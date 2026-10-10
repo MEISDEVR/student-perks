@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>学生优惠地图：海外在读学生可申请的软件、云服务与订阅优惠</title>
+<meta name="description" content="汇总 GitHub Student Pack、JetBrains、Azure for Students、Google AI Pro、Notion、Figma、Spotify、Apple 教育优惠等海外学生优惠，写清资格、验证方式（学校邮箱、SheerID、UNiDAYS、ISIC）和官方申请入口。">
+<link rel="canonical" href="https://minchuan-dev.github.io/student-perks/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="学生优惠地图：海外在读学生可申请的软件、云服务与订阅优惠">
+<meta property="og:description" content="汇总 GitHub Student Pack、JetBrains、Azure for Students、Google AI Pro、Notion、Figma、Spotify、Apple 教育优惠等海外学生优惠，写清资格、验证方式（学校邮箱、SheerID、UNiDAYS、ISIC）和官方申请入口。">
+<meta property="og:url" content="https://minchuan-dev.github.io/student-perks/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312302c'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle' fill='%23f3e24a' font-weight='900'%3E学%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "海外学生优惠清单", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "GitHub Student Developer Pack", "url": "https://education.github.com/pack"}, {"@type": "ListItem", "position": 2, "name": "JetBrains 教育许可", "url": "https://www.jetbrains.com/community/education/#students"}, {"@type": "ListItem", "position": 3, "name": "Unity Student", "url": "https://unity.com/products/unity-student"}, {"@type": "ListItem", "position": 4, "name": "Azure for Students", "url": "https://azure.microsoft.com/free/students/"}, {"@type": "ListItem", "position": 5, "name": "AWS Educate", "url": "https://aws.amazon.com/education/awseducate/"}, {"@type": "ListItem", "position": 6, "name": "Google AI Pro 学生优惠", "url": "https://gemini.google/students/"}, {"@type": "ListItem", "position": 7, "name": "Microsoft 365 教育版", "url": "https://www.microsoft.com/education/products/office"}, {"@type": "ListItem", "position": 8, "name": "Notion 教育版", "url": "https://www.notion.com/product/notion-for-education"}, {"@type": "ListItem", "position": 9, "name": "Miro Education", "url": "https://miro.com/education-whiteboard/"}, {"@type": "ListItem", "position": 10, "name": "Tableau for Students", "url": "https://www.tableau.com/academic/students"}, {"@type": "ListItem", "position": 11, "name": "Figma Education", "url": "https://www.figma.com/education/"}, {"@type": "ListItem", "position": 12, "name": "Autodesk Education", "url": "https://www.autodesk.com/education/edu-software/overview"}, {"@type": "ListItem", "position": 13, "name": "Adobe Creative Cloud 学生价", "url": "https://www.adobe.com/creativecloud/buy/students.html"}, {"@type": "ListItem", "position": 14, "name": "Ableton Live 教育版", "url": "https://www.ableton.com/en/shop/education/"}, {"@type": "ListItem", "position": 15, "name": "Canva for Education", "url": "https://www.canva.com/education/"}, {"@type": "ListItem", "position": 16, "name": "Apple 教育优惠", "url": "https://www.apple.com/us-edu/store"}, {"@type": "ListItem", "position": 17, "name": "Samsung 教育优惠", "url": "https://www.samsung.com/us/shop/discount-program/education/"}, {"@type": "ListItem", "position": 18, "name": "Microsoft Store 教育优惠", "url": "https://www.microsoft.com/en-us/store/b/education"}, {"@type": "ListItem", "position": 19, "name": "Spotify Premium Student", "url": "https://www.spotify.com/us/student/"}, {"@type": "ListItem", "position": 20, "name": "Apple Music 学生方案", "url": "https://www.apple.com/apple-music/"}, {"@type": "ListItem", "position": 21, "name": "YouTube Premium 学生方案", "url": "https://www.youtube.com/premium/student"}, {"@type": "ListItem", "position": 22, "name": "Amazon Prime Student", "url": "https://www.amazon.com/amazonprime?planOptimizationId=Student"}, {"@type": "ListItem", "position": 23, "name": "16-25 Railcard（英国）", "url": "https://www.16-25railcard.co.uk/"}, {"@type": "ListItem", "position": 24, "name": "UNiDAYS", "url": "https://www.myunidays.com/"}, {"@type": "ListItem", "position": 25, "name": "Student Beans", "url": "https://www.studentbeans.com/"}, {"@type": "ListItem", "position": 26, "name": "ISIC 国际学生证", "url": "https://www.isic.org/"}]}</script>
+<style>body{margin:0}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 按 Figma 稿「学生优惠地图 UI」。学生证首屏 → 吸顶筛选栏 → 精选深色大卡 → 三列优惠卡 → 验证方式速查 → 深色页脚。 */
+:root {
+  --bg: #eef2f1;
+  --surface: #ffffff;
+  --ink: #12302c;
+  --muted: #55706b;
+  --line: #d3dedb;
+  --accent: #0f6b5c;
+  --accent-soft: #dcede8;
+  --mark: #f3e24a;
+  --mark-ink: #2b2700;
+  --on-accent: #ffffff;
+  --font-display: "Bricolage Grotesque", "Noto Sans SC", system-ui, sans-serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1816; --surface: #15221f; --ink: #e3eeeb; --muted: #93aca6; --line: #263834;
+    --accent: #5cc8b3; --accent-soft: #1c3531; --mark: #e8d83f; --mark-ink: #1d1a00; --on-accent: #0e1816;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1816; --surface: #15221f; --ink: #e3eeeb; --muted: #93aca6; --line: #263834;
+  --accent: #5cc8b3; --accent-soft: #1c3531; --mark: #e8d83f; --mark-ink: #1d1a00; --on-accent: #0e1816;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 20px; }
+h1, h2 { text-wrap: balance; margin: 0; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--font-mono); }
+
+/* Nav */
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; text-decoration: none; }
+.brand-mark { width: 32px; height: 32px; border-radius: 8px; background: var(--ink); color: var(--mark); display: grid; place-items: center; font-weight: 900; font-size: 17px; }
+.links { display: flex; gap: 32px; }
+.links a { text-decoration: none; color: var(--muted); font-weight: 500; }
+.links a:hover, .links a.on { color: var(--ink); }
+.updated { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.updated::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 480px; gap: 64px; align-items: center; padding-block: 72px 56px; }
+.eyebrow { font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: .1em; color: var(--accent); }
+.hero h1 { font-weight: 900; font-size: clamp(34px, 5vw, 60px); line-height: 1.2; letter-spacing: -.02em; margin-block: 20px; }
+.lede { color: var(--muted); font-size: 17px; max-width: 34em; margin: 0 0 24px; }
+.search { display: flex; align-items: center; gap: 12px; max-width: 600px; padding: 8px 8px 8px 20px; border: 2px solid var(--ink); border-radius: 14px; background: var(--surface); }
+.search svg { flex: none; color: var(--muted); }
+.search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 16px; color: var(--ink); padding-block: 8px; }
+.search input::placeholder { color: var(--muted); }
+.btn-primary { border: 0; cursor: pointer; background: var(--accent); color: var(--on-accent); font-weight: 700; padding: 11px 22px; border-radius: 10px; }
+.btn-primary:hover { filter: brightness(1.08); }
+.popular { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+.popular button { border: 0; background: none; padding: 0; cursor: pointer; font-weight: 500; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Student pass */
+.pass-wrap { position: relative; height: 330px; }
+.pass-wrap::before { content: ""; position: absolute; left: 34px; top: 48px; width: 440px; height: 276px; border-radius: 22px; background: var(--mark); transform: rotate(-6deg); }
+.pass { position: absolute; left: 20px; top: 24px; width: 440px; height: 276px; border-radius: 22px; background: var(--accent); color: var(--on-accent); padding: 26px 28px; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
+.pass-top { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; }
+.pass-top b { font-weight: 500; letter-spacing: .14em; }
+.pass-top span { opacity: .7; }
+.pass-body { display: grid; grid-template-columns: 96px 1fr; gap: 24px; align-items: center; }
+.photo { height: 116px; border-radius: 12px; background: var(--mark); color: var(--mark-ink); display: grid; place-items: center; font-weight: 900; font-size: 56px; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+.fields small { display: block; font-size: 12px; opacity: .7; }
+.fields b { font-weight: 900; font-size: 22px; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.pass-foot { display: flex; justify-content: space-between; align-items: flex-end; border-top: 6px solid var(--mark); margin-inline: -28px; padding: 16px 28px 0; }
+.barcode { width: 240px; height: 34px; background: repeating-linear-gradient(90deg, var(--on-accent) 0 2px, transparent 2px 4px, var(--on-accent) 4px 5px, transparent 5px 8px, var(--on-accent) 8px 11px, transparent 11px 13px); }
+.pass-foot span { font-family: var(--font-mono); font-size: 11px; opacity: .75; }
+.stats { display: none; }
+
+/* Filter bar */
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; padding-block: 12px; background: var(--bg); }
+.filter-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.chip { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; cursor: pointer; padding: 7px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); font-weight: 500; font-size: 14px; }
+.chip:hover { border-color: var(--ink); }
+.chip span { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.chip[aria-pressed="true"] span { color: var(--bg); opacity: .75; }
+.switch { display: inline-flex; align-items: center; gap: 10px; flex: none; cursor: pointer; font-weight: 500; font-size: 14px; }
+.switch input { appearance: none; margin: 0; width: 40px; height: 24px; border-radius: 12px; background: var(--line); position: relative; cursor: pointer; transition: background .15s; }
+.switch input::after { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); transition: transform .15s; }
+.switch input:checked { background: var(--accent); }
+.switch input:checked::after { transform: translateX(16px); }
+
+/* Section heads */
+.sec { padding-top: 48px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.sec-head h2 { font-weight: 900; font-size: 28px; line-height: 1.3; }
+.sec-head .aside { font-size: 14px; color: var(--muted); }
+.sec-head .count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-left: 12px; }
+.sort { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; }
+.sort select { font: inherit; color: var(--ink); background: transparent; border: 0; cursor: pointer; padding: 2px 0; }
+
+/* Featured */
+.featured { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.feat { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: 20px; background: var(--ink); color: var(--bg); min-width: 0; }
+.feat::after { content: ""; position: absolute; right: -50px; top: -60px; width: 180px; height: 180px; border-radius: 50%; border: 1px solid var(--bg); opacity: .12; }
+.feat-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; }
+.feat-top span:first-child { opacity: .7; }
+.feat h3 { margin: 0; font-weight: 900; font-size: 34px; line-height: 1.25; color: var(--mark); }
+.feat .name { font-weight: 700; font-size: 18px; }
+.feat p { margin: 0; opacity: .75; font-size: 14px; }
+.feat-foot { margin-top: auto; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.feat-foot span { font-family: var(--font-mono); font-size: 12px; opacity: .6; min-width: 0; }
+.feat-foot a { flex: none; display: inline-flex; align-items: center; gap: 4px; padding: 8px 14px; border-radius: 999px; background: var(--bg); color: var(--ink); font-weight: 700; font-size: 13px; text-decoration: none; }
+
+/* Tags */
+.tag { flex: none; font-weight: 700; font-size: 12px; line-height: 16px; padding: 4px 10px; border-radius: 6px; white-space: nowrap; }
+.tag.free { background: var(--mark); color: var(--mark-ink); }
+.tag.paid { border: 1px solid var(--line); color: var(--muted); padding: 3px 9px; }
+
+/* Deal cards */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.deal { display: flex; flex-direction: column; gap: 16px; min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.deal-head { display: flex; align-items: center; gap: 14px; }
+.logo { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+.deal-title { flex: 1; min-width: 0; }
+.deal h3 { margin: 0; font-weight: 700; font-size: 17px; line-height: 1.4; }
+.meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.offer { margin: 0; flex: 1; }
+.rows { display: grid; gap: 8px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; }
+.rows div { display: grid; grid-template-columns: 32px 1fr; gap: 12px; }
+.rows dt { color: var(--muted); font-weight: 500; }
+.rows dd { margin: 0; min-width: 0; }
+.deal-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-family: var(--font-mono); font-weight: 500; font-size: 12px; }
+.pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.cta { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); font-weight: 700; font-size: 14px; text-decoration: none; }
+.cta:hover { text-decoration: underline; text-underline-offset: 3px; }
+.more { display: flex; justify-content: center; margin-top: 28px; }
+.more button { cursor: pointer; padding: 13px 28px; border-radius: 999px; border: 1.5px solid var(--ink); background: transparent; font-weight: 700; }
+.more button:hover { background: var(--ink); color: var(--bg); }
+.empty { padding: 48px 0; text-align: center; color: var(--muted); }
+
+/* Guide */
+.guide { padding-top: 88px; }
+.guide .sub { color: var(--muted); margin: 8px 0 28px; }
+.guide-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.guide-item { border-top: 2px solid var(--ink); padding-top: 20px; min-width: 0; }
+.guide-item h3 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1.3; }
+.guide-item .used { font-family: var(--font-mono); font-size: 12px; color: var(--accent); margin: 6px 0 8px; }
+.guide-item p { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* Footer */
+footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-block: 48px; }
+.foot { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.foot b { display: block; font-size: 16px; margin-bottom: 10px; }
+.foot p { margin: 0; max-width: 40em; opacity: .7; font-size: 14px; }
+.foot .mono { font-size: 12px; opacity: .6; }
+
+/* Tablet */
+@media (max-width: 1080px) {
+  .hero { grid-template-columns: 1fr; }
+  .pass-wrap { display: none; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 600px; margin-top: 20px; padding: 14px 16px; border-radius: 14px; background: var(--accent); color: var(--on-accent); text-align: center; }
+  .stats b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1.3; font-variant-numeric: tabular-nums; }
+  .stats small { font-size: 12px; opacity: .75; }
+  .featured, .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .featured .feat:nth-child(3) { display: none; }
+  .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filter-card { flex-direction: column; align-items: stretch; }
+}
+/* Phone */
+@media (max-width: 640px) {
+  .links, .updated { display: none; }
+  .nav { padding-block: 16px; }
+  .hero { padding-block: 28px 16px; }
+  .eyebrow { font-size: 11px; }
+  .hero h1 { font-size: 34px; margin-block: 14px; }
+  .lede { font-size: 15px; margin-bottom: 18px; }
+  .search { padding-left: 16px; }
+  .btn-primary { padding: 10px 16px; }
+  .popular { display: none; }
+  .filter-card { border: 0; border-radius: 0; background: var(--bg); padding: 4px 0; gap: 12px; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -20px; padding-inline: 20px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .featured { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; scrollbar-width: none; }
+  .featured::-webkit-scrollbar { display: none; }
+  .featured .feat { flex: 0 0 100%; scroll-snap-align: start; padding: 24px; }
+  .featured .feat:nth-child(3) { display: flex; }
+  .feat h3 { font-size: 30px; }
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .deal { padding: 20px; }
+  .sec { padding-top: 32px; }
+  .sec-head h2 { font-size: 22px; }
+  .guide { padding-top: 48px; }
+  .guide-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  footer { margin-top: 56px; padding-block: 32px 40px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <nav class="nav">
+    <a class="brand" href="#top" id="top"><span class="brand-mark">学</span>学生优惠地图</a>
+    <div class="links"><a class="on" href="#deals">全部优惠</a><a href="#guide">验证方式</a><a href="#notice">使用须知</a></div>
+    <span class="updated">核实于 <span class="js-updated">2026-10</span></span>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">STUDENT PERKS · 海外在读学生</div>
+      <h1>在读这几年，<br>该领的优惠别错过</h1>
+      <p class="lede"><span class="js-total">26</span> 项软件、云服务、设备和订阅优惠，每项写清资格、验证方式和官方申请入口。只链官方渠道，用本人学籍申请。</p>
+      <form class="search" id="searchForm" role="search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="搜索名称、权益或验证方式，例如 Copilot、SheerID" autocomplete="off" aria-label="搜索优惠">
+        <button class="btn-primary" type="submit">搜索</button>
+      </form>
+      <div class="popular">大家在搜 <button type="button">Copilot</button><button type="button">免费一年</button><button type="button">Spotify</button><button type="button">Azure</button><button type="button">Mac</button></div>
+      <div class="stats" aria-hidden="true">
+        <div><b class="js-total">26</b><small>收录</small></div>
+        <div><b class="js-cats">8</b><small>分类</small></div>
+        <div><b class="js-free">15</b><small>免费</small></div>
+        <div><b class="js-month">10月</b><small>核实</small></div>
+      </div>
+    </div>
+    <div class="pass-wrap" aria-hidden="true">
+      <div class="pass">
+        <div class="pass-top"><b>STUDENT PERKS PASS</b><span>2026–27</span></div>
+        <div class="pass-body">
+          <div class="photo">学</div>
+          <div class="fields">
+            <div><small>收录</small><b><span class="js-total">26</span> 项</b></div>
+            <div><small>分类</small><b><span class="js-cats">8</span> 类</b></div>
+            <div><small>免费可领</small><b><span class="js-free">15</span> 项</b></div>
+            <div><small>信息核实</small><b class="js-updated">2026-10</b></div>
+          </div>
+        </div>
+        <div class="pass-foot"><div class="barcode"></div><span>仅限在读</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="filters">
+  <div class="wrap">
+    <div class="filter-card">
+      <div class="chips" id="chips" role="group" aria-label="分类"></div>
+      <label class="switch" for="freeOnly"><input id="freeOnly" type="checkbox"> 只看免费</label>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="sec" id="featuredSec">
+    <div class="sec-head"><h2>本学期先领这三个</h2><span class="aside">价值最高、覆盖最广</span></div>
+    <div class="featured" id="featured">
+    <article class="feat">
+      <div class="feat-top"><span>开发工具</span><span class="tag free">免费</span></div>
+      <h3>Copilot 免费用</h3>
+      <div class="name">GitHub Student Developer Pack</div>
+      <p>免费 GitHub Copilot（学生版）、GitHub Pro，外加数十家合作方权益：域名、云额度、IDE、设计工具等。</p>
+      <div class="feat-foot"><span>全球 · 学校邮箱</span><a href="https://education.github.com/pack" target="_blank" rel="noopener">去申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </article>
+    <article class="feat">
+      <div class="feat-top"><span>开发工具</span><span class="tag free">免费</span></div>
+      <h3>全家桶 IDE 免费</h3>
+      <div class="name">JetBrains 教育许可</div>
+      <p>IntelliJ IDEA Ultimate、PyCharm、WebStorm、CLion 等全家桶 IDE 免费使用，每年可续。</p>
+      <div class="feat-foot"><span>全球 · 学校邮箱</span><a href="https://www.jetbrains.com/community/education/#students" target="_blank" rel="noopener">去申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </article>
+    <article class="feat">
+      <div class="feat-top"><span>云与 AI</span><span class="tag free">免费</span></div>
+      <h3>AI Pro 免费 1 年</h3>
+      <div class="name">Google AI Pro 学生优惠</div>
+      <p>大学生可免费使用一年 Google AI Pro：Gemini 高级模型、NotebookLM 增强、2 TB 云端存储等。</p>
+      <div class="feat-foot"><span>美国及部分国家 · SheerID</span><a href="https://gemini.google/students/" target="_blank" rel="noopener">去申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </article>
+    </div>
+  </section>
+
+  <section class="sec" id="deals">
+    <div class="sec-head">
+      <h2>全部优惠<span class="count" id="count"></span></h2>
+      <label class="sort" for="sort">排序：<select id="sort"><option value="free">免费优先</option><option value="name">按名称</option><option value="cat">按分类</option></select></label>
+    </div>
+    <div class="grid" id="grid">
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">G</div>
+          <div class="deal-title"><h3>GitHub Student Developer Pack</h3><div class="meta">开发工具 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">免费 GitHub Copilot（学生版）、GitHub Pro，外加数十家合作方权益：域名、云额度、IDE、设计工具等。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>年满 13 岁、在授予学位或文凭的学校在读，并有 GitHub 账号。</dd></div>
+          <div><dt>验证</dt><dd>GitHub Education 审核：学校邮箱、学生证或在读证明照片，需开启定位。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://education.github.com/pack" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">J</div>
+          <div class="deal-title"><h3>JetBrains 教育许可</h3><div class="meta">开发工具 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">IntelliJ IDEA Ultimate、PyCharm、WebStorm、CLion 等全家桶 IDE 免费使用，每年可续。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在认可的教育机构全日制或非全日制在读的学生。</dd></div>
+          <div><dt>验证</dt><dd>学校邮箱、ISIC 国际学生证、官方在读证明，或关联 GitHub Student Pack。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.jetbrains.com/community/education/#students" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">U</div>
+          <div class="deal-title"><h3>Unity Student</h3><div class="meta">开发工具 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">Unity Pro 级功能学生免费版，含学习资源与部分资源商店权益。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>年满 16 岁、在认可院校在读的学生。</dd></div>
+          <div><dt>验证</dt><dd>通过 GitHub Student Pack 或 Unity 学生验证。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">人工审核</span><a class="cta" href="https://unity.com/products/unity-student" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">A</div>
+          <div class="deal-title"><h3>Azure for Students</h3><div class="meta">云与 AI · 全球（多数国家）</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">USD 100 Azure 额度（12 个月），外加一批免费服务，无需信用卡。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>年满 18 岁、在认可院校全日制在读的学生。</dd></div>
+          <div><dt>验证</dt><dd>用学校邮箱登录或验证学生身份。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://azure.microsoft.com/free/students/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">A</div>
+          <div class="deal-title"><h3>AWS Educate</h3><div class="meta">云与 AI · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">免费云计算课程与动手实验环境（无需信用卡），完成课程可获数字徽章。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>年满 13 岁的学生或学习者。</dd></div>
+          <div><dt>验证</dt><dd>邮箱注册即可，无需学籍验证。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">邮箱注册</span><a class="cta" href="https://aws.amazon.com/education/awseducate/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">G</div>
+          <div class="deal-title"><h3>Google AI Pro 学生优惠</h3><div class="meta">云与 AI · 美国及部分国家</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">大学生可免费使用一年 Google AI Pro：Gemini 高级模型、NotebookLM 增强、2 TB 云端存储等。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在指定国家的高等院校在读、年满 18 岁的学生。</dd></div>
+          <div><dt>验证</dt><dd>SheerID 学生验证，需绑定付款方式（到期前可取消）。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">SheerID</span><a class="cta" href="https://gemini.google/students/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">M</div>
+          <div class="deal-title"><h3>Microsoft 365 教育版</h3><div class="meta">效率办公 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">Word、Excel、PowerPoint、OneNote、Teams 网页版免费；部分学校提供桌面版。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>所在学校已开通 Microsoft 365 教育版的学生。</dd></div>
+          <div><dt>验证</dt><dd>用学校邮箱登录。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.microsoft.com/education/products/office" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">N</div>
+          <div class="deal-title"><h3>Notion 教育版</h3><div class="meta">效率办公 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">个人免费使用 Notion Plus：无限块、无限文件上传、页面历史。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>使用学校邮箱的学生和教师。</dd></div>
+          <div><dt>验证</dt><dd>学校邮箱注册后在设置中切换为教育版。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.notion.com/product/notion-for-education" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">M</div>
+          <div class="deal-title"><h3>Miro Education</h3><div class="meta">效率办公 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">免费 Education 计划：无限白板与协作功能。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在读学生和教师。</dd></div>
+          <div><dt>验证</dt><dd>学校邮箱并提交教育版申请。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://miro.com/education-whiteboard/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">T</div>
+          <div class="deal-title"><h3>Tableau for Students</h3><div class="meta">效率办公 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">Tableau Desktop 与 Tableau Prep 免费一年，可续。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>认可院校的在读学生。</dd></div>
+          <div><dt>验证</dt><dd>填写学校信息并上传在读证明。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">人工审核</span><a class="cta" href="https://www.tableau.com/academic/students" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">F</div>
+          <div class="deal-title"><h3>Figma Education</h3><div class="meta">设计创意 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">免费 Figma Professional 级教育计划，含 FigJam 协作。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>年满 13 岁的在读学生和教育工作者。</dd></div>
+          <div><dt>验证</dt><dd>提交教育验证申请（学校信息与证明）。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">人工审核</span><a class="cta" href="https://www.figma.com/education/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">A</div>
+          <div class="deal-title"><h3>Autodesk Education</h3><div class="meta">设计创意 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">AutoCAD、Fusion、Revit、Maya、3ds Max 等教育许可免费一年，可续。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>年满 13 岁、在认可院校在读的学生。</dd></div>
+          <div><dt>验证</dt><dd>SheerID 验证，上传在读证明。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">SheerID</span><a class="cta" href="https://www.autodesk.com/education/edu-software/overview" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">A</div>
+          <div class="deal-title"><h3>Adobe Creative Cloud 学生价</h3><div class="meta">设计创意 · 全球</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">Creative Cloud 全部应用学生价，首年折扣通常 60% 以上。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>年满 13 岁、在认可院校在读的学生。</dd></div>
+          <div><dt>验证</dt><dd>学校邮箱或上传在读证明。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.adobe.com/creativecloud/buy/students.html" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">A</div>
+          <div class="deal-title"><h3>Ableton Live 教育版</h3><div class="meta">设计创意 · 全球</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">Ableton Live 教育价约 6 折（减 40%）。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在读学生和教师。</dd></div>
+          <div><dt>验证</dt><dd>上传在读证明或通过授权教育经销商。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">人工审核</span><a class="cta" href="https://www.ableton.com/en/shop/education/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">C</div>
+          <div class="deal-title"><h3>Canva for Education</h3><div class="meta">设计创意 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">Canva 高级功能免费。注意：仅面向 K-12 中小学，大学生不适用。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>K-12 学校的教师，以及由教师邀请的学生。</dd></div>
+          <div><dt>验证</dt><dd>教师提交资格认证后邀请学生加入。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">人工审核</span><a class="cta" href="https://www.canva.com/education/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">A</div>
+          <div class="deal-title"><h3>Apple 教育优惠</h3><div class="meta">硬件数码 · 多数国家</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">Mac、iPad 教育价，开学季常送 AirPods 或礼品卡；Pro Apps Bundle 教育版（Final Cut Pro、Logic Pro 等）。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>大学在读生、已录取新生及其家长，教职工。</dd></div>
+          <div><dt>验证</dt><dd>Apple 教育商店下单时验证，部分地区通过 UNiDAYS。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">UNiDAYS</span><a class="cta" href="https://www.apple.com/us-edu/store" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">S</div>
+          <div class="deal-title"><h3>Samsung 教育优惠</h3><div class="meta">硬件数码 · 美国等</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">手机、平板、笔记本、显示器等教育折扣。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在读学生、教职工。</dd></div>
+          <div><dt>验证</dt><dd>Samsung 教育计划验证学校邮箱。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.samsung.com/us/shop/discount-program/education/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">M</div>
+          <div class="deal-title"><h3>Microsoft Store 教育优惠</h3><div class="meta">硬件数码 · 美国等</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">Surface 等设备教育价。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在读学生、家长和教师。</dd></div>
+          <div><dt>验证</dt><dd>下单时验证学生身份。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">人工审核</span><a class="cta" href="https://www.microsoft.com/en-us/store/b/education" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">S</div>
+          <div class="deal-title"><h3>Spotify Premium Student</h3><div class="meta">影音娱乐 · 多数国家</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">Premium 学生价约为个人版半价；美国学生套餐含 Hulu（含广告版）。首月通常免费。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在认可的高等院校在读的学生，最多连续 4 年。</dd></div>
+          <div><dt>验证</dt><dd>SheerID 验证，每 12 个月复验。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">SheerID</span><a class="cta" href="https://www.spotify.com/us/student/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">A</div>
+          <div class="deal-title"><h3>Apple Music 学生方案</h3><div class="meta">影音娱乐 · 多数国家</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">Apple Music 学生价，美国等地区附赠 Apple TV 订阅。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>大学或学院在读学生，最多 48 个月。</dd></div>
+          <div><dt>验证</dt><dd>通过 UNiDAYS 验证。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">UNiDAYS</span><a class="cta" href="https://www.apple.com/apple-music/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">Y</div>
+          <div class="deal-title"><h3>YouTube Premium 学生方案</h3><div class="meta">影音娱乐 · 多数国家</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">YouTube Premium（含 YouTube Music）学生价，约为个人版的一半多。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>高等院校在读学生，最多 4 年。</dd></div>
+          <div><dt>验证</dt><dd>SheerID 验证，每年复验。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">SheerID</span><a class="cta" href="https://www.youtube.com/premium/student" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">A</div>
+          <div class="deal-title"><h3>Amazon Prime Student</h3><div class="meta">购物生活 · 美国（英德等地有当地版本）</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">6 个月免费试用，之后 Prime 会员约半价：免运费、Prime Video 等。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在美国两年制或四年制院校在读的学生，最多 4 年。</dd></div>
+          <div><dt>验证</dt><dd>学校 .edu 邮箱或上传在读证明。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.amazon.com/amazonprime?planOptimizationId=Student" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">1</div>
+          <div class="deal-title"><h3>16-25 Railcard（英国）</h3><div class="meta">购物生活 · 英国</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">英国火车票大多数票价 1/3 折扣，全日制成人学生不受 25 岁上限。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>16 至 25 岁人群，或 26 岁以上的全日制学生。</dd></div>
+          <div><dt>验证</dt><dd>在线购卡，全日制学生需提交在读证明。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">人工审核</span><a class="cta" href="https://www.16-25railcard.co.uk/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">U</div>
+          <div class="deal-title"><h3>UNiDAYS</h3><div class="meta">验证平台 · 全球</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">学生验证平台，汇集服装、电子、软件等数千家品牌学生折扣。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>在读大学生（各国规则不同）。</dd></div>
+          <div><dt>验证</dt><dd>学校邮箱或上传在读证明，验证一次可在多个品牌复用。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.myunidays.com/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">S</div>
+          <div class="deal-title"><h3>Student Beans</h3><div class="meta">验证平台 · 英国、美国、澳洲等</div></div>
+          <span class="tag free">免费</span>
+        </div>
+        <p class="offer">学生折扣聚合平台，覆盖时尚、餐饮、科技等品牌。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>16 岁以上的在读学生。</dd></div>
+          <div><dt>验证</dt><dd>学校邮箱或在读证明。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.studentbeans.com/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">I</div>
+          <div class="deal-title"><h3>ISIC 国际学生证</h3><div class="meta">验证平台 · 全球</div></div>
+          <span class="tag paid">折扣</span>
+        </div>
+        <p class="offer">国际通用学生身份证明，全球 15 万+ 项交通、住宿、博物馆、软件折扣。</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>12 岁以上的全日制在读学生。</dd></div>
+          <div><dt>验证</dt><dd>向 ISIC 签发机构提交在读证明，付费办理。</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">付费办理</span><a class="cta" href="https://www.isic.org/" target="_blank" rel="noopener">去官方申请 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      </article>
+    </div>
+    <div class="empty" id="empty" hidden>没有匹配的优惠。换个关键词，或切回“全部”分类。</div>
+    <div class="more" id="more" hidden><button type="button" id="moreBtn"></button></div>
+  </section>
+
+  <section class="guide" id="guide">
+    <h2 class="sec-head" style="margin:0;font-weight:900;font-size:28px">申请前先弄清怎么验证</h2>
+    <p class="sub">大多数优惠用下面四种方式之一确认学籍。</p>
+    <div class="guide-grid">
+      <div class="guide-item"><h3>学校邮箱</h3><div class="used">Notion、Azure、JetBrains 等</div><p>用学校发的邮箱注册或接收验证链接。毕业后邮箱停用，优惠通常随之失效。</p></div>
+      <div class="guide-item"><h3>SheerID</h3><div class="used">Spotify、YouTube、Google 等</div><p>第三方学籍验证。填写学校名称后常自动通过，不通过时上传学生证或学费单。</p></div>
+      <div class="guide-item"><h3>UNiDAYS</h3><div class="used">Apple、服装与数码品牌</div><p>验证一次，可在合作品牌间复用。需定期重新确认在读状态。</p></div>
+      <div class="guide-item"><h3>ISIC</h3><div class="used">交通、博物馆、部分软件</div><p>国际学生证，付费办理，适合学校邮箱不被识别的情况。</p></div>
+    </div>
+  </section>
+</div>
+
+<footer id="notice">
+  <div class="wrap foot">
+    <div><b>只收录面向真实在读学生的官方优惠</b><p>请用本人真实学籍申请。借用或伪造学籍、转售学生账号违反各平台条款，可能导致封号。优惠内容、价格和地区会变动，申请前以官方页面为准。</p></div>
+    <span class="mono">学生优惠地图 · 核实于 <span class="js-updated">2026-10</span></span>
+  </div>
+</footer>
+
+<script src="deals.js"></script>
+<script>
+(function () {
+  const deals = window.DEALS || [];
+  const updated = window.DEALS_UPDATED || "—";
+  const PAGE = 9;
+  const cats = ["全部", ...new Set(deals.map(d => d.cat))];
+  const state = { cat: "全部", q: "", free: false, sort: "free", expanded: false };
+  try { const c = localStorage.getItem("cat"); if (c && cats.includes(c)) state.cat = c; } catch (e) {}
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const setAll = (cls, v) => document.querySelectorAll(cls).forEach(el => el.textContent = v);
+  setAll(".js-total", deals.length);
+  setAll(".js-cats", cats.length - 1);
+  setAll(".js-free", deals.filter(d => d.free).length);
+  setAll(".js-updated", updated);
+  setAll(".js-month", updated.includes("-") ? Number(updated.split("-")[1]) + "月" : updated);
+
+  const pillOf = d => {
+    const v = d.verify;
+    if (/SheerID/i.test(v)) return "SheerID";
+    if (/UNiDAYS/i.test(v)) return "UNiDAYS";
+    if (/付费/.test(v)) return "付费办理";
+    if (/学校邮箱|\.edu/.test(v)) return "学校邮箱";
+    if (/邮箱注册/.test(v)) return "邮箱注册";
+    return "人工审核";
+  };
+  const initialOf = d => (d.name.match(/[A-Za-z0-9]/) || [d.name[0]])[0].toUpperCase();
+  const arrow = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+
+  $("featured").innerHTML = deals.filter(d => d.featured).map(d => `
+    <article class="feat">
+      <div class="feat-top"><span>${esc(d.cat)}</span><span class="tag free">免费</span></div>
+      <h3>${esc(d.featured)}</h3>
+      <div class="name">${esc(d.name)}</div>
+      <p>${esc(d.offer)}</p>
+      <div class="feat-foot"><span>${esc(d.region)} · ${esc(pillOf(d))}</span><a href="${esc(d.url)}" target="_blank" rel="noopener">去申请 ${arrow}</a></div>
+    </article>`).join("");
+
+  function renderChips() {
+    $("chips").innerHTML = cats.map(c => {
+      const n = c === "全部" ? deals.length : deals.filter(d => d.cat === c).length;
+      return `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c === state.cat}">${esc(c)}<span>${n}</span></button>`;
+    }).join("");
+  }
+
+  function render() {
+    const q = state.q.toLowerCase();
+    let list = deals.filter(d =>
+      (state.cat === "全部" || d.cat === state.cat) &&
+      (!state.free || d.free) &&
+      (!q || [d.name, d.offer, d.who, d.verify, d.region, d.cat].join(" ").toLowerCase().includes(q)));
+    if (state.sort === "free") list = list.slice().sort((a, b) => (b.free - a.free));
+    if (state.sort === "name") list = list.slice().sort((a, b) => a.name.localeCompare(b.name, "zh"));
+    if (state.sort === "cat") list = list.slice().sort((a, b) => cats.indexOf(a.cat) - cats.indexOf(b.cat));
+    const shown = state.expanded ? list : list.slice(0, PAGE);
+    $("grid").innerHTML = shown.map(d => `
+      <article class="deal">
+        <div class="deal-head">
+          <div class="logo" aria-hidden="true">${esc(initialOf(d))}</div>
+          <div class="deal-title"><h3>${esc(d.name)}</h3><div class="meta">${esc(d.cat)} · ${esc(d.region)}</div></div>
+          <span class="tag ${d.free ? "free" : "paid"}">${d.free ? "免费" : "折扣"}</span>
+        </div>
+        <p class="offer">${esc(d.offer)}</p>
+        <dl class="rows">
+          <div><dt>资格</dt><dd>${esc(d.who)}</dd></div>
+          <div><dt>验证</dt><dd>${esc(d.verify)}</dd></div>
+        </dl>
+        <div class="deal-foot"><span class="pill">${esc(pillOf(d))}</span><a class="cta" href="${esc(d.url)}" target="_blank" rel="noopener">去官方申请 ${arrow}</a></div>
+      </article>`).join("");
+    $("count").textContent = `显示 ${list.length} / ${deals.length}`;
+    $("empty").hidden = list.length > 0;
+    const rest = list.length - shown.length;
+    $("more").hidden = rest <= 0;
+    $("moreBtn").textContent = `再看 ${rest} 项`;
+    $("featuredSec").hidden = !!(state.q || state.free || state.cat !== "全部");
+  }
+
+  $("chips").addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    state.cat = b.dataset.cat; state.expanded = false;
+    try { localStorage.setItem("cat", state.cat); } catch (e) {}
+    renderChips(); render();
+  });
+  $("q").addEventListener("input", e => { state.q = e.target.value.trim(); state.expanded = false; render(); });
+  $("searchForm").addEventListener("submit", e => { e.preventDefault(); $("deals").scrollIntoView({ behavior: "smooth" }); });
+  document.querySelector(".popular").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    $("q").value = b.textContent; state.q = b.textContent; state.expanded = false; render();
+    $("deals").scrollIntoView({ behavior: "smooth" });
+  });
+  $("freeOnly").addEventListener("change", e => { state.free = e.target.checked; render(); });
+  $("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
+  $("moreBtn").addEventListener("click", () => { state.expanded = true; render(); });
+
+  renderChips(); render();
+})();
+</script>
+
+</body>
+</html>
