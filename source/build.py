@@ -81,6 +81,7 @@ head = f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{e(TITLE)}</title>
 <meta name="description" content="{e(DESC)}">
+<meta name="google-site-verification" content="e53tznfkhhCijPSgTLN8fvLbjxAnkYY7kBtX5b2WUY4">
 <link rel="canonical" href="{SITE_URL}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{e(TITLE)}">
