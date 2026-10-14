@@ -101,9 +101,14 @@ shutil.rmtree(DIST, ignore_errors=True)
 os.makedirs(DIST)
 open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
 shutil.copy(os.path.join(ROOT, "deals.js"), DIST)
+EXTRA_PAGES = ["black-friday.html"]
+for name in EXTRA_PAGES:
+    src = open(os.path.join(ROOT, name), encoding="utf-8").read()
+    open(os.path.join(DIST, name), "w", encoding="utf-8").write(src.replace("{{SITE_URL}}", SITE_URL))
 open(os.path.join(DIST, ".nojekyll"), "w").close()
 open(os.path.join(DIST, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}sitemap.xml\n")
 open(os.path.join(DIST, "sitemap.xml"), "w").write(
     f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    f'  <url><loc>{SITE_URL}</loc><lastmod>{updated}-01</lastmod></url>\n</urlset>\n')
+    f'  <url><loc>{SITE_URL}</loc><lastmod>{updated}-01</lastmod></url>\n'
+    + "".join(f'  <url><loc>{SITE_URL}{n}</loc></url>\n' for n in EXTRA_PAGES) + '</urlset>\n')
 print(f"built {len(deals)} deals -> {DIST} for {SITE_URL}")
