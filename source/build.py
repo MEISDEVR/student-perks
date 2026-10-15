@@ -7,7 +7,7 @@
 """
 import html, json, os, re, shutil, subprocess, sys
 
-SITE_URL = (sys.argv[1] if len(sys.argv) > 1 else "https://minchuan-dev.github.io/student-perks/").rstrip("/") + "/"
+SITE_URL = (sys.argv[1] if len(sys.argv) > 1 else "https://meisdevr.github.io/student-perks/").rstrip("/") + "/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "..", "docs"))
 
