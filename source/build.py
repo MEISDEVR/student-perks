@@ -101,7 +101,7 @@ shutil.rmtree(DIST, ignore_errors=True)
 os.makedirs(DIST)
 open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
 shutil.copy(os.path.join(ROOT, "deals.js"), DIST)
-EXTRA_PAGES = ["black-friday.html"]
+EXTRA_PAGES = ["budget.html", "black-friday.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
     open(os.path.join(DIST, name), "w", encoding="utf-8").write(src.replace("{{SITE_URL}}", SITE_URL))
