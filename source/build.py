@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""把 index.html + deals.js 构建成可部署的静态站（dist/）。
+"""把 index.html + deals.js + icons.js + v2.css 构建成可部署的静态站（dist/）。
 
 做的事：补全 <head>（SEO 描述、canonical、Open Graph、JSON-LD），把全部优惠卡片
 预先写进 HTML 让搜索引擎能读到，再生成 sitemap.xml、robots.txt。
@@ -32,43 +32,48 @@ def pill(d):
     if "邮箱注册" in v: return "邮箱注册"
     return "人工审核"
 
-def initial(d):
-    m = re.search(r"[A-Za-z0-9]", d["name"])
-    return (m.group(0) if m else d["name"][0]).upper()
+icons_js = open(os.path.join(ROOT, "icons.js"), encoding="utf-8").read()
+ICONS = json.loads(subprocess.check_output(
+    ["node", "-e", "global.window={};eval(require('fs').readFileSync(0,'utf8'));process.stdout.write(JSON.stringify(window.ICONS))"],
+    input=icons_js.encode()))
 
-ARROW = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+def icon(d):
+    k = d.get("icon", "")
+    if k.startswith("mono:"):
+        _, t, bg = k.split(":")
+        return f'<span class="bi mono{" long" if len(t) > 2 else ""}" style="background:{e(bg)}" aria-hidden="true">{e(t)}</span>'
+    ic = ICONS.get(k)
+    if not ic:
+        return '<span class="bi mono" style="background:#141414" aria-hidden="true">★</span>'
+    h = ic["hex"]
+    fill = "#141414" if sum(int(h[i:i + 2], 16) for i in (1, 3, 5)) > 600 else h  # 白色图形放在白底上看不见
+    return f'<span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="{fill}"><path d="{ic["d"]}"/></svg></span>'
+
+ARROW = ('<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" '
          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>')
 
+# 与 index.html 里 ticket() 的结构保持一致；预渲染前 9 张（免费优先），脚本加载后接管
+order = sorted(deals, key=lambda d: not d["free"])
 cards = "".join(f'''
-      <article class="deal">
-        <div class="deal-head">
-          <div class="logo" aria-hidden="true">{e(initial(d))}</div>
-          <div class="deal-title"><h3>{e(d["name"])}</h3><div class="meta">{e(d["cat"])} · {e(d["region"])}</div></div>
-          <span class="tag {"free" if d["free"] else "paid"}">{"免费" if d["free"] else "折扣"}</span>
+      <article class="ticket">
+        <div class="t-main">
+          <div class="t-head">{icon(d)}<div class="meta">{e(d["cat"])} · {e(d["region"])}</div></div>
+          <h3>{e(d["name"])}</h3>
+          <p class="offer">{e(d["offer"])}</p>
+          <dl class="rows">
+            <div><dt>资格</dt><dd>{e(d["who"])}</dd></div>
+            <div><dt>验证</dt><dd>{e(d["verify"])}</dd></div>
+          </dl>
+          <div class="t-foot"><span class="pill">{e(pill(d))}</span><a class="cta" href="{e(d["url"])}" target="_blank" rel="noopener">去申请 {ARROW}</a></div>
         </div>
-        <p class="offer">{e(d["offer"])}</p>
-        <dl class="rows">
-          <div><dt>资格</dt><dd>{e(d["who"])}</dd></div>
-          <div><dt>验证</dt><dd>{e(d["verify"])}</dd></div>
-        </dl>
-        <div class="deal-foot"><span class="pill">{e(pill(d))}</span><a class="cta" href="{e(d["url"])}" target="_blank" rel="noopener">去官方申请 {ARROW}</a></div>
-      </article>''' for d in deals)
-
-featured = "".join(f'''
-    <article class="feat">
-      <div class="feat-top"><span>{e(d["cat"])}</span><span class="tag free">免费</span></div>
-      <h3>{e(d["featured"])}</h3>
-      <div class="name">{e(d["name"])}</div>
-      <p>{e(d["offer"])}</p>
-      <div class="feat-foot"><span>{e(d["region"])} · {e(pill(d))}</span><a href="{e(d["url"])}" target="_blank" rel="noopener">去申请 {ARROW}</a></div>
-    </article>''' for d in deals if d.get("featured"))
+        <div class="stub{"" if d["free"] else " deal"}" aria-label="{"免费" if d["free"] else "折扣"}"><b>{"FREE" if d["free"] else "DEAL"}</b><span>{"免费" if d["free"] else "折扣"}</span></div>
+      </article>''' for d in order[:9])
 
 page = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
 page = re.sub(r"<title>.*?</title>\n?", "", page, count=1)
 page = page.replace('<div class="grid" id="grid"></div>', f'<div class="grid" id="grid">{cards}\n    </div>')
-page = page.replace('<div class="featured" id="featured"></div>', f'<div class="featured" id="featured">{featured}\n    </div>')
 for k, v in {"js-total": len(deals), "js-free": sum(1 for d in deals if d["free"]),
-             "js-cats": len({d["cat"] for d in deals}), "js-updated": updated}.items():
+             "js-updated": updated, "js-month": (f"{int(updated.split('-')[1])} 月" if "-" in updated else updated)}.items():
     page = re.sub(rf'(class="{k}">)[^<]*(<)', rf"\g<1>{v}\2", page)
 
 ld = {"@context": "https://schema.org", "@type": "ItemList", "name": "海外学生优惠清单",
@@ -89,7 +94,7 @@ head = f'''<!doctype html>
 <meta property="og:url" content="{SITE_URL}">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312302c'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle' fill='%23f3e24a' font-weight='900'%3E学%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 <style>body{{margin:0}}[hidden]{{display:none!important}}</style>
 '''
@@ -100,7 +105,9 @@ out = head + page[:split] + "\n</head>\n<body>\n" + page[split:] + "\n</body>\n<
 shutil.rmtree(DIST, ignore_errors=True)
 os.makedirs(DIST)
 open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
-shutil.copy(os.path.join(ROOT, "deals.js"), DIST)
+for name in ["deals.js", "icons.js", "v2.css"]:
+    shutil.copy(os.path.join(ROOT, name), DIST)
+shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
 EXTRA_PAGES = ["budget.html", "black-friday.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()

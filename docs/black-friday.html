@@ -12,154 +12,16 @@
 <meta property="og:url" content="https://meisdevr.github.io/student-perks/black-friday.html">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312302c'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle' fill='%23f3e24a' font-weight='900'%3E学%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
-<style>
-/* 与首页同一套 tokens；本页为 2026 英国黑五专区，内容为静态 HTML，更新时直接改本文件。 */
-:root {
-  --bg: #eef2f1; --surface: #ffffff; --ink: #12302c; --muted: #55706b; --line: #d3dedb;
-  --accent: #0f6b5c; --accent-soft: #dcede8; --mark: #f3e24a; --mark-ink: #2b2700; --on-accent: #ffffff;
-  --warn-soft: #fbf3c4;
-  --font-display: "Bricolage Grotesque", "Noto Sans SC", system-ui, sans-serif;
-  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0e1816; --surface: #15221f; --ink: #e3eeeb; --muted: #93aca6; --line: #263834;
-    --accent: #5cc8b3; --accent-soft: #1c3531; --mark: #e8d83f; --mark-ink: #1d1a00; --on-accent: #0e1816;
-    --warn-soft: #2e2b12; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0e1816; --surface: #15221f; --ink: #e3eeeb; --muted: #93aca6; --line: #263834;
-  --accent: #5cc8b3; --accent-soft: #1c3531; --mark: #e8d83f; --mark-ink: #1d1a00; --on-accent: #0e1816;
-  --warn-soft: #2e2b12; color-scheme: dark;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6; }
-.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 20px; }
-h1, h2, h3 { text-wrap: balance; margin: 0; }
-a { color: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.mono { font-family: var(--font-mono); }
-
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; border-bottom: 1px solid var(--line); }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; text-decoration: none; }
-.brand-mark { width: 32px; height: 32px; border-radius: 8px; background: var(--ink); color: var(--mark); display: grid; place-items: center; font-weight: 900; font-size: 17px; }
-.links { display: flex; gap: 32px; }
-.links a { text-decoration: none; color: var(--muted); font-weight: 500; }
-.links a:hover, .links a.on { color: var(--ink); }
-.back { font-size: 14px; color: var(--muted); text-decoration: none; }
-
-/* Hero */
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 56px; align-items: center; padding-block: 64px 40px; }
-.eyebrow { font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: .1em; color: var(--accent); }
-.hero h1 { font-weight: 900; font-size: clamp(32px, 5vw, 56px); line-height: 1.2; letter-spacing: -.02em; margin-block: 18px; }
-.hero h1 mark { background: var(--mark); color: var(--mark-ink); padding: 0 .15em; border-radius: 6px; }
-.lede { color: var(--muted); font-size: 17px; max-width: 34em; margin: 0 0 20px; }
-.legend { display: flex; flex-wrap: wrap; gap: 10px; }
-.countdown { background: var(--ink); color: var(--bg); border-radius: 20px; padding: 28px; display: grid; gap: 18px; }
-.countdown .label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; opacity: .7; }
-.countdown .big { font-family: var(--font-display); font-weight: 800; font-size: 64px; line-height: 1; color: var(--mark); font-variant-numeric: tabular-nums; }
-.countdown .big small { font-family: var(--font-body); font-size: 18px; font-weight: 700; color: var(--bg); margin-left: 6px; }
-.countdown .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px solid color-mix(in srgb, var(--bg) 20%, transparent); padding-top: 16px; }
-.countdown .pair b { display: block; font-size: 20px; }
-.countdown .pair span { font-size: 13px; opacity: .7; }
-
-/* Status tags */
-.st { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-family: var(--font-mono); font-weight: 500; font-size: 12px; white-space: nowrap; }
-.st::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.st.ok { background: var(--accent); color: var(--on-accent); }
-.st.past { background: var(--accent-soft); color: var(--accent); }
-.st.guess { background: var(--warn-soft); color: var(--ink); }
-
-/* Sections */
-.sec { padding-top: 56px; }
-.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-.sec-head h2 { font-weight: 900; font-size: 28px; line-height: 1.3; }
-.sec-head .aside { font-size: 14px; color: var(--muted); }
-
-/* Timeline */
-.timeline { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
-.tl { padding: 16px 16px 0 0; min-width: 0; }
-.tl .d { font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1.2; }
-.tl.key .d { color: var(--accent); }
-.tl p { margin: 6px 0 8px; font-size: 14px; }
-
-/* Cards */
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-.card h3 { font-family: var(--font-display); font-weight: 800; font-size: 20px; line-height: 1.3; }
-.card p { margin: 0; font-size: 14px; }
-.card .src { margin-top: auto; padding-top: 8px; font-size: 12px; color: var(--muted); }
-.card .src a { color: var(--accent); }
-
-/* Brand lists */
-.cat { margin-top: 32px; }
-.cat h3 { font-size: 18px; font-weight: 900; margin-bottom: 4px; }
-.rows { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.row { display: grid; grid-template-columns: 180px minmax(0, 1fr) 210px; gap: 20px; padding: 16px 22px; border-top: 1px solid var(--line); align-items: start; }
-.row:first-child { border-top: 0; }
-.row .b { font-weight: 700; }
-.row .o { font-size: 14px; }
-.row .s { font-size: 12px; color: var(--muted); text-align: right; }
-.row .s a { color: var(--accent); }
-
-/* Student stack */
-.stack { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.stack div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; min-width: 0; }
-.stack b { display: block; font-size: 15px; }
-.stack span { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--accent); }
-.stack small { display: block; font-size: 12px; color: var(--muted); }
-
-/* Tips */
-.tips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.tip { border-top: 2px solid var(--ink); padding-top: 16px; }
-.tip h3 { font-size: 18px; font-weight: 900; }
-.tip p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
-
-footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-block: 48px; }
-.foot { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-.foot b { display: block; font-size: 16px; margin-bottom: 10px; }
-.foot p { margin: 0; max-width: 40em; opacity: .7; font-size: 14px; }
-.foot .mono { font-size: 12px; opacity: .6; }
-
-@media (max-width: 1080px) {
-  .hero { grid-template-columns: 1fr; gap: 28px; }
-  .timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 8px; }
-  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .stack { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .row { grid-template-columns: 150px minmax(0, 1fr); }
-  .row .s { grid-column: 2; text-align: left; }
-}
-@media (max-width: 640px) {
-  .links { display: none; }
-  .nav { padding-block: 16px; }
-  .hero { padding-block: 28px 8px; }
-  .lede { font-size: 15px; }
-  .countdown { padding: 22px; }
-  .countdown .big { font-size: 52px; }
-  .sec { padding-top: 40px; }
-  .sec-head h2 { font-size: 22px; }
-  .timeline { grid-template-columns: minmax(0, 1fr); border-top: 0; }
-  .tl { border-left: 2px solid var(--ink); padding: 4px 0 12px 16px; }
-  .cards { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .row { grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 14px 16px; }
-  .row .s { grid-column: auto; }
-  .stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .tips { grid-template-columns: minmax(0, 1fr); }
-  footer { margin-top: 56px; padding-block: 32px 40px; }
-}
-</style>
+<link rel="stylesheet" href="v2.css">
 </head>
 <body>
 <div class="wrap">
   <nav class="nav">
-    <a class="brand" href="./"><span class="brand-mark">学</span>学生优惠地图</a>
-    <div class="links"><a href="./#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a class="on" href="black-friday.html">英国黑五</a><a href="#tips">购物提示</a></div>
+    <a class="brand" href="./"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>学生优惠地图</b><small>STUDENT PERKS MAP</small></span></a>
+    <div class="seg"><a href="./#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a class="on" href="black-friday.html">英国黑五</a><a href="#tips">购物提示</a></div>
     <a class="back" href="./">← 返回首页</a>
   </nav>
 
@@ -170,7 +32,7 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
       <p class="lede">截至 10 月 14 日，大多数品牌还没官宣今年的活动。每条信息都标了可信度，并附来源和日期。价格以官网为准，下单前再核一次。</p>
       <div class="legend"><span class="st ok">已确认</span><span class="st past">2025 参考</span><span class="st guess">第三方预测</span></div>
     </div>
-    <aside class="countdown" aria-label="黑五倒计时">
+    <aside class="dark-panel countdown" aria-label="黑五倒计时">
       <div class="label">距 BLACK FRIDAY 还有</div>
       <div class="big"><span id="days">44</span><small>天</small></div>
       <div class="pair">
@@ -219,7 +81,7 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
 
     <div class="cat">
       <h3>电子数码</h3>
-      <div class="rows">
+      <div class="list">
         <div class="row"><div class="b">Apple</div><div class="o">11-28 至 12-01 Shopping Event，英国参与。买指定产品送 Apple Gift Card，英国最高 £200；iPhone 17、M5 等新品不参与。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.macrumors.com/2025/11/20/apple-announces-2025-black-friday-event/" target="_blank" rel="noopener">MacRumors</a> · <a href="https://www.hotukdeals.com/deals/apple-shopping-event-2025-upto-ps200-gift-card-4739066" target="_blank" rel="noopener">hotukdeals</a></div></div>
         <div class="row"><div class="b">Amazon UK</div><div class="o">Black Friday Week 11-20 至 12-01（11-13 公布），科技和日用品最高约 40% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://primevoucher.co.uk/guides/black-friday-2026-uk" target="_blank" rel="noopener">PrimeVoucher</a> · <a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
         <div class="row"><div class="b">Currys</div><div class="o">10-29 就开始，比黑五提前约 4 周，TV、笔记本、家电为主。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.which.co.uk/news/article/best-currys-deals-sales-aauut3X5qW3N" target="_blank" rel="noopener">Which?</a></div></div>
@@ -235,7 +97,7 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
 
     <div class="cat">
       <h3>家电个护</h3>
-      <div class="rows">
+      <div class="list">
         <div class="row"><div class="b">Dyson</div><div class="o">官网吸尘器和美发最高减 £200；Supersonic 在 Amazon 低至 40% off，Airwrap 在 Very 减 £150。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://graziadaily.co.uk/fashion/shopping/dyson-hair-dryer-black-friday-sale-best-deals/" target="_blank" rel="noopener">Grazia</a> · <a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
         <div class="row"><div class="b">Ninja</div><div class="o">厨房电器最高 30% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
         <div class="row"><div class="b">Shark</div><div class="o">吸尘器和风扇最高减 £130。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
@@ -245,7 +107,7 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
 
     <div class="cat">
       <h3>服饰运动</h3>
-      <div class="rows">
+      <div class="list">
         <div class="row"><div class="b">ASOS</div><div class="o">App 内几乎全场最高 70% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://britbrief.co.uk/business/retail/black-friday-2026-fashion-deals-key-dates-and-top-early-offers.html" target="_blank" rel="noopener">Brit Brief</a></div></div>
         <div class="row"><div class="b">Nike</div><div class="o">鞋服最高约 50% off，无官方数字。</div><div class="s"><span class="st guess">第三方预测</span><br><a href="https://www.groupon.co.uk/discount-codes/nike-store/sales-calendar" target="_blank" rel="noopener">Groupon</a></div></div>
         <div class="row"><div class="b">adidas / JD Sports</div><div class="o">adidas 提前开跑；JD Sports 精选最高 50% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
@@ -259,7 +121,7 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
 
     <div class="cat">
       <h3>床垫家居</h3>
-      <div class="rows">
+      <div class="list">
         <div class="row"><div class="b">Emma</div><div class="o">最高 65% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
         <div class="row"><div class="b">Simba</div><div class="o">55% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
         <div class="row"><div class="b">Wayfair</div><div class="o">比黑五早一周开始。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
@@ -298,9 +160,12 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
 </div>
 
 <footer>
-  <div class="wrap foot">
+  <div class="wrap">
+    <div class="foot-word"><img src="assets/logo.svg" alt="" width="168" height="168"><span>STUDENT<br>PERKS MAP</span></div>
+    <div class="foot">
     <div><b>信息会持续更新</b><p>本页汇总公开报道和品牌官网信息，标“2025 参考”和“预测”的条目不代表今年一定相同。品牌官宣后会改为“已确认”。价格和库存以官网为准。</p></div>
     <span class="mono">学生优惠地图 · 英国黑五专区 · 更新于 2026-10-14</span>
+    </div>
   </div>
 </footer>
 
