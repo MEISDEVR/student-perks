@@ -1,258 +1,191 @@
 <title>学生优惠地图</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="v2.css">
 <style>
-/* Layout: 按 Figma 稿「学生优惠地图 UI」。学生证首屏 → 吸顶筛选栏 → 精选深色大卡 → 三列优惠卡 → 验证方式速查 → 深色页脚。 */
-:root {
-  --bg: #eef2f1;
-  --surface: #ffffff;
-  --ink: #12302c;
-  --muted: #55706b;
-  --line: #d3dedb;
-  --accent: #0f6b5c;
-  --accent-soft: #dcede8;
-  --mark: #f3e24a;
-  --mark-ink: #2b2700;
-  --on-accent: #ffffff;
-  --font-display: "Bricolage Grotesque", "Noto Sans SC", system-ui, sans-serif;
-  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0e1816; --surface: #15221f; --ink: #e3eeeb; --muted: #93aca6; --line: #263834;
-    --accent: #5cc8b3; --accent-soft: #1c3531; --mark: #e8d83f; --mark-ink: #1d1a00; --on-accent: #0e1816;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0e1816; --surface: #15221f; --ink: #e3eeeb; --muted: #93aca6; --line: #263834;
-  --accent: #5cc8b3; --accent-soft: #1c3531; --mark: #e8d83f; --mark-ink: #1d1a00; --on-accent: #0e1816;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6; }
-.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 20px; }
-h1, h2 { text-wrap: balance; margin: 0; }
-a { color: inherit; }
-button { font: inherit; color: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.mono { font-family: var(--font-mono); }
-
-/* Nav */
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; border-bottom: 1px solid var(--line); }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; text-decoration: none; }
-.brand-mark { width: 32px; height: 32px; border-radius: 8px; background: var(--ink); color: var(--mark); display: grid; place-items: center; font-weight: 900; font-size: 17px; }
-.links { display: flex; gap: 32px; }
-.links a { text-decoration: none; color: var(--muted); font-weight: 500; }
-.links a:hover, .links a.on { color: var(--ink); }
-.updated { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
-.updated::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-
-/* 黑五专区入口 */
-.promo + .promo { margin-top: 8px; }
-.promo { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 12px 18px; border-radius: 14px; background: var(--ink); color: var(--bg); text-decoration: none; }
-.promo b { color: var(--mark); white-space: nowrap; }
-.promo span { flex: 1; min-width: 0; opacity: .8; font-size: 14px; }
-.promo em { font-style: normal; font-weight: 700; white-space: nowrap; }
-.promo:hover em { text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 640px) { .promo span { display: none; } .promo { justify-content: space-between; } }
-
-/* Hero */
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) 480px; gap: 64px; align-items: center; padding-block: 72px 56px; }
-.eyebrow { font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: .1em; color: var(--accent); }
-.hero h1 { font-weight: 900; font-size: clamp(34px, 5vw, 60px); line-height: 1.2; letter-spacing: -.02em; margin-block: 20px; }
-.lede { color: var(--muted); font-size: 17px; max-width: 34em; margin: 0 0 24px; }
-.search { display: flex; align-items: center; gap: 12px; max-width: 600px; padding: 8px 8px 8px 20px; border: 2px solid var(--ink); border-radius: 14px; background: var(--surface); }
-.search svg { flex: none; color: var(--muted); }
+/* 首页专用：Hero 拼贴、跑马灯、Bento 精选、筛选条、三步领取。公共样式在 v2.css。 */
+.home-hero { display: grid; grid-template-columns: minmax(0, 1fr) 540px; gap: 40px; align-items: center; padding-block: 40px 72px; }
+.kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.kicker .chip-s { background: var(--yellow); color: var(--on-color); font-family: var(--font-mono); }
+.home-hero h1 { font-weight: 900; font-size: clamp(44px, 6.2vw, 92px); line-height: 1.08; letter-spacing: -.045em; margin-block: 22px 26px; }
+.home-hero .lede { font-size: 17px; }
+.search { display: flex; align-items: center; gap: 12px; max-width: 620px; padding: 8px 8px 8px 20px; border: 3px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 6px 6px 0 var(--shadow); }
+.search:focus-within { box-shadow: 6px 6px 0 var(--cobalt); }
+.search svg { flex: none; }
 .search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 16px; color: var(--ink); padding-block: 8px; }
 .search input::placeholder { color: var(--muted); }
-.btn-primary { border: 0; cursor: pointer; background: var(--accent); color: var(--on-accent); font-weight: 700; padding: 11px 22px; border-radius: 10px; }
-.btn-primary:hover { filter: brightness(1.08); }
-.popular { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 16px; font-size: 13px; color: var(--muted); }
-.popular button { border: 0; background: none; padding: 0; cursor: pointer; font-weight: 500; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.search kbd { flex: none; font-family: var(--font-mono); font-size: 12px; padding: 1px 7px; border: 1.5px solid var(--line); border-radius: 6px; color: var(--muted); }
+.popular { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.popular button { cursor: pointer; padding: 3px 12px; border: var(--bw) solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-family: var(--font-body); font-weight: 700; font-size: 12px; }
+.popular button:hover { background: var(--yellow); color: var(--on-color); }
+.popular button.hot { background: var(--mint); color: var(--on-color); }
 
-/* Student pass */
-.pass-wrap { position: relative; height: 330px; }
-.pass-wrap::before { content: ""; position: absolute; left: 34px; top: 48px; width: 440px; height: 276px; border-radius: 22px; background: var(--mark); transform: rotate(-6deg); }
-.pass { position: absolute; left: 20px; top: 24px; width: 440px; height: 276px; border-radius: 22px; background: var(--accent); color: var(--on-accent); padding: 26px 28px; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
-.pass-top { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; }
-.pass-top b { font-weight: 500; letter-spacing: .14em; }
-.pass-top span { opacity: .7; }
-.pass-body { display: grid; grid-template-columns: 96px 1fr; gap: 24px; align-items: center; }
-.photo { height: 116px; border-radius: 12px; background: var(--mark); color: var(--mark-ink); display: grid; place-items: center; font-weight: 900; font-size: 56px; }
-.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
-.fields small { display: block; font-size: 12px; opacity: .7; }
-.fields b { font-weight: 900; font-size: 22px; line-height: 1.3; font-variant-numeric: tabular-nums; }
-.pass-foot { display: flex; justify-content: space-between; align-items: flex-end; border-top: 6px solid var(--mark); margin-inline: -28px; padding: 16px 28px 0; }
-.barcode { width: 240px; height: 34px; background: repeating-linear-gradient(90deg, var(--on-accent) 0 2px, transparent 2px 4px, var(--on-accent) 4px 5px, transparent 5px 8px, var(--on-accent) 8px 11px, transparent 11px 13px); }
-.pass-foot span { font-family: var(--font-mono); font-size: 11px; opacity: .75; }
-.stats { display: none; }
+.collage { position: relative; height: 540px; }
+.blob { position: absolute; right: 30px; top: 70px; width: 380px; height: 380px; border-radius: 50%; background: var(--cobalt); border: 3px solid var(--line); }
+.spark { position: absolute; width: 56px; height: 56px; left: 0; top: 70px; }
+.collage .ticket { position: absolute; width: 400px; }
+.collage .ticket:hover { transform: none; }
+.c1 { right: 0; top: 0; transform: rotate(-6deg) !important; }
+.c2 { right: 70px; top: 180px; transform: rotate(2deg) !important; }
+.c3 { right: 140px; top: 350px; transform: rotate(-4deg) !important; }
+.collage .rows { display: none; }
+.collage .offer { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.stamp { position: absolute; right: -6px; top: 330px; width: 132px; height: 132px; border-radius: 50%; background: var(--tomato); color: #fff; border: 3px solid var(--line); box-shadow: 4px 4px 0 var(--shadow); display: grid; place-items: center; align-content: center; text-align: center; transform: rotate(12deg); z-index: 2; }
+.stamp b { font-family: var(--font-display); font-weight: 800; font-size: 44px; line-height: 1; }
+.stamp small { font-weight: 900; font-size: 13px; }
 
-/* Filter bar */
-.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; padding-block: 12px; background: var(--bg); }
-.filter-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
-.chip { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; cursor: pointer; padding: 7px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); font-weight: 500; font-size: 14px; }
-.chip:hover { border-color: var(--ink); }
-.chip span { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
-.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
-.chip[aria-pressed="true"] span { color: var(--bg); opacity: .75; }
-.switch { display: inline-flex; align-items: center; gap: 10px; flex: none; cursor: pointer; font-weight: 500; font-size: 14px; }
-.switch input { appearance: none; margin: 0; width: 40px; height: 24px; border-radius: 12px; background: var(--line); position: relative; cursor: pointer; transition: background .15s; }
-.switch input::after { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); transition: transform .15s; }
-.switch input:checked { background: var(--accent); }
-.switch input:checked::after { transform: translateX(16px); }
+.marquee { margin-block: 8px 0; background: #141414; color: var(--yellow); border-block: 3px solid var(--line); transform: rotate(-1.6deg); overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-flex; gap: 28px; padding-block: 14px; animation: scroll 38s linear infinite; font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: .01em; text-transform: uppercase; }
+.marquee-track span::after { content: "✦"; margin-left: 28px; color: #f3efe6; }
+@keyframes scroll { to { transform: translateX(-50%); } }
 
-/* Section heads */
-.sec { padding-top: 48px; }
-.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-.sec-head h2 { font-weight: 900; font-size: 28px; line-height: 1.3; }
-.sec-head .aside { font-size: 14px; color: var(--muted); }
-.sec-head .count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-left: 12px; }
-.sort { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; }
-.sort select { font: inherit; color: var(--ink); background: transparent; border: 0; cursor: pointer; padding: 2px 0; }
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(220px, auto)); gap: 20px; }
+.tile { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 10px; padding: 24px; border: var(--bw) solid var(--line); border-radius: 22px; box-shadow: var(--sh); color: var(--on-color); text-decoration: none; min-width: 0; transition: transform .14s, box-shadow .14s; }
+.tile:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--shadow); }
+.tile .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; }
+.tile h3 { font-weight: 900; font-size: 30px; line-height: 1.15; letter-spacing: -.02em; }
+.tile p { margin: 0; font-size: 13px; }
+.tile .go { margin-top: auto; font-weight: 900; font-size: 14px; }
+.tile.big { grid-column: span 2; grid-row: span 2; background: var(--cobalt); color: #fff; padding: 32px; }
+.tile.big h3 { font-family: var(--font-display); font-size: clamp(48px, 6vw, 88px); line-height: .98; letter-spacing: -.04em; max-width: 6em; }
+.tile.big p { font-size: 15px; max-width: 30em; opacity: .9; }
+.tile.big .go { align-self: flex-start; padding: 10px 18px; border: var(--bw) solid #141414; border-radius: 999px; background: var(--yellow); color: #141414; box-shadow: 3px 3px 0 #141414; }
+.tile.big .bigstar { position: absolute; right: 28px; bottom: 26px; width: 130px; height: 130px; }
+.tile.y { background: var(--yellow); }
+.tile.m { background: var(--mint); }
+.tile.t { background: var(--tomato); color: #fff; }
+.tile.k-dark { background: #141414; color: #f3efe6; }
+.tile.k-dark .k { color: var(--yellow); }
+.tile .num { font-family: var(--font-display); font-weight: 800; font-size: 84px; line-height: 1; color: var(--yellow); font-variant-numeric: tabular-nums; }
+.tile .num small { font-family: var(--font-body); font-size: 20px; font-weight: 900; color: #f3efe6; margin-left: 6px; }
 
-/* Featured */
-.featured { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.feat { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: 20px; background: var(--ink); color: var(--bg); min-width: 0; }
-.feat::after { content: ""; position: absolute; right: -50px; top: -60px; width: 180px; height: 180px; border-radius: 50%; border: 1px solid var(--bg); opacity: .12; }
-.feat-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; }
-.feat-top span:first-child { opacity: .7; }
-.feat h3 { margin: 0; font-weight: 900; font-size: 34px; line-height: 1.25; color: var(--mark); }
-.feat .name { font-weight: 700; font-size: 18px; }
-.feat p { margin: 0; opacity: .75; font-size: 14px; }
-.feat-foot { margin-top: auto; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.feat-foot span { font-family: var(--font-mono); font-size: 12px; opacity: .6; min-width: 0; }
-.feat-foot a { flex: none; display: inline-flex; align-items: center; gap: 4px; padding: 8px 14px; border-radius: 999px; background: var(--bg); color: var(--ink); font-weight: 700; font-size: 13px; text-decoration: none; }
-
-/* Tags */
-.tag { flex: none; font-weight: 700; font-size: 12px; line-height: 16px; padding: 4px 10px; border-radius: 6px; white-space: nowrap; }
-.tag.free { background: var(--mark); color: var(--mark-ink); }
-.tag.paid { border: 1px solid var(--line); color: var(--muted); padding: 3px 9px; }
-
-/* Deal cards */
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.deal { display: flex; flex-direction: column; gap: 16px; min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
-.deal-head { display: flex; align-items: center; gap: 14px; }
-.logo { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 20px; }
-.deal-title { flex: 1; min-width: 0; }
-.deal h3 { margin: 0; font-weight: 700; font-size: 17px; line-height: 1.4; }
-.meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
-.offer { margin: 0; flex: 1; }
-.rows { display: grid; gap: 8px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; }
-.rows div { display: grid; grid-template-columns: 32px 1fr; gap: 12px; }
-.rows dt { color: var(--muted); font-weight: 500; }
-.rows dd { margin: 0; min-width: 0; }
-.deal-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-family: var(--font-mono); font-weight: 500; font-size: 12px; }
-.pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.cta { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); font-weight: 700; font-size: 14px; text-decoration: none; }
-.cta:hover { text-decoration: underline; text-underline-offset: 3px; }
-.more { display: flex; justify-content: center; margin-top: 28px; }
-.more button { cursor: pointer; padding: 13px 28px; border-radius: 999px; border: 1.5px solid var(--ink); background: transparent; font-weight: 700; }
-.more button:hover { background: var(--ink); color: var(--bg); }
+.filters { position: sticky; top: 0; z-index: 5; padding-block: 14px; background: var(--paper); }
+.filter-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 12px 10px 10px; border: var(--bw) solid var(--line); border-radius: 999px; background: var(--surface); box-shadow: 4px 4px 0 var(--shadow); }
+.chips { display: flex; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; cursor: pointer; padding: 7px 14px; border-radius: 999px; border: 1.5px solid transparent; background: transparent; font-weight: 700; font-size: 14px; }
+.chip:hover { border-color: var(--line); }
+.chip span { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--active-bg); color: var(--active-fg); }
+.chip[aria-pressed="true"] span { color: var(--active-fg); opacity: .8; }
+.switch { display: inline-flex; align-items: center; gap: 10px; flex: none; cursor: pointer; font-weight: 700; font-size: 14px; padding-right: 6px; }
+.switch input { appearance: none; margin: 0; width: 44px; height: 26px; border-radius: 13px; border: var(--bw) solid var(--line); background: var(--paper); position: relative; cursor: pointer; transition: background .15s; }
+.switch input::after { content: ""; position: absolute; left: 2px; top: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); transition: transform .15s; }
+.switch input:checked { background: var(--cobalt); }
+.switch input:checked::after { transform: translateX(18px); background: #fff; }
+.count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.sort { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; }
+.sort select { font: inherit; color: var(--ink); background: var(--surface); border: var(--bw) solid var(--line); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.more { display: flex; justify-content: center; margin-top: 36px; }
 .empty { padding: 48px 0; text-align: center; color: var(--muted); }
 
-/* Guide */
-.guide { padding-top: 88px; }
-.guide .sub { color: var(--muted); margin: 8px 0 28px; }
-.guide-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
-.guide-item { border-top: 2px solid var(--ink); padding-top: 20px; min-width: 0; }
-.guide-item h3 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1.3; }
-.guide-item .used { font-family: var(--font-mono); font-size: 12px; color: var(--accent); margin: 6px 0 8px; }
-.guide-item p { margin: 0; color: var(--muted); font-size: 14px; }
+.how { margin-top: 112px; background: #141414; color: #f3efe6; border-block: 3px solid var(--line); padding-block: 80px; }
+.how .eyebrow { color: var(--yellow); }
+.how h2 { margin-top: 8px; font-weight: 900; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -.02em; }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 32px; }
+.step { padding: 26px; border: var(--bw) solid #f3efe6; border-radius: 22px; min-width: 0; }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 64px; line-height: 1; }
+.step:nth-child(1) .n { color: var(--yellow); }
+.step:nth-child(2) .n { color: var(--mint); }
+.step:nth-child(3) .n { color: var(--tomato); }
+.step h3 { margin-top: 18px; font-size: 22px; font-weight: 900; }
+.step p { margin: 6px 0 0; font-size: 14px; opacity: .75; }
+.verify { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin-top: 56px; }
+.verify div { border-top: 2px dashed rgba(243, 239, 230, .4); padding-top: 16px; min-width: 0; }
+.verify h3 { font-family: var(--font-display); font-weight: 800; font-size: 22px; }
+.verify .used { font-family: var(--font-mono); font-size: 12px; color: var(--yellow); margin: 4px 0 6px; }
+.verify p { margin: 0; font-size: 14px; opacity: .72; }
+.how + footer { margin-top: 0; }
 
-/* Footer */
-footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-block: 48px; }
-.foot { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-.foot b { display: block; font-size: 16px; margin-bottom: 10px; }
-.foot p { margin: 0; max-width: 40em; opacity: .7; font-size: 14px; }
-.foot .mono { font-size: 12px; opacity: .6; }
-
-/* Tablet */
+@media (max-width: 1180px) {
+  .home-hero { grid-template-columns: 1fr; padding-bottom: 40px; }
+  .collage { height: 470px; max-width: 560px; width: 100%; justify-self: center; }
+}
 @media (max-width: 1080px) {
-  .hero { grid-template-columns: 1fr; }
-  .pass-wrap { display: none; }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 600px; margin-top: 20px; padding: 14px 16px; border-radius: 14px; background: var(--accent); color: var(--on-accent); text-align: center; }
-  .stats b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1.3; font-variant-numeric: tabular-nums; }
-  .stats small { font-size: 12px; opacity: .75; }
-  .featured, .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .featured .feat:nth-child(3) { display: none; }
-  .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .filter-card { flex-direction: column; align-items: stretch; }
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
+  .tile.big { grid-row: auto; }
+  .verify { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filter-card { border-radius: 22px; flex-direction: column; align-items: stretch; }
 }
-/* Phone */
 @media (max-width: 640px) {
-  .links, .updated { display: none; }
-  .nav { padding-block: 16px; }
-  .hero { padding-block: 28px 16px; }
-  .eyebrow { font-size: 11px; }
-  .hero h1 { font-size: 34px; margin-block: 14px; }
-  .lede { font-size: 15px; margin-bottom: 18px; }
-  .search { padding-left: 16px; }
-  .btn-primary { padding: 10px 16px; }
+  .home-hero { padding-block: 16px 24px; gap: 24px; }
+  .home-hero h1 { font-size: 46px; margin-block: 16px 18px; }
+  .search { padding-left: 14px; box-shadow: 4px 4px 0 var(--shadow); }
+  .search kbd { display: none; }
+  .search .btn { padding: 9px 14px; }
   .popular { display: none; }
-  .filter-card { border: 0; border-radius: 0; background: var(--bg); padding: 4px 0; gap: 12px; }
-  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -20px; padding-inline: 20px; }
-  .chips::-webkit-scrollbar { display: none; }
-  .featured { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; scrollbar-width: none; }
-  .featured::-webkit-scrollbar { display: none; }
-  .featured .feat { flex: 0 0 100%; scroll-snap-align: start; padding: 24px; }
-  .featured .feat:nth-child(3) { display: flex; }
-  .feat h3 { font-size: 30px; }
-  .grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .deal { padding: 20px; }
-  .sec { padding-top: 32px; }
-  .sec-head h2 { font-size: 22px; }
-  .guide { padding-top: 48px; }
-  .guide-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  footer { margin-top: 56px; padding-block: 32px 40px; }
+  .collage { height: 372px; }
+  .blob { width: 240px; height: 240px; right: 10px; top: 30px; }
+  .spark { width: 40px; height: 40px; top: 10px; }
+  .collage .ticket { width: min(300px, 82vw); }
+  .collage .offer { display: none; }
+  .c1 { right: 0; top: 0; }
+  .c2 { right: 26px; top: 110px; }
+  .c3 { right: 52px; top: 224px; }
+  .stamp { width: 96px; height: 96px; top: 190px; right: -4px; }
+  .stamp b { font-size: 32px; }
+  .stamp small { font-size: 11px; }
+  .marquee-track { font-size: 16px; padding-block: 10px; }
+  .bento { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+  .tile { padding: 16px; border-radius: 18px; }
+  .tile h3 { font-size: 22px; }
+  .tile.big { padding: 22px; }
+  .tile.big h3 { font-size: 48px; }
+  .tile.big .bigstar { width: 70px; height: 70px; right: 16px; bottom: 16px; }
+  .tile .num { font-size: 56px; }
+  .tile p { font-size: 12px; }
+  .filters { padding-block: 8px; }
+  .filter-card { padding: 8px; gap: 8px; box-shadow: 3px 3px 0 var(--shadow); }
+  .how { margin-top: 72px; padding-block: 56px; }
+  .steps { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .step { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 4px 12px; padding: 18px; }
+  .step .n { font-size: 44px; grid-row: span 2; }
+  .step h3 { margin: 0; font-size: 18px; }
+  .step p { margin: 0; }
+  .verify { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 40px; }
 }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 
 <div class="wrap">
   <nav class="nav">
-    <a class="brand" href="#top" id="top"><span class="brand-mark">学</span>学生优惠地图</a>
-    <div class="links"><a class="on" href="#deals">全部优惠</a><a href="#guide">验证方式</a><a href="#notice">使用须知</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a></div>
-    <span class="updated">核实于 <span class="js-updated">—</span></span>
+    <a class="brand" href="#top" id="top"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>学生优惠地图</b><small>STUDENT PERKS MAP</small></span></a>
+    <div class="seg"><a class="on" href="#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="#guide">怎么验证</a></div>
+    <span class="badge"><span class="js-month">10月</span>已核实</span>
   </nav>
-  <a class="promo" href="black-friday.html"><b>2026 英国黑五专区</b><span>11-27 Black Friday · 主流品牌折扣汇总</span><em>查看 →</em></a>
-  <a class="promo" href="budget.html"><b>穷鬼专区</b><span>超市会员价 · 快餐 App 免费餐 · 临期食品袋</span><em>查看 →</em></a>
 
-  <section class="hero">
+  <section class="home-hero">
     <div>
-      <div class="eyebrow">STUDENT PERKS · 海外在读学生</div>
-      <h1>在读这几年，<br>该领的优惠别错过</h1>
-      <p class="lede"><span class="js-total">26</span> 项软件、云服务、设备和订阅优惠，每项写清资格、验证方式和官方申请入口。只链官方渠道，用本人学籍申请。</p>
+      <div class="kicker"><span class="chip-s">2026–27 学年</span><span><span class="js-total">26</span> 项优惠 · <span class="js-free">15</span> 项免费 · 只链官方入口</span></div>
+      <h1>在读这几年，<br>该领的 <span class="hl">别错过</span></h1>
+      <p class="lede">软件、云服务、设备、订阅和吃饭买菜的学生优惠，每项写清资格、验证方式和官方申请入口。只链官方渠道，用本人学籍申请。</p>
       <form class="search" id="searchForm" role="search">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="搜索名称、权益或验证方式，例如 Copilot、SheerID" autocomplete="off" aria-label="搜索优惠">
-        <button class="btn-primary" type="submit">搜索</button>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="搜 Copilot、Spotify、SheerID…" autocomplete="off" aria-label="搜索优惠">
+        <kbd>/</kbd>
+        <button class="btn" type="submit">搜索</button>
       </form>
-      <div class="popular">大家在搜 <button type="button">Copilot</button><button type="button">免费一年</button><button type="button">Spotify</button><button type="button">Azure</button><button type="button">Mac</button></div>
-      <div class="stats" aria-hidden="true">
-        <div><b class="js-total">26</b><small>收录</small></div>
-        <div><b class="js-cats">8</b><small>分类</small></div>
-        <div><b class="js-free">15</b><small>免费</small></div>
-        <div><b class="js-month">10月</b><small>核实</small></div>
-      </div>
+      <div class="popular">大家在搜 → <button type="button">Copilot</button><button type="button" class="hot">免费一年</button><button type="button">Spotify</button><button type="button">Railcard</button><button type="button">Mac</button></div>
     </div>
-    <div class="pass-wrap" aria-hidden="true">
-      <div class="pass">
-        <div class="pass-top"><b>STUDENT PERKS PASS</b><span>2026–27</span></div>
-        <div class="pass-body">
-          <div class="photo">学</div>
-          <div class="fields">
-            <div><small>收录</small><b><span class="js-total">26</span> 项</b></div>
-            <div><small>分类</small><b><span class="js-cats">8</span> 类</b></div>
-            <div><small>免费可领</small><b><span class="js-free">15</span> 项</b></div>
-            <div><small>信息核实</small><b class="js-updated">—</b></div>
-          </div>
-        </div>
-        <div class="pass-foot"><div class="barcode"></div><span>仅限在读</span></div>
-      </div>
+    <div class="collage" id="collage" aria-hidden="true">
+      <div class="blob"></div>
+      <svg class="spark" viewBox="0 0 40 40"><path d="M20 1 Q22 18 39 20 Q22 22 20 39 Q18 22 1 20 Q18 18 20 1Z" fill="var(--yellow)" stroke="var(--line)" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      <div class="stamp"><b class="js-free">15</b><small>项免费可领</small></div>
+    </div>
+  </section>
+</div>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"><span>Copilot 免费</span><span>JetBrains 全家桶</span><span>AI Pro 一年</span><span>Notion Plus</span><span>Figma 教育版</span><span>Tesco 会员价</span><span>麦当劳积分</span><span>Railcard 1/3 off</span><span>Copilot 免费</span><span>JetBrains 全家桶</span><span>AI Pro 一年</span><span>Notion Plus</span><span>Figma 教育版</span><span>Tesco 会员价</span><span>麦当劳积分</span><span>Railcard 1/3 off</span></div></div>
+
+<div class="wrap">
+  <section class="sec" id="featuredSec">
+    <div class="sec-head"><div><div class="eyebrow">Editor's picks · 本学期</div><h2>先领这几个，最值</h2></div><a class="aside" href="#deals">全部 <span class="js-total">26</span> 项 →</a></div>
+    <div class="bento" id="featured"></div>
+  </section>
+
+  <section class="sec" id="deals">
+    <div class="sec-head">
+      <div><div class="eyebrow">All perks · <span class="js-total">26</span> 项</div><h2>按类别找</h2></div>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><span class="count" id="count"></span><label class="sort" for="sort">排序 <select id="sort"><option value="free">免费优先</option><option value="name">按名称</option><option value="cat">按分类</option></select></label></div>
     </div>
   </section>
 </div>
@@ -267,44 +200,47 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
 </div>
 
 <div class="wrap">
-  <section class="sec" id="featuredSec">
-    <div class="sec-head"><h2>本学期先领这三个</h2><span class="aside">价值最高、覆盖最广</span></div>
-    <div class="featured" id="featured"></div>
-  </section>
-
-  <section class="sec" id="deals">
-    <div class="sec-head">
-      <h2>全部优惠<span class="count" id="count"></span></h2>
-      <label class="sort" for="sort">排序：<select id="sort"><option value="free">免费优先</option><option value="name">按名称</option><option value="cat">按分类</option></select></label>
-    </div>
+  <div style="padding-top:16px">
     <div class="grid" id="grid"></div>
     <div class="empty" id="empty" hidden>没有匹配的优惠。换个关键词，或切回“全部”分类。</div>
-    <div class="more" id="more" hidden><button type="button" id="moreBtn"></button></div>
-  </section>
-
-  <section class="guide" id="guide">
-    <h2 class="sec-head" style="margin:0;font-weight:900;font-size:28px">申请前先弄清怎么验证</h2>
-    <p class="sub">大多数优惠用下面四种方式之一确认学籍。</p>
-    <div class="guide-grid">
-      <div class="guide-item"><h3>学校邮箱</h3><div class="used">Notion、Azure、JetBrains 等</div><p>用学校发的邮箱注册或接收验证链接。毕业后邮箱停用，优惠通常随之失效。</p></div>
-      <div class="guide-item"><h3>SheerID</h3><div class="used">Spotify、YouTube、Google 等</div><p>第三方学籍验证。填写学校名称后常自动通过，不通过时上传学生证或学费单。</p></div>
-      <div class="guide-item"><h3>UNiDAYS</h3><div class="used">Apple、服装与数码品牌</div><p>验证一次，可在合作品牌间复用。需定期重新确认在读状态。</p></div>
-      <div class="guide-item"><h3>ISIC</h3><div class="used">交通、博物馆、部分软件</div><p>国际学生证，付费办理，适合学校邮箱不被识别的情况。</p></div>
-    </div>
-  </section>
+    <div class="more" id="more" hidden><button class="btn ghost" type="button" id="moreBtn"></button></div>
+  </div>
 </div>
 
+<section class="how" id="guide">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>三步领到，不踩坑</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>挑一个</h3><p>按类别或搜索找到想要的，先看资格和适用地区。</p></div>
+      <div class="step"><div class="n">02</div><h3>备材料</h3><p>学校邮箱、在读证明，或一次通过 SheerID / UNiDAYS 验证。</p></div>
+      <div class="step"><div class="n">03</div><h3>官方领</h3><p>只点官方申请入口，用本人学籍，不买卖账号。</p></div>
+    </div>
+    <div class="verify">
+      <div><h3>学校邮箱</h3><div class="used">Notion、Azure、JetBrains 等</div><p>用学校发的邮箱注册或接收验证链接。毕业后邮箱停用，优惠通常随之失效。</p></div>
+      <div><h3>SheerID</h3><div class="used">Spotify、YouTube、Google 等</div><p>第三方学籍验证。填写学校名称后常自动通过，不通过时上传学生证或学费单。</p></div>
+      <div><h3>UNiDAYS</h3><div class="used">Apple、服装与数码品牌</div><p>验证一次，可在合作品牌间复用。需定期重新确认在读状态。</p></div>
+      <div><h3>ISIC</h3><div class="used">交通、博物馆、部分软件</div><p>国际学生证，付费办理，适合学校邮箱不被识别的情况。</p></div>
+    </div>
+  </div>
+</section>
+
 <footer id="notice">
-  <div class="wrap foot">
-    <div><b>只收录面向真实在读学生的官方优惠</b><p>请用本人真实学籍申请。借用或伪造学籍、转售学生账号违反各平台条款，可能导致封号。优惠内容、价格和地区会变动，申请前以官方页面为准。</p></div>
-    <span class="mono">学生优惠地图 · 核实于 <span class="js-updated">—</span></span>
+  <div class="wrap">
+    <div class="foot-word"><img src="assets/logo.svg" alt="" width="168" height="168"><span>STUDENT<br>PERKS MAP</span></div>
+    <div class="foot">
+      <div><b>只收录面向真实在读学生的官方优惠</b><p>请用本人真实学籍申请。借用或伪造学籍、转售学生账号违反各平台条款，可能导致封号。优惠内容、价格和地区会变动，申请前以官方页面为准。</p></div>
+      <span class="mono">核实于 <span class="js-updated">—</span> · 学生优惠地图</span>
+    </div>
   </div>
 </footer>
 
+<script src="icons.js"></script>
 <script src="deals.js"></script>
 <script>
 (function () {
   const deals = window.DEALS || [];
+  const ICONS = window.ICONS || {};
   const updated = window.DEALS_UPDATED || "—";
   const PAGE = 9;
   const cats = ["全部", ...new Set(deals.map(d => d.cat))];
@@ -315,10 +251,9 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const setAll = (cls, v) => document.querySelectorAll(cls).forEach(el => el.textContent = v);
   setAll(".js-total", deals.length);
-  setAll(".js-cats", cats.length - 1);
   setAll(".js-free", deals.filter(d => d.free).length);
   setAll(".js-updated", updated);
-  setAll(".js-month", updated.includes("-") ? Number(updated.split("-")[1]) + "月" : updated);
+  setAll(".js-month", updated.includes("-") ? Number(updated.split("-")[1]) + " 月" : updated);
 
   const pillOf = d => {
     const v = d.verify;
@@ -329,17 +264,68 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
     if (/邮箱注册/.test(v)) return "邮箱注册";
     return "人工审核";
   };
-  const initialOf = d => (d.name.match(/[A-Za-z0-9]/) || [d.name[0]])[0].toUpperCase();
-  const arrow = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+  const icon = d => {
+    const k = d.icon || "";
+    if (k.startsWith("mono:")) {
+      const [, t, bg] = k.split(":");
+      return `<span class="bi mono${t.length > 2 ? " long" : ""}" style="background:${bg}" aria-hidden="true">${esc(t)}</span>`;
+    }
+    const ic = ICONS[k];
+    if (!ic) return `<span class="bi mono" style="background:#141414" aria-hidden="true">★</span>`;
+    const light = parseInt(ic.hex.slice(1, 3), 16) + parseInt(ic.hex.slice(3, 5), 16) + parseInt(ic.hex.slice(5, 7), 16) > 600;
+    return `<span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="${light ? "#141414" : ic.hex}"><path d="${ic.d}"/></svg></span>`;
+  };
+  const arrow = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+  const ticket = (d, extra = "") => `
+      <article class="ticket${extra}">
+        <div class="t-main">
+          <div class="t-head">${icon(d)}<div class="meta">${esc(d.cat)} · ${esc(d.region)}</div></div>
+          <h3>${esc(d.name)}</h3>
+          <p class="offer">${esc(d.offer)}</p>
+          <dl class="rows">
+            <div><dt>资格</dt><dd>${esc(d.who)}</dd></div>
+            <div><dt>验证</dt><dd>${esc(d.verify)}</dd></div>
+          </dl>
+          <div class="t-foot"><span class="pill">${esc(pillOf(d))}</span><a class="cta" href="${esc(d.url)}" target="_blank" rel="noopener">去申请 ${arrow}</a></div>
+        </div>
+        <div class="stub${d.free ? "" : " deal"}" aria-label="${d.free ? "免费" : "折扣"}"><b>${d.free ? "FREE" : "DEAL"}</b><span>${d.free ? "免费" : "折扣"}</span></div>
+      </article>`;
 
-  $("featured").innerHTML = deals.filter(d => d.featured).map(d => `
-    <article class="feat">
-      <div class="feat-top"><span>${esc(d.cat)}</span><span class="tag free">免费</span></div>
-      <h3>${esc(d.featured)}</h3>
-      <div class="name">${esc(d.name)}</div>
-      <p>${esc(d.offer)}</p>
-      <div class="feat-foot"><span>${esc(d.region)} · ${esc(pillOf(d))}</span><a href="${esc(d.url)}" target="_blank" rel="noopener">去申请 ${arrow}</a></div>
-    </article>`).join("");
+  // Hero 拼贴：三张精选票
+  const picks = deals.filter(d => d.featured);
+  const collage = $("collage");
+  [picks[1], picks[0], deals.find(d => d.icon === "spotify")].filter(Boolean).forEach((d, i) => {
+    collage.insertAdjacentHTML("beforeend", ticket(d, " c" + (i + 1)));
+  });
+
+  // Bento 精选
+  const bf = new Date("2026-11-27T00:00:00Z");
+  const days = Math.max(0, Math.ceil((bf - new Date()) / 864e5));
+  const [p0, ...rest] = picks;
+  $("featured").innerHTML = (p0 ? `
+      <a class="tile big" href="${esc(p0.url)}" target="_blank" rel="noopener">
+        <div style="display:flex;align-items:center;gap:12px">${icon(p0)}<span class="k">01 · ${esc(p0.cat)} · ${esc(p0.region)}</span></div>
+        <h3>${esc(p0.featured)}</h3>
+        <p>${esc(p0.offer)}</p>
+        <span class="go">去官方申请 ↗</span>
+        <svg class="bigstar" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 1 Q22 18 39 20 Q22 22 20 39 Q18 22 1 20 Q18 18 20 1Z" fill="#f3e24a" stroke="#141414" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </a>` : "") + rest.map((d, i) => `
+      <a class="tile ${i % 2 ? "m" : "y"}" href="${esc(d.url)}" target="_blank" rel="noopener">
+        <div style="display:flex;align-items:center;gap:10px">${icon(d)}<span class="k">0${i + 2} · ${esc(d.cat)}</span></div>
+        <h3>${esc(d.featured)}</h3>
+        <p>${esc(d.offer)}</p>
+      </a>`).join("") + `
+      <a class="tile t" href="budget.html">
+        <span class="k">NEW · 穷鬼专区</span>
+        <h3>吃饭买菜<br>也能薅</h3>
+        <p>超市会员价、快餐 App 免费餐、临期食品袋</p>
+        <span class="go">去看看 →</span>
+      </a>
+      <a class="tile k-dark" href="black-friday.html">
+        <span class="k">BLACK FRIDAY · 11-27</span>
+        <div class="num">${days}<small>天</small></div>
+        <span class="go">英国黑五品牌折扣 →</span>
+      </a>`;
 
   function renderChips() {
     $("chips").innerHTML = cats.map(c => {
@@ -358,25 +344,12 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
     if (state.sort === "name") list = list.slice().sort((a, b) => a.name.localeCompare(b.name, "zh"));
     if (state.sort === "cat") list = list.slice().sort((a, b) => cats.indexOf(a.cat) - cats.indexOf(b.cat));
     const shown = state.expanded ? list : list.slice(0, PAGE);
-    $("grid").innerHTML = shown.map(d => `
-      <article class="deal">
-        <div class="deal-head">
-          <div class="logo" aria-hidden="true">${esc(initialOf(d))}</div>
-          <div class="deal-title"><h3>${esc(d.name)}</h3><div class="meta">${esc(d.cat)} · ${esc(d.region)}</div></div>
-          <span class="tag ${d.free ? "free" : "paid"}">${d.free ? "免费" : "折扣"}</span>
-        </div>
-        <p class="offer">${esc(d.offer)}</p>
-        <dl class="rows">
-          <div><dt>资格</dt><dd>${esc(d.who)}</dd></div>
-          <div><dt>验证</dt><dd>${esc(d.verify)}</dd></div>
-        </dl>
-        <div class="deal-foot"><span class="pill">${esc(pillOf(d))}</span><a class="cta" href="${esc(d.url)}" target="_blank" rel="noopener">去官方申请 ${arrow}</a></div>
-      </article>`).join("");
+    $("grid").innerHTML = shown.map(d => ticket(d)).join("");
     $("count").textContent = `显示 ${list.length} / ${deals.length}`;
     $("empty").hidden = list.length > 0;
     const rest = list.length - shown.length;
     $("more").hidden = rest <= 0;
-    $("moreBtn").textContent = `再看 ${rest} 项`;
+    $("moreBtn").textContent = `再看 ${rest} 项 ↓`;
     $("featuredSec").hidden = !!(state.q || state.free || state.cat !== "全部");
   }
 
@@ -392,6 +365,9 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
     const b = e.target.closest("button"); if (!b) return;
     $("q").value = b.textContent; state.q = b.textContent; state.expanded = false; render();
     $("deals").scrollIntoView({ behavior: "smooth" });
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "/" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); $("q").focus(); }
   });
   $("freeOnly").addEventListener("change", e => { state.free = e.target.checked; render(); });
   $("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });

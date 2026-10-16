@@ -6,7 +6,7 @@
 
 ## 更新内容
 
-1. 编辑 `source/deals.js`（每条优惠一个对象；加 `featured` 字段即进入首页精选）。
+1. 编辑 `source/deals.js`（每条优惠一个对象；加 `featured` 字段即进入首页精选；`icon` 填 `source/icons.js` 里的品牌 key，或 `mono:字母:底色` 字母标）。
 2. 运行 `python3 source/build.py https://meisdevr.github.io/student-perks/`，生成 `docs/`。
 3. 提交并推送，GitHub Pages 从 `main` 分支的 `/docs` 目录发布。
 
