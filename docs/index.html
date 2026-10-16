@@ -73,6 +73,11 @@
 .tile.t { background: var(--tomato); color: #fff; }
 .tile.k-dark { background: #141414; color: #f3efe6; }
 .tile.k-dark .k { color: var(--yellow); }
+.tile.wide { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 24px; background: var(--mint); }
+.tile.wide h3 { flex: none; }
+.tile.wide p { flex: 1; font-size: 14px; }
+.tile.wide .go { margin: 0; flex: none; }
+@media (max-width: 640px) { .tile.wide { flex-direction: column; align-items: flex-start; gap: 8px; } }
 .tile .num { font-family: var(--font-display); font-weight: 800; font-size: 84px; line-height: 1; color: var(--yellow); font-variant-numeric: tabular-nums; }
 .tile .num small { font-family: var(--font-body); font-size: 20px; font-weight: 900; color: #f3efe6; margin-left: 6px; }
 
@@ -169,7 +174,7 @@
 <div class="wrap">
   <nav class="nav">
     <a class="brand" href="#top" id="top"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>学生优惠地图</b><small>STUDENT PERKS MAP</small></span></a>
-    <div class="seg"><a class="on" href="#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="#guide">怎么验证</a></div>
+    <div class="seg"><a class="on" href="#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="#guide">怎么验证</a></div>
     <span class="badge"><span class="js-month">10 月</span>已核实</span>
   </nav>
 
@@ -463,6 +468,12 @@
         <span class="k">BLACK FRIDAY · 11-27</span>
         <div class="num">${days}<small>天</small></div>
         <span class="go">英国黑五品牌折扣 →</span>
+      </a>
+      <a class="tile wide" href="bicester.html">
+        <span class="k">BICESTER VILLAGE</span>
+        <h3>比斯特专区</h3>
+        <p>大促日历、Winter Event 会员额外折扣、学生和银联 9 折，挑对日子再去</p>
+        <span class="go">去看看 →</span>
       </a>`;
 
   function renderChips() {
