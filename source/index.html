@@ -50,6 +50,7 @@ button { font: inherit; color: inherit; }
 .updated::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 
 /* 黑五专区入口 */
+.promo + .promo { margin-top: 8px; }
 .promo { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 12px 18px; border-radius: 14px; background: var(--ink); color: var(--bg); text-decoration: none; }
 .promo b { color: var(--mark); white-space: nowrap; }
 .promo span { flex: 1; min-width: 0; opacity: .8; font-size: 14px; }
@@ -214,10 +215,11 @@ footer { margin-top: 96px; background: var(--ink); color: var(--bg); padding-blo
 <div class="wrap">
   <nav class="nav">
     <a class="brand" href="#top" id="top"><span class="brand-mark">学</span>学生优惠地图</a>
-    <div class="links"><a class="on" href="#deals">全部优惠</a><a href="#guide">验证方式</a><a href="#notice">使用须知</a><a href="black-friday.html">英国黑五</a></div>
+    <div class="links"><a class="on" href="#deals">全部优惠</a><a href="#guide">验证方式</a><a href="#notice">使用须知</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a></div>
     <span class="updated">核实于 <span class="js-updated">—</span></span>
   </nav>
   <a class="promo" href="black-friday.html"><b>2026 英国黑五专区</b><span>11-27 Black Friday · 主流品牌折扣汇总</span><em>查看 →</em></a>
+  <a class="promo" href="budget.html"><b>穷鬼专区</b><span>超市会员价 · 快餐 App 免费餐 · 临期食品袋</span><em>查看 →</em></a>
 
   <section class="hero">
     <div>
