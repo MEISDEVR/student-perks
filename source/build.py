@@ -7,7 +7,7 @@
 """
 import html, json, os, re, shutil, subprocess, sys
 
-SITE_URL = (sys.argv[1] if len(sys.argv) > 1 else "https://meisdevr.github.io/student-perks/").rstrip("/") + "/"
+SITE_URL = (sys.argv[1] if len(sys.argv) > 1 else "https://sheeperks.com/").rstrip("/") + "/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "..", "docs"))
 
@@ -113,6 +113,9 @@ for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
     open(os.path.join(DIST, name), "w", encoding="utf-8").write(src.replace("{{SITE_URL}}", SITE_URL))
 open(os.path.join(DIST, ".nojekyll"), "w").close()
+host = SITE_URL.split("/")[2]
+if not host.endswith(".github.io"):  # GitHub Pages 自定义域名；DIST 每次重建，CNAME 要在这里写
+    open(os.path.join(DIST, "CNAME"), "w").write(host + "\n")
 open(os.path.join(DIST, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}sitemap.xml\n")
 open(os.path.join(DIST, "sitemap.xml"), "w").write(
     f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
