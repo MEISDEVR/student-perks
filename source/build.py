@@ -108,7 +108,7 @@ open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
 for name in ["deals.js", "icons.js", "v2.css"]:
     shutil.copy(os.path.join(ROOT, name), DIST)
 shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
-EXTRA_PAGES = ["budget.html", "black-friday.html"]
+EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
     open(os.path.join(DIST, name), "w", encoding="utf-8").write(src.replace("{{SITE_URL}}", SITE_URL))

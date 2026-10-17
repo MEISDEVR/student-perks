@@ -226,3 +226,13 @@ footer { margin-top: 112px; background: var(--yellow); color: var(--on-color); b
   .foot-word { gap: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
+/* 互斥优惠（只能选一个）醒目标注 */
+.st.once { background: var(--tomato); color: #fff; border-color: #141414; font-weight: 700; }
+.warn { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 18px; padding: 16px 20px; border: var(--bw) solid #141414; border-radius: 14px; background: var(--tomato); color: #fff; box-shadow: 4px 4px 0 var(--shadow); }
+.warn .mark { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border: var(--bw) solid #141414; border-radius: 50%; background: var(--yellow); color: #141414; font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1; }
+.warn b { display: block; font-size: 18px; font-weight: 900; }
+.warn p { margin: 2px 0 0; font-size: 14px; }
+.stack em.tag { display: inline-block; margin: 0 0 6px; padding: 1px 8px; border: 1.5px solid #141414; border-radius: 999px; font-family: var(--font-mono); font-style: normal; font-size: 11px; font-weight: 700; background: var(--mint); color: #141414; }
+.stack em.tag.once { background: var(--tomato); color: #fff; }
+.stack div.once { border-color: var(--tomato); box-shadow: 4px 4px 0 var(--tomato); }
