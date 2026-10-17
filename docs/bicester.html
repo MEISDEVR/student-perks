@@ -42,7 +42,7 @@
   </section>
 
   <nav class="jump" aria-label="本页目录">
-    <a href="#about">比斯特是什么</a><a href="#why">为什么值得去</a><a href="#brands">主流品牌</a><a href="#compare">和其他奥莱比</a><a href="#goods">货品分析</a><a href="#map">漫画地图</a><a href="#brand-notes">品牌速览</a><a href="#news">品牌活动</a><a href="#dates">折扣日历</a><a href="#student">学生折扣</a><a href="#getting-here">怎么去</a>
+    <a href="#about">比斯特是什么</a><a href="#why">为什么值得去</a><a href="#brands">主流品牌</a><a href="#compare">和其他奥莱比</a><a href="#goods">货品分析</a><a href="#map">漫画地图</a><a href="#brand-notes">品牌速览</a><a href="#news">品牌活动</a><a href="#dates">折扣日历</a><a href="#student">学生折扣</a><a href="#getting-here">路线指引</a>
   </nav>
 
   <section class="sec" id="about">
@@ -53,7 +53,7 @@
     </div>
     <div class="facts">
       <div><b>150+</b><span>品牌，官网品牌页 152 个条目</span></div>
-      <div><b>46 分钟</b><span>伦敦 Marylebone 直达</span></div>
+      <div><b>约 1 小时</b><span>伦敦 Marylebone 直达</span></div>
       <div><b>约 1 公里</b><span>主街全长，慢慢逛要大半天</span></div>
       <div><b>660 万</b><span>年访客（2018 年报道）</span></div>
     </div>
@@ -77,7 +77,7 @@
       <table>
         <thead><tr><th>购物村</th><th>在哪</th><th>店铺数</th><th>品牌档次</th><th>官网折扣说法</th></tr></thead>
         <tbody>
-          <tr class="me"><th>Bicester Village</th><td>牛津郡，伦敦火车 46 分钟</td><td>150+</td><td>一线奢侈品最全：Gucci、Prada、Dior、Burberry、Saint Laurent、FENDI、CELINE</td><td>每天低至 6 折，大促低至 3 折</td></tr>
+          <tr class="me"><th>Bicester Village</th><td>牛津郡，伦敦火车约 1 小时</td><td>150+</td><td>一线奢侈品最全：Gucci、Prada、Dior、Burberry、Saint Laurent、FENDI、CELINE</td><td>每天低至 6 折，大促低至 3 折</td></tr>
           <tr><th>Cheshire Oaks</th><td>英格兰西北，离利物浦、曼彻斯特车程不到 1 小时</td><td>140+</td><td>中高端，有 Burberry，没找到 Gucci、Prada、Dior 折扣店</td><td>低至 4 折</td></tr>
           <tr><th>Ashford Designer Outlet</th><td>肯特郡</td><td>120+</td><td>中高端：Coach、Sandro、Maje</td><td>未核实</td></tr>
           <tr><th>Clarks Village</th><td>萨默塞特郡</td><td>75+ 家店，90 个品牌</td><td>大众和中端</td><td>低至 4 折</td></tr>
@@ -154,7 +154,7 @@
             <rect x="154" y="10" width="34" height="18" rx="4" fill="#fff" stroke="#141414" stroke-width="2"/>
             <text x="115" y="-8" class="vm-s" text-anchor="middle">MARYLEBONE ⇄ OXFORD</text>
           </g>
-          <text x="610" y="74" class="vm-s">伦敦 46 分钟 · 牛津约 10 分钟</text>
+          <text x="610" y="74" class="vm-s">伦敦最快 54 分钟 · 牛津最快 14 分钟</text>
         </g>
 
         <!-- 火车站 -->
@@ -342,27 +342,131 @@
   </section>
 
   <section class="sec" id="getting-here">
-    <div class="sec-head"><h2>怎么去</h2><span class="aside">村子就在 Bicester Village 火车站旁边</span></div>
-    <div class="cards">
-      <article class="card">
-        <div class="card-head"><h3>从伦敦</h3><span class="st ok">已确认</span></div>
-        <p>London Marylebone 直达 Bicester Village 站，最快 46 分钟，每小时 2 班。Chiltern 官网宣传往返 £28 起。</p>
-        <p class="how"><b>注意：</b>这段不能刷 Oyster 或非接触卡，要提前买票；带 Railcard 能再省 1/3。</p>
-        <div class="src">来源：<a href="https://www.chilternrailways.co.uk/bicester-village-outlet-shopping" target="_blank" rel="noopener">Chiltern Railways</a> · 2026-10-16 访问</div>
+    <div class="sec-head"><h2>路线指引：从你的城市怎么去</h2><span class="aside">火车最省心 · 伦敦直达大巴目前暂停</span></div>
+    <div class="rtabs" role="tablist" aria-label="选择出发城市">
+      <button role="tab" aria-selected="true" aria-controls="r-london" id="t-london">伦敦<small>约 1 小时</small></button>
+      <button role="tab" aria-selected="false" aria-controls="r-manchester" id="t-manchester">曼彻斯特<small>约 3.5 小时</small></button>
+      <button role="tab" aria-selected="false" aria-controls="r-leeds" id="t-leeds">利兹<small>约 4 小时</small></button>
+      <button role="tab" aria-selected="false" aria-controls="r-glasgow" id="t-glasgow">格拉斯哥<small>约 6.5 小时起</small></button>
+    </div>
+
+    <div class="rpanel" id="r-london" role="tabpanel" aria-labelledby="t-london">
+      <article class="route best">
+        <div class="route-head"><h4>方案 A：Marylebone 火车直达</h4><span class="st ok">推荐 · 不用换乘</span></div>
+        <ol class="legs">
+          <li><b>London Marylebone</b><small>Chiltern Railways</small><em>每 30 分钟一班</em></li>
+          <li><b>Bicester Village 站</b><small>出站步行几分钟到村口</small></li>
+        </ol>
+        <div class="rmeta"><span><b>最快 54 分钟</b>，平均 1 小时 5 分</span><span>非高峰往返 <b>£31.60 起</b></span><span>Railcard 再减 1/3</span></div>
+        <p class="how"><b>注意：</b>这段不能刷 Oyster 或 contactless，要在 Chiltern 官网或 App 先买票（官网不收手续费）。别去 Paddington 或 Euston，是 Marylebone 站。</p>
+        <div class="src">来源：<a href="https://www.chilternrailways.co.uk/bicester-village-london" target="_blank" rel="noopener">Chiltern Railways</a> · 2026-10-17 访问</div>
       </article>
-      <article class="card">
-        <div class="card-head"><h3>从牛津、伯明翰</h3><span class="st ok">已确认</span></div>
-        <p>牛津市中心有直达火车到 Bicester Village 站。伯明翰从 Moor Street 或 Snow Hill 坐到 Bicester North，再换接驳巴士。</p>
-        <p class="how"><b>适合：</b>在牛津、伯明翰、考文垂等地读书的同学当天来回。</p>
-        <div class="src">来源：<a href="https://www.thebicestercollection.com/bicester-village/en/getting-here/train/" target="_blank" rel="noopener">Bicester Village 交通页</a> · 2026-10-16 访问</div>
-      </article>
-      <article class="card">
-        <div class="card-head"><h3>从苏格兰和北方</h3><span class="st guess">建议</span></div>
-        <p>格拉斯哥、爱丁堡没有直达，要先到伦敦或伯明翰再换车，适合周末两天顺路去。更省事的是跟学生会团车：例如利兹大学学生会 2026-11-28 有黑五一日游大巴。</p>
-        <p class="how"><b>技巧：</b>先问自己学校学生会和学联有没有黑五团车。</p>
-        <div class="src">来源：<a href="https://engage.luu.org.uk/events/D4T6Q/bicester-village-black-friday-sales-28112026" target="_blank" rel="noopener">Leeds University Union</a> · 2026-10-16 访问</div>
+      <article class="route">
+        <div class="route-head"><h4>方案 B：周末施工时，经牛津绕行</h4><span class="st guess">备用</span></div>
+        <ol class="legs">
+          <li><b>London Paddington</b><small>GWR 到牛津</small></li>
+          <li><b>Oxford</b><small>换 Chiltern，最快 14 分钟</small><em>每小时 2 班</em></li>
+          <li><b>Bicester Village 站</b></li>
+        </ol>
+        <p>Marylebone 线周末偶尔停运，例如 2026-09-12、13 日没有直达车，官网当时建议坐替代巴士或走这条线。出发前一周查一下 Chiltern 的施工日历。</p>
+        <div class="src">来源：<a href="https://www.thebicestercollection.com/bicester-village/en/getting-here/train" target="_blank" rel="noopener">Bicester Village 交通页</a> · <a href="https://www.chilternrailways.co.uk/tickets-and-times/changes" target="_blank" rel="noopener">Chiltern 施工日历</a> · 2026-10-17 访问</div>
       </article>
     </div>
+
+    <div class="rpanel" id="r-manchester" role="tabpanel" aria-labelledby="t-manchester">
+      <article class="route best">
+        <div class="route-head"><h4>方案 A：直达牛津，换一次车</h4><span class="st ok">推荐 · 不进伦敦</span></div>
+        <ol class="legs">
+          <li><b>Manchester Piccadilly</b><small>CrossCountry 直达牛津</small><em>每天约 17 班</em></li>
+          <li><b>Oxford</b><small>换 Chiltern，最快 14 分钟</small></li>
+          <li><b>Bicester Village 站</b></li>
+        </ol>
+        <div class="rmeta"><span>全程<b>约 3.5 小时</b></span><span>曼城到牛津最快 2 小时 46 分</span><span>Advance 单程 <b>£19.40 起</b></span></div>
+        <p class="how"><b>技巧：</b>Advance 票越早买越便宜，用 Railcard 再减 1/3。买到 Bicester Village 的联程票，牛津换车不用出站。</p>
+        <div class="src">来源：<a href="https://www.thetrainline.com/train-times/manchester-piccadilly-to-oxford" target="_blank" rel="noopener">Trainline</a>（第三方参考价）· <a href="https://chilternrailways.co.uk/bicester-village-outlet-shopping-oxford" target="_blank" rel="noopener">Chiltern 牛津线</a> · 2026-10-17 访问</div>
+      </article>
+      <article class="route">
+        <div class="route-head"><h4>方案 B：大巴到牛津，再坐 S5 公交</h4><span class="st guess">最省钱</span></div>
+        <ol class="legs">
+          <li><b>Manchester</b><small>National Express / FlixBus，中途换 1 次</small></li>
+          <li><b>Oxford Gloucester Green</b><small>Stagecoach S5，最密每 15 分钟一班</small></li>
+          <li><b>Bicester Village</b></li>
+        </ol>
+        <p>大巴到牛津约 4.5–5 小时，票价比火车低不少，适合不赶时间的周末。S5 在牛津市中心 Magdalen Street 上车。</p>
+        <div class="src">来源：<a href="https://www.omio.fr/bus/manchester/oxford-0tpkh" target="_blank" rel="noopener">Omio</a>（第三方）· <a href="https://www.stagecoachbus.com/promos-and-offers/oxfordshire/bicester-village" target="_blank" rel="noopener">Stagecoach S5</a> · 2026-10-17 访问</div>
+      </article>
+    </div>
+
+    <div class="rpanel" id="r-leeds" role="tabpanel" aria-labelledby="t-leeds">
+      <article class="route best">
+        <div class="route-head"><h4>方案 A：LNER 到伦敦，转 Marylebone</h4><span class="st ok">推荐 · 班次最多</span></div>
+        <ol class="legs">
+          <li><b>Leeds</b><small>LNER 直达</small><em>最快 1 小时 59 分</em></li>
+          <li class="walk"><b>London King's Cross</b><small>地铁 Circle / H&amp;C / Met 线到 Baker Street</small></li>
+          <li><b>Baker Street → Marylebone</b><small>步行约 6–10 分钟，或换 Bakerloo 一站</small></li>
+          <li><b>Bicester Village 站</b><small>Chiltern 最快 54 分钟</small></li>
+        </ol>
+        <div class="rmeta"><span>全程<b>约 4 小时</b></span><span>利兹到伦敦 Advance 单程 <b>£12 起</b></span><span>伦敦市内换乘留 30–40 分钟</span></div>
+        <p class="how"><b>注意：</b>King's Cross 和 Marylebone 是两个站，伦敦段要刷 Oyster 或 contactless，到了 Marylebone 再用火车票。</p>
+        <div class="src">来源：<a href="https://www.thetrainline.com/train-times/leeds-to-london-kings-cross" target="_blank" rel="noopener">Trainline</a>（第三方参考价）· <a href="https://www.chilternrailways.co.uk/bicester-village-london" target="_blank" rel="noopener">Chiltern</a> · 2026-10-17 访问</div>
+      </article>
+      <article class="route">
+        <div class="route-head"><h4>方案 B：经伯明翰到牛津</h4><span class="st guess">不进伦敦</span></div>
+        <ol class="legs">
+          <li><b>Leeds</b><small>CrossCountry</small></li>
+          <li><b>Birmingham New Street</b><small>换车到牛津，可能要换 1–2 次</small></li>
+          <li><b>Oxford</b><small>换 Chiltern，最快 14 分钟</small></li>
+          <li><b>Bicester Village 站</b></li>
+        </ol>
+        <p>到牛津约 3–4 小时，不用在伦敦换地铁。更省钱的是 National Express 大巴到伦敦 Victoria，单程 £9.49 起，约 3.5–4 小时，再转去 Marylebone。</p>
+        <div class="src">来源：<a href="https://www.omio.co.uk/trains/leeds/oxford" target="_blank" rel="noopener">Omio</a>（第三方）· <a href="https://www.nationalexpress.com/destinations/london/leeds-to-london" target="_blank" rel="noopener">National Express</a> · 2026-10-17 访问</div>
+      </article>
+    </div>
+
+    <div class="rpanel" id="r-glasgow" role="tabpanel" aria-labelledby="t-glasgow">
+      <article class="route best">
+        <div class="route-head"><h4>方案 A：Avanti 到伦敦，转 Marylebone</h4><span class="st ok">推荐 · 直达车多</span></div>
+        <ol class="legs">
+          <li><b>Glasgow Central</b><small>Avanti West Coast 直达</small><em>最快 4 小时 32 分</em></li>
+          <li class="walk"><b>London Euston</b><small>步行约 20–25 分钟，或地铁到 Baker Street</small></li>
+          <li><b>London Marylebone</b><small>Chiltern 最快 54 分钟</small></li>
+          <li><b>Bicester Village 站</b></li>
+        </ol>
+        <div class="rmeta"><span>全程<b>约 6.5–7.5 小时</b></span><span>格拉斯哥到伦敦 Advance 单程 <b>£34.50 起</b></span><span>建议两天一夜</span></div>
+        <p class="how"><b>建议：</b>当天来回太赶，前一晚到伦敦住下，第二天一早从 Marylebone 出发，逛完再回伦敦。</p>
+        <div class="src">来源：<a href="https://www.thetrainline.com/train-times/glasgow-to-london-euston" target="_blank" rel="noopener">Trainline</a>（第三方参考价）· <a href="https://www.chilternrailways.co.uk/bicester-village-london" target="_blank" rel="noopener">Chiltern</a> · 2026-10-17 访问；全程时间为估算</div>
+      </article>
+      <article class="route">
+        <div class="route-head"><h4>方案 B：经伯明翰到牛津</h4><span class="st guess">不进伦敦</span></div>
+        <ol class="legs">
+          <li><b>Glasgow Central</b><small>Avanti / CrossCountry</small></li>
+          <li><b>Birmingham New Street</b><small>换 CrossCountry 到牛津</small></li>
+          <li><b>Oxford</b><small>换 Chiltern，最快 14 分钟</small></li>
+          <li><b>Bicester Village 站</b></li>
+        </ol>
+        <p>到牛津约 5 小时 45 分–6 小时，换 1–3 次车，参考票价 £80 起，但不用拖着箱子在伦敦换站。</p>
+        <div class="src">来源：<a href="https://www.omio.co.uk/trains/glasgow/oxford" target="_blank" rel="noopener">Omio</a>（第三方）· 2026-10-17 访问</div>
+      </article>
+      <article class="route">
+        <div class="route-head"><h4>方案 C：夜班大巴到伦敦</h4><span class="st free">最省钱</span></div>
+        <ol class="legs">
+          <li><b>Glasgow Buchanan</b><small>National Express 夜车 21:45 或 22:45</small></li>
+          <li class="walk"><b>London Victoria</b><small>06:20 或 07:20 到，地铁 Victoria 线转 Bakerloo 线</small></li>
+          <li><b>London Marylebone</b><small>Chiltern 最快 54 分钟</small></li>
+          <li><b>Bicester Village 站</b></li>
+        </ol>
+        <p>大巴单程 £19 起，睡一晚到伦敦，上午就能到购物村。Victoria 直达比斯特的大巴目前暂停，只能转火车。</p>
+        <div class="src">来源：<a href="https://www.omio.co.uk/coaches/glasgow/london" target="_blank" rel="noopener">Omio</a>（第三方）· <a href="https://www2.nationalexpress.com/en/destinations/bicester" target="_blank" rel="noopener">National Express 比斯特线暂停</a> · 2026-10-17 访问</div>
+      </article>
+    </div>
+
+    <div class="tips" style="margin-top:24px">
+      <div class="tip"><h3>两个 Bicester 站别搞混</h3><p>从 Marylebone 和牛津来的车停 <b>Bicester Village</b> 站，出站就到。从伯明翰 Moor Street 来的 Chiltern 停 <b>Bicester North</b>，要再坐接驳巴士，每 30 分钟一班，单程 £3.70。来源：<a href="https://www.chilternrailways.co.uk/bicester-village-outlet-shopping-birmingham" target="_blank" rel="noopener">Chiltern</a>。</p></div>
+      <div class="tip"><h3>Railcard 先办好</h3><p>16-25 Railcard £35/年，26 岁以上全日制学生也能办；26-30 Railcard £35/年，只能网上买。两张都减 1/3，Advance 票也能用。来源：<a href="https://www.railcard.co.uk/railcards/16-25-railcard/" target="_blank" rel="noopener">Railcard 官网</a>。</p></div>
+      <div class="tip"><h3>伦敦直达大巴暂停</h3><p>官网写明 Shopping Express 和 National Express 直达比斯特的大巴目前都暂停，攻略里写的“£7 大巴”现在坐不了。来源：<a href="https://www.thebicestercollection.com/bicester-village/en/partners/digital-travel-partner-guide" target="_blank" rel="noopener">官网交通伙伴页</a>。</p></div>
+      <div class="tip"><h3>跟团车更省事</h3><p>北方城市可以先问学生会和学联有没有黑五团车，例如利兹大学学生会 2026-11-28 有比斯特黑五一日游大巴。来源：<a href="https://engage.luu.org.uk/events/D4T6Q/bicester-village-black-friday-sales-28112026" target="_blank" rel="noopener">Leeds University Union</a>。</p></div>
+    </div>
+    <p class="note">票价随日期和购票时间浮动，“起”价是平台上见过的最低价；Trainline、Omio 是第三方票务平台，数据只作参考，以购票时为准。全部 2026-10-17 访问。</p>
   </section>
 
   <section class="sec" id="tips">
@@ -395,6 +499,18 @@
   var el = document.getElementById("days");
   if (d > 0) el.textContent = d;
   else el.parentNode.innerHTML = today <= end ? "进行中" : "已结束";
+})();
+(function () {
+  var tabs = document.querySelectorAll(".rtabs [role=tab]");
+  function show(t) {
+    tabs.forEach(function (o) {
+      var on = o === t;
+      o.setAttribute("aria-selected", on);
+      document.getElementById(o.getAttribute("aria-controls")).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t) { t.addEventListener("click", function () { show(t); }); });
+  if (tabs.length) show(tabs[0]);
 })();
 </script>
 </body>
