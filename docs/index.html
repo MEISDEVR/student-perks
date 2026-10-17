@@ -16,8 +16,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "海外学生优惠清单", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "GitHub Student Developer Pack", "url": "https://education.github.com/pack"}, {"@type": "ListItem", "position": 2, "name": "JetBrains 教育许可", "url": "https://www.jetbrains.com/community/education/#students"}, {"@type": "ListItem", "position": 3, "name": "Unity Student", "url": "https://unity.com/products/unity-student"}, {"@type": "ListItem", "position": 4, "name": "Azure for Students", "url": "https://azure.microsoft.com/free/students/"}, {"@type": "ListItem", "position": 5, "name": "AWS Educate", "url": "https://aws.amazon.com/education/awseducate/"}, {"@type": "ListItem", "position": 6, "name": "Google AI Pro 学生优惠", "url": "https://gemini.google/students/"}, {"@type": "ListItem", "position": 7, "name": "Microsoft 365 教育版", "url": "https://www.microsoft.com/education/products/office"}, {"@type": "ListItem", "position": 8, "name": "Notion 教育版", "url": "https://www.notion.com/product/notion-for-education"}, {"@type": "ListItem", "position": 9, "name": "Miro Education", "url": "https://miro.com/education-whiteboard/"}, {"@type": "ListItem", "position": 10, "name": "Tableau for Students", "url": "https://www.tableau.com/academic/students"}, {"@type": "ListItem", "position": 11, "name": "Figma Education", "url": "https://www.figma.com/education/"}, {"@type": "ListItem", "position": 12, "name": "Autodesk Education", "url": "https://www.autodesk.com/education/edu-software/overview"}, {"@type": "ListItem", "position": 13, "name": "Adobe Creative Cloud 学生价", "url": "https://www.adobe.com/creativecloud/buy/students.html"}, {"@type": "ListItem", "position": 14, "name": "Ableton Live 教育版", "url": "https://www.ableton.com/en/shop/education/"}, {"@type": "ListItem", "position": 15, "name": "Canva for Education", "url": "https://www.canva.com/education/"}, {"@type": "ListItem", "position": 16, "name": "Apple 教育优惠", "url": "https://www.apple.com/us-edu/store"}, {"@type": "ListItem", "position": 17, "name": "Samsung 教育优惠", "url": "https://www.samsung.com/us/shop/discount-program/education/"}, {"@type": "ListItem", "position": 18, "name": "Microsoft Store 教育优惠", "url": "https://www.microsoft.com/en-us/store/b/education"}, {"@type": "ListItem", "position": 19, "name": "Spotify Premium Student", "url": "https://www.spotify.com/us/student/"}, {"@type": "ListItem", "position": 20, "name": "Apple Music 学生方案", "url": "https://www.apple.com/apple-music/"}, {"@type": "ListItem", "position": 21, "name": "YouTube Premium 学生方案", "url": "https://www.youtube.com/premium/student"}, {"@type": "ListItem", "position": 22, "name": "Amazon Prime Student", "url": "https://www.amazon.com/amazonprime?planOptimizationId=Student"}, {"@type": "ListItem", "position": 23, "name": "16-25 Railcard（英国）", "url": "https://www.16-25railcard.co.uk/"}, {"@type": "ListItem", "position": 24, "name": "UNiDAYS", "url": "https://www.myunidays.com/"}, {"@type": "ListItem", "position": 25, "name": "Student Beans", "url": "https://www.studentbeans.com/"}, {"@type": "ListItem", "position": 26, "name": "ISIC 国际学生证", "url": "https://www.isic.org/"}]}</script>
 <style>body{margin:0}[hidden]{display:none!important}</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="v2.css">
 <style>
 /* 首页专用：Hero 拼贴、跑马灯、Bento 精选、筛选条、三步领取。公共样式在 v2.css。 */
@@ -174,7 +173,7 @@
 <div class="wrap">
   <nav class="nav">
     <a class="brand" href="#top" id="top"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>学生优惠地图</b><small>STUDENT PERKS MAP</small></span></a>
-    <div class="seg"><a class="on" href="#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="#guide">怎么验证</a></div>
+    <div class="seg"><a class="on" href="#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="earn.html">零花钱专区</a><a href="#guide">怎么验证</a></div>
     <span class="badge"><span class="js-month">10 月</span>已核实</span>
   </nav>
 
@@ -474,6 +473,12 @@
         <h3>比斯特专区</h3>
         <p>大促日历、Winter Event 会员额外折扣、学生和银联 9 折，挑对日子再去</p>
         <span class="go">去看看 →</span>
+      </a>
+      <a class="tile wide k-dark" href="earn.html" style="background:#141414">
+        <span class="k">即将上线 · COMING SOON</span>
+        <h3>零花钱专区</h3>
+        <p>校内岗位、合规兼职合作、购物返现任务正在筹备，先看看学生签证能怎么打工</p>
+        <span class="go">看预告 →</span>
       </a>`;
 
   function renderChips() {
