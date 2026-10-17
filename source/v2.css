@@ -1,4 +1,8 @@
 /* 学生优惠地图 v2：「优惠票根」+ 新粗野主义。Figma「网站重设计 v2」页。三个页面共用这一份。 */
+/* 字体自托管（国内打不开 Google Fonts）；中文用系统字体：苹方 / 微软雅黑 */
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 800; font-display: swap; src: url(assets/fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url(assets/fonts/jetbrains-mono-latin-500-normal.woff2) format("woff2"); }
 :root {
   --paper: #f3efe6;
   --surface: #ffffff;
