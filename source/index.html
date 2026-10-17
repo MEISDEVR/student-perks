@@ -84,6 +84,49 @@
 .more { display: flex; justify-content: center; margin-top: 36px; }
 .empty { padding: 48px 0; text-align: center; color: var(--muted); }
 
+/* 品牌设计板块：格村小羊形象、LOGO 三版、配色、周边 Vol.1 */
+.br-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px; }
+.br-card { position: relative; overflow: hidden; border: var(--bw) solid var(--line); border-radius: 22px; box-shadow: var(--sh); padding: 26px; min-width: 0; }
+.br-card .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; }
+.br-card h3 { font-weight: 900; font-size: 22px; line-height: 1.2; margin-top: 6px; }
+.br-hero { grid-row: span 2; display: flex; flex-direction: column; background: var(--yellow); color: var(--on-color); padding: 0; }
+.br-hero img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-bottom: var(--bw) solid #141414; }
+.br-hero .cap { padding: 22px 26px 26px; }
+.br-hero h3 { font-family: var(--font-display); font-size: clamp(36px, 4.4vw, 56px); line-height: 1; letter-spacing: -.03em; }
+.br-hero p { margin: 10px 0 0; font-size: 14px; }
+.br-story { display: flex; flex-direction: column; background: #141414; color: #f3efe6; border-color: var(--line); }
+.br-story .k { color: var(--yellow); }
+.br-story h3 { font-size: clamp(22px, 2.4vw, 30px); }
+.br-story h3 em { font-style: normal; color: var(--yellow); }
+.br-marks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.br-marks li { list-style: none; border-top: 2px dashed rgba(243, 239, 230, .4); padding-top: 12px; font-size: 13px; opacity: .85; }
+.br-marks b { display: block; font-size: 15px; opacity: 1; color: #fff; }
+.br-marks { padding: 0; margin-bottom: 0; margin-top: auto; padding-top: 24px; }
+.br-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+.br-logos { background: var(--surface); }
+.br-logos .set { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.br-logos figure { margin: 0; display: grid; place-items: center; aspect-ratio: 1; border: var(--bw) solid var(--line); border-radius: 14px; }
+.br-logos figure img { width: 72%; height: auto; }
+.br-logos .set > div:nth-child(1) figure { background: #f3efe6; }
+.br-logos .set > div:nth-child(2) figure { background: #141414; }
+.br-logos .set > div:nth-child(3) figure { background: #ffffff; }
+.br-logos figcaption { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 8px; text-align: center; }
+.br-colors { background: var(--surface); }
+.swatches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.sw { border: var(--bw) solid var(--line); border-radius: 14px; padding: 12px; min-height: 84px; display: flex; flex-direction: column; justify-content: flex-end; color: #141414; }
+.sw b { font-size: 13px; }
+.sw code { font-family: var(--font-mono); font-size: 11px; }
+.sw.dark { color: #f3efe6; }
+.merch { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin-top: 20px; }
+.merch figure { margin: 0; border: var(--bw) solid var(--line); border-radius: 18px; overflow: hidden; background: var(--surface); box-shadow: var(--sh); min-width: 0; }
+.merch img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-bottom: var(--bw) solid var(--line); }
+.merch figcaption { padding: 12px 14px; font-weight: 900; font-size: 15px; }
+.merch figcaption span { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 11px; color: var(--muted); }
+.slogans { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.slogans span { padding: 6px 16px; border: var(--bw) solid var(--line); border-radius: 999px; font-family: var(--font-display); font-weight: 800; font-size: 15px; letter-spacing: .02em; background: var(--surface); }
+.slogans span:nth-child(1) { background: var(--yellow); color: #141414; }
+.slogans span:nth-child(2) { background: var(--mint); color: #141414; }
+.slogans span:nth-child(3) { background: var(--tomato); color: #fff; }
 .how { margin-top: 112px; background: #141414; color: #f3efe6; border-block: 3px solid var(--line); padding-block: 80px; }
 .how .eyebrow { color: var(--yellow); }
 .how h2 { margin-top: 8px; font-weight: 900; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -.02em; }
@@ -107,6 +150,10 @@
   .collage { height: 470px; max-width: 560px; width: 100%; justify-self: center; }
 }
 @media (max-width: 1080px) {
+  .br-grid { grid-template-columns: minmax(0, 1fr); }
+  .br-hero { grid-row: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; }
+  .br-hero img { border-bottom: 0; border-right: var(--bw) solid #141414; }
+  .merch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
   .tile.big { grid-row: auto; }
   .verify { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -148,6 +195,16 @@
   .step h3 { margin: 0; font-size: 18px; }
   .step p { margin: 0; }
   .verify { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 40px; }
+  .br-card { padding: 18px; border-radius: 18px; }
+  .br-hero { grid-template-columns: minmax(0, 1fr); padding: 0; }
+  .br-hero img { border-right: 0; border-bottom: var(--bw) solid #141414; }
+  .br-hero .cap { padding: 16px 18px 20px; }
+  .br-row { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .br-grid { gap: 12px; }
+  .br-marks { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .merch { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -24px; padding: 4px 24px 12px; scrollbar-width: none; }
+  .merch::-webkit-scrollbar { display: none; }
+  .merch figure { flex: 0 0 78%; scroll-snap-align: start; box-shadow: 3px 3px 0 var(--shadow); }
 }
 </style>
 
@@ -210,6 +267,55 @@
     <div class="empty" id="empty" hidden>没有匹配的优惠。换个关键词，或切回“全部”分类。</div>
     <div class="more" id="more" hidden><button class="btn ghost" type="button" id="moreBtn"></button></div>
   </div>
+</div>
+
+<div class="wrap">
+  <section class="sec" id="brand">
+    <div class="sec-head"><div><div class="eyebrow">Brand · 品牌设计</div><h2>认识格村小羊</h2></div><span class="aside">吉祥物 · LOGO · 配色 · 周边 Vol.1</span></div>
+    <div class="br-grid">
+      <div class="br-card br-hero">
+        <img src="assets/brand/sheep-3d.webp" alt="格村小羊 3D 潮玩形象：黄色卷毛、黑脸、眨一只眼，手里拿着蓝色优惠票和购物袋" width="760" height="760" loading="lazy">
+        <div class="cap"><div class="k">MASCOT · 3D 潮玩</div><h3>格村小羊</h3><p>一只眨眼的苏格兰黑脸羊，手里攥着刚领到的优惠票。</p></div>
+      </div>
+      <div class="br-card br-story">
+        <div class="k">WHY A SHEEP</div>
+        <h3>薅<em>羊毛</em>的羊，来自<em>格拉斯哥</em>的黑脸羊</h3>
+        <ul class="br-marks">
+          <li><b>齿边羊毛</b>羊毛轮廓是邮票齿孔，也是优惠券的花边。</li>
+          <li><b>黑脸卷角</b>原型是苏格兰黑脸羊，苏格兰高地最常见的羊。</li>
+          <li><b>眨一只眼</b>知道哪里有便宜，悄悄告诉你。</li>
+        </ul>
+      </div>
+      <div class="br-row">
+        <div class="br-card br-logos">
+          <div class="k">LOGO · 3 版</div><h3>同一只羊，三种底色</h3>
+          <div class="set">
+            <div><figure><img src="assets/logo.svg" alt="标准版 LOGO" width="72" height="72" loading="lazy"></figure><figcaption>标准</figcaption></div>
+            <div><figure><img src="assets/logo-inverse.svg" alt="深底反白版 LOGO" width="72" height="72" loading="lazy"></figure><figcaption>深底反白</figcaption></div>
+            <div><figure><img src="assets/logo-mono.svg" alt="单色版 LOGO" width="72" height="72" loading="lazy"></figure><figcaption>单色</figcaption></div>
+          </div>
+        </div>
+        <div class="br-card br-colors">
+          <div class="k">COLOUR · 6 色</div><h3>一黄一蓝，红绿点缀</h3>
+          <div class="swatches">
+            <div class="sw" style="background:#f3e24a"><b>羊毛黄</b><code>#F3E24A</code></div>
+            <div class="sw dark" style="background:#2f4bff"><b>钴蓝星</b><code>#2F4BFF</code></div>
+            <div class="sw dark" style="background:#141414"><b>黑脸墨</b><code>#141414</code></div>
+            <div class="sw" style="background:#ff5b39"><b>番茄红</b><code>#FF5B39</code></div>
+            <div class="sw" style="background:#bfe8d2"><b>薄荷绿</b><code>#BFE8D2</code></div>
+            <div class="sw" style="background:#f3efe6"><b>票根纸</b><code>#F3EFE6</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="merch">
+      <figure><img src="assets/brand/stickers.webp" alt="格村小羊表情贴纸样机" width="900" height="675" loading="lazy"><figcaption>表情贴纸<span>STICKER SHEET</span></figcaption></figure>
+      <figure><img src="assets/brand/loyalty-card.webp" alt="集羊毛卡样机" width="900" height="675" loading="lazy"><figcaption>集羊毛卡<span>LOYALTY STUB</span></figcaption></figure>
+      <figure><img src="assets/brand/tote.webp" alt="BAG FOR LIFE 帆布袋样机" width="900" height="675" loading="lazy"><figcaption>帆布袋<span>BAG FOR LIFE</span></figcaption></figure>
+      <figure><img src="assets/brand/pin.webp" alt="珐琅徽章样机" width="900" height="675" loading="lazy"><figcaption>珐琅徽章<span>PIN CLUB</span></figcaption></figure>
+    </div>
+    <div class="slogans" aria-label="品牌标语"><span>SKINT BUT SMART</span><span>WEE DEALS</span><span>BAG FOR LIFE</span></div>
+  </section>
 </div>
 
 <section class="how" id="guide">
