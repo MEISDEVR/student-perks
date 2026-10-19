@@ -12,7 +12,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "..", "docs"))
 
 TITLE = "学生优惠地图：海外在读学生可申请的软件、云服务与订阅优惠"
-DESC = ("汇总 GitHub Student Pack、JetBrains、Azure for Students、Google AI Pro、Notion、Figma、"
+DESC = ("汇总 GitHub Student Pack、JetBrains、Azure for Students、Google AI 学生版、Notion、Figma、"
         "Spotify、Apple 教育优惠等海外学生优惠，写清资格、验证方式（学校邮箱、SheerID、UNiDAYS、ISIC）和官方申请入口。")
 
 deals_js = open(os.path.join(ROOT, "deals.js"), encoding="utf-8").read()
