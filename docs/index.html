@@ -267,7 +267,7 @@
       </article>
       <article class="ticket">
         <div class="t-main">
-          <div class="t-head"><span class="bi mono" style="background:#0078D4" aria-hidden="true">Az</span><div class="meta">云与 AI · 全球（多数国家）</div></div>
+          <div class="t-head"><span class="bi img"><img src="assets/brands/azure.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">云与 AI · 全球（多数国家）</div></div>
           <h3>Azure for Students</h3>
           <p class="offer">USD 100 Azure 额度（12 个月），外加一批免费服务，无需信用卡。</p>
           <dl class="rows">
@@ -280,7 +280,7 @@
       </article>
       <article class="ticket">
         <div class="t-main">
-          <div class="t-head"><span class="bi mono long" style="background:#232F3E" aria-hidden="true">AWS</span><div class="meta">云与 AI · 全球</div></div>
+          <div class="t-head"><span class="bi img"><img src="assets/brands/aws.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">云与 AI · 全球</div></div>
           <h3>AWS Educate</h3>
           <p class="offer">免费云计算课程与动手实验环境（无需信用卡），完成课程可获数字徽章。</p>
           <dl class="rows">
@@ -306,7 +306,7 @@
       </article>
       <article class="ticket">
         <div class="t-main">
-          <div class="t-head"><span class="bi mono long" style="background:#D83B01" aria-hidden="true">365</span><div class="meta">效率办公 · 全球</div></div>
+          <div class="t-head"><span class="bi img"><img src="assets/brands/microsoft365.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">效率办公 · 全球</div></div>
           <h3>Microsoft 365 教育版</h3>
           <p class="offer">Word、Excel、PowerPoint、OneNote、Teams 网页版免费；部分学校提供桌面版。</p>
           <dl class="rows">
@@ -408,6 +408,7 @@
   };
   const icon = d => {
     const k = d.icon || "";
+    if (k.startsWith("img:")) return `<span class="bi img"><img src="assets/brands/${esc(k.slice(4))}" alt="" width="28" height="28" loading="lazy"></span>`;
     if (k.startsWith("mono:")) {
       const [, t, bg] = k.split(":");
       return `<span class="bi mono${t.length > 2 ? " long" : ""}" style="background:${bg}" aria-hidden="true">${esc(t)}</span>`;

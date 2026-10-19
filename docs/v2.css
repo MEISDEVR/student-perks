@@ -81,6 +81,7 @@ button { font: inherit; color: inherit; }
 /* Brand icon tile */
 .bi { flex: none; width: 40px; height: 40px; border: var(--bw) solid var(--line); border-radius: 11px; background: #fff; display: grid; place-items: center; overflow: hidden; }
 .bi svg { width: 22px; height: 22px; }
+.bi.img img { width: 28px; height: 28px; object-fit: contain; }
 .bi.mono { color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 15px; letter-spacing: -.02em; }
 .bi.mono.long { font-size: 11px; }
 
@@ -162,6 +163,10 @@ button { font: inherit; color: inherit; }
 .row { display: grid; grid-template-columns: 190px minmax(0, 1fr) 220px; gap: 20px; padding: 16px 22px; border-top: 1.5px dashed color-mix(in srgb, var(--ink) 35%, transparent); align-items: start; }
 .row:first-child { border-top: 0; }
 .row .b { font-weight: 900; }
+.row .b .logos { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.row .b .logos:empty { display: none; }
+.logos .bi { width: 34px; height: 34px; border-radius: 9px; }
+.logos .bi.img img { width: 24px; height: 24px; }
 .row .o { font-size: 14px; }
 .row .s { font-size: 12px; color: var(--muted); text-align: right; }
 .row .s a { color: var(--ink); }
