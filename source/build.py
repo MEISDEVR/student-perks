@@ -43,8 +43,19 @@ ICONS = json.loads(subprocess.check_output(
     ["node", "-e", "global.window={};eval(require('fs').readFileSync(0,'utf8'));process.stdout.write(JSON.stringify(window.ICONS))"],
     input=icons_js.encode()))
 
+BRANDS = os.path.join(ROOT, "assets", "brands")
+
+def logo(slug, alt=""):
+    """品牌 logo 文件在 assets/brands/<slug>.svg|png；没有文件就不画。"""
+    for ext in ("svg", "png", "webp"):
+        if os.path.exists(os.path.join(BRANDS, f"{slug}.{ext}")):
+            return f'<span class="bi img"><img src="assets/brands/{slug}.{ext}" alt="{e(alt)}" width="28" height="28" loading="lazy"></span>'
+    return ""
+
 def icon(d):
     k = d.get("icon", "")
+    if k.startswith("img:"):
+        return logo(k[4:].rsplit(".", 1)[0]) or f'<span class="bi mono" style="background:#141414" aria-hidden="true">{e(d["name"][0])}</span>'
     if k.startswith("mono:"):
         _, t, bg = k.split(":")
         return f'<span class="bi mono{" long" if len(t) > 2 else ""}" style="background:{e(bg)}" aria-hidden="true">{e(t)}</span>'
@@ -117,7 +128,7 @@ shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
 EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html", "earn.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
-    open(os.path.join(DIST, name), "w", encoding="utf-8").write(src.replace("{{SITE_URL}}", SITE_URL).replace("</head>", ANALYTICS + "</head>", 1))
+    open(os.path.join(DIST, name), "w", encoding="utf-8").write(re.sub(r"\{\{logo:([a-z0-9]+)\}\}", lambda m: logo(m.group(1)), src.replace("{{SITE_URL}}", SITE_URL)).replace("</head>", ANALYTICS + "</head>", 1))
 open(os.path.join(DIST, ".nojekyll"), "w").close()
 host = SITE_URL.split("/")[2]
 if not host.endswith(".github.io"):  # GitHub Pages 自定义域名；DIST 每次重建，CNAME 要在这里写
