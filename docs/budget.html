@@ -21,6 +21,7 @@
   <nav class="nav">
     <a class="brand" href="./"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>学生优惠地图</b><small>STUDENT PERKS MAP</small></span></a>
     <div class="seg"><a href="./#deals">全部优惠</a><a class="on" href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="earn.html">零花钱专区</a><a href="#tips">省钱提示</a></div>
+    <button class="sbox" type="button" data-search aria-haspopup="dialog" aria-label="搜索全站优惠"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>搜优惠、品牌、关键词</span><kbd>Ctrl K</kbd></button>
     <a class="back" href="./">← 返回首页</a>
   </nav>
 
@@ -46,31 +47,31 @@
   <section class="sec" id="supermarkets">
     <div class="sec-head"><h2>超市会员价</h2><span class="aside">都免费注册，结账扫卡或扫 App</span></div>
     <div class="cards">
-      <article class="card">
+      <article id="s1" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/coop.svg" alt="" width="28" height="28" loading="lazy"></span><h3>Co-op 学生 10% off</h3></div><span class="st free">学生专属</span></div>
         <p>出示 Young Scot 卡，参与门店食品饮料 10% off。另有 £1 的 Co-op 会员，部分商品会员价，买指定 Co-op 商品每 £1 返 2p。</p>
         <p class="how"><b>注意：</b>Co-op 学生折扣目前只剩苏格兰可用，英格兰等地已取消。</p>
         <div class="src">来源：<a href="https://www.coop.co.uk/in-store-services/student-discount" target="_blank" rel="noopener">Co-op 官网</a> · 2026-10-15 访问</div>
       </article>
-      <article class="card">
+      <article id="s2" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/tesco.png" alt="" width="28" height="28" loading="lazy"></span><h3>Tesco Clubcard</h3></div><span class="st ok">会员价</span></div>
         <p>结账扫 Clubcard 就按 Clubcard Prices 结算，蓝色价签那些。店内每消费 £1 积 1 分，1 分值 1p；满 150 分出券，换合作商家（餐厅等）最高可翻 2–3 倍。</p>
         <p class="how"><b>怎么领：</b>下载 Tesco Clubcard App 注册，免费。</p>
         <div class="src">来源：<a href="https://www.moneysavingexpert.com/reclaim/reclaim-tesco-vouchers/" target="_blank" rel="noopener">MoneySavingExpert</a> · 2026-07-16 更新</div>
       </article>
-      <article class="card">
+      <article id="s3" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/sainsburys.png" alt="" width="28" height="28" loading="lazy"></span><h3>Sainsbury's Nectar</h3></div><span class="st ok">会员价</span></div>
         <p>扫 Nectar 卡享 Nectar Prices。另有 <b>Your Nectar Prices</b>：按你的购物记录每周最多 10 个专属折扣，每周五刷新，要先在 App 里点开解锁。</p>
         <p class="how"><b>怎么领：</b>注册 Nectar App，购物前在 Sainsbury's 栏目解锁。</p>
         <div class="src">来源：<a href="https://help.nectar.com/help/faqs/prices/what-are-nectar-prices-and-how-do-i-get-them" target="_blank" rel="noopener">Nectar 帮助中心</a> · 2026-10-15 访问</div>
       </article>
-      <article class="card">
+      <article id="s4" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/lidl.svg" alt="" width="28" height="28" loading="lazy"></span><h3>Lidl Plus</h3></div><span class="st ok">积分</span></div>
         <p>2026-05-05 起改成 Lidl Plus Points：门店消费攒积分，在 App 积分商城换单品券、满减券。App 里还有个人专属券。</p>
         <p class="how"><b>怎么领：</b>下载 Lidl Plus App，结账前扫码。</p>
         <div class="src">来源：<a href="https://www.grocerygazette.co.uk/2026/05/05/lidl-launches-brand-new-lidl-plus-points-rewards-scheme/" target="_blank" rel="noopener">Grocery Gazette</a> · 2026-05-05</div>
       </article>
-      <article class="card">
+      <article id="s5" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/asda.svg" alt="" width="28" height="28" loading="lazy"></span><h3>Asda Rewards</h3></div><span class="st ok">返现</span></div>
         <p>买 Star Products 或完成 App 里的任务，钱返到 Cashpot，满 £1 就能转成 Asda 购物券。Cashpot 和券都有有效期，以 App 显示为准。</p>
         <p class="how"><b>怎么领：</b>下载 Asda Rewards App，结账扫码。</p>
@@ -85,7 +86,7 @@
       <span class="aside">按截止日期排序，到期自动标「已过期」· 核实于 2026-10-21</span>
     </div>
     <div class="grid lim" id="lim">
-      <article class="ticket lim-t" data-end="2026-11-08">
+      <article id="s6" class="ticket lim-t" data-end="2026-11-08">
         <div class="t-main">
           <div class="t-head"><span class="bi img"><img src="assets/brands/kfc.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">KFC · 门店 / Drive-Thru</div></div>
           <h3>2 个 Original Wrap <em class="price">£4.99</em></h3>
@@ -111,7 +112,7 @@
         </div>
         <div class="stub deal"><b>11·08</b><span>截止</span></div>
       </article>
-      <article class="ticket lim-t" data-weekday="2">
+      <article id="s7" class="ticket lim-t" data-weekday="2">
         <div class="t-main">
           <div class="t-head"><span class="bi mono" style="background:#ff8000" aria-hidden="true">JE</span><div class="meta">Just Eat · 外卖平台</div></div>
           <h3>Cheeky Tuesday <em class="price">8 折</em></h3>
@@ -124,7 +125,7 @@
         </div>
         <div class="stub week"><b>TUE</b><span>每周二</span></div>
       </article>
-      <article class="ticket lim-t">
+      <article id="s8" class="ticket lim-t">
         <div class="t-main">
           <div class="t-head"><span class="bi img"><img src="assets/brands/kfc.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">KFC · 学生专属</div></div>
           <h3>满 £5 送 Popcorn Chicken 小食盒</h3>
@@ -137,7 +138,7 @@
         </div>
         <div class="stub"><b>FREE</b><span>学生</span></div>
       </article>
-      <article class="ticket lim-t">
+      <article id="s9" class="ticket lim-t">
         <div class="t-main">
           <div class="t-head"><span class="bi img"><img src="assets/brands/mcdonalds.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">McDonald's · 门店</div></div>
           <h3>Meal Deal Plus <em class="price">£5.59</em></h3>
@@ -150,7 +151,7 @@
         </div>
         <div class="stub"><b>LONG</b><span>长期</span></div>
       </article>
-      <article class="ticket lim-t">
+      <article id="s10" class="ticket lim-t">
         <div class="t-main">
           <div class="t-head"><span class="bi img"><img src="assets/brands/mcdonalds.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">McDonald's · Saver Menu</div></div>
           <h3>Snack Wrap 回归 <em class="price">£1.99</em></h3>
@@ -163,7 +164,7 @@
         </div>
         <div class="stub"><b>LONG</b><span>长期</span></div>
       </article>
-      <article class="ticket lim-t">
+      <article id="s11" class="ticket lim-t">
         <div class="t-main">
           <div class="t-head"><span class="bi img"><img src="assets/brands/kfc.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">KFC · Cult Classic Savers</div></div>
           <h3>Snack Box <em class="price">£3 起</em></h3>
@@ -183,7 +184,7 @@
   <section class="sec" id="fastfood">
     <div class="sec-head"><h2>快餐 App 积分换免费餐</h2><span class="aside">点单前先扫 App 码，不然不累积</span></div>
     <div class="cards">
-      <article class="card">
+      <article id="s12" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/mcdonalds.svg" alt="" width="28" height="28" loading="lazy"></span><h3>McDonald's</h3></div><span class="st ok">积分</span></div>
         <p>每消费 £1 得 100 分，首单送 1000 分。积分换免费餐：</p>
         <div class="tiers">
@@ -195,13 +196,13 @@
         <p class="how"><b>注意：</b>积分 6 个月过期；第三方外卖平台的订单不积分。</p>
         <div class="src">来源：<a href="https://www.mcdonalds.com/gb/en-gb/rewards.html" target="_blank" rel="noopener">McDonald's 官网</a> · 2026-10-15 访问</div>
       </article>
-      <article class="card">
+      <article id="s13" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/greggs.png" alt="" width="28" height="28" loading="lazy"></span><h3>Greggs</h3></div><span class="st ok">集章</span></div>
         <p>注册送一杯免费咖啡。按品类集章，同一类集满 9 个，第 10 个免费；填生日送一份甜点。</p>
         <p class="how"><b>怎么领：</b>下载 Greggs App，付款前扫码，现金和刷卡都行。</p>
         <div class="src">来源：<a href="https://www.thefinancialwilderness.com/is-greggs-rewards-worth-it-our-review/" target="_blank" rel="noopener">The Financial Wilderness</a> · 2026-05-29 更新</div>
       </article>
-      <article class="card">
+      <article id="s14" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/kfc.svg" alt="" width="28" height="28" loading="lazy"></span><h3>KFC</h3></div><span class="st ok">小游戏</span></div>
         <p>单笔消费满 £3 获得一次 Rewards Arcade 游戏机会，每天最多玩 2 次，可能赢 Zinger 汉堡、薯条、Bargain Bucket 等。奖励 40 天内用完。</p>
         <p class="how"><b>注意：</b>注册没有新人礼，第三方外卖订单不算。</p>
@@ -213,13 +214,13 @@
   <section class="sec" id="surplus">
     <div class="sec-head"><h2>临期食品袋</h2><span class="aside">当天卖不完的食物打包低价卖</span></div>
     <div class="cards">
-      <article class="card">
+      <article id="s15" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/toogoodtogo.png" alt="" width="28" height="28" loading="lazy"></span><h3>Too Good To Go</h3></div><span class="st past">临期折扣</span></div>
         <p>店家把当天剩下的食物装成 Surprise Bag，在 App 里预订，到点去店里取。Aldi、Greggs 等连锁都有上架，据报道 Greggs 热食袋 £2.99 起。</p>
         <p class="how"><b>技巧：</b>热门店家一上架就被抢，收藏常去的店开提醒。</p>
         <div class="src">来源：<a href="https://retailtimes.co.uk/greggs-too-good-to-go-launch-hot-food-grab-bags-from-just-2-99-now-in-1800-shops-nationwide/" target="_blank" rel="noopener">Retail Times</a> · Greggs 合作报道</div>
       </article>
-      <article class="card">
+      <article id="s16" class="card">
         <div class="card-head"><div class="t-head"><span class="bi img"><img src="assets/brands/coop.svg" alt="" width="28" height="28" loading="lazy"></span><h3>Co-op Second Chance</h3></div><span class="st past">临期折扣</span></div>
         <p>Co-op 门店的 Second Chance Saver Bag 约 £3 一袋。</p>
         <p class="how"><b>怎么领：</b>在 Too Good To Go App 搜附近的 Co-op。</p>
@@ -231,10 +232,10 @@
   <section class="sec" id="tips">
     <div class="sec-head"><h2>省钱提示</h2></div>
     <div class="tips">
-      <div class="tip"><h3>先扫码再点单</h3><p>McDonald's、KFC、Greggs 都要在点单或付款前扫 App 码，事后补不了。经第三方外卖平台下单一般不积分。</p></div>
-      <div class="tip"><h3>积分有效期</h3><p>McDonald's 积分 6 个月过期，KFC 奖励 40 天，Asda Cashpot 也会过期。攒够就换，别囤。</p></div>
-      <div class="tip"><h3>别为凑券多花钱</h3><p>会员价和满减只在本来就要买的时候划算。先列购物清单，再看哪家有会员价。</p></div>
-      <div class="tip"><h3>找黄标打折</h3><p>超市傍晚常把临期商品贴黄标降价，时间各店不同，多去几次就摸清了。</p></div>
+      <div id="s17" class="tip"><h3>先扫码再点单</h3><p>McDonald's、KFC、Greggs 都要在点单或付款前扫 App 码，事后补不了。经第三方外卖平台下单一般不积分。</p></div>
+      <div id="s18" class="tip"><h3>积分有效期</h3><p>McDonald's 积分 6 个月过期，KFC 奖励 40 天，Asda Cashpot 也会过期。攒够就换，别囤。</p></div>
+      <div id="s19" class="tip"><h3>别为凑券多花钱</h3><p>会员价和满减只在本来就要买的时候划算。先列购物清单，再看哪家有会员价。</p></div>
+      <div id="s20" class="tip"><h3>找黄标打折</h3><p>超市傍晚常把临期商品贴黄标降价，时间各店不同，多去几次就摸清了。</p></div>
     </div>
   </section>
 </div>
@@ -270,5 +271,6 @@
   });
 })();
 </script>
+<script src="search.js" defer></script>
 </body>
 </html>
