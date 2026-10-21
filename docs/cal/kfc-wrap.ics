@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:kfc-wrap@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:KFC 截止：2 个 Original Wrap
+DESCRIPTION:每个卷里 2 块 Tender，加生菜和胡椒蛋黄酱。平
+ 均一个约 £2.50。\nhttps://www.kfc.co.uk/kfc-double-original-wrap
+URL:https://www.kfc.co.uk/kfc-double-original-wrap
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:截止：2 个 Original Wrap
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

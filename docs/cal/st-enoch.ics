@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:st-enoch@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261106
+DTEND;VALUE=DATE:20261107
+SUMMARY:格拉斯哥 开始：圣诞市集开幕（至 12-27）
+DESCRIPTION:市中心 St Enoch Square 的圣诞市集，小吃摊、热
+ 红酒、手作摊位，逛不花钱。George Square 今年改造，不
+ 办市集。\nhttps://www.glasgowtourism.org/glasgow-christmas-markets/
+URL:https://www.glasgowtourism.org/glasgow-christmas-markets/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：圣诞市集开幕（至 12-27）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -12,7 +12,7 @@ SITE_URL = (sys.argv[1] if len(sys.argv) > 1 else "https://sheeperks.com/").rstr
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "..", "docs"))
 
-TITLE = "学生优惠地图：海外在读学生可申请的软件、云服务与订阅优惠"
+TITLE = "Sheeperks 英国羊毛：在英留学生的学生优惠、限时羊毛与省钱攻略"
 DESC = ("汇总 GitHub Student Pack、JetBrains、Azure for Students、Google AI 学生版、Notion、Figma、"
         "Spotify、Apple 教育优惠等海外学生优惠，写清资格、验证方式（学校邮箱、SheerID、UNiDAYS、ISIC）和官方申请入口。")
 
@@ -67,6 +67,15 @@ def icon(d):
     fill = "#141414" if sum(int(h[i:i + 2], 16) for i in (1, 3, 5)) > 600 else h  # 白色图形放在白底上看不见
     return f'<span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="{fill}"><path d="{ic["d"]}"/></svg></span>'
 
+# 分享卡片图、添加到主屏幕：每页 <head> 都补上（index 在下面的 head 模板里，其余页面在构建循环里）
+SHARE_HEAD = (f'<meta property="og:site_name" content="Sheeperks 英国羊毛">\n'
+              f'<meta property="og:image" content="{SITE_URL}assets/og.png">\n'
+              f'<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+              f'<meta name="twitter:card" content="summary_large_image">\n'
+              f'<link rel="manifest" href="manifest.webmanifest">\n'
+              f'<link rel="apple-touch-icon" href="assets/icon-512.png">\n'
+              f'<meta name="theme-color" content="#F3E24A">\n')
+
 ARROW = ('<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" '
          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>')
 
@@ -80,6 +89,54 @@ wdata = json.loads(subprocess.check_output(
 WEEKLY, WEEKLY_UPDATED = wdata["w"], wdata["u"]
 WD_CN, WD_EN = "一二三四五六日", ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
 dot = lambda s: f"{s[5:7]}·{s[8:10]}"
+
+CAL_SVG = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" '
+           'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/>'
+           '<path d="M3 10h18M8 3v4M16 3v4"/></svg>')
+
+def ics(w):
+    """有日期的条目生成一个日历文件：手机点开就能加进系统日历，前一天上午 9 点提醒（每周优惠当天 9 点）。"""
+    from datetime import date, timedelta
+    d = lambda s: date.fromisoformat(s)
+    fmt = lambda x: x.strftime("%Y%m%d")
+    url = w["url"] if w["url"].startswith("http") else SITE_URL + w["url"]
+    if w.get("weekday"):
+        first = d(w["added"])
+        first += timedelta(days=(int(w["weekday"]) - first.isoweekday()) % 7)
+        start, end, rule, summary, alarm = first, first + timedelta(days=1), "RRULE:FREQ=WEEKLY\r\n", w["title"], "PT9H"
+    elif w.get("start"):
+        till = f'（至 {w["end"][5:]}）' if w.get("end") else ""
+        start, end, rule, summary, alarm = d(w["start"]), d(w["start"]) + timedelta(days=1), "", "开始：" + w["title"] + till, "-PT15H"
+    elif w.get("end"):
+        start, end, rule, summary, alarm = d(w["end"]), d(w["end"]) + timedelta(days=1), "", "截止：" + w["title"], "-PT15H"
+    else:
+        return None
+    esc = lambda s: re.sub(r"([,;\\])", r"\\\1", re.sub("<[^>]+>", "", s))
+    desc = esc(w["offer"]) + "\\n" + url
+    return fold("BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Sheeperks//CN\r\nCALSCALE:GREGORIAN\r\nBEGIN:VEVENT\r\n"
+            f"UID:{w['id']}@sheeperks.com\r\nDTSTAMP:{fmt(d(w['added']))}T000000Z\r\n"
+            f"DTSTART;VALUE=DATE:{fmt(start)}\r\nDTEND;VALUE=DATE:{fmt(end)}\r\n{rule}"
+            f"SUMMARY:{esc(w['meta'].split(' · ')[0] + ' ' + summary)}\r\nDESCRIPTION:{desc}\r\nURL:{url}\r\n"
+            f"BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:{esc(summary)}\r\nTRIGGER:{alarm}\r\nEND:VALARM\r\n"
+            "END:VEVENT\r\nEND:VCALENDAR\r\n")
+
+def fold(s):
+    """iCalendar 每行不超过 75 字节，超出的折行（续行以空格开头），不拆开 UTF-8 字符"""
+    out = []
+    for line in s.split("\r\n"):
+        while len(line.encode()) > 73:
+            i = 73
+            while len(line[:i].encode()) > 73:
+                i -= 1
+            out.append(line[:i])
+            line = " " + line[i:]
+        out.append(line)
+    return "\r\n".join(out)
+
+def cal_link(w):
+    if not (w.get("end") or w.get("start") or w.get("weekday")):
+        return ""
+    return f'<a class="cal" href="cal/{e(w["id"])}.ics" download aria-label="加入日历" title="加入日历，到期前提醒">{CAL_SVG}</a>'
 
 def wticket(w):
     k = w["icon"]
@@ -111,7 +168,7 @@ def wticket(w):
           <h3>{e(w["title"])}{price}</h3>
           <p class="offer">{e(w["offer"])}</p>
           <dl class="rows">{rows}</dl>
-          <div class="t-foot">{pill}<a class="cta" href="{e(w["url"])}"{ext}>{e(w["cta"])} {ARROW}</a></div>
+          <div class="t-foot">{pill}{cal_link(w)}<a class="cta" href="{e(w["url"])}"{ext}>{e(w["cta"])} {ARROW}</a></div>
         </div>
         {stub}
       </article>'''
@@ -180,9 +237,8 @@ head = f'''<!doctype html>
 <meta property="og:description" content="{e(DESC)}">
 <meta property="og:url" content="{SITE_URL}">
 <meta property="og:locale" content="zh_CN">
-<meta name="twitter:card" content="summary">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+{SHARE_HEAD}<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 <style>body{{margin:0}}[hidden]{{display:none!important}}</style>
 {ANALYTICS}'''
 # 把 index.html 里的 <link>/<style> 留在 head，正文放进 body
@@ -297,15 +353,19 @@ out = out.replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</bo
 shutil.rmtree(DIST, ignore_errors=True)
 os.makedirs(DIST)
 open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
-for name in ["deals.js", "icons.js", "v2.css", "search.js", "lim.js"]:
+for name in ["deals.js", "icons.js", "v2.css", "search.js", "lim.js", "manifest.webmanifest"]:
     shutil.copy(os.path.join(ROOT, name), DIST)
 shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
+os.makedirs(os.path.join(DIST, "cal"))
+for w in WEEKLY:
+    if ics(w):
+        open(os.path.join(DIST, "cal", f"{w['id']}.ics"), "w", encoding="utf-8", newline="").write(ics(w))
 EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html", "earn.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
     src = src.replace("{{weekly:food}}", WEEKLY_FOOD).replace("<footer", JOIN + "<footer", 1)
     src = re.sub(r"\{\{logo:([a-z0-9]+)\}\}", lambda m: logo(m.group(1)), src.replace("{{SITE_URL}}", SITE_URL))
-    src = src.replace("</head>", ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
+    src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
     src, ents = index_page(src, name)
     search_entries += ents
     open(os.path.join(DIST, name), "w", encoding="utf-8").write(src)

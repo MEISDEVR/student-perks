@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:kfc-delivery@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:KFC 截止：2 个 Fillet Burger + 2 份薯条
+DESCRIPTION:两个原味鸡腿堡加两份 Signature Fries，适合和室
+ 友拼单。\nhttps://www.kfc.co.uk/kfc-deals
+URL:https://www.kfc.co.uk/kfc-deals
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:截止：2 个 Fillet Burger + 2 份薯条
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

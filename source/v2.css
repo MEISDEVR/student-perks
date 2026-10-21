@@ -624,3 +624,18 @@ html.modal-open { overflow: hidden; }
   .join-card { grid-template-columns: minmax(0, 1fr); justify-items: start; padding: 26px 20px; border-inline: 0; border-radius: 0; }
   .join-qr { justify-self: center; }
 }
+
+/* 手机导航：栏目按钮排成 3 列网格，全部露出，不用横滑找 */
+@media (max-width: 640px) {
+  .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; border-radius: 18px; overflow: visible; }
+  .seg > i { display: none; }
+  .seg a { padding: 8px 4px; font-size: 13px; }
+}
+.hero .btn.jump { margin-top: 18px; }
+
+/* 时效卡片「加入日历」按钮 */
+.lim .t-foot .cal { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-right: auto; margin-left: 8px; border: 1.5px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--surface); flex: none; }
+.lim .t-foot .cal:hover { background: var(--yellow); color: #141414; }
+.lim .ticket.expired .t-foot .cal { display: none; }
+.lim .t-foot { flex-wrap: wrap; row-gap: 8px; }
+.hero .btn.jump { width: fit-content; }

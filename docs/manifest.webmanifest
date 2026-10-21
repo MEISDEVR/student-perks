@@ -1,0 +1,14 @@
+{
+  "name": "Sheeperks 英国羊毛",
+  "short_name": "Sheeperks",
+  "description": "在英留学生的学生优惠、限时羊毛与省钱攻略",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F3EFE6",
+  "theme_color": "#F3E24A",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

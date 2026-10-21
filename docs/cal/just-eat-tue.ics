@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:just-eat-tue@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261027
+DTEND;VALUE=DATE:20261028
+RRULE:FREQ=WEEKLY
+SUMMARY:Just Eat Cheeky Tuesday
+DESCRIPTION:每周二在参加活动的餐厅下单，满 £15 自动打 
+ 8 折，不用输码。\nhttps://www.just-eat.co.uk/promo/cheeky-tuesday
+URL:https://www.just-eat.co.uk/promo/cheeky-tuesday
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Cheeky Tuesday
+TRIGGER:PT9H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
