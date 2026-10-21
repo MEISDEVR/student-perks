@@ -162,6 +162,16 @@
     <span class="badge"><span class="js-month">10月</span>已核实</span>
   </nav>
 
+  <section class="sec weekly" id="weekly">
+    <div class="sec-head">
+      <div><div class="eyebrow">THIS WEEK · {{weekly_updated}} 更新</div><h2>本周羊毛</h2></div>
+      <span class="aside"><span data-feed-count>{{weekly_count}}</span> 条在架 · 按截止日期排 · 过期自动下架</span>
+    </div>
+    <div class="grid lim feed" id="feed" data-feed>{{weekly}}
+    </div>
+    <button class="btn ghost feed-more" type="button" data-feed-more hidden>展开全部</button>
+  </section>
+
   <section class="home-hero">
     <div>
       <div class="kicker"><span class="chip-s">2026–27 学年</span><span><span class="js-total">26</span> 项优惠 · <span class="js-free">15</span> 项免费 · 只链官方入口</span></div>

@@ -70,6 +70,73 @@ def icon(d):
 ARROW = ('<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" '
          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>')
 
+# ---------- 本周羊毛 ----------
+# weekly.js 里的时效条目在构建时写成票根卡片：首页「本周羊毛」放全部，穷鬼专区放 tag 为 food 的。
+# 剩余天数、NEW 标、排序和过期下架由 lim.js 在浏览器里按英国当天日期算，这里只写默认文案。
+wdata = json.loads(subprocess.check_output(
+    ["node", "-e", "global.window={};eval(require('fs').readFileSync(0,'utf8'));"
+     "process.stdout.write(JSON.stringify({w:window.WEEKLY,u:window.WEEKLY_UPDATED}))"],
+    input=open(os.path.join(ROOT, "weekly.js"), encoding="utf-8").read().encode()))
+WEEKLY, WEEKLY_UPDATED = wdata["w"], wdata["u"]
+WD_CN, WD_EN = "一二三四五六日", ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+dot = lambda s: f"{s[5:7]}·{s[8:10]}"
+
+def wticket(w):
+    k = w["icon"]
+    ic = icon({"icon": k, "name": w["meta"]}) if k.startswith("mono:") else (
+        logo(k) or f'<span class="bi mono" style="background:#141414" aria-hidden="true">{e(w["meta"][0])}</span>')
+    data = "".join(f' data-{a}="{e(w[a])}"' for a in ("added", "start", "end", "weekday") if w.get(a))
+    if w.get("weekday"):
+        n = int(w["weekday"])
+        stub = f'<div class="stub week"><b>{WD_EN[n - 1]}</b><span>每周{WD_CN[n - 1]}</span></div>'
+        pill = f"每周{WD_CN[n - 1]}"
+    elif w.get("start"):
+        endstub = f' data-endstub="{dot(w["end"])}"' if w.get("end") else ""
+        stub = f'<div class="stub week"{endstub}><b>{dot(w["start"])}</b><span>开始</span></div>'
+        pill = f'{w["start"][5:]} 开始'
+    elif w.get("end"):
+        stub = f'<div class="stub deal"><b>{dot(w["end"])}</b><span>截止</span></div>'
+        pill = f'截至 {w["end"][5:]}'
+    else:
+        b, s, c = w["stub"]
+        stub, pill = f'<div class="stub{" " + c if c else ""}"><b>{e(b)}</b><span>{e(s)}</span></div>', None
+    pill = f'<span class="pill left">{e(pill)}</span>' if pill else '<span class="pill">长期 · 以官网为准</span>'
+    ext = "" if w["url"].endswith(".html") else ' target="_blank" rel="noopener"'
+    price = f' <em class="price">{e(w["price"])}</em>' if w.get("price") else ""
+    rows = "".join(f"<div><dt>{e(dt)}</dt><dd>{dd}</dd></div>" for dt, dd in w["rows"])
+    return f'''
+      <article class="ticket lim-t" id="w-{e(w["id"])}"{data}>
+        <div class="t-main">
+          <div class="t-head">{ic}<div class="meta">{e(w["meta"])}</div></div>
+          <h3>{e(w["title"])}{price}</h3>
+          <p class="offer">{e(w["offer"])}</p>
+          <dl class="rows">{rows}</dl>
+          <div class="t-foot">{pill}<a class="cta" href="{e(w["url"])}"{ext}>{e(w["cta"])} {ARROW}</a></div>
+        </div>
+        {stub}
+      </article>'''
+
+WEEKLY_HOME = "".join(wticket(w) for w in WEEKLY)
+WEEKLY_FOOD = "".join(wticket(w) for w in WEEKLY if w["tag"] == "food")
+
+# ---------- 加群入口 ----------
+# 每页页脚上方放进群二维码：把微信活码图片存成 assets/join-qr.png 就会出现，没有这张图则不显示。
+# 用活码不用群二维码，因为微信群二维码 7 天就过期。
+JOIN_QR = next((f"assets/join-qr.{x}" for x in ("png", "jpg", "webp")
+                if os.path.exists(os.path.join(ROOT, "assets", f"join-qr.{x}"))), "")
+JOIN = f'''<section class="join" id="join" aria-label="加入羊毛群">
+  <div class="wrap"><div class="join-card">
+    <div class="join-text">
+      <div class="eyebrow">JOIN · 羊毛群</div>
+      <h2>新羊毛，群里先发</h2>
+      <p>网站上的限时优惠、快到期提醒、群友实测，每天在微信群推送，不用天天回来翻。</p>
+      <ul><li>快到期的优惠提前提醒</li><li>群友实测哪些能用、哪些失效</li><li>发现失效在群里说一声，核实后网站下架</li></ul>
+    </div>
+    <figure class="join-qr"><img src="{JOIN_QR}" alt="微信扫码加入羊毛群" width="180" height="180" loading="lazy"><figcaption>微信扫码进群<small>在微信里打开可长按识别</small></figcaption></figure>
+  </div></div>
+</section>
+''' if JOIN_QR else ""
+
 # 与 index.html 里 ticket() 的结构保持一致；预渲染前 9 张（免费优先），脚本加载后接管
 order = sorted(deals, key=lambda d: not d["free"])
 cards = "".join(f'''
@@ -89,6 +156,8 @@ cards = "".join(f'''
 
 page = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
 page = re.sub(r"<title>.*?</title>\n?", "", page, count=1)
+page = page.replace("{{weekly}}", WEEKLY_HOME).replace("{{weekly_updated}}", WEEKLY_UPDATED[5:]).replace("{{weekly_count}}", str(len(WEEKLY)))
+page = page.replace("<footer", JOIN + "<footer", 1)
 page = page.replace('<div class="grid" id="grid"></div>', f'<div class="grid" id="grid">{cards}\n    </div>')
 for k, v in {"js-total": len(deals), "js-free": sum(1 for d in deals if d["free"]),
              "js-updated": updated, "js-month": (f"{int(updated.split('-')[1])} 月" if "-" in updated else updated)}.items():
@@ -219,18 +288,22 @@ def index_page(src, name):
 
 search_entries = [[f"./?q={quote(d['name'])}#deals", PAGE_LABEL["index.html"], d["name"], d["cat"],
                    " ".join(filter(None, [d["offer"], d.get("term", ""), d["who"], d["verify"], d["region"]]))] for d in deals]
-SEARCH_JS = '<script src="search.js" defer></script>\n'
+search_entries += [[f"./#w-{w['id']}", PAGE_LABEL["index.html"], w["title"], "本周羊毛",
+                    " ".join([w["meta"], w.get("price", ""), w["offer"]] + [re.sub("<[^>]+>", "", dd) for _, dd in w["rows"]])]
+                   for w in WEEKLY if w["tag"] != "food"]
+SEARCH_JS = '<script src="lim.js" defer></script>\n<script src="search.js" defer></script>\n'
 out = out.replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
 
 shutil.rmtree(DIST, ignore_errors=True)
 os.makedirs(DIST)
 open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
-for name in ["deals.js", "icons.js", "v2.css", "search.js"]:
+for name in ["deals.js", "icons.js", "v2.css", "search.js", "lim.js"]:
     shutil.copy(os.path.join(ROOT, name), DIST)
 shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
 EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html", "earn.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
+    src = src.replace("{{weekly:food}}", WEEKLY_FOOD).replace("<footer", JOIN + "<footer", 1)
     src = re.sub(r"\{\{logo:([a-z0-9]+)\}\}", lambda m: logo(m.group(1)), src.replace("{{SITE_URL}}", SITE_URL))
     src = src.replace("</head>", ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
     src, ents = index_page(src, name)
