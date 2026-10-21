@@ -387,3 +387,12 @@ footer { margin-top: 112px; background: var(--yellow); color: var(--on-color); b
 @media (max-width: 640px) {
   .timeline.t4, .excl, .plan, .malls { grid-template-columns: minmax(0, 1fr); }
 }
+/* 穷鬼专区：快餐限时卡片（到期由页面脚本标记） */
+.lim .ticket h3 .price { font-style: normal; display: inline-block; margin-left: 4px; padding: 0 8px; border: var(--bw) solid #141414; border-radius: 8px; background: var(--yellow); color: #141414; font-family: var(--font-display); font-weight: 800; transform: rotate(-2deg); }
+.lim .ticket:has(.stub.deal) h3 .price { background: var(--tomato); color: #fff; }
+.lim .stub.week { background: var(--mint); }
+.lim .stub.deal b { font-size: 18px; letter-spacing: .02em; }
+.pill.hot { background: var(--tomato); color: #fff; border-color: #141414; font-weight: 700; }
+.lim .ticket.expired { filter: grayscale(1); opacity: .55; }
+.lim .ticket.expired:hover { transform: none; box-shadow: var(--sh); }
+.lim .ticket.expired::after { content: "已过期 EXPIRED"; position: absolute; top: 42%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg); padding: 6px 16px; border: 3px solid var(--tomato); border-radius: 10px; color: var(--tomato); font: 800 22px var(--font-display); letter-spacing: .04em; white-space: nowrap; background: color-mix(in srgb, var(--surface) 85%, transparent); }
