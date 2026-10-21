@@ -346,13 +346,13 @@ search_entries = [[f"./?q={quote(d['name'])}#deals", PAGE_LABEL["index.html"], d
 search_entries += [[f"./#w-{w['id']}", PAGE_LABEL["index.html"], w["title"], "本周羊毛",
                     " ".join([w["meta"], w.get("price", ""), w["offer"]] + [re.sub("<[^>]+>", "", dd) for _, dd in w["rows"]])]
                    for w in WEEKLY if w["tag"] != "food"]
-SEARCH_JS = '<script src="lim.js" defer></script>\n<script src="search.js" defer></script>\n'
+SEARCH_JS = '<script src="lim.js" defer></script>\n<script src="search.js" defer></script>\n<script src="nav.js" defer></script>\n'
 out = out.replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
 
 shutil.rmtree(DIST, ignore_errors=True)
 os.makedirs(DIST)
 open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
-for name in ["deals.js", "icons.js", "v2.css", "search.js", "lim.js", "manifest.webmanifest"]:
+for name in ["deals.js", "icons.js", "v2.css", "search.js", "lim.js", "nav.js", "manifest.webmanifest"]:
     shutil.copy(os.path.join(ROOT, name), DIST)
 shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
 os.makedirs(os.path.join(DIST, "cal"))

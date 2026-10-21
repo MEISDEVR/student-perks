@@ -91,7 +91,8 @@
 .tile .num { font-family: var(--font-display); font-weight: 800; font-size: 84px; line-height: 1; color: var(--yellow); font-variant-numeric: tabular-nums; }
 .tile .num small { font-family: var(--font-body); font-size: 20px; font-weight: 900; color: #f3efe6; margin-left: 6px; }
 
-.filters { position: sticky; top: 0; z-index: 5; padding-block: 14px; background: var(--paper); }
+.topbar-off .filters { top: 0; }
+.filters { position: sticky; top: var(--topbar-h, 0px); z-index: 5; transition: top .25s ease; padding-block: 14px; background: var(--paper); }
 .filter-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 12px 10px 10px; border: var(--bw) solid var(--line); border-radius: 999px; background: var(--surface); box-shadow: 4px 4px 0 var(--shadow); }
 .chips { display: flex; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .chips::-webkit-scrollbar { display: none; }
@@ -181,18 +182,21 @@
 <body>
 
 
-<div class="wrap">
+<header class="topbar"><div class="wrap">
   <nav class="nav">
     <a class="brand" href="#top" id="top"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>Sheeperks</b><small>英国羊毛 · UK STUDENT PERKS</small></span></a>
     <div class="seg"><a class="on" href="#deals">全部优惠</a><i aria-hidden="true">✦</i><a href="budget.html">穷鬼专区</a><i aria-hidden="true">✦</i><a href="black-friday.html">英国黑五</a><i aria-hidden="true">✦</i><a href="bicester.html">比斯特专区</a><i aria-hidden="true">✦</i><a href="earn.html">零花钱专区</a><i aria-hidden="true">✦</i><a href="#guide">怎么验证</a><i aria-hidden="true">✦</i></div>
     <button class="sbox" type="button" data-search aria-haspopup="dialog" aria-label="搜索全站优惠"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>搜优惠、品牌、关键词</span><kbd>Ctrl K</kbd></button>
     <span class="badge"><span class="js-month">10 月</span>已核实</span>
   </nav>
+</div></header>
+
+<div class="wrap">
 
   <section class="sec weekly" id="weekly">
     <div class="sec-head">
       <div><div class="eyebrow">THIS WEEK · 10-21 更新</div><h2>本周羊毛</h2></div>
-      <span class="aside"><span data-feed-count>17</span> 条在架 · 按截止日期排 · 过期自动下架</span>
+      <span class="aside"><span data-feed-count>19</span> 条在架 · 按截止日期排 · 过期自动下架</span>
     </div>
     <div class="grid lim feed" id="feed" data-feed>
       <article class="ticket lim-t" id="w-nationwide" data-added="2026-10-21" data-end="2026-10-22">
@@ -219,7 +223,7 @@
         <div class="t-main">
           <div class="t-head"><span class="bi mono" style="background:#006a4d" aria-hidden="true">LL</span><div class="meta">Lloyds · 学生账户</div></div>
           <h3>学生账户返现 <em class="price">£100 + £120 券</em></h3>
-          <p class="offer">开 Lloyds 学生账户并存入 £500，11-30 前到账 £100 现金；之后每月刷卡够 20 笔，次月再送 £20 Deliveroo 券，最多 6 次。</p>
+          <p class="offer">开 Lloyds 学生账户并存入 £500，11-30 前到账 £100 现金；之后每月刷卡够 20 笔，次月再送 £20 Deliveroo 券，最多 6 次。苏格兰的 Bank of Scotland 是同一集团，学生账户也有同款，两家只能领一份。</p>
           <dl class="rows"><div><dt>条件</dt><dd><b>10-30 前</b>开户（或转成学生账户）并存入 £500</dd></div><div><dt>不算</dt><dd>2021-08-01 以来有过 Lloyds、Bank of Scotland、Halifax 学生或毕业生账户的；国际学生开户要求以官网为准</dd></div></dl>
           <div class="t-foot"><span class="pill left">截至 10-30</span><a class="cal" href="cal/lloyds.ics" download aria-label="加入日历" title="加入日历，到期前提醒"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></a><a class="cta" href="https://www.lloydsbank.com/current-accounts/all-accounts/student-account.html">Lloyds 官网 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
         </div>
@@ -234,6 +238,26 @@
           <div class="t-foot"><span class="pill">长期 · 以官网为准</span><a class="cta" href="earn.html#hsbc" target="_blank" rel="noopener">看攻略 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
         </div>
         <div class="stub deal"><b>£220</b><span>奖励</span></div>
+      </article>
+      <article class="ticket lim-t" id="w-barclays" data-added="2026-10-21">
+        <div class="t-main">
+          <div class="t-head"><span class="bi mono" style="background:#00aeef" aria-hidden="true">BA</span><div class="meta">Barclays · 转户奖励</div></div>
+          <h3>转户到 Bank Account <em class="price">最高 £300</em></h3>
+          <p class="offer">10-01 起的新转户奖励：用 CASS 把旧账户转到 Barclays 标准 Bank Account，满足条件最高拿 £300，比 HSBC 还多。</p>
+          <dl class="rows"><div><dt>条件</dt><dd>转过来至少 3 笔在用的 Direct Debit；30 天内存入 £2,000，借记卡消费 10 笔；在 Barclays App 里开户</dd></div><div><dt>注意</dt><dd>条件来自 Moneyfacts 报道，奖励是否分两笔发各家说法不一，以 Barclays 官网条款为准；CASS 会关掉旧账户</dd></div></dl>
+          <div class="t-foot"><span class="pill">长期 · 以官网为准</span><a class="cta" href="https://www.barclays.co.uk/" target="_blank" rel="noopener">Barclays 官网 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        </div>
+        <div class="stub deal"><b>£300</b><span>奖励</span></div>
+      </article>
+      <article class="ticket lim-t" id="w-rbs-student" data-added="2026-10-21">
+        <div class="t-main">
+          <div class="t-head"><span class="bi mono long" style="background:#5a287d" aria-hidden="true">RBS</span><div class="meta">RBS · 学生账户</div></div>
+          <h3>学生账户送现金 + tastecard <em class="price">£100</em></h3>
+          <p class="offer">RBS 是苏格兰的 NatWest，学生账户送 £100 现金和 4 年 tastecard（餐厅、外卖折扣卡），另有无息透支。</p>
+          <dl class="rows"><div><dt>不算</dt><dd>2022-07-01 以来在 NatWest 集团（NatWest、RBS）领过学生奖励的</dd></div><div><dt>注意</dt><dd>比价网站标「限时」，截止日没公布，以 RBS 官网为准</dd></div></dl>
+          <div class="t-foot"><span class="pill">长期 · 以官网为准</span><a class="cta" href="https://www.rbs.co.uk/" target="_blank" rel="noopener">RBS 官网 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        </div>
+        <div class="stub"><b>£100</b><span>学生</span></div>
       </article>
       <article class="ticket lim-t" id="w-bicester-winter" data-added="2026-10-21" data-start="2026-10-23" data-end="2026-11-01">
         <div class="t-main">
@@ -757,5 +781,6 @@
 
 <script src="lim.js" defer></script>
 <script src="search.js" defer></script>
+<script src="nav.js" defer></script>
 </body>
 </html>
