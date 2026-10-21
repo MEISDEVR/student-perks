@@ -48,4 +48,6 @@
     var cnt = document.querySelector("[data-feed-count]");
     if (cnt) cnt.textContent = live.length;
   });
+  // 不是票根的限时块（如纸质券列表）：data-expire 过了就隐藏
+  [].forEach.call(document.querySelectorAll("[data-expire]"), function (el) { if (day(el.dataset.expire) < t) el.hidden = true; });
 })();

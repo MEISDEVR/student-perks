@@ -174,7 +174,6 @@ def wticket(w):
       </article>'''
 
 WEEKLY_HOME = "".join(wticket(w) for w in WEEKLY)
-WEEKLY_FOOD = "".join(wticket(w) for w in WEEKLY if w["tag"] == "food")
 
 # ---------- 加群入口 ----------
 # 每页页脚上方放进群二维码：把微信活码图片存成 assets/join-qr.png 就会出现，没有这张图则不显示。
@@ -363,7 +362,8 @@ for w in WEEKLY:
 EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html", "earn.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
-    src = src.replace("{{weekly:food}}", WEEKLY_FOOD).replace("<footer", JOIN + "<footer", 1)
+    src = re.sub(r"\{\{weekly:(\w+)\}\}", lambda m: "".join(wticket(w) for w in WEEKLY if w["tag"] == m.group(1)), src)
+    src = src.replace("<footer", JOIN + "<footer", 1)
     src = re.sub(r"\{\{logo:([a-z0-9]+)\}\}", lambda m: logo(m.group(1)), src.replace("{{SITE_URL}}", SITE_URL))
     src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
     src, ents = index_page(src, name)
