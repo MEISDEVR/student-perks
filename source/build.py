@@ -129,7 +129,7 @@ JOIN = f'''<section class="join" id="join" aria-label="加入羊毛群">
     <div class="join-text">
       <div class="eyebrow">JOIN · 羊毛群</div>
       <h2>新羊毛，群里先发</h2>
-      <p>网站上的限时优惠、快到期提醒、群友实测，每天在微信群推送，不用天天回来翻。</p>
+      <p>有好的限时优惠、快到期的提醒、群友实测，会不定期发在微信群里，不用自己回来翻。</p>
       <ul><li>快到期的优惠提前提醒</li><li>群友实测哪些能用、哪些失效</li><li>发现失效在群里说一声，核实后网站下架</li></ul>
     </div>
     <figure class="join-qr"><img src="{JOIN_QR}" alt="微信扫码加入羊毛群" width="180" height="180" loading="lazy"><figcaption>微信扫码进群<small>在微信里打开可长按识别</small></figcaption></figure>
