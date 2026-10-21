@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:glasgow-green@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261121
+SUMMARY:格拉斯哥 开始：冬季游乐园和露天冰场（至 01-03
+ ）
+DESCRIPTION:Glasgow Green 的 Winter Wonderland：冰场、摩天轮、
+ 游乐设施。往年入场免费，玩项目单独买票，冰场票含
+ 冰鞋。\nhttps://www.glasgowtourism.org/glasgow-christmas-markets/
+URL:https://www.glasgowtourism.org/glasgow-christmas-markets/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：冬季游乐园和露天冰场（至 01-03）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

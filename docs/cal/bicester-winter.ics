@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:bicester-winter@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261023
+DTEND;VALUE=DATE:20261024
+SUMMARY:比斯特 开始：Winter Event 再减（至 11-01）
+DESCRIPTION:参与活动的精品店，部分商品在奥莱价基础上
+ ，会员再减最高 20%。注册会员免费。\nhttps://sheeperks.com
+ /bicester.html
+URL:https://sheeperks.com/bicester.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：Winter Event 再减（至 11-01）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

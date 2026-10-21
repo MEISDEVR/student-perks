@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:black-friday@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261127
+DTEND;VALUE=DATE:20261128
+SUMMARY:英国黑五 开始：Black Friday 开跑（至 11-30）
+DESCRIPTION:多数品牌黑五这一周全面打折，11-30 Cyber Monday 
+ 线上补漏。Currys 11 月初就有早鸟价，带保价。\nhttps://s
+ heeperks.com/black-friday.html
+URL:https://sheeperks.com/black-friday.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：Black Friday 开跑（至 11-30）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:lloyds@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261030
+DTEND;VALUE=DATE:20261031
+SUMMARY:Lloyds 截止：学生账户返现
+DESCRIPTION:开 Lloyds 学生账户并存入 £500，11-30 前到账 £10
+ 0 现金；之后每月刷卡够 20 笔，次月再送 £20 Deliveroo 
+ 券，最多 6 次。\nhttps://www.lloydsbank.com/current-accounts/all-a
+ ccounts/student-account.html
+URL:https://www.lloydsbank.com/current-accounts/all-accounts/student-acco
+ unt.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:截止：学生账户返现
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

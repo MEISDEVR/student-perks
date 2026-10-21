@@ -584,3 +584,58 @@ html.modal-open { overflow: hidden; }
   .kv div { grid-template-columns: 68px minmax(0, 1fr); padding: 9px 12px; }
   .facts a b { font-size: 24px; }
 }
+
+/* 本周羊毛（首页时效卡片流）+ NEW 标 */
+.lim .ticket.is-new::before { content: "NEW"; position: absolute; top: -11px; left: 14px; z-index: 1; padding: 1px 8px; border: 2px solid #141414; border-radius: 6px; background: var(--cobalt); color: #fff; font: 800 12px var(--font-display); letter-spacing: .06em; transform: rotate(-4deg); }
+.weekly { padding-top: 24px; }
+.weekly .sec-head { margin-bottom: 22px; }
+.feed { padding-top: 6px; }
+.feed .ticket.extra { display: none; }
+.feed.open .ticket.extra { display: grid; }
+.feed-more { margin-top: 24px; }
+@media (max-width: 640px) {
+  .weekly { padding-top: 12px; }
+  .weekly .sec-head { margin-bottom: 12px; }
+  /* 手机横滑：首屏就能看到一张半，滑动看全部 */
+  .feed { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -16px; padding: 14px 16px 16px; scrollbar-width: none; }
+  .feed::-webkit-scrollbar { display: none; }
+  .feed > .ticket { flex: 0 0 84%; scroll-snap-align: center; }
+  .feed .ticket.extra { display: grid; }
+  .feed-more { display: none; }
+  .lim .ticket:hover { transform: none; }
+}
+
+/* 加群入口（每页页脚上方；没有 assets/join-qr.* 时不渲染） */
+.join { margin-top: 96px; }
+.join + footer { margin-top: 0; }
+.join-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px 40px; align-items: center; padding: 32px 36px; border: 3px solid var(--line); border-bottom: 0; border-radius: 22px 22px 0 0; background: #141414; color: #f3efe6; }
+.join-card .eyebrow { color: var(--yellow); }
+.join-card h2 { margin: 8px 0 10px; font-weight: 900; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.15; letter-spacing: -.02em; }
+.join-card p { margin: 0 0 12px; color: #c9c3b6; max-width: 34em; }
+.join-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 14px; }
+.join-card li::before { content: "✦"; margin-right: 8px; color: var(--yellow); }
+.join-qr { margin: 0; display: grid; justify-items: center; gap: 10px; padding: 14px 14px 12px; border: 3px solid var(--yellow); border-radius: 16px; background: #fff; color: #141414; box-shadow: 6px 6px 0 var(--yellow); transform: rotate(2deg); }
+.join-qr img { display: block; width: 168px; height: 168px; }
+.join-qr figcaption { display: grid; text-align: center; font-weight: 800; font-size: 14px; }
+.join-qr small { font-weight: 500; font-size: 11px; color: #6b665c; }
+@media (max-width: 640px) {
+  .join { margin-top: 64px; }
+  .join .wrap { padding-inline: 0; }
+  .join-card { grid-template-columns: minmax(0, 1fr); justify-items: start; padding: 26px 20px; border-inline: 0; border-radius: 0; }
+  .join-qr { justify-self: center; }
+}
+
+/* 手机导航：栏目按钮排成 3 列网格，全部露出，不用横滑找 */
+@media (max-width: 640px) {
+  .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; border-radius: 18px; overflow: visible; }
+  .seg > i { display: none; }
+  .seg a { padding: 8px 4px; font-size: 13px; }
+}
+.hero .btn.jump { margin-top: 18px; }
+
+/* 时效卡片「加入日历」按钮 */
+.lim .t-foot .cal { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-right: auto; margin-left: 8px; border: 1.5px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--surface); flex: none; }
+.lim .t-foot .cal:hover { background: var(--yellow); color: #141414; }
+.lim .ticket.expired .t-foot .cal { display: none; }
+.lim .t-foot { flex-wrap: wrap; row-gap: 8px; }
+.hero .btn.jump { width: fit-content; }
