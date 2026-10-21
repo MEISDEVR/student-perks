@@ -639,3 +639,11 @@ html.modal-open { overflow: hidden; }
 .lim .ticket.expired .t-foot .cal { display: none; }
 .lim .t-foot { flex-wrap: wrap; row-gap: 8px; }
 .hero .btn.jump { width: fit-content; }
+
+/* 零花钱专区：HSBC 攻略 */
+#hsbc .warn { margin-top: 24px; }
+#hsbc .cards { margin-top: 24px; }
+#hsbc .tip b { font-weight: 800; }
+#hsbc .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#hsbc .rows div { grid-template-columns: 52px 1fr; }
+@media (max-width: 640px) { #hsbc .cards { grid-template-columns: minmax(0, 1fr); } }
