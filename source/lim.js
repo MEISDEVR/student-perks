@@ -13,7 +13,7 @@
       if (d.start && day(d.start) > t) {
         var s = day(d.start) - t;
         pill.textContent = s === 1 ? "明天开始" : s + " 天后开始";
-        key = s + .5; // 快开始的排在后面截止的前面
+        key = s + .5; // 按距开始天数和其他卡片的剩余天数混排
       } else if (d.end) {
         var n = day(d.end) - t;
         if (n < 0) {
