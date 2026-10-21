@@ -50,4 +50,8 @@
   });
   // 不是票根的限时块（如纸质券列表）：data-expire 过了就隐藏
   [].forEach.call(document.querySelectorAll("[data-expire]"), function (el) { if (day(el.dataset.expire) < t) el.hidden = true; });
+  [].forEach.call(document.querySelectorAll("[data-countdown]"), function (el) {
+    var n = day(el.dataset.countdown) - t;
+    if (n >= 0) { el.textContent = n === 0 ? "今天截止" : "还剩 " + n + " 天"; if (n <= 7) el.classList.add("hot"); }
+  });
 })();
