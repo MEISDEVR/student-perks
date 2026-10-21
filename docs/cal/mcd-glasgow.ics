@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:mcd-glasgow@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261204
+DTEND;VALUE=DATE:20261205
+SUMMARY:McDonald's 截止：汉堡 + 中薯纸质券
+DESCRIPTION:格拉斯哥市中心发的麦当劳纸质券：吉士汉堡
+ 或 Mayo Chicken + 中薯 £2.50，巨无霸套 £3.50，6 块麦乐鸡 
+ + 中薯 £3.50，另有早餐、McCrispy 和 4 人 Squad 券。\nhttps:
+ //sheeperks.com/budget.html#mcd-glasgow
+URL:https://sheeperks.com/budget.html#mcd-glasgow
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:截止：汉堡 + 中薯纸质券
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

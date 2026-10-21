@@ -647,3 +647,41 @@ html.modal-open { overflow: hidden; }
 #hsbc .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 #hsbc .rows div { grid-template-columns: 52px 1fr; }
 @media (max-width: 640px) { #hsbc .cards { grid-template-columns: minmax(0, 1fr); } }
+/* 穷鬼专区：格拉斯哥麦当劳纸质券 */
+.mcdg { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 28px; align-items: start; }
+.mcdg-img { margin: 0; position: sticky; top: 96px; }
+.mcdg-img img { display: block; width: 100%; height: auto; border: var(--bw) solid var(--line); border-radius: 14px; box-shadow: var(--sh); transform: rotate(-1.5deg); }
+.mcdg-img figcaption { margin-top: 14px; font-size: 12px; color: var(--muted); }
+.mcdg-body { display: grid; gap: 22px; min-width: 0; }
+.coupons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.cp { display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 14px 16px; border: var(--bw) dashed var(--line); border-radius: 12px; background: var(--surface); }
+.cp-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.cp-top b { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: .02em; }
+.cp-top em { font-style: normal; padding: 0 8px; border: var(--bw) solid #141414; border-radius: 8px; background: var(--yellow); color: #141414; font-family: var(--font-display); font-weight: 800; font-size: 16px; transform: rotate(-2deg); }
+.cp p { margin: 0; font-size: 13px; line-height: 1.5; flex: 1; }
+.cp small { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.cp small b { color: var(--tomato); }
+.cp.am em { background: var(--tomato); color: #fff; }
+.cp.squad { grid-column: span 2; }
+.cp.squad em { background: var(--cobalt); color: #fff; }
+.mcdg-info { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 14px; }
+.mcdg-info > div { padding: 16px 18px; border: var(--bw) solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: 4px 4px 0 var(--shadow); }
+.mcdg-info > div:last-child { background: var(--tomato); color: #fff; border-color: #141414; }
+.mcdg-info h3 { font-size: 16px; font-weight: 900; margin-bottom: 8px; }
+.mcdg-info ul { margin: 0; padding-left: 1.1em; display: grid; gap: 5px; font-size: 13px; }
+@media (max-width: 1080px) {
+  .mcdg { grid-template-columns: 260px minmax(0, 1fr); }
+  .coupons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mcdg-info { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .mcdg { grid-template-columns: minmax(0, 1fr); }
+  .mcdg-img { position: static; max-width: 300px; margin-inline: auto; }
+  .coupons { grid-template-columns: minmax(0, 1fr); }
+  .cp.squad { grid-column: auto; }
+}
+.mcdh-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.mcdh-head h3 { font-size: 20px; font-weight: 900; }
+.mcdh { margin-bottom: 40px; padding: 20px; border: var(--bw) solid var(--line); border-radius: var(--r); background: color-mix(in srgb, var(--yellow) 30%, var(--surface)); box-shadow: var(--sh); }
+.mcdh .mcdh-note { margin: 14px 0 0; font-size: 13px; }
+.mcdh .mcdh-note a { color: inherit; font-weight: 700; }

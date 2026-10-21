@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:mcd-highstreet@sheeperks.com
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:McDonald's 截止：10 月汉堡 + 中薯券
+DESCRIPTION:小红书上流传的 10 月这批麦当劳券：吉士汉堡
+ 或 Mayo Chicken + 中薯 £2.50，巨无霸套 £3.50，McCrispy 套 £
+ 4.50。\nhttps://sheeperks.com/budget.html#mcd-highstreet
+URL:https://sheeperks.com/budget.html#mcd-highstreet
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:截止：10 月汉堡 + 中薯券
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
