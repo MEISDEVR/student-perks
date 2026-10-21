@@ -6,6 +6,7 @@
 用法：python3 build.py https://你的域名/ [输出目录，默认 ../docs]
 """
 import html, json, os, re, shutil, subprocess, sys
+from urllib.parse import quote
 
 SITE_URL = (sys.argv[1] if len(sys.argv) > 1 else "https://sheeperks.com/").rstrip("/") + "/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -119,16 +120,124 @@ head = f'''<!doctype html>
 split = page.index("</style>") + len("</style>")
 out = head + page[:split] + "\n</head>\n<body>\n" + page[split:] + "\n</body>\n</html>\n"
 
+# ---------- 全站搜索 ----------
+# 导航里的 {{search}} 换成搜索框；每页可搜的卡片补 id，文字写进 search-index.json，前端 search.js 首次打开时加载
+SEARCH_BOX = ('<button class="sbox" type="button" data-search aria-haspopup="dialog" aria-label="搜索全站优惠">'
+              '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">'
+              '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>搜优惠、品牌、关键词</span><kbd>Ctrl K</kbd></button>')
+PAGE_LABEL = {"index.html": "全部优惠", "budget.html": "穷鬼专区", "black-friday.html": "英国黑五",
+              "bicester.html": "比斯特专区", "earn.html": "零花钱专区"}
+ITEM_CLASS = {"ticket", "card", "row", "tl", "tip", "bc", "route", "cat"}
+CHILD_OF = {"stack", "plan"}  # 这些容器的直接子元素算一张卡
+TITLE_TAGS = {"h3", "h4", "summary", "th"}
+from html.parser import HTMLParser
+
+class Indexer(HTMLParser):
+    VOID = {"img", "br", "hr", "input", "meta", "link", "source", "path", "circle", "rect", "line", "polyline", "polygon", "ellipse", "use"}
+    def __init__(self, src):
+        super().__init__(convert_charrefs=True)
+        self.src, self.stack, self.items, self.cur, self.sec, self.h2 = src, [], [], None, "", None
+        self.lines = [0]
+        for ln in src.split("\n"):
+            self.lines.append(self.lines[-1] + len(ln) + 1)
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        cls = set((a.get("class") or "").split())
+        parent = self.stack[-1] if self.stack else ("", set())
+        skip = any(t in ("nav", "footer", "svg", "script", "style", "dialog") for t, _ in self.stack)
+        if tag not in self.VOID:
+            self.stack.append((tag, cls))
+        if self.cur is not None:
+            self.cur["text"].append(" ")
+        if skip:
+            return
+        if tag == "h2":
+            self.h2 = []
+        if self.cur is None and (cls & ITEM_CLASS or tag == "details" or (tag == "div" and parent[1] & CHILD_OF)
+                                 or (tag == "tr" and parent[0] == "tbody")):
+            line, col = self.getpos()
+            self.cur = {"depth": len(self.stack), "id": a.get("id"), "pos": self.lines[line - 1] + col + 1 + len(tag),
+                        "title": [], "alt": [], "text": [], "tdepth": None, "sec": self.sec}
+        elif self.cur is not None and self.cur["tdepth"] is None and not self.cur["title"] and (
+                tag in TITLE_TAGS or cls & {"b", "d", "vs"}):
+            self.cur["tdepth"] = len(self.stack)
+        elif self.cur is not None and tag == "b" and not self.cur["alt"]:
+            self.cur["bdepth"] = len(self.stack)
+    def handle_endtag(self, tag):
+        if not self.stack:
+            return
+        depth = len(self.stack)
+        if self.cur is not None:
+            self.cur["text"].append(" ")
+            if self.cur.get("tdepth") == depth:
+                self.cur["tdepth"] = -1
+            if self.cur.get("bdepth") == depth:
+                self.cur["bdepth"] = None
+            if self.cur["depth"] == depth:
+                self.items.append(self.cur)
+                self.cur = None
+        if tag == "h2" and self.h2 is not None:
+            self.sec = re.sub(r"\s+", " ", "".join(self.h2)).strip()
+            self.h2 = None
+        while self.stack:
+            t, _ = self.stack.pop()
+            if t == tag:
+                break
+    def handle_data(self, d):
+        if any(t in ("svg", "script", "style") for t, _ in self.stack):
+            return
+        if self.h2 is not None:
+            self.h2.append(d)
+        if self.cur is None:
+            return
+        self.cur["text"].append(d)
+        if self.cur["tdepth"] is not None and self.cur["tdepth"] > 0:
+            self.cur["title"].append(d)
+        elif self.cur.get("bdepth"):
+            self.cur["alt"].append(d)
+
+def index_page(src, name):
+    """给可搜元素补 id，返回（新 HTML, 索引条目）"""
+    p = Indexer(src)
+    p.feed(src)
+    out, entries, n = src, [], 0
+    norm = lambda parts: re.sub(r"\s+", " ", "".join(parts)).strip()
+    for it in p.items:
+        if not it["id"]:
+            n += 1
+            it["id"], it["new"] = f"s{n}", True
+    for it in sorted(p.items, key=lambda x: -x["pos"]):
+        if it.get("new"):
+            out = out[:it["pos"]] + f' id="{it["id"]}"' + out[it["pos"]:]
+    for it in p.items:
+        title = norm(it["title"]) or norm(it["alt"]) or norm(it["text"])[:24]
+        text = norm(it["text"])
+        if text.startswith(title):
+            text = text[len(title):].strip()
+        entries.append([f"{name}#{it['id']}", PAGE_LABEL[name], title[:60], it["sec"], text[:700]])
+    return out, entries
+
+search_entries = [[f"./?q={quote(d['name'])}#deals", PAGE_LABEL["index.html"], d["name"], d["cat"],
+                   " ".join(filter(None, [d["offer"], d.get("term", ""), d["who"], d["verify"], d["region"]]))] for d in deals]
+SEARCH_JS = '<script src="search.js" defer></script>\n'
+out = out.replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
+
 shutil.rmtree(DIST, ignore_errors=True)
 os.makedirs(DIST)
 open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
-for name in ["deals.js", "icons.js", "v2.css"]:
+for name in ["deals.js", "icons.js", "v2.css", "search.js"]:
     shutil.copy(os.path.join(ROOT, name), DIST)
 shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
 EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html", "earn.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
-    open(os.path.join(DIST, name), "w", encoding="utf-8").write(re.sub(r"\{\{logo:([a-z0-9]+)\}\}", lambda m: logo(m.group(1)), src.replace("{{SITE_URL}}", SITE_URL)).replace("</head>", ANALYTICS + "</head>", 1))
+    src = re.sub(r"\{\{logo:([a-z0-9]+)\}\}", lambda m: logo(m.group(1)), src.replace("{{SITE_URL}}", SITE_URL))
+    src = src.replace("</head>", ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
+    src, ents = index_page(src, name)
+    search_entries += ents
+    open(os.path.join(DIST, name), "w", encoding="utf-8").write(src)
+json.dump({"p": list(PAGE_LABEL.values()), "i": search_entries}, open(os.path.join(DIST, "search-index.json"), "w", encoding="utf-8"),
+          ensure_ascii=False, separators=(",", ":"))
 open(os.path.join(DIST, ".nojekyll"), "w").close()
 host = SITE_URL.split("/")[2]
 if not host.endswith(".github.io"):  # GitHub Pages 自定义域名；DIST 每次重建，CNAME 要在这里写
@@ -138,4 +247,4 @@ open(os.path.join(DIST, "sitemap.xml"), "w").write(
     f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     f'  <url><loc>{SITE_URL}</loc><lastmod>{updated}-01</lastmod></url>\n'
     + "".join(f'  <url><loc>{SITE_URL}{n}</loc></url>\n' for n in EXTRA_PAGES) + '</urlset>\n')
-print(f"built {len(deals)} deals -> {DIST} for {SITE_URL}")
+print(f"built {len(deals)} deals, {len(search_entries)} search entries -> {DIST} for {SITE_URL}")

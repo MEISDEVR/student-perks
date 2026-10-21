@@ -21,6 +21,7 @@
   <nav class="nav">
     <a class="brand" href="./"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>学生优惠地图</b><small>STUDENT PERKS MAP</small></span></a>
     <div class="seg"><a href="./#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a class="on" href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="earn.html">零花钱专区</a><a href="#tips">购物提示</a></div>
+    {{search}}
     <a class="back" href="./">← 返回首页</a>
   </nav>
 
@@ -41,146 +42,198 @@
     </aside>
   </section>
 
-  <nav class="jump" aria-label="本页目录">
-    <a href="#dates">关键日期</a><a href="#confirmed">已官宣</a><a href="#brands">品牌力度</a><a href="#exclusive">二选一</a><a href="#worth">值不值得等</a><a href="#student">学生折扣</a><a href="#plan">备战时间表</a><a href="#rights">退货与付款</a><a href="#scam">防骗</a><a href="#glasgow">格拉斯哥线下</a><a href="#faq">常见问题</a>
+  <nav class="jump tabs" aria-label="本页栏目">
+    <a href="#dates">关键日期</a><a href="#confirmed">已官宣</a><a href="#brands">品牌力度</a><a href="#exclusive">二选一</a><a href="#worth">值不值得等</a><a href="#student">学生折扣</a><a href="#plan">备战时间表</a><a href="#rights">退货与付款</a><a href="#scam">防骗</a><a href="#glasgow">格拉斯哥线下</a><a href="#tips">下单提示</a><a href="#faq">常见问题</a>
   </nav>
 
-  <div class="facts">
-    <div><b>11-27</b><span>Black Friday，周五</span></div>
-    <div><b>11-30</b><span>Cyber Monday，周一</span></div>
-    <div><b>83%</b><span>Which? 跟踪的黑五商品，一年里别的时候价格相同或更低</span></div>
-    <div><b>14 天</b><span>网购收货后可无理由取消</span></div>
-  </div>
-
+  <div class="tabpanels" id="panels">
   <section class="sec" id="dates">
-    <div class="sec-head"><h2>关键日期</h2><span class="aside">英国时间 · 预测项按往年推算</span></div>
+    <div class="facts">
+      <a href="#plan"><b>11-27 周五</b><span>Black Friday 当天。多数品牌这一周全面开跑，Amazon 往年提前一周开始</span><i>看备战时间表 →</i></a>
+      <a href="#plan"><b>11-30 周一</b><span>Cyber Monday，以线上为主。美妆网站常在这天再加码，Railcard、机票码也常留到这天</span><i>看哪天买什么 →</i></a>
+      <a href="#worth"><b>83%</b><span>Which? 跟踪的黑五商品里，83% 在一年里别的时候价格相同或更低。先查历史价再买</span><i>看哪些值得等 →</i></a>
+      <a href="#rights"><b>14 天</b><span>网购收货后 14 天内可无理由取消，打折商品一样适用；线下门店买的不适用</span><i>看退货与付款 →</i></a>
+    </div>
+    <div class="sec-head" style="margin-top:44px"><h2>关键日期</h2><span class="aside">英国时间 · 点卡片看详情 · 预测项按往年推算</span></div>
     <div class="timeline t4">
-      <div class="tl"><div class="d">10-06 ~ 07</div><p>Amazon Prime Big Deal Days（已结束）</p><span class="st ok">已确认</span></div>
-      <div class="tl"><div class="d">10-23 ~ 11-01</div><p>比斯特 Winter Event，会员最高再减 20%。<a href="bicester.html#confirmed">比斯特专区 →</a></p><span class="st ok">已确认</span></div>
-      <div class="tl"><div class="d">11 月初</div><p>Currys 早鸟价和购物指南上线（2025 年 10-29 就开始）</p><span class="st ok">已确认</span></div>
-      <div class="tl"><div class="d">约 11-10</div><p>比斯特黑五开跑，2025 年为 11-10 至 12-01</p><span class="st guess">预测</span></div>
-      <div class="tl"><div class="d">约 11-20</div><p>Amazon UK Black Friday Week 开始，2025 年为 11-20 至 12-01</p><span class="st guess">预测</span></div>
-      <div class="tl key"><div class="d">11-27</div><p>Black Friday，多数品牌这周全面开跑</p><span class="st ok">已确认</span></div>
-      <div class="tl key"><div class="d">11-30</div><p>Cyber Monday，线上补漏</p><span class="st ok">已确认</span></div>
-      <div class="tl"><div class="d">12-26</div><p>Boxing Day 节礼日，冬季大促开始，可以和黑五比价</p><span class="st guess">按惯例</span></div>
+      <div class="tl"><div class="d">10-06 ~ 07</div><p>Amazon Prime Big Deal Days，Prime 会员专享，已结束</p><span class="st ok">已确认</span>
+        <div class="more" hidden><p class="lead">今年 10 月的 Prime 会员大促，已经结束。</p><dl class="kv"><div><dt>是什么</dt><dd>Amazon 每年 10 月的 Prime 专享促销，只有 Prime 会员能拿到活动价。</dd></div><div><dt>学生怎么用</dt><dd>Prime Student 新用户可免费试用 6 个月，之后半价。下次大促前开通试用，免运费和活动价都能拿到。</dd></div><div><dt>和黑五的关系</dt><dd>不少商品 10 月和黑五价差不多。10 月没买的，黑五周再比一次价。</dd></div></dl></div></div>
+      <div class="tl"><div class="d">10-23 ~ 11-01</div><p>比斯特 Winter Event：会员在店内折扣上最高再减 20%。<a href="bicester.html#confirmed">比斯特专区 →</a></p><span class="st ok">已确认</span>
+        <div class="more" hidden><p class="lead">比斯特奥莱今年冬季的会员活动，正在进行。</p><dl class="kv"><div><dt>时间</dt><dd>2026-10-23 至 11-01</dd></div><div><dt>力度</dt><dd>参与店铺在奥莱价基础上，会员最高再减 20%。</dd></div><div class="bad"><dt>限制</dt><dd>大促额外折扣、UNiDAYS 学生 9 折、银联 9 折只能三选一。</dd></div><div><dt>怎么用</dt><dd>先在 Bicester Village 官网注册会员，到店出示会员码。参与品牌、交通和路线见 <a href="bicester.html">比斯特专区</a>。</dd></div></dl></div></div>
+      <div class="tl"><div class="d">11 月初</div><p>Currys 早鸟价上线，带保价（Price Promise）；2025 年 10-29 就开始了</p><span class="st ok">已确认</span>
+        <div class="more" hidden><p class="lead">Currys 官网已写明 11 月初开始早鸟价。</p><dl class="kv"><div><dt>力度</dt><dd>TV、笔记本、家电为主，具体折扣开跑后才公布。</dd></div><div class="good"><dt>保价</dt><dd>早鸟期买的合资格商品，Black Friday 当天再降价就退差价。2025 年的做法是：保留小票，在规定日期前到官网登记订单号并上传小票照片，降价后退差价。</dd></div><div><dt>怎么用</dt><dd>要买大件的话，早鸟期先下单锁价，比等当天抢更稳。今年登记截止日以官网为准。</dd></div></dl><div class="d-src">2025 年流程来源：<a href="https://www.currys.co.uk/price-guarantee.html" target="_blank" rel="noopener">Currys Price Guarantee</a></div></div></div>
+      <div class="tl"><div class="d">约 11-10</div><p>比斯特黑五预计开跑，2025 年是 11-10 至 12-01，持续 3 周</p><span class="st guess">预测</span>
+        <div class="more" hidden><p class="lead">按 2025 年推算，今年日期还没官宣。</p><dl class="kv"><div><dt>2025 年</dt><dd>11-10 至 12-01，持续 3 周，参与精品店部分商品低至 5 折（按原价算）。</dd></div><div class="bad"><dt>限制</dt><dd>大促折扣不能和 UNiDAYS、银联 9 折叠加。</dd></div><div><dt>建议</dt><dd>不赶黑五周末去，人少、尺码也全。官宣后本页会改成「已确认」。</dd></div></dl></div></div>
+      <div class="tl"><div class="d">约 11-20</div><p>Amazon UK 黑五周预计开始，2025 年是 11-20 至 12-01</p><span class="st guess">预测</span>
+        <div class="more" hidden><p class="lead">按 2025 年推算。Amazon 往年在 11 月中旬才公布日期。</p><dl class="kv"><div><dt>2025 年</dt><dd>11-13 起日用品早鸟价，11-20 至 12-01 黑五周，百万件商品最高 40% off，另有每天更换的 Doorbuster 最高 50% off。</dd></div><div><dt>怎么用</dt><dd>想买的东西先加进 camelcamelcamel 看历史价，到心理价就下单。</dd></div></dl><div class="d-src">来源：<a href="https://press.aboutamazon.com/uk/news/retail/2025/11/its-the-season-for-savings-amazons-black-friday-week-offers-deep-discounts-on-customer-favourite-brands-from-20-november-until-1-december" target="_blank" rel="noopener">Amazon 2025 新闻稿</a></div></div></div>
+      <div class="tl key"><div class="d">11-27</div><p>Black Friday，多数品牌这一周全面开跑</p><span class="st ok">已确认</span>
+        <div class="more" hidden><p class="lead">今年 Black Friday 是 11 月 27 日，周五。</p><dl class="kv"><div><dt>已官宣</dt><dd>John Lewis 写明 11-27 回归；Currys 早鸟价 11 月初开始。</dd></div><div><dt>按往年</dt><dd>Apple、Uniqlo 感谢祭、ASOS 全场折扣都在这几天；Zara 往年提前一天（周四）开始。</dd></div><div><dt>当天怎么买</dt><dd>只买清单上的东西，对照历史价。结账前看一下能不能叠学生折扣，能叠就叠。</dd></div></dl></div></div>
+      <div class="tl key"><div class="d">11-30</div><p>Cyber Monday，线上补漏，美妆常再加码</p><span class="st ok">已确认</span>
+        <div class="more" hidden><p class="lead">Black Friday 之后的周一，以线上为主。</p><dl class="kv"><div><dt>按往年</dt><dd>Lookfantastic 2025 年 Cyber 期间几乎全场 30% off、结账再减 5%；Sephora 从 20% 提到 30%。</dd></div><div><dt>适合买</dt><dd>美妆护肤、线上品牌、黑五当天漏买的东西。Railcard 和机票码也留意到这天。</dd></div></dl></div></div>
+      <div class="tl"><div class="d">12-26</div><p>Boxing Day 节礼日，冬季大促开始，可以和黑五比价</p><span class="st guess">按惯例</span>
+        <div class="more" hidden><p class="lead">圣诞后第二天，英国传统的冬季大促开始。</p><dl class="kv"><div><dt>适合买</dt><dd>冬季外套、服饰。这类东西节礼日折扣往往比黑五大。</dd></div><div><dt>比斯特</dt><dd>冬季 Extraordinary Sale 也在圣诞后开始。</dd></div><div><dt>建议</dt><dd>黑五没赶上别冲动补单，等这一波再比价。</dd></div></dl></div></div>
     </div>
   </section>
 
   <section class="sec" id="confirmed">
-    <div class="sec-head"><h2>已官宣的 2026 信息</h2><span class="aside">截至 2026-10-18</span></div>
+    <div class="sec-head"><h2>已官宣的 2026 信息</h2><span class="aside">截至 2026-10-18 · 点卡片看详情</span></div>
     <div class="cards">
       <article class="card">
         <div class="card-head"><div class="t-head">{{logo:currys}}<h3>Currys</h3></div><span class="st ok">已确认</span></div>
-        <p>11 月初开始早鸟价。<b>Price Promise</b>：早鸟期买的合资格商品，如果 Black Friday 当天再降价，退差价。</p>
+        <p><b>11 月初开始早鸟价</b>。早鸟期买的合资格商品，如果 Black Friday 当天再降价，退差价（Price Promise）。</p>
         <div class="src">来源：<a href="https://www.currys.co.uk/black-friday.html" target="_blank" rel="noopener">Currys 官网</a> · 2026-10-14 访问</div>
+        <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2026 年 11 月初开始，具体日期以官网为准。2025 年是 10-29 开始。</dd></div><div><dt>卖什么</dt><dd>TV、笔记本、耳机、家电，和 Amazon、Argos 同款可以比价。</dd></div><div class="good"><dt>保价</dt><dd>2025 年只覆盖带「Our lowest ever price」标的商品。买后在截止日前到官网登记订单号、上传小票照片，之后降价会退差价，银行信息事后邮件收集。</dd></div><div><dt>另一个比价</dt><dd>Currys 常年有 Price Promise：别家英国零售商更便宜，下单前申请可拿差价券，买后发现也可以联系退差价。</dd></div><div><dt>怎么用</dt><dd>要买大件，早鸟期先下单锁价，再盯黑五当天。小票一定留好。</dd></div></dl></div>
       </article>
       <article class="card">
         <div class="card-head"><div class="t-head">{{logo:johnlewis}}<h3>John Lewis</h3></div><span class="st ok">已确认</span></div>
-        <p>官网写明活动在 11 月 27 日回归，具体优惠还没公布。格拉斯哥店在 Buchanan Galleries 里。</p>
+        <p>官网写明活动 <b>11 月 27 日</b>回归，具体优惠还没公布。格拉斯哥店在 Buchanan Galleries 里，可以线下看实物。</p>
         <div class="src">来源：<a href="https://www.johnlewis.com/black-friday/c6000670128" target="_blank" rel="noopener">John Lewis 官网</a> · 2026-10-14 访问</div>
+        <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>官网写 11-27 回归，开始和结束日期还没公布。</dd></div><div><dt>力度</dt><dd>还没公布，公布后本页更新。</dd></div><div><dt>线下</dt><dd>格拉斯哥店在市中心 Buchanan Galleries，靠近 Buchanan Street 地铁站。大件家电、床品可以先去看实物。</dd></div><div><dt>怎么用</dt><dd>John Lewis 上的 Apple 产品、Dyson 常有直降，可以和 Apple 官网送卡比一下哪个更划算。</dd></div></dl></div>
       </article>
       <article class="card">
         <div class="card-head"><h3>时尚美妆早鸟</h3><span class="st ok">已确认</span></div>
-        <p>M&amp;S、Reiss、Mytheresa、Aligne 已有个别单品提前降价，例如 Reiss 丝绸半裙 £180 降到 £108。ASOS、Damson Madder、Cult Beauty、Lookfantastic 也有提前折扣。</p>
+        <p>M&amp;S、Reiss、Mytheresa、Aligne 已有个别单品提前降价，例如 Reiss 丝绸半裙 <b>£180 降到 £108</b>。ASOS、Damson Madder、Cult Beauty、Lookfantastic 也有提前折扣。</p>
         <div class="src">来源：<a href="https://britbrief.co.uk/business/retail/black-friday-2026-fashion-deals-key-dates-and-top-early-offers.html" target="_blank" rel="noopener">Brit Brief 时尚</a> · <a href="https://britbrief.co.uk/business/retail/beauty-writers-guide-to-black-friday-2026-deals.html" target="_blank" rel="noopener">Brit Brief 美妆</a></div>
+        <div class="more" hidden><dl class="kv"><div><dt>已经降价</dt><dd>M&amp;S、Reiss、Mytheresa、Aligne 的个别单品；Reiss 丝绸半裙 £180 → £108（4 折左右）。</dd></div><div><dt>提前折扣</dt><dd>ASOS、Damson Madder、Cult Beauty、Lookfantastic。</dd></div><div class="bad"><dt>注意</dt><dd>早鸟只是个别单品，不是全场。全场折扣通常要到黑五周。</dd></div><div><dt>怎么用</dt><dd>心仪单品已经降到心理价就先买，网购 14 天内可以无理由退，黑五更便宜的话退掉重下（看店家规则）。</dd></div></dl></div>
       </article>
     </div>
-    <p class="note">Amazon UK、Apple、Nike、adidas、Boots、Dyson、Argos 等暂未官宣。Amazon 往年在 11 月中旬才公布日期。下面列出它们 2025 年的实际力度作参考。</p>
+    <p class="note">Amazon UK、Apple、Nike、adidas、Boots、Dyson、Argos 等暂未官宣。Amazon 往年在 11 月中旬才公布日期。「品牌力度」一栏列出它们 2025 年的实际力度作参考。</p>
   </section>
 
   <section class="sec" id="brands">
-    <div class="sec-head"><h2>主流品牌 2025 年力度参考</h2><span class="aside">2025 年黑五为 11-28，Cyber Monday 为 12-01</span></div>
+    <div class="sec-head"><h2>主流品牌 2025 年力度参考</h2><span class="aside">2025 年黑五为 11-28，Cyber Monday 为 12-01 · 点品牌看详情</span></div>
 
     <div class="bfcat">
       <h3>电子数码</h3>
       <div class="list">
-        <div class="row"><div class="b"><span class="logos">{{logo:apple}}</span>Apple</div><div class="o">11-28 至 12-01 Shopping Event，英国参与。买指定产品送 Apple Gift Card，英国最高 £200；iPhone 17、M5 等新品不参与。往年规则是不能和教育价同时用，见下方「二选一」。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.macrumors.com/2025/11/20/apple-announces-2025-black-friday-event/" target="_blank" rel="noopener">MacRumors</a> · <a href="https://www.hotukdeals.com/deals/apple-shopping-event-2025-upto-ps200-gift-card-4739066" target="_blank" rel="noopener">hotukdeals</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:amazon}}</span>Amazon UK</div><div class="o">Black Friday Week 11-20 至 12-01（11 月中旬才公布），科技和日用品最高约 40% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://press.aboutamazon.com/uk/news/retail/2025/11/its-the-season-for-savings-amazons-black-friday-week-offers-deep-discounts-on-customer-favourite-brands-from-20-november-until-1-december" target="_blank" rel="noopener">Amazon 新闻稿</a> · <a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:currys}}</span>Currys</div><div class="o">10-29 就开始，比黑五提前约 4 周，TV、笔记本、家电为主。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.which.co.uk/news/article/best-currys-deals-sales-aauut3X5qW3N" target="_blank" rel="noopener">Which?</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:argos}}</span>Argos</div><div class="o">家电、科技、玩具最高 50% off。注意 Which? 曾统计 18 个 Argos 黑五商品里有 15 个在之前半年价格相同或更低。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a> · <a href="https://www.thestar.co.uk/read-this/you-might-end-up-paying-more-than-normal-for-a-black-friday-deal-what-to-look-out-for-3045285" target="_blank" rel="noopener">The Star 转述 Which?</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:samsung}}</span>Samsung</div><div class="o">TV 和手机最高减 £250。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:dell}}</span>Dell</div><div class="o">笔记本最高 35% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:googlestore}}</span>Google Store</div><div class="o">Pixel 手机和耳机 £169 起。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:playstation}}</span>PlayStation</div><div class="o">PS5 套装降价，PS Plus 最高 33% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:very}}{{logo:ao}}</span>Very / AO</div><div class="o">Very 最高 40% off；AO 的 Smeg、Beko、Apple 最高减 £500。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:lego}}</span>Lego</div><div class="o">最高 50% off，套装 £2.49 起。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:apple}}</span>Apple</div><div class="o"><p>不直接降价，买指定产品送 Apple 礼品卡：Mac 最高送 £200，iPad 最高 £80，iPhone 最高 £60。</p><ul class="kvs"><li><i>时间</i>11-28 ~ 12-01</li><li><i>力度</i>送卡最高 £200</li><li class="warn-k"><i>限制</i>不能叠教育价</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.macrumors.com/2025/11/20/apple-announces-2025-black-friday-event/" target="_blank" rel="noopener">MacRumors</a> · <a href="https://www.macworld.com/article/672787/apple-black-friday-2025.html" target="_blank" rel="noopener">Macworld</a> · <a href="https://www.stuff.tv/features/this-offer-means-you-can-get-money-back-on-apple-gear-but-theres-a-catch/" target="_blank" rel="noopener">Stuff</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025-11-28 至 12-01，4 天 Shopping Event，英国参与。</dd></div><div><dt>送多少</dt><dd>按 Stuff 整理的英国档位：MacBook Pro 14/16 英寸 £200，MacBook Air 15 英寸 £160、13 英寸 £140，iMac £120，Mac mini 和 iPad Air £80，iPhone 16 和 AirPods Max £60，iPhone 16e、iPad、iPad mini、AirPods Pro 3 £40，AirPods 4 £20。各媒体个别数字有出入，以官网为准。</dd></div><div class="bad"><dt>不参加</dt><dd>iPhone 17、M5 新品、新 iPad Pro 不送卡；翻新机也不送。</dd></div><div class="bad"><dt>限制</dt><dd>礼品卡只能下次在 Apple 消费，不是降价。往年规则是不能和教育价同时用。</dd></div><div><dt>怎么选</dt><dd>先算教育价直减多少，再和送卡面值比。比如 MacBook Air 教育价直减往往就超过 £140 的卡。AirPods、iPad 在 Amazon、Currys、John Lewis 直降通常更划算。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:amazon}}</span>Amazon UK</div><div class="o"><p>黑五周 11-20 至 12-01，百万件商品最高 40% off，每天另有 Doorbuster 最高 50% off。</p><ul class="kvs"><li><i>时间</i>11-20 ~ 12-01</li><li><i>力度</i>最高 40%，Doorbuster 50%</li><li><i>学生</i>Prime Student 免费 6 个月</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://press.aboutamazon.com/uk/news/retail/2025/11/its-the-season-for-savings-amazons-black-friday-week-offers-deep-discounts-on-customer-favourite-brands-from-20-november-until-1-december" target="_blank" rel="noopener">Amazon 新闻稿</a> · <a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年 11-13 起日用品早鸟价，11-20 至 12-01 黑五周。2026 年日期预计 11 月中旬公布。</dd></div><div><dt>力度</dt><dd>官方说法是超过 100 万件商品最高 40% off，另有每天更换的 Doorbuster 最高 50% off。科技和日用品为主。</dd></div><div><dt>学生</dt><dd>Prime Student 新用户可免费试用 6 个月，含免运费和 Prime 专享价。</dd></div><div class="bad"><dt>注意</dt><dd>官方新闻稿没提 Prime 会员提前抢，第三方说的「会员提前进场」未证实。同一商品可能有第三方卖家，看清 Sold by Amazon。</dd></div><div><dt>怎么用</dt><dd>用 camelcamelcamel 加关注，设好目标价，降到就邮件提醒。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:currys}}</span>Currys</div><div class="o"><p>10-29 就开始，比黑五早约 4 周，TV、笔记本、家电为主；带标商品买后再降价退差价。</p><ul class="kvs"><li><i>时间</i>10-29 起</li><li><i>品类</i>TV、笔记本、家电</li><li><i>保价</i>Price Promise</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.which.co.uk/news/article/best-currys-deals-sales-aauut3X5qW3N" target="_blank" rel="noopener">Which?</a> · <a href="https://www.currys.co.uk/price-guarantee.html" target="_blank" rel="noopener">Currys</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年 10-29 开始，到 12 月初。今年官网已写 11 月初开始早鸟价。</dd></div><div class="good"><dt>保价</dt><dd>带「Our lowest ever price」标的商品（线上线下都算），买后在截止日前登记订单号、上传小票，之后再降价退差价。</dd></div><div><dt>怎么用</dt><dd>大件先在早鸟期下单锁价。同型号去 PriceSpy 看 Argos、AO、Amazon 的价格。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:argos}}</span>Argos</div><div class="o"><p>2025 年黑五从 10-31 跑到 12-02，家电、科技、玩具最高 50% off；带黑五标的商品圣诞前再降价补差价。</p><ul class="kvs"><li><i>时间</i>10-31 ~ 12-02</li><li><i>力度</i>最高 50%</li><li class="warn-k"><i>注意</i>不少商品平时也是这个价</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://help.argos.co.uk/help/terms-and-conditions/black-friday-price-guarantee" target="_blank" rel="noopener">Argos 条款</a> · <a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a> · <a href="https://www.thestar.co.uk/read-this/you-might-end-up-paying-more-than-normal-for-a-black-friday-deal-what-to-look-out-for-3045285" target="_blank" rel="noopener">The Star 转述 Which?</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>官方条款写 2025-10-31 至 12-02。</dd></div><div><dt>力度</dt><dd>家电、科技、玩具最高 50% off。</dd></div><div class="good"><dt>保价</dt><dd>带 Black Friday 标的商品，标价在 12-25 午夜前不会再降；降了就补电子礼品卡差价。</dd></div><div class="bad"><dt>注意</dt><dd>Which? 曾统计 18 个 Argos 黑五商品里，15 个在之前半年价格相同或更低。买前看历史价。</dd></div><div><dt>怎么买</dt><dd>线上下单可选门店自提（Click &amp; Collect），不少 Sainsbury's 超市里有 Argos 柜台。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:samsung}}</span>Samsung</div><div class="o"><p>TV 和手机最高减 £250；学生走官网学生通道还有额外折扣。</p><ul class="kvs"><li><i>力度</i>最高减 £250</li><li><i>学生</i>Student Beans 黑五 10%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 TV 和手机最高减 £250。</dd></div><div><dt>学生</dt><dd>2025 年 Student Beans 黑五活动里 Samsung 是 10%，需用学籍验证。官网学生通道的比例以官网为准。</dd></div><div><dt>怎么用</dt><dd>看清是不是旧款清库存。手机有旧机回收（trade-in）的话，把回收价也算进去再比。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:dell}}</span>Dell</div><div class="o"><p>笔记本最高 35% off。</p><ul class="kvs"><li><i>力度</i>最高 35%</li><li><i>品类</i>笔记本</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年笔记本最高 35% off，折扣按型号不同。</dd></div><div><dt>怎么选</dt><dd>同一系列配置差别很大，对比时看 CPU、内存、硬盘，不只看折扣比例。同型号去 PriceSpy 看 Currys、Amazon 的价格。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:googlestore}}</span>Google Store</div><div class="o"><p>Pixel 10 系列最高减 £200，Pixel 9 减 £200，Pixel Watch、耳机也有折扣。</p><ul class="kvs"><li><i>力度</i>Pixel 最高减 £200</li><li><i>品类</i>手机、手表、耳机</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://store.google.com/intl/en_uk/ideas/articles/black-friday-deals" target="_blank" rel="noopener">Google Store 英国</a> · <a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>手机</dt><dd>2025 年英国官网：Pixel 10、10 Pro、10 Pro XL 最高减 £200，Pixel 9 减 £200。</dd></div><div><dt>配件</dt><dd>Pixel Watch 3 最高减 £80，Pixel Buds Pro 2 也有折扣；耳机手机 £169 起（TechRadar）。</dd></div><div><dt>怎么用</dt><dd>Amazon、Currys 也卖 Pixel，常跟价，几家比一下。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:playstation}}</span>PlayStation</div><div class="o"><p>PS5 主机约降 £90，PS Plus 12 个月最高 33% off。</p><ul class="kvs"><li><i>时间</i>11-21 起</li><li><i>主机</i>PS5 £389（原 £479）</li><li><i>会员</i>PS Plus 最高 33%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.pushsquare.com/news/2025/11/usd100-off-ps5-consoles-psvr2-for-black-friday-2025" target="_blank" rel="noopener">Push Square</a> · <a href="https://www.thesixthaxis.com/2025/11/18/playstation-black-friday-2025-sale-knocks-90-off-the-ps5-and-ps5-pro/" target="_blank" rel="noopener">TheSixthAxis</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年 11-21 起，PlayStation Store、官方直营和合作零售商同步。</dd></div><div><dt>主机</dt><dd>PS5 光驱版 £389（原 £479），数字版 £294（原 £429），PS5 Pro £609（原 £699）。不同媒体报的数字差 £1 左右。</dd></div><div><dt>会员</dt><dd>12-05 前开通 PS Plus 12 个月最高 33% off，已是会员升级档位也算。</dd></div><div><dt>怎么用</dt><dd>零售商常送游戏或配手柄的套装，比单买主机划算的话选套装。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:very}}{{logo:ao}}</span>Very / AO</div><div class="o"><p>Very 最高 40% off；AO 的 Smeg、Beko、Apple 最高减 £500。</p><ul class="kvs"><li><i>Very</i>最高 40%</li><li><i>AO</i>最高减 £500</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>Very</dt><dd>2025 年最高 40% off，家电、美发工具都有；Dyson Airwrap 当时在 Very 减 £150。</dd></div><div><dt>AO</dt><dd>Smeg、Beko、Apple 最高减 £500，主打大家电。</dd></div><div class="bad"><dt>注意</dt><dd>Very 主推分期付款（Very Pay），学生别为了凑单借钱。大家电租房的话先问房东能不能装。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:lego}}</span>Lego</div><div class="o"><p>最高 50% off，套装 £2.49 起；官网满额送赠品，会员周末双倍积分。</p><ul class="kvs"><li><i>时间</i>11-28 ~ 12-01</li><li><i>力度</i>最高 50%</li><li><i>赠品</i>满 £155 / £225 送</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a> · <a href="https://www.brickfanatics.com/lego-black-friday-cyber-monday-2025-offers" target="_blank" rel="noopener">Brick Fanatics</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年 LEGO Insiders 会员周末 11-22 至 23（双倍积分），黑五 11-28 至 12-01。</dd></div><div><dt>力度</dt><dd>零售商最高 50% off，套装 £2.49 起。</dd></div><div><dt>官网赠品</dt><dd>满 £155 送 40776 热巧克力摊，满 £225 送 40775 迷你骑士城堡（2025 年）。</dd></div><div><dt>怎么用</dt><dd>官网少有直接打折，主要靠赠品和积分；直接降价看 Amazon、Argos。免费注册 LEGO Insiders 才有积分。</dd></div></dl></div></div>
       </div>
     </div>
 
     <div class="bfcat">
       <h3>家电</h3>
       <div class="list">
-        <div class="row"><div class="b"><span class="logos">{{logo:dyson}}</span>Dyson</div><div class="o">官网吸尘器和美发最高减 £200；Supersonic 在 Amazon 低至 40% off，Airwrap 在 Very 减 £150。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://graziadaily.co.uk/fashion/shopping/dyson-hair-dryer-black-friday-sale-best-deals/" target="_blank" rel="noopener">Grazia</a> · <a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:ninja}}</span>Ninja</div><div class="o">厨房电器最高 30% off，空气炸锅是留学生热门。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:shark}}</span>Shark</div><div class="o">吸尘器和风扇最高减 £130。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:dyson}}</span>Dyson</div><div class="o"><p>官网吸尘器和美发最高减 £200；Airwrap 官网减 £150，Supersonic 在 Amazon 低至 40% off。</p><ul class="kvs"><li><i>官网</i>最高减 £200</li><li><i>Amazon</i>Supersonic 低至 6 折</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://graziadaily.co.uk/fashion/shopping/dyson-hair-dryer-black-friday-sale-best-deals/" target="_blank" rel="noopener">Grazia</a> · <a href="https://graziadaily.co.uk/beauty-hair/hair/dyson-black-friday-deals-airwrap" target="_blank" rel="noopener">Grazia Airwrap</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>官网</dt><dd>2025 年吸尘器和美发最高减 £200；Airwrap 五配件套装减 £150。</dd></div><div><dt>其他平台</dt><dd>Supersonic 在 Amazon 低至 40% off；Airwrap i.d. 在 Very 减 £150；Airwrap Origin 在 Amazon £299（原 £399.99）；Boots 的 Supersonic Origin 减 £90。</dd></div><div class="bad"><dt>注意</dt><dd>名字带 Origin 的多是旧款或简化版，配件比新款少。看清型号再比价。</dd></div><div><dt>怎么用</dt><dd>官网、Boots、Very、Amazon、John Lewis 同型号一起比。英国插头的美发工具回国要转换插头。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:ninja}}</span>Ninja</div><div class="o"><p>厨房电器最高 30% off，空气炸锅是留学生热门；Double Stack XL 低至约 £200。</p><ul class="kvs"><li><i>力度</i>最高 30%</li><li><i>学生</i>可再叠 9%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a> · <a href="https://www.t3.com/home-living/air-fryers/black-friday-dual-air-fryer-deals-2025" target="_blank" rel="noopener">T3</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年空气炸锅和厨房电器最高 30% off。</dd></div><div><dt>例子</dt><dd>Double Stack XL 双层空气炸锅在 SharkNinja 官网 £199.99（原 £289.99，T3 Cyber Monday 报道）；别的平台约 £229.99。</dd></div><div class="good"><dt>学生叠加</dt><dd>2025 年 Student Beans 上 Shark / Ninja 在 30% off 基础上再减 9%。</dd></div><div><dt>怎么用</dt><dd>官网、Amazon、Argos、Currys 都卖，同型号比价。宿舍先确认能不能用大功率电器。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:shark}}</span>Shark</div><div class="o"><p>吸尘器和风扇最高减 £130，学生可再叠 9%。</p><ul class="kvs"><li><i>力度</i>最高减 £130</li><li><i>学生</i>可再叠 9%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.techradar.com/live/news/early-black-friday-sales-start-now-in-the-uk" target="_blank" rel="noopener">TechRadar</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年吸尘器和风扇最高减 £130。</dd></div><div class="good"><dt>学生叠加</dt><dd>和 Ninja 同属 SharkNinja，2025 年 Student Beans 黑五在折扣基础上再减 9%。</dd></div><div><dt>怎么用</dt><dd>租房一般配了吸尘器，先问清楚再买。手持款更适合宿舍。</dd></div></dl></div></div>
       </div>
     </div>
 
     <div class="bfcat">
       <h3>美妆个护</h3>
       <div class="list">
-        <div class="row"><div class="b"><span class="logos">{{logo:boots}}</span>Boots</div><div class="o">通常比黑五早约一周开始；电动牙刷最高 70% off，精选礼盒 50% off，美发工具最高 60% off。</div><div class="s"><span class="st guess">第三方预测</span><br><a href="https://www.vouchercloud.com/better-living/boots-black-friday" target="_blank" rel="noopener">vouchercloud</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:lookfantastic}}</span>Lookfantastic</div><div class="o">早鸟期 25% off 热门单品；Cyber Monday 几乎全场 30% off，再额外减 5%。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.marieclaire.co.uk/beauty/black-friday-beauty-deals-2025" target="_blank" rel="noopener">Marie Claire</a> · <a href="https://www.marieclaire.co.uk/beauty/black-friday-beauty-deals" target="_blank" rel="noopener">Marie Claire CM</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:cultbeauty}}</span>Cult Beauty</div><div class="o">早鸟期部分商品最高 50% off，Cyber Monday 25% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.marieclaire.co.uk/beauty/black-friday-beauty-deals-2025" target="_blank" rel="noopener">Marie Claire</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:sephora}}</span>Sephora UK</div><div class="o">早鸟期 20% off，Cyber Monday 提到 30% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.marieclaire.co.uk/beauty/black-friday-beauty-deals" target="_blank" rel="noopener">Marie Claire</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:spacenk}}</span>Space NK</div><div class="o">Cyber Week 11-24 开始，力度要先登记等候名单才公布。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.spacenk.com/eu/black-friday" target="_blank" rel="noopener">Space NK 官网</a></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:boots}}</span>Boots</div><div class="o"><p>整个 11 月都有黑五活动：电动牙刷最高 70% off，美发工具最高 60% off，精选礼盒 50% off。</p><ul class="kvs"><li><i>时间</i>11 月全月</li><li><i>力度</i>最高 70%</li><li><i>会员</i>需绑 Advantage Card</li></ul></div><div class="s"><span class="st guess">第三方预测</span><br><a href="https://www.vouchercloud.com/better-living/boots-black-friday" target="_blank" rel="noopener">vouchercloud</a> · <a href="https://www.boots.com/black-friday" target="_blank" rel="noopener">Boots 官网</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>Boots 自己说黑五活动贯穿 11 月，通常比黑五早约一周加码，Cyber Monday 后还有。</dd></div><div><dt>力度</dt><dd>往年电动牙刷最高 70% off，美发工具最高 60% off，精选礼盒 50% off，奢侈美妆最高约 30% off。数字来自优惠码网站，不是官方。</dd></div><div><dt>会员</dt><dd>要登录并绑定 Advantage Card 才能看到会员价；消费攒积分，1 分抵 1p。</dd></div><div class="good"><dt>学生</dt><dd>Advantage Card 绑定学生身份通常 10% off，旺季有时 20%。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:lookfantastic}}</span>Lookfantastic</div><div class="o"><p>早鸟期热门单品 25% off；Cyber 期间几乎全场 30% off，结账再减 5%，一直到 12-03。</p><ul class="kvs"><li><i>早鸟</i>25%</li><li><i>Cyber</i>30% + 5%</li><li><i>截止</i>12-03</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.marieclaire.co.uk/beauty/black-friday-beauty-deals-2025" target="_blank" rel="noopener">Marie Claire</a> · <a href="https://www.marieclaire.co.uk/beauty/lookfantastic-black-friday-2025" target="_blank" rel="noopener">Marie Claire CM</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>早鸟</dt><dd>2025 年早鸟期热门单品 25% off。</dd></div><div><dt>Cyber</dt><dd>几乎全场 30% off，结账再减 5%，活动到 12-03（比 Cyber Monday 多两天）。</dd></div><div class="bad"><dt>注意</dt><dd>那 5% 的码名字每年不一样，没核实到 2025 年的码，以官网和邮件为准。部分品牌不参加。</dd></div><div><dt>怎么用</dt><dd>护肤品囤货和圣诞礼盒一起买，凑满包邮门槛。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:cultbeauty}}</span>Cult Beauty</div><div class="o"><p>早鸟期部分商品最高 50% off，Cyber Monday 全场 25% off。</p><ul class="kvs"><li><i>早鸟</i>最高 50%</li><li><i>Cyber</i>25%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.marieclaire.co.uk/beauty/black-friday-beauty-deals-2025" target="_blank" rel="noopener">Marie Claire</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>早鸟</dt><dd>2025 年部分商品最高 50% off，只限指定单品。</dd></div><div><dt>Cyber</dt><dd>Cyber Monday 25% off。</dd></div><div><dt>怎么用</dt><dd>和 Lookfantastic 是同一集团，同款商品两边比一下。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:sephora}}</span>Sephora UK</div><div class="o"><p>早鸟期 20% off，Cyber Monday 提到 30% off；学生还有 15%。</p><ul class="kvs"><li><i>早鸟</i>20%</li><li><i>Cyber</i>30%</li><li><i>学生</i>15%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.marieclaire.co.uk/beauty/black-friday-beauty-deals" target="_blank" rel="noopener">Marie Claire</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年早鸟期 20% off，Cyber Monday 提到 30% off。</dd></div><div><dt>学生</dt><dd>2025 年 Student Beans 黑五活动 Sephora 15%，和活动价能不能叠看结账页。</dd></div><div><dt>怎么用</dt><dd>不急的等 Cyber Monday 那档 30%。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:spacenk}}</span>Space NK</div><div class="o"><p>Cyber Week 11-24 开始，具体力度要先登记等候名单才公布。</p><ul class="kvs"><li><i>时间</i>11-24 起</li><li><i>力度</i>登记后公布</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.spacenk.com/eu/black-friday" target="_blank" rel="noopener">Space NK 官网</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年 Cyber Week 从 11-24 开始。</dd></div><div><dt>力度</dt><dd>官网要先登记等候名单，力度才会发给你，没查到公开数字。</dd></div><div><dt>怎么用</dt><dd>想买高端护肤的提前登记，注意邮件。</dd></div></dl></div></div>
       </div>
     </div>
 
     <div class="bfcat">
       <h3>服饰运动</h3>
       <div class="list">
-        <div class="row"><div class="b"><span class="logos">{{logo:asos}}</span>ASOS</div><div class="o">App 内几乎全场最高 70% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://britbrief.co.uk/business/retail/black-friday-2026-fashion-deals-key-dates-and-top-early-offers.html" target="_blank" rel="noopener">Brit Brief</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:uniqlo}}</span>Uniqlo</div><div class="o">感谢祭（Arigato Festival）11-28 至 12-03，抓绒外套 £19.90、羊绒圆领毛衣 £69.90。苏格兰过冬的保暖层可以等这一波。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://graziadaily.co.uk/fashion/shopping/uniqlo-black-friday-sale/" target="_blank" rel="noopener">Grazia</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:zara}}</span>Zara</div><div class="o">往年精选最高 40% off，通常提前一天（周四）开始，今年预计 11-26。</div><div class="s"><span class="st guess">第三方预测</span><br><a href="https://www.whowhatwear.com/uk/zara-black-friday" target="_blank" rel="noopener">Who What Wear</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:nike}}</span>Nike</div><div class="o">鞋服最高约 50% off，无官方数字。</div><div class="s"><span class="st guess">第三方预测</span><br><a href="https://www.groupon.co.uk/discount-codes/nike-store/sales-calendar" target="_blank" rel="noopener">Groupon</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:adidas}}{{logo:jdsports}}</span>adidas / JD Sports</div><div class="o">adidas 提前开跑；JD Sports 精选最高 50% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:end}}</span>END.</div><div class="o">早鸟期精选 25% off 折扣码。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://graziadaily.co.uk/fashion/shopping/20-amazing-black-friday-deals-high-street" target="_blank" rel="noopener">Grazia</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:handm}}{{logo:clarks}}{{logo:decathlon}}</span>H&amp;M / Clarks / Decathlon</div><div class="o">最高 50% off。</div><div class="s"><span class="st past">往年参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:boohoo}}</span>boohoo</div><div class="o">最高 70% off。</div><div class="s"><span class="st past">往年参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:marksandspencer}}</span>M&amp;S</div><div class="o">3 for 2、第二件半价，不做全场折扣。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:damsonmadder}}{{logo:softgoat}}</span>Damson Madder / Soft Goat</div><div class="o">精选最高 40% off / 针织最高 30% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://britbrief.co.uk/business/retail/black-friday-2026-fashion-deals-key-dates-and-top-early-offers.html" target="_blank" rel="noopener">Brit Brief</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:selfridges}}{{logo:cos}}</span>Selfridges / COS</div><div class="o">预计参加，力度未知。</div><div class="s"><span class="st guess">第三方预测</span><br><a href="https://britbrief.co.uk/business/retail/black-friday-2026-fashion-deals-key-dates-and-top-early-offers.html" target="_blank" rel="noopener">Brit Brief</a></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:asos}}</span>ASOS</div><div class="o"><p>11-28 至 12-01 四天，几乎全场最高 70% off，用码再减 15%；App 用户提前进场。</p><ul class="kvs"><li><i>时间</i>11-28 ~ 12-01</li><li><i>力度</i>最高 70% + 15%</li><li><i>技巧</i>App 提前进场</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.asos.com/discover/black-friday-cyber-monday-deals" target="_blank" rel="noopener">ASOS 官网</a> · <a href="https://graziadaily.co.uk/fashion/news/asos-black-friday" target="_blank" rel="noopener">Grazia</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年 11-28 至 12-01，共 4 天。</dd></div><div><dt>力度</dt><dd>几乎全场最高 70% off；11-27 前后还有用码再减 15%；Marketplace（小卖家）25% off。</dd></div><div><dt>技巧</dt><dd>下载 ASOS App 能提前进场。热门尺码第一天就没了。</dd></div><div><dt>怎么用</dt><dd>拿不准尺码先看退货规则和运费，再决定要不要多买一个码。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:uniqlo}}</span>Uniqlo</div><div class="o"><p>感谢祭（Arigato Festival）11-28 至 12-03，抓绒外套 £19.90、羊绒圆领毛衣 £69.90。</p><ul class="kvs"><li><i>时间</i>11-28 ~ 12-03</li><li><i>例子</i>抓绒 £19.90</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://graziadaily.co.uk/fashion/shopping/uniqlo-black-friday-sale/" target="_blank" rel="noopener">Grazia</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年感谢祭 11-28 至 12-03，线上线下都有。</dd></div><div><dt>例子</dt><dd>抓绒外套 £19.90，羊绒圆领毛衣 £69.90。</dd></div><div><dt>适合买</dt><dd>苏格兰过冬的保暖层：Heattech、抓绒、轻羽绒，基本款每年都打折。</dd></div><div><dt>怎么用</dt><dd>先去线下门店试好尺码，活动开始再下单。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:zara}}</span>Zara</div><div class="o"><p>往年精选最高 40% off，通常提前一天（周四）开始，今年预计 11-26。</p><ul class="kvs"><li><i>时间</i>预计 11-26 起</li><li><i>力度</i>精选最高 40%</li></ul></div><div class="s"><span class="st guess">第三方预测</span><br><a href="https://www.whowhatwear.com/uk/zara-black-friday" target="_blank" rel="noopener">Who What Wear</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>往年提前一天（周四）开始，今年预计 11-26。</dd></div><div><dt>力度</dt><dd>精选商品最高 40% off，不是全场。</dd></div><div><dt>建议</dt><dd>快时尚全年轮番打折，不一定要等黑五；节礼日的冬季大促力度通常更大。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:nike}}</span>Nike</div><div class="o"><p>11-17 至 12-02，大部分商品最高 50% off，去年起非会员也能买。</p><ul class="kvs"><li><i>时间</i>11-17 ~ 12-02</li><li><i>力度</i>最高 50%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.moneysavingexpert.com/deals/nike-store/" target="_blank" rel="noopener">MoneySavingExpert</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年 11-17（周一）开始，到 12-02 早上 8 点。</dd></div><div><dt>力度</dt><dd>大部分商品最高 50% off。2025 年起非会员也能买，以前要先注册 Nike 会员。</dd></div><div class="bad"><dt>注意</dt><dd>额外折扣码没核实到 2025 年的，网上流传的码不一定有效。</dd></div><div><dt>怎么用</dt><dd>免费注册会员仍有包邮等福利。同款鞋在 JD Sports、Nike App 比一下。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:adidas}}{{logo:jdsports}}</span>adidas / JD Sports</div><div class="o"><p>adidas 提前开跑，学生还有 25%；JD Sports 精选最高 50% off。</p><ul class="kvs"><li><i>JD</i>精选最高 50%</li><li><i>学生</i>adidas 25%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>adidas</dt><dd>2025 年比黑五提前开始；Student Beans 黑五活动学生 25%。</dd></div><div><dt>JD Sports</dt><dd>精选商品最高 50% off。</dd></div><div><dt>怎么用</dt><dd>同款鞋在官网、JD、Nike 三家比价；学生折扣能不能叠活动价看结账页。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:end}}</span>END.</div><div class="o"><p>早鸟期精选商品 25% off 折扣码。</p><ul class="kvs"><li><i>力度</i>精选 25%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://graziadaily.co.uk/fashion/shopping/20-amazing-black-friday-deals-high-street" target="_blank" rel="noopener">Grazia</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年早鸟期精选商品 25% off 折扣码。</dd></div><div><dt>适合买</dt><dd>潮牌、设计师品牌球鞋和外套。</dd></div><div class="bad"><dt>注意</dt><dd>限量款常不参加折扣。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:handm}}{{logo:clarks}}{{logo:decathlon}}</span>H&amp;M / Clarks / Decathlon</div><div class="o"><p>三家都有最高 50% off。</p><ul class="kvs"><li><i>力度</i>最高 50%</li></ul></div><div class="s"><span class="st past">往年参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>往年三家都有最高 50% off，精选商品为主。</dd></div><div><dt>适合买</dt><dd>Decathlon 的户外、徒步装备适合去苏格兰高地；Clarks 皮鞋适合面试和正装场合。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:boohoo}}</span>boohoo</div><div class="o"><p>最高 70% off，学生在折后价上再减 20%。</p><ul class="kvs"><li><i>力度</i>最高 70%</li><li><i>学生</i>再减 20%</li></ul></div><div class="s"><span class="st past">往年参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>往年最高 70% off。</dd></div><div class="good"><dt>学生叠加</dt><dd>2025 年 Student Beans 上 boohoo 黑五价再减 20%。</dd></div><div><dt>怎么用</dt><dd>先在 Student Beans 验证学籍拿码，结账时填。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:marksandspencer}}</span>M&amp;S</div><div class="o"><p>不做全场折扣，主要是 3 for 2、第二件半价。</p><ul class="kvs"><li><i>形式</i>3 for 2、第二件半价</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>形式</dt><dd>M&amp;S 不做全场黑五折扣，常见的是 3 for 2、第二件半价，以及个别单品提前降价。</dd></div><div><dt>适合买</dt><dd>内衣、袜子、羊毛衫这类基本款，凑三件买。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:damsonmadder}}{{logo:softgoat}}</span>Damson Madder / Soft Goat</div><div class="o"><p>Damson Madder 精选最高 40% off，Soft Goat 针织最高 30% off。</p><ul class="kvs"><li><i>Damson</i>最高 40%</li><li><i>Soft Goat</i>最高 30%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://britbrief.co.uk/business/retail/black-friday-2026-fashion-deals-key-dates-and-top-early-offers.html" target="_blank" rel="noopener">Brit Brief</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>Damson Madder</dt><dd>英国独立女装，2025 年精选最高 40% off，今年已有提前折扣。</dd></div><div><dt>Soft Goat</dt><dd>羊绒针织，2025 年最高 30% off。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:selfridges}}{{logo:cos}}</span>Selfridges / COS</div><div class="o"><p>预计参加，力度还不知道。</p><ul class="kvs"><li><i>力度</i>未知</li></ul></div><div class="s"><span class="st guess">第三方预测</span><br><a href="https://britbrief.co.uk/business/retail/black-friday-2026-fashion-deals-key-dates-and-top-early-offers.html" target="_blank" rel="noopener">Brit Brief</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>现状</dt><dd>媒体预计两家会参加，具体力度没有公开数字，官宣后更新。</dd></div><div><dt>建议</dt><dd>大牌想买折扣，比斯特奥莱常年就有奥莱价，可以先看 <a href="bicester.html">比斯特专区</a>。</dd></div></dl></div></div>
       </div>
     </div>
 
     <div class="bfcat">
       <h3>奥莱</h3>
       <div class="list">
-        <div class="row"><div class="b"><span class="logos">{{logo:bicestervillage}}</span>Bicester Village</div><div class="o">2025 年黑五 11-10 至 12-01，持续 3 周，参与精品店部分商品低至 5 折（按原价），另有店内专属价。UNiDAYS、银联 9 折和大促折扣只能三选一。交通、品牌和路线见比斯特专区。</div><div class="s"><span class="st past">2025 参考</span><br><a href="bicester.html">比斯特专区</a></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:bicestervillage}}</span>Bicester Village</div><div class="o"><p>2025 年黑五 11-10 至 12-01，持续 3 周，参与精品店部分商品低至 5 折（按原价算）。</p><ul class="kvs"><li><i>时间</i>11-10 ~ 12-01</li><li><i>力度</i>低至 5 折</li><li class="warn-k"><i>限制</i>三个折扣三选一</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="bicester.html">比斯特专区</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年 11-10 至 12-01，持续 3 周。</dd></div><div><dt>力度</dt><dd>参与精品店部分商品低至 5 折（按原价算），另有店内专属价。</dd></div><div class="bad"><dt>限制</dt><dd>大促额外折扣、UNiDAYS 学生 9 折、银联 9 折只能三选一。携程会员返现另算。</dd></div><div><dt>怎么去</dt><dd>伦敦 Marylebone 坐火车最快约 1 小时；格拉斯哥出发的路线见 <a href="bicester.html#getting-here">比斯特专区</a>。</dd></div></dl></div></div>
       </div>
     </div>
 
     <div class="bfcat">
       <h3>出行</h3>
       <div class="list">
-        <div class="row"><div class="b"><span class="logos">{{logo:trainline}}{{logo:railcard}}</span>Trainline · Railcard</div><div class="o">往年黑五常有 Railcard 折扣码，例如 2024 年 30% off、另一年 50% off。16-25 Railcard 平时 £35/年，火车票省 1/3。苏格兰回家、去伦敦常坐火车的可以等这一波再办。</div><div class="s"><span class="st past">往年参考</span><br><a href="https://www.moneysavingexpert.com/deals/two-together-railcard/" target="_blank" rel="noopener">MoneySavingExpert</a> · <a href="https://www.expertreviews.co.uk/?p=1414978" target="_blank" rel="noopener">Expert Reviews</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:easyjet}}</span>easyJet</div><div class="o">航班最高 10% off，适用 2025-12-05 至 2026-03-22 出发，12-01 前订；easyJet holidays 用码 BLACKFRIDAY 套餐最高减 £200。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.easyjet.com/en/news/story/easyjet-and-easyjet-holidays-black-friday-sale-takes-off-2025" target="_blank" rel="noopener">easyJet 官网</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:jet2}}</span>Jet2</div><div class="o">10-30 至 12-02 订票，合资格航班自动 20% off；Jet2holidays 每人减 £100。格拉斯哥机场有 Jet2 航线。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.timeout.com/news/all-the-best-black-friday-and-cyber-monday-travel-deals-to-watch-out-for-in-2025-112525" target="_blank" rel="noopener">Time Out</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:ryanair}}</span>Ryanair</div><div class="o">精选航班 15% off，限黑五当天午夜前。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.timeout.com/news/all-the-best-black-friday-and-cyber-monday-travel-deals-to-watch-out-for-in-2025-112525" target="_blank" rel="noopener">Time Out</a></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:trainline}}{{logo:railcard}}</span>Trainline · Railcard</div><div class="o"><p>往年黑五常有 Railcard 折扣码，有一年 50% off。16-25 Railcard 平时 £35 一年，火车票省 1/3。</p><ul class="kvs"><li><i>往年</i>Railcard 最高半价</li><li><i>平时</i>£35 / 年</li></ul></div><div class="s"><span class="st past">往年参考</span><br><a href="https://www.moneysavingexpert.com/deals/two-together-railcard/" target="_blank" rel="noopener">MoneySavingExpert</a> · <a href="https://www.expertreviews.co.uk/?p=1414978" target="_blank" rel="noopener">Expert Reviews</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>往年</dt><dd>Trainline 某年黑五用码 RAILCARD50 新办 Railcard 半价（年份未注明）；更早一年用码办 16-25 Railcard 只要 £21。2025 年的码没核实到。</dd></div><div><dt>平时</dt><dd>16-25 Railcard £35 一年，大部分火车票省 1/3。满 26 岁可以看 26-30 Railcard。</dd></div><div class="bad"><dt>注意</dt><dd>折扣码常有使用次数上限，用完即止。急着坐车就别等，省下的车票钱可能比码还多。</dd></div><div><dt>怎么用</dt><dd>苏格兰回家、去伦敦常坐火车的，留意黑五到 Cyber Monday 这几天的码。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:easyjet}}</span>easyJet</div><div class="o"><p>航班最高 10% off（冬季出行、12-01 前订）；easyJet holidays 用码 BLACKFRIDAY 套餐最高减 £200。</p><ul class="kvs"><li><i>机票</i>最高 10%</li><li><i>套餐</i>最高减 £200</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.easyjet.com/en/news/story/easyjet-and-easyjet-holidays-black-friday-sale-takes-off-2025" target="_blank" rel="noopener">easyJet 官网</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>机票</dt><dd>2025 年航班最高 10% off，适用 2025-12-05 至 2026-03-22 出发，12-01 前订。</dd></div><div><dt>套餐</dt><dd>easyJet holidays（机票 + 酒店）用码 BLACKFRIDAY 最高减 £200。</dd></div><div><dt>怎么用</dt><dd>格拉斯哥、爱丁堡机场都有 easyJet，寒假出行可以趁这波订。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:jet2}}</span>Jet2</div><div class="o"><p>10-30 至 12-02 订票，所有航班自动 20% off，出行可到 2027 年；Jet2holidays 每人减 £100。</p><ul class="kvs"><li><i>订票</i>10-30 ~ 12-02</li><li><i>力度</i>自动 20%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.timeout.com/news/all-the-best-black-friday-and-cyber-monday-travel-deals-to-watch-out-for-in-2025-112525" target="_blank" rel="noopener">Time Out</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>订票时间</dt><dd>2025-10-30 至 12-02。</dd></div><div><dt>力度</dt><dd>所有 Jet2.com 航班自动 20% off，不用码，出行可到 2027-10-31；另放出 5 万张 £50 以内的单程票。Jet2holidays 套餐每人减 £100。</dd></div><div><dt>怎么用</dt><dd>格拉斯哥机场有 Jet2 航线，适合订明年暑假的阳光假期。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:ryanair}}</span>Ryanair</div><div class="o"><p>精选航班 15% off，只限黑五当天午夜前。</p><ul class="kvs"><li><i>力度</i>精选 15%</li><li class="warn-k"><i>限时</i>只有当天</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.timeout.com/news/all-the-best-black-friday-and-cyber-monday-travel-deals-to-watch-out-for-in-2025-112525" target="_blank" rel="noopener">Time Out</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年精选航班 15% off。</dd></div><div class="bad"><dt>限时</dt><dd>只限黑五当天午夜前订。</dd></div><div class="bad"><dt>注意</dt><dd>Ryanair 行李、选座另收费，算总价再比。</dd></div></dl></div></div>
       </div>
     </div>
 
     <div class="bfcat">
       <h3>床垫家居</h3>
       <div class="list">
-        <div class="row"><div class="b"><span class="logos">{{logo:emma}}</span>Emma</div><div class="o">最高 65% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:simba}}</span>Simba</div><div class="o">55% off。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
-        <div class="row"><div class="b"><span class="logos">{{logo:wayfair}}</span>Wayfair</div><div class="o">比黑五早一周开始。</div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:emma}}</span>Emma</div><div class="o"><p>标称最高 65% off，常见是精选床垫 30% off。</p><ul class="kvs"><li><i>标称</i>最高 65%</li><li><i>常见</i>精选 30%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a> · <a href="https://www.idealhome.co.uk/bedroom/emma-vs-simba-mattress-comparison" target="_blank" rel="noopener">Ideal Home</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>T3 写最高 65% off；Ideal Home 报道 2025 年精选床垫 30% off。「最高」一般只适用个别型号或尺寸。</dd></div><div><dt>怎么用</dt><dd>租房常已配床垫，换之前问房东。床垫一般有试睡期，看清退货条件。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:simba}}</span>Simba</div><div class="o"><p>标称 55% off，常见是精选 30% off。</p><ul class="kvs"><li><i>标称</i>55%</li><li><i>常见</i>精选 30%</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a> · <a href="https://www.idealhome.co.uk/bedroom/emma-vs-simba-mattress-comparison" target="_blank" rel="noopener">Ideal Home</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>T3 写 55% off；Ideal Home 报道 2025 年精选 30% off，混合床垫最高减 £840（Tom's Guide）。</dd></div><div><dt>怎么用</dt><dd>和 Emma 同价位，两家比尺寸和试睡期。</dd></div></dl></div></div>
+        <div class="row"><div class="b"><span class="logos">{{logo:wayfair}}</span>Wayfair</div><div class="o"><p>比黑五早一周开始，家具家居为主。</p><ul class="kvs"><li><i>时间</i>提前一周</li></ul></div><div class="s"><span class="st past">2025 参考</span><br><a href="https://www.t3.com/news/black-friday-sales" target="_blank" rel="noopener">T3</a></div>
+          <div class="more" hidden><dl class="kv"><div><dt>时间</dt><dd>2025 年比黑五早一周开始。</dd></div><div><dt>适合买</dt><dd>台灯、收纳、床品这类小件，搬家布置宿舍。</dd></div><div class="bad"><dt>注意</dt><dd>大件家具配送到苏格兰可能更久，看清 delivery 时间。</dd></div></dl></div></div>
       </div>
     </div>
   </section>
 
   <section class="sec" id="exclusive">
-    <div class="sec-head"><h2>这些优惠只能二选一</h2><span class="aside">结账前先比一下哪个更省</span></div>
+    <div class="sec-head"><h2>这些优惠只能二选一</h2><span class="aside">结账前先比一下哪个更省 · 点卡片看怎么算</span></div>
     <div class="warn"><span class="mark">!</span><div><b>同一笔订单，红框里的两项通常只能拿一个</b><p>下面是条款里写明或往年规则如此的组合。今年条款公布后以官网为准，拿不准就在结账页看最终价格，或问客服。</p></div></div>
     <div class="stack excl">
-      <div class="once"><em class="tag once">二选一</em><span class="vs">Apple 黑五送礼品卡 <i>VS</i> 教育优惠价</span><p>往年 Apple 黑五活动写明不能和教育价同时用，翻新机也不送卡。学生先算：教育价直减多少，和送的礼品卡面值比，哪个划算选哪个。来源：<a href="https://macrumors.com/2022/11/24/apple-black-friday-event" target="_blank" rel="noopener">MacRumors（2022 年规则）</a></p></div>
-      <div class="once"><em class="tag once">二选一</em><span class="vs">返现网站 <i>VS</i> 外面找的折扣码</span><p>Quidco 帮助中心写明：用了返现页面没列出的折扣码，返现可能不追踪、被拒或按更低比例算。想拿返现就只用返现站列出的码。来源：<a href="https://support.quidco.com/en/articles/5335788-why-didn-t-my-cashback-track" target="_blank" rel="noopener">Quidco 帮助中心</a></p></div>
-      <div class="once"><em class="tag once">二选一</em><span class="vs">返现 <i>VS</i> 礼品卡付款</span><p>TopCashback 客服在 MSE 论坛说明，部分商家用礼品卡付款就不给返现。用 Apple 送的卡或别的礼品卡下单前，先看该商家返现条款。来源：<a href="https://forums.moneysavingexpert.com/discussion/4519857/topcashback-questions-answers/p455" target="_blank" rel="noopener">MSE 论坛</a></p></div>
-      <div class="once"><em class="tag once">三选一</em><span class="vs">比斯特大促 <i>VS</i> UNiDAYS <i>VS</i> 银联</span><p>Bicester Village 的大促额外折扣、UNiDAYS 学生 9 折、银联 9 折，条款都写了不能叠加。会员积分和 Railcard 不受影响。详见 <a href="bicester.html#student">比斯特专区</a>。</p></div>
+      <div class="once"><em class="tag once">二选一</em><span class="vs">Apple 黑五送礼品卡 <i>VS</i> 教育优惠价</span><p>往年 Apple 黑五活动写明不能和教育价同时用，翻新机也不送卡。来源：<a href="https://macrumors.com/2022/11/24/apple-black-friday-event" target="_blank" rel="noopener">MacRumors（2022 年规则）</a></p>
+        <div class="more" hidden><dl class="kv"><div class="bad"><dt>规则</dt><dd>往年 Apple 黑五送卡活动不能和教育价同时用，翻新机也不送卡。</dd></div><div><dt>怎么算</dt><dd>教育价直减金额 vs 送卡面值。直减是现钱，礼品卡只能下次在 Apple 用，面值差不多时选教育价。</dd></div><div><dt>第三条路</dt><dd>Amazon、Currys、John Lewis 黑五直降 AirPods、iPad 常比两者都便宜，三家比一下。</dd></div></dl></div></div>
+      <div class="once"><em class="tag once">二选一</em><span class="vs">返现网站 <i>VS</i> 外面找的折扣码</span><p>Quidco 写明：用了返现页面没列出的折扣码，返现可能不追踪或被拒。来源：<a href="https://support.quidco.com/en/articles/5335788-why-didn-t-my-cashback-track" target="_blank" rel="noopener">Quidco 帮助中心</a></p>
+        <div class="more" hidden><dl class="kv"><div class="bad"><dt>规则</dt><dd>Quidco 帮助中心写明：用了返现页面没列出的折扣码，返现可能不追踪、被拒或按更低比例算。</dd></div><div><dt>怎么算</dt><dd>折扣码省的钱 vs 返现金额。返现要等几周到几个月才到账，还可能被拒；折扣码当场生效。</dd></div><div><dt>想两个都要</dt><dd>只用返现站页面上列出的码。</dd></div></dl></div></div>
+      <div class="once"><em class="tag once">二选一</em><span class="vs">返现 <i>VS</i> 礼品卡付款</span><p>TopCashback 客服说明，部分商家用礼品卡付款就不给返现。来源：<a href="https://forums.moneysavingexpert.com/discussion/4519857/topcashback-questions-answers/p455" target="_blank" rel="noopener">MSE 论坛</a></p>
+        <div class="more" hidden><dl class="kv"><div class="bad"><dt>规则</dt><dd>TopCashback 客服在 MSE 论坛说明，部分商家用礼品卡付款就不给返现。</dd></div><div><dt>怎么办</dt><dd>用 Apple 送的卡或别的礼品卡下单前，先看该商家在返现站的条款。礼品卡可以留到不走返现的订单用。</dd></div></dl></div></div>
+      <div class="once"><em class="tag once">三选一</em><span class="vs">比斯特大促 <i>VS</i> UNiDAYS <i>VS</i> 银联</span><p>大促额外折扣、UNiDAYS 学生 9 折、银联 9 折，条款都写了不能叠加。详见 <a href="bicester.html#student">比斯特专区</a>。</p>
+        <div class="more" hidden><dl class="kv"><div class="bad"><dt>规则</dt><dd>Bicester Village 的大促额外折扣、UNiDAYS 学生 9 折、银联 9 折，条款都写了不能叠加。</dd></div><div class="good"><dt>不受影响</dt><dd>会员积分、Railcard 火车票折扣、携程会员返现（需到礼宾台登记）。</dd></div><div><dt>怎么选</dt><dd>大促期间选大促折扣（通常更大）；平时没活动用 UNiDAYS 或银联 9 折。</dd></div></dl></div></div>
     </div>
-    <p class="note">可以放心叠加的：学生折扣和黑五价能不能叠看各品牌条款，2025 年 Student Beans 上就有 boohoo 黑五价再减 20%、The Fragrance Shop 再减 15% 的例子（见下方学生折扣）。</p>
+    <p class="note">可以叠加的例子：学生折扣和黑五价能不能叠看各品牌条款，2025 年 Student Beans 上就有 boohoo 黑五价再减 20%、The Fragrance Shop 再减 15%（见「学生折扣」一栏）。</p>
   </section>
 
   <section class="sec" id="worth">
@@ -191,7 +244,7 @@
         <thead><tr><th>品类</th><th>建议</th><th>为什么</th></tr></thead>
         <tbody>
           <tr><th>笔记本、耳机、平板</th><td><span class="vd go">值得等</span></td><td>大件折扣绝对值高，Amazon、Currys、Argos 都会做。先查历史价，Currys 早鸟期买还有 Price Promise 保价。苹果产品对比教育价。</td></tr>
-          <tr><th>Dyson、Ninja 等家电</th><td><span class="vd go">值得等</span></td><td>每年黑五都有专门力度（2025 年官网减 £200、Ninja 30% off），多平台比价。</td></tr>
+          <tr><th>Dyson、Ninja 等家电</th><td><span class="vd go">值得等</span></td><td>每年黑五都有专门力度（2025 年 Dyson 官网减 £200、Ninja 30% off），多平台比价。</td></tr>
           <tr><th>护肤彩妆、香水礼盒</th><td><span class="vd go">值得囤</span></td><td>Lookfantastic、Cult Beauty、Sephora 有全场折扣，Cyber Monday 往往再加码；圣诞礼物一起买。</td></tr>
           <tr><th>Railcard、机票</th><td><span class="vd go">值得等</span></td><td>Trainline 往年黑五有 Railcard 折扣码；easyJet、Jet2 有 10% 到 20% off。急用的话别等，火车票省的钱可能更多。</td></tr>
           <tr><th>冬季外套、保暖层</th><td><span class="vd wait">看情况</span></td><td>Uniqlo 感谢祭在黑五周；大牌外套比斯特常年就有奥莱价，12-26 节礼日冬季大促力度通常更大。</td></tr>
@@ -204,20 +257,32 @@
   </section>
 
   <section class="sec" id="student">
-    <div class="sec-head"><h2>学生折扣还能叠加</h2><span class="aside">2025 年 Student Beans 黑五活动，需本人学籍验证</span></div>
+    <div class="sec-head"><h2>学生折扣还能叠加</h2><span class="aside">2025 年 Student Beans 黑五活动，需本人学籍验证 · 点卡片看怎么领</span></div>
     <div class="stack">
-      <div><b>adidas</b><span>25%</span></div>
-      <div><b>Logitech</b><span>35%</span></div>
-      <div><b>Dr. Martens</b><span>20%</span><small>正价商品</small></div>
-      <div><b>boohoo</b><span>20%+20%</span><small>折上再减学生折扣</small></div>
-      <div><b>The Fragrance Shop</b><span>+15%</span><small>最高 50% off 基础上</small></div>
-      <div><b>Shark / Ninja</b><span>+9%</span><small>最高 30% off 基础上</small></div>
-      <div><b>Garmin</b><span>40%</span><small>精选商品</small></div>
-      <div><b>eufy</b><span>25%</span></div>
-      <div><b>Gymshark</b><span>12%</span></div>
-      <div><b>Sephora</b><span>15%</span></div>
-      <div><b>Samsung</b><span>10%</span></div>
-      <div><b>Amazon</b><span>6 个月</span><small>Prime Student 免费</small></div>
+      <div><b>adidas</b><span>25%</span><small>学生价，黑五期间</small>
+        <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 Student Beans 黑五活动 adidas 学生 25%。</dd></div><div><dt>怎么领</dt><dd>Student Beans 用学校邮箱验证后，在 adidas 页面点 Get code，结账填码。</dd></div><div class="bad"><dt>注意</dt><dd>能不能叠官网活动价看结账页，部分新品不参加。</dd></div></dl></div></div>
+      <div><b>Logitech</b><span>35%</span><small>键鼠、耳机</small>
+        <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 Student Beans 黑五活动 Logitech 35%。</dd></div><div><dt>适合买</dt><dd>键盘、鼠标、摄像头、耳机，写论文和网课都用得上。</dd></div><div><dt>怎么领</dt><dd>Student Beans 验证学籍后拿码，到 Logitech 官网结账填。</dd></div></dl></div></div>
+      <div><b>Dr. Martens</b><span>20%</span><small>正价商品</small>
+        <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 Student Beans 黑五活动 20%。</dd></div><div class="bad"><dt>限制</dt><dd>只限正价商品，已打折的不能再用。</dd></div><div><dt>怎么领</dt><dd>Student Beans 验证学籍后拿码。</dd></div></dl></div></div>
+      <div><b>boohoo</b><span>20%+20%</span><small>折上再减学生折扣</small>
+        <div class="more" hidden><dl class="kv"><div class="good"><dt>可叠加</dt><dd>2025 年 boohoo 黑五价基础上，学生再减 20%。</dd></div><div><dt>怎么领</dt><dd>Student Beans 验证学籍拿码，结账时填。</dd></div></dl></div></div>
+      <div><b>The Fragrance Shop</b><span>+15%</span><small>最高 50% off 基础上</small>
+        <div class="more" hidden><dl class="kv"><div class="good"><dt>可叠加</dt><dd>2025 年黑五最高 50% off，学生在此基础上再减 15%。</dd></div><div><dt>适合买</dt><dd>香水礼盒，圣诞送礼。</dd></div><div><dt>怎么领</dt><dd>Student Beans 验证学籍拿码。</dd></div></dl></div></div>
+      <div><b>Shark / Ninja</b><span>+9%</span><small>最高 30% off 基础上</small>
+        <div class="more" hidden><dl class="kv"><div class="good"><dt>可叠加</dt><dd>2025 年 SharkNinja 黑五最高 30% off，学生再减 9%。</dd></div><div><dt>适合买</dt><dd>空气炸锅、手持吸尘器。</dd></div><div><dt>怎么领</dt><dd>Student Beans 验证学籍，到 SharkNinja 官网结账填码。</dd></div></dl></div></div>
+      <div><b>Garmin</b><span>40%</span><small>精选商品</small>
+        <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 Student Beans 黑五活动精选商品 40%。</dd></div><div class="bad"><dt>限制</dt><dd>只限精选型号，不是全场。</dd></div></dl></div></div>
+      <div><b>eufy</b><span>25%</span><small>安防、扫地机、配件</small>
+        <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 Student Beans 黑五活动 25%。</dd></div><div><dt>怎么领</dt><dd>Student Beans 验证学籍后拿码。</dd></div></dl></div></div>
+      <div><b>Gymshark</b><span>12%</span><small>运动服</small>
+        <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 Student Beans 黑五活动 12%。</dd></div><div><dt>怎么领</dt><dd>Student Beans 验证学籍后拿码。</dd></div></dl></div></div>
+      <div><b>Sephora</b><span>15%</span><small>美妆护肤</small>
+        <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 Student Beans 黑五活动 15%。</dd></div><div><dt>对比</dt><dd>Sephora 自己 Cyber Monday 往年 30% off，两者能不能叠看结账页，不能就选大的。</dd></div></dl></div></div>
+      <div><b>Samsung</b><span>10%</span><small>手机、平板、电视</small>
+        <div class="more" hidden><dl class="kv"><div><dt>力度</dt><dd>2025 年 Student Beans 黑五活动 10%。</dd></div><div><dt>怎么用</dt><dd>Samsung 官网也有学生通道（UNiDAYS 等验证），比例以官网为准，两边比一下。</dd></div></dl></div></div>
+      <div><b>Amazon</b><span>6 个月</span><small>Prime Student 免费</small>
+        <div class="more" hidden><dl class="kv"><div><dt>拿到什么</dt><dd>Prime Student 新用户免费 6 个月：免运费、Prime Video、Prime 专享价。</dd></div><div><dt>之后</dt><dd>试用期后按学生价续费，约为普通 Prime 的一半；不想续就在试用结束前取消。</dd></div><div><dt>怎么领</dt><dd>Amazon 官网 Prime Student 页面，用学校邮箱注册。</dd></div></dl></div></div>
     </div>
     <p class="note">来源：<a href="https://www.studentbeans.com/student-discount/uk/campaign-plus/black-friday-cyber-monday-discounts" target="_blank" rel="noopener">Student Beans Black Friday 2025</a>。Boots Advantage Card 绑定学生身份通常 10% off，旺季有时 20%（<a href="https://www.vouchercloud.com/better-living/boots-black-friday" target="_blank" rel="noopener">vouchercloud</a>）。黑五前先把 <a href="https://www.myunidays.com/GB" target="_blank" rel="noopener">UNiDAYS</a>、<a href="https://www.studentbeans.com/uk" target="_blank" rel="noopener">Student Beans</a> 都用学校邮箱验证好，当天验证排队容易错过限量款。</p>
   </section>
@@ -240,18 +305,21 @@
         <div class="card-head"><h3>网购 14 天无理由取消</h3><span class="st ok">法律规定</span></div>
         <p>从下单起到<b>收到货后 14 天</b>都能取消，不用说理由。商家要在收到退货（或你给出寄回凭证）后 14 天内退款。条款没写谁出运费时由商家承担。</p>
         <p class="how"><b>例外：</b>拆封的光盘和软件、定制商品、易腐品。线下门店买的没有这条，看店家自己的退货政策。</p>
+        <div class="more" hidden><dl class="kv"><div><dt>多久</dt><dd>从下单起，到收到货后 14 天内都能取消。</dd></div><div><dt>怎么退</dt><dd>在订单页发起退货，或给商家发邮件写明要取消（cancel），再在 14 天内寄回。保留寄件凭证和单号。</dd></div><div><dt>退款</dt><dd>商家收到退货或你给出寄回凭证后 14 天内退款，含最基本的运费；条款没写谁出退货运费时由商家承担。</dd></div><div class="bad"><dt>例外</dt><dd>拆封的光盘和软件、定制商品、易腐品；线下门店买的不适用，看店家政策。</dd></div><div><dt>质量问题</dt><dd>另受 Consumer Rights Act 保护，30 天内可要求全额退款，之后可要求维修或换货。</dd></div></dl></div>
         <div class="src">来源：<a href="https://www.which.co.uk/consumer-rights/advice/can-i-cancel-an-online-order" target="_blank" rel="noopener">Which?</a> · <a href="https://www.which.co.uk/consumer-rights/regulation/consumer-contracts-regulations-ajWHC8m21cAk" target="_blank" rel="noopener">Consumer Contracts Regulations</a></div>
       </article>
       <article class="card">
         <div class="card-head"><h3>信用卡 Section 75</h3><span class="st ok">法律规定</span></div>
         <p>英国信用卡买 <b>单件 £100 到 £30,000</b> 的东西，商家跑路、不发货或货不对版，发卡行和商家一起负责。注意是按单件算，两张 £70 的票不算。</p>
         <p class="how"><b>借记卡：</b>没有 Section 75，但可以找银行申请 Chargeback，金额不限，只是不受法律保障。国内发行的卡按发卡行自己的争议规则处理。</p>
+        <div class="more" hidden><dl class="kv"><div><dt>适用</dt><dd>英国发行的信用卡，单件商品 £100 到 £30,000。部分用信用卡付也算（比如定金刷卡）。</dd></div><div><dt>保什么</dt><dd>商家倒闭、不发货、货不对版，可以找发卡行要钱，发卡行和商家负连带责任。</dd></div><div class="bad"><dt>不算</dt><dd>按单件算，两张 £70 的票不算；经 PayPal 中转付款通常不受 Section 75 保护。</dd></div><div><dt>借记卡</dt><dd>没有 Section 75，可以申请 Chargeback，不受法律保障但金额不限，通常要在交易后 120 天内提出。</dd></div><div><dt>国内卡</dt><dd>按发卡行自己的争议规则，海外消费维权难度更大。</dd></div></dl></div>
         <div class="src">来源：<a href="https://www.which.co.uk/consumer-rights/regulation/section-75-of-the-consumer-credit-act" target="_blank" rel="noopener">Which? Section 75</a> · <a href="https://www.which.co.uk/consumer-rights/advice/can-i-claim-on-my-credit-card-when-something-goes-wrong" target="_blank" rel="noopener">Which? Chargeback</a></div>
       </article>
       <article class="card">
         <div class="card-head"><h3>先买后付（Klarna 等）</h3><span class="st ok">2026 新规</span></div>
         <p>从 <b>2026 年 7 月 15 日</b>起，Klarna、Clearpay、PayPal 的分期和 30 天后付归 FCA 监管：放款前要做还款能力审核，£100 到 £30,000 的购物也有 Section 75 保护，投诉可以找金融申诉专员。</p>
         <p class="how"><b>提醒：</b>它仍然是借钱，逾期会影响英国信用记录，学生别拿来凑单。</p>
+        <div class="more" hidden><dl class="kv"><div><dt>生效</dt><dd>2026-07-15 起归 FCA 监管。</dd></div><div><dt>覆盖</dt><dd>Klarna、Clearpay、PayPal 等的分期和 30 天后付。</dd></div><div class="good"><dt>新保护</dt><dd>放款前要做还款能力审核；£100 到 £30,000 的购物有 Section 75 保护；投诉可以找金融申诉专员（Financial Ombudsman）。</dd></div><div class="bad"><dt>风险</dt><dd>仍然是借钱，逾期会影响英国信用记录，以后租房、办合约手机都可能受影响。</dd></div></dl></div>
         <div class="src">来源：<a href="https://www.which.co.uk/news/article/7-things-you-need-to-know-about-new-buy-now-pay-later-rules-aJagg4v0fsbB" target="_blank" rel="noopener">Which?</a> · <a href="https://fashionunited.uk/news/business/uk-enforces-fca-regulations-on-buy-now-pay-later-sector/2026071589224" target="_blank" rel="noopener">FashionUnited</a></div>
       </article>
     </div>
@@ -271,12 +339,12 @@
   <section class="sec" id="glasgow">
     <div class="sec-head"><h2>在格拉斯哥线下逛</h2><span class="aside">营业时间以各商场官网为准</span></div>
     <div class="malls">
-      <article class="bc"><h3>Buchanan Galleries</h3><small>市中心 · Buchanan Street</small><p>John Lewis 格拉斯哥店在这里，90 多家店。黑五已官宣的 John Lewis 可以线下看实物。</p><div class="off">市中心步行可达</div></article>
-      <article class="bc"><h3>St Enoch Centre</h3><small>市中心 · St Enoch Square</small><p>市中心最大的商场，100 多个品牌，紧挨 Argyle Street 和 Buchanan Street 主购物街。</p><div class="off">地铁 St Enoch 站</div></article>
-      <article class="bc"><h3>Buchanan / Argyle Street</h3><small>市中心 · 购物街</small><p>Apple、Zara、Nike 等街边店集中的地方，一条街能比好几家。</p><div class="off">门店以品牌官网为准</div></article>
-      <article class="bc"><h3>Silverburn</h3><small>南区 · Barrhead Road</small><p>南边的大型商场，购物、吃饭、娱乐都有。</p><div class="off">公交可达</div></article>
-      <article class="bc"><h3>Braehead</h3><small>西边 · Kingsinch Road</small><p>城市西边的大型商场，坐公交可到。</p><div class="off">公交可达</div></article>
-      <article class="bc"><h3>Glasgow Fort</h3><small>东区 · M8 Junction 10</small><p>露天购物园，主打大众品牌，有 1900 个免费车位，适合有车的同学拼车去。</p><div class="off">开车更方便</div></article>
+      <article class="bc"><h3>Buchanan Galleries</h3><small>市中心 · Buchanan Street</small><p>John Lewis 格拉斯哥店在这里，90 多家店。黑五已官宣的 John Lewis 可以线下看实物。</p><div class="off">市中心步行可达</div><div class="more" hidden><dl class="kv"><div><dt>位置</dt><dd>Buchanan Street 北端，紧挨 Buchanan Street 地铁站和 Queen Street 火车站。</dd></div><div><dt>适合逛</dt><dd>John Lewis（今年黑五已官宣 11-27 回归），家电、床品、美妆可以看实物。</dd></div><div><dt>建议</dt><dd>线下看好型号，线上比价下单；线下买的没有 14 天无理由退。</dd></div></dl></div></article>
+      <article class="bc"><h3>St Enoch Centre</h3><small>市中心 · St Enoch Square</small><p>市中心最大的商场，100 多个品牌，紧挨 Argyle Street 和 Buchanan Street 主购物街。</p><div class="off">地铁 St Enoch 站</div><div class="more" hidden><dl class="kv"><div><dt>位置</dt><dd>St Enoch Square，出地铁 St Enoch 站就到，Argyle Street 和 Buchanan Street 交汇处。</dd></div><div><dt>适合逛</dt><dd>大众服饰、运动品牌，一次比好几家。</dd></div></dl></div></article>
+      <article class="bc"><h3>Buchanan / Argyle Street</h3><small>市中心 · 购物街</small><p>Apple、Zara、Nike 等街边店集中的地方，一条街能比好几家。</p><div class="off">门店以品牌官网为准</div><div class="more" hidden><dl class="kv"><div><dt>位置</dt><dd>市中心两条主购物街，步行街为主。</dd></div><div><dt>适合逛</dt><dd>Apple、Zara、Nike 等街边店，黑五当天人多，想试鞋试衣早点去。</dd></div><div><dt>建议</dt><dd>线下试好尺码和型号，再和线上价格比一下。</dd></div></dl></div></article>
+      <article class="bc"><h3>Silverburn</h3><small>南区 · Barrhead Road</small><p>南边的大型商场，购物、吃饭、娱乐都有。</p><div class="off">公交可达</div><div class="more" hidden><dl class="kv"><div><dt>位置</dt><dd>城市南边 Barrhead Road，从市中心坐公交可达。</dd></div><div><dt>适合逛</dt><dd>购物、吃饭、看电影一站搞定，大型商场里品牌比较全。</dd></div></dl></div></article>
+      <article class="bc"><h3>Braehead</h3><small>西边 · Kingsinch Road</small><p>城市西边的大型商场，坐公交可到。</p><div class="off">公交可达</div><div class="more" hidden><dl class="kv"><div><dt>位置</dt><dd>城市西边 Kingsinch Road，靠近 Renfrew，坐公交可到。</dd></div><div><dt>适合逛</dt><dd>大型商场，大众品牌和超市都有。</dd></div></dl></div></article>
+      <article class="bc"><h3>Glasgow Fort</h3><small>东区 · M8 Junction 10</small><p>露天购物园，主打大众品牌，有 1900 个免费车位，适合有车的同学拼车去。</p><div class="off">开车更方便</div><div class="more" hidden><dl class="kv"><div><dt>位置</dt><dd>东区，M8 Junction 10 旁边，露天购物园。</dd></div><div><dt>适合逛</dt><dd>大众品牌集中，有 1900 个免费车位，适合有车的同学拼车去。</dd></div></dl></div></article>
     </div>
     <p class="note">商场信息来源：<a href="https://www.whatsonglasgow.co.uk/shopping/shopping-centres/" target="_blank" rel="noopener">What's On Glasgow</a>。想买大牌奥莱可以看 <a href="bicester.html">比斯特专区</a>，里面有格拉斯哥出发的路线。</p>
   </section>
@@ -296,11 +364,12 @@
     <div class="faq">
       <details><summary>黑五当天是不是最便宜？</summary><p>不一定。Which? 跟踪 2024 年黑五商品一整年，没有一件在黑五当天是全年最低价，35% 在黑五之后更便宜。想买的东西提前看历史价，到了心理价就买。来源：<a href="https://www.which.co.uk/policy-and-insight/article/dont-believe-the-hype-most-black-friday-deals-the-same-price-or-cheaper-at-other-times-of-the-year-which-finds-a3TbD5x5KADs" target="_blank" rel="noopener">Which?</a></p></details>
       <details><summary>黑五和 Cyber Monday 有什么区别？</summary><p>Black Friday 是周五（今年 11-27），线下线上都打折；Cyber Monday 是随后的周一（11-30），以线上为主。现在很多品牌两天连着做成“Black Week”，美妆网站往往在 Cyber Monday 再加码。</p></details>
-      <details><summary>打折买的东西能退吗？</summary><p>网购的可以，收货后 14 天内无理由取消，打折商品也一样。线下买的看店家政策，质量问题任何时候都能找商家。见上方「退货与付款」。</p></details>
+      <details><summary>打折买的东西能退吗？</summary><p>网购的可以，收货后 14 天内无理由取消，打折商品也一样。线下买的看店家政策，质量问题任何时候都能找商家。见「退货与付款」一栏。</p></details>
       <details><summary>学生折扣和黑五价能叠加吗？</summary><p>看品牌。Student Beans 上不少品牌黑五期间允许叠加，但 Apple 往年送卡和教育价二选一，比斯特三个折扣三选一。结账页能用就用，用不了就是不叠。</p></details>
       <details><summary>黑五过了还有便宜吗？</summary><p>有。12-26 节礼日开始冬季大促，比斯特冬季 Extraordinary Sale 也从圣诞后开始。没赶上黑五别冲动补单。</p></details>
     </div>
   </section>
+  </div>
 </div>
 
 <footer>
@@ -308,7 +377,7 @@
     <div class="foot-word"><img src="assets/logo.svg" alt="" width="168" height="168"><span>STUDENT<br>PERKS MAP</span></div>
     <div class="foot">
     <div><b>信息会持续更新</b><p>本页汇总公开报道和品牌官网信息，标“2025 参考”和“预测”的条目不代表今年一定相同。品牌官宣后会改为“已确认”。价格和库存以官网为准。本页不构成法律或理财建议，退货和维权以官方条款和法规原文为准。</p></div>
-    <span class="mono">学生优惠地图 · 英国黑五专区 · 更新于 2026-10-18</span>
+    <span class="mono">学生优惠地图 · 英国黑五专区 · 更新于 2026-10-21</span>
     </div>
   </div>
 </footer>
@@ -322,6 +391,158 @@
   var el = document.getElementById("days");
   if (d > 0) el.textContent = d;
   else { el.parentNode.innerHTML = d === 0 ? "就是今天" : "已开始"; }
+})();
+
+// 栏目 tab：点按钮或左右滑动切换内容；没有 JS 时退回长页面 + 锚点
+(function () {
+  const bar = document.querySelector(".jump.tabs");
+  const wrap = document.getElementById("panels");
+  const tabs = [...bar.querySelectorAll("a")];
+  const panels = tabs.map(a => document.getElementById(a.hash.slice(1)));
+  const names = tabs.map(a => a.textContent);
+  let cur = -1;
+  document.documentElement.classList.add("js-tabs");
+  bar.setAttribute("role", "tablist");
+  tabs.forEach((a, i) => {
+    a.setAttribute("role", "tab"); a.id = "tab-" + panels[i].id; a.setAttribute("aria-controls", panels[i].id);
+    panels[i].setAttribute("role", "tabpanel"); panels[i].setAttribute("aria-labelledby", a.id);
+    const pg = document.createElement("div");
+    pg.className = "pager";
+    pg.innerHTML = (i > 0 ? `<button type="button" data-go="${i - 1}"><small>← 上一栏</small><b>${names[i - 1]}</b></button>` : "")
+      + `<span class="hint">左右滑动也能切换</span>`
+      + (i < tabs.length - 1 ? `<button type="button" class="nx" data-go="${i + 1}"><small>下一栏 →</small><b>${names[i + 1]}</b></button>` : "");
+    panels[i].appendChild(pg);
+  });
+
+  function show(i, opt) {
+    opt = opt || {};
+    if (i < 0 || i >= tabs.length || i === cur) return;
+    const dir = cur < 0 ? 0 : (i > cur ? 1 : -1);
+    panels.forEach((p, j) => { p.hidden = j !== i; p.classList.remove("in-l", "in-r"); });
+    tabs.forEach((t, j) => { t.setAttribute("aria-selected", j === i); t.tabIndex = j === i ? 0 : -1; });
+    if (dir) { void panels[i].offsetWidth; panels[i].classList.add(dir > 0 ? "in-r" : "in-l"); }
+    const t = tabs[i];
+    bar.scrollTo({ left: t.offsetLeft - (bar.clientWidth - t.offsetWidth) / 2, behavior: dir ? "smooth" : "auto" });
+    if (opt.hash !== false) history.replaceState(null, "", "#" + panels[i].id);
+    if (opt.scroll) {
+      const top = wrap.getBoundingClientRect().top + scrollY - bar.offsetHeight;
+      if (scrollY > top) scrollTo({ top, behavior: "smooth" });
+    }
+    cur = i;
+  }
+  const fromHash = () => {
+    const el = location.hash && document.getElementById(location.hash.slice(1));
+    const p = el && el.closest('[role="tabpanel"]');
+    return p ? panels.indexOf(p) : -1;
+  };
+  bar.addEventListener("click", e => {
+    const a = e.target.closest("a"); if (!a) return;
+    e.preventDefault(); show(tabs.indexOf(a), { scroll: true });
+  });
+  bar.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const i = Math.max(0, Math.min(tabs.length - 1, cur + (e.key === "ArrowRight" ? 1 : -1)));
+    show(i); tabs[i].focus();
+  });
+  wrap.addEventListener("click", e => {
+    const b = e.target.closest("[data-go]");
+    if (b) { show(+b.dataset.go, { scroll: true }); return; }
+    const a = e.target.closest('a[href^="#"]');  // 卡片里的页内链接（例如 83% → 值不值得等）
+    if (a && panels.some(p => "#" + p.id === a.getAttribute("href"))) { e.preventDefault(); show(panels.findIndex(p => "#" + p.id === a.getAttribute("href")), { scroll: true }); }
+  });
+  window.addEventListener("hashchange", () => { const i = fromHash(); if (i >= 0) show(i, { hash: false }); });
+
+  // 手机左右滑：横向位移超过 60px 且明显大于纵向才切换；表格等能横向滚动的区域不拦截
+  let sx = null, sy = 0, dx = 0, lock = null;
+  wrap.addEventListener("touchstart", e => {
+    if (e.touches.length > 1 || e.target.closest(".tbl, .scroll")) { sx = null; return; }
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; dx = 0; lock = null;
+  }, { passive: true });
+  wrap.addEventListener("touchmove", e => {
+    if (sx === null) return;
+    dx = e.touches[0].clientX - sx;
+    const dy = e.touches[0].clientY - sy;
+    if (lock === null && Math.abs(dx) + Math.abs(dy) > 10) lock = Math.abs(dx) > Math.abs(dy) * 1.3 ? "x" : "y";
+    if (lock === "x") {
+      const edge = (dx > 0 && cur === 0) || (dx < 0 && cur === tabs.length - 1);
+      panels[cur].style.transition = "none";
+      panels[cur].style.transform = `translateX(${dx * (edge ? .12 : .35)}px)`;
+    }
+  }, { passive: true });
+  wrap.addEventListener("touchend", () => {
+    if (sx === null) return;
+    const p = panels[cur];
+    p.style.transition = "transform .2s"; p.style.transform = "";
+    setTimeout(() => { p.style.transition = ""; }, 220);
+    if (lock === "x" && Math.abs(dx) > 60) show(cur + (dx < 0 ? 1 : -1), { scroll: true });
+    sx = null;
+  });
+
+  const i0 = fromHash();
+  show(i0 >= 0 ? i0 : 0, { hash: false });
+})();
+
+// 卡片详情：点卡片弹出详情（桌面居中，手机底部抽屉），可以上一个/下一个
+(function () {
+  const items = [...document.querySelectorAll(".more")].map(m => m.parentElement);
+  const dlg = document.createElement("dialog");
+  dlg.className = "detail";
+  dlg.innerHTML = `<div class="d-top"><div class="logos"></div><div class="ttl"><div class="eyebrow"></div><h2></h2><div class="tags"></div></div><button class="d-x" type="button" aria-label="关闭">×</button></div><div class="d-body"></div><div class="d-foot"><button type="button" data-step="-1">← 上一个</button><span></span><button type="button" data-step="1">下一个 →</button></div>`;
+  document.body.appendChild(dlg);
+  const $ = s => dlg.querySelector(s);
+  let list = [], at = 0;
+  const text = el => el ? el.textContent.replace(/\s+/g, " ").trim() : "";
+
+  items.forEach(it => {
+    it.classList.add("has-more");
+    it.tabIndex = 0;
+    it.setAttribute("role", "button");
+    it.setAttribute("aria-haspopup", "dialog");
+    const go = document.createElement("span");
+    go.className = "more-go"; go.setAttribute("aria-hidden", "true"); go.textContent = "看详情 →";
+    const host = it.querySelector(".o") || it;
+    const src = host.querySelector(":scope > .src");
+    src ? host.insertBefore(go, src) : host.insertBefore(go, host.querySelector(":scope > .more"));
+    it.addEventListener("click", e => { if (!e.target.closest("a")) open(it); });
+    it.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target === it) { e.preventDefault(); open(it); } });
+  });
+
+  function fill(it) {
+    const head = it.querySelector("h3, .b, .vs, .d") || it.querySelector("b");
+    let title = text(head);
+    if (it.classList.contains("tl")) title = text(it.querySelector(".d")) + " · " + text(it.querySelector("p")).replace(/比斯特专区 →/, "").split(/[，。：]/)[0];
+    $("h2").textContent = title;
+    const logos = it.querySelector(".logos, .t-head > .bi");
+    $(".logos").innerHTML = logos ? (logos.classList.contains("logos") ? logos.innerHTML : logos.outerHTML) : "";
+    const panel = it.closest('[role="tabpanel"]');
+    const cat = it.closest(".bfcat");
+    $(".eyebrow").textContent = [panel && text(panel.querySelector("h2")), cat && text(cat.querySelector("h3"))].filter(Boolean).join(" · ");
+    $(".tags").innerHTML = [...it.querySelectorAll(":scope .st, :scope em.tag")].filter(t => !t.closest(".more")).map(t => t.outerHTML).join("");
+    const summary = it.querySelector(".o > p") || (it.classList.contains("card") ? it.querySelector(":scope > p") : null)
+      || (it.parentElement.classList.contains("stack") && !it.classList.contains("once") ? { innerHTML: text(it.querySelector(":scope > span")) + " · " + text(it.querySelector(":scope > small")) } : null);
+    const src = it.querySelector(":scope > .src, :scope > .s, .o + .s");
+    const links = src ? [...src.querySelectorAll("a")].map(a => a.outerHTML).join(" · ") : "";
+    $(".d-body").innerHTML = (summary ? `<p class="lead">${summary.innerHTML}</p>` : "") + it.querySelector(":scope > .more").innerHTML
+      + (links && !it.querySelector(".more .d-src") ? `<div class="d-src">来源：${links}</div>` : "");
+    $(".d-body").scrollTop = 0;
+    $(".d-foot span").textContent = `${at + 1} / ${list.length}`;
+    $('[data-step="-1"]').disabled = at === 0;
+    $('[data-step="1"]').disabled = at === list.length - 1;
+  }
+  function open(it) {
+    const scope = it.closest('[role="tabpanel"]') || document;
+    list = items.filter(x => scope.contains(x));
+    at = list.indexOf(it);
+    fill(it);
+    if (!dlg.open) { dlg.showModal(); document.documentElement.classList.add("modal-open"); }
+  }
+  function step(d) { const n = at + d; if (n >= 0 && n < list.length) { at = n; fill(list[at]); } }
+  dlg.addEventListener("click", e => {
+    if (e.target === dlg || e.target.closest(".d-x")) return dlg.close();
+    const b = e.target.closest("[data-step]"); if (b) step(+b.dataset.step);
+  });
+  dlg.addEventListener("keydown", e => { if (e.key === "ArrowRight") step(1); if (e.key === "ArrowLeft") step(-1); });
+  dlg.addEventListener("close", () => { document.documentElement.classList.remove("modal-open"); if (list[at]) list[at].focus({ preventScroll: true }); });
 })();
 </script>
 </body>
