@@ -125,10 +125,11 @@
     if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)) { e.preventDefault(); open(); }
     else if (e.key === "/" && here !== "index.html" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); open(); }
   });
-  if (/^#s\d+$/.test(location.hash)) {
+  const ANCHOR = /^#(s\d+|p-[\w-]+)$/;  // p-* 是手写的固定锚点（首页跑马灯链过来）
+  if (ANCHOR.test(location.hash)) {
     const run = () => reveal(location.hash.slice(1));
     document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", run) : run();
   }
-  window.addEventListener("hashchange", () => { if (/^#s\d+$/.test(location.hash)) reveal(location.hash.slice(1)); });
+  window.addEventListener("hashchange", () => { if (ANCHOR.test(location.hash)) reveal(location.hash.slice(1)); });
   window.openSiteSearch = open;
 })();

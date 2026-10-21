@@ -51,8 +51,12 @@
 .stamp small { font-weight: 900; font-size: 13px; }
 
 .marquee { margin-block: 8px 0; background: #141414; color: var(--yellow); border-block: 3px solid var(--line); transform: rotate(-1.6deg); overflow: hidden; white-space: nowrap; }
-.marquee-track { display: inline-flex; gap: 28px; padding-block: 14px; animation: scroll 38s linear infinite; font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: .01em; text-transform: uppercase; }
-.marquee-track span::after { content: "✦"; margin-left: 28px; color: #f3efe6; }
+.marquee-track { display: inline-flex; padding-block: 14px; animation: scroll 38s linear infinite; font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: .01em; text-transform: uppercase; }
+.mq-set { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; }
+.mq-set i { font-style: normal; color: #f3efe6; }
+.marquee a { color: inherit; text-decoration: none; padding: 2px 8px; margin: -2px -8px; border: 2px solid transparent; transition: background .15s, color .15s; }
+.marquee a:hover, .marquee a:focus-visible { background: var(--yellow); color: #141414; border-color: #141414; box-shadow: 3px 3px 0 #f3efe6; outline: none; }
+.marquee:hover .marquee-track, .marquee:focus-within .marquee-track, .marquee.hold .marquee-track { animation-play-state: paused; }
 @keyframes scroll { to { transform: translateX(-50%); } }
 
 .bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(220px, auto)); gap: 20px; }
@@ -173,7 +177,7 @@
 <div class="wrap">
   <nav class="nav">
     <a class="brand" href="#top" id="top"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>学生优惠地图</b><small>STUDENT PERKS MAP</small></span></a>
-    <div class="seg"><a class="on" href="#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="earn.html">零花钱专区</a><a href="#guide">怎么验证</a></div>
+    <div class="seg"><a class="on" href="#deals">全部优惠</a><i aria-hidden="true">✦</i><a href="budget.html">穷鬼专区</a><i aria-hidden="true">✦</i><a href="black-friday.html">英国黑五</a><i aria-hidden="true">✦</i><a href="bicester.html">比斯特专区</a><i aria-hidden="true">✦</i><a href="earn.html">零花钱专区</a><i aria-hidden="true">✦</i><a href="#guide">怎么验证</a><i aria-hidden="true">✦</i></div>
     <button class="sbox" type="button" data-search aria-haspopup="dialog" aria-label="搜索全站优惠"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>搜优惠、品牌、关键词</span><kbd>Ctrl K</kbd></button>
     <span class="badge"><span class="js-month">10 月</span>已核实</span>
   </nav>
@@ -199,11 +203,11 @@
   </section>
 </div>
 
-<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"><span>Copilot 免费</span><span>JetBrains 全家桶</span><span>Gemini 一年</span><span>Notion Plus</span><span>Figma 教育版</span><span>Tesco 会员价</span><span>麦当劳积分</span><span>Railcard 1/3 off</span><span>Copilot 免费</span><span>JetBrains 全家桶</span><span>Gemini 一年</span><span>Notion Plus</span><span>Figma 教育版</span><span>Tesco 会员价</span><span>麦当劳积分</span><span>Railcard 1/3 off</span></div></div>
+<nav class="marquee" aria-label="热门优惠"><div class="marquee-track" id="marquee"><div class="mq-set"><a href="#d-github">Copilot 免费</a><i aria-hidden="true">✦</i><a href="#d-jetbrains">JetBrains 全家桶</a><i aria-hidden="true">✦</i><a href="#d-googlegemini">Gemini 一年</a><i aria-hidden="true">✦</i><a href="#d-notion">Notion Plus</a><i aria-hidden="true">✦</i><a href="#d-figma">Figma 教育版</a><i aria-hidden="true">✦</i><a href="budget.html#p-tesco">Tesco 会员价</a><i aria-hidden="true">✦</i><a href="budget.html#p-mcd">麦当劳积分</a><i aria-hidden="true">✦</i><a href="#d-nationalrail">Railcard 1/3 off</a><i aria-hidden="true">✦</i></div></div></nav>
 
 <div class="wrap">
   <section class="sec" id="featuredSec">
-    <div class="sec-head"><div><div class="eyebrow">Editor's picks · 本学期</div><h2>先领这几个，最值</h2></div><a class="aside" href="#deals">全部 <span class="js-total">26</span> 项 →</a></div>
+    <div class="sec-head"><div><div class="eyebrow">Editor's picks · 本学期</div><h2>先领这几个，最值</h2></div><a class="aside" href="#deals">全部 <span class="js-total">26</span> 项 →</a><i aria-hidden="true">✦</i></div>
     <div class="bento" id="featured"></div>
   </section>
 
@@ -422,8 +426,9 @@
     return `<span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="${light ? "#141414" : ic.hex}"><path d="${ic.d}"/></svg></span>`;
   };
   const arrow = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
-  const ticket = (d, extra = "") => `
-      <article class="ticket${extra}">
+  const key = d => (d.icon || "").replace(/^img:/, "").replace(/\..*$/, "");  // 稳定锚点：#d-github
+  const ticket = (d, extra = "", anchor = false) => `
+      <article class="ticket${extra}"${anchor ? ` id="d-${esc(key(d))}"` : ""}>
         <div class="t-main">
           <div class="t-head">${icon(d)}<div class="meta">${esc(d.cat)} · ${esc(d.region)}</div></div>
           <h3>${esc(d.name)}</h3>
@@ -433,7 +438,7 @@
             <div><dt>验证</dt><dd>${esc(d.verify)}</dd></div>
             ${d.term ? `<div><dt>期限</dt><dd>${esc(d.term)}</dd></div>` : ""}
           </dl>
-          <div class="t-foot"><span class="pill">${esc(pillOf(d))}</span><a class="cta" href="${esc(d.url)}" target="_blank" rel="noopener">去申请 ${arrow}</a></div>
+          <div class="t-foot"><span class="pill">${esc(pillOf(d))}</span><a class="cta" href="${esc(d.url)}" target="_blank" rel="noopener">去申请 ${arrow}</a><i aria-hidden="true">✦</i></div>
         </div>
         <div class="stub${d.free ? "" : " deal"}" aria-label="${d.free ? "免费" : "折扣"}"><b>${d.free ? "FREE" : "DEAL"}</b><span>${d.free ? "免费" : "折扣"}</span></div>
       </article>`;
@@ -503,7 +508,7 @@
     if (state.sort === "name") list = list.slice().sort((a, b) => a.name.localeCompare(b.name, "zh"));
     if (state.sort === "cat") list = list.slice().sort((a, b) => cats.indexOf(a.cat) - cats.indexOf(b.cat));
     const shown = state.expanded ? list : list.slice(0, PAGE);
-    $("grid").innerHTML = shown.map(d => ticket(d)).join("");
+    $("grid").innerHTML = shown.map(d => ticket(d, "", true)).join("");
     $("count").textContent = `显示 ${list.length} / ${deals.length}`;
     $("empty").hidden = list.length > 0;
     const rest = list.length - shown.length;
@@ -532,8 +537,34 @@
   $("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
   $("moreBtn").addEventListener("click", () => { state.expanded = true; render(); });
 
+  // 跑马灯：复制一份接在后面无缝循环；点 #d-xxx 时清空筛选、展开全部，滚到那张卡并闪一下
+  const mq = $("marquee"), set = mq.querySelector(".mq-set"), dup = set.cloneNode(true);
+  dup.setAttribute("aria-hidden", "true");
+  dup.querySelectorAll("a").forEach(a => a.tabIndex = -1);
+  mq.appendChild(dup);
+  mq.parentNode.addEventListener("touchstart", () => mq.parentNode.classList.add("hold"), { passive: true });
+  mq.parentNode.addEventListener("touchend", () => setTimeout(() => mq.parentNode.classList.remove("hold"), 1200), { passive: true });
+  function showDeal(hash) {
+    if (!/^#d-[\w-]+$/.test(hash) || !deals.some(d => "#d-" + key(d) === hash)) return false;
+    Object.assign(state, { cat: "全部", q: "", free: false, expanded: true });
+    $("q").value = ""; $("freeOnly").checked = false;
+    renderChips(); render();
+    const el = document.querySelector(hash);
+    requestAnimationFrame(() => {
+      el.scrollIntoView({ block: "center", behavior: "smooth" });
+      el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+    });
+    return true;
+  }
+  mq.addEventListener("click", e => {
+    const a = e.target.closest("a");
+    if (a && showDeal(a.getAttribute("href"))) { e.preventDefault(); history.replaceState(null, "", a.getAttribute("href")); }
+  });
+
   if (qp) $("q").value = qp;
   renderChips(); render();
+  showDeal(location.hash);
+  window.addEventListener("hashchange", () => showDeal(location.hash));
 })();
 </script>
 
