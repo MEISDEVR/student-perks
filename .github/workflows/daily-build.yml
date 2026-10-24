@@ -1,0 +1,45 @@
+# 每天英国早上重建一次网站：过期的限时优惠自动下架、搜索索引和日历文件同步更新。
+# 内容没变化（没有东西过期）时不提交。也可以在 Actions 页手动点 Run workflow。
+name: Daily rebuild
+
+on:
+  schedule:
+    - cron: "15 5 * * *"   # UTC 05:15 = 英国冬令时 05:15 / 夏令时 06:15
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build docs/
+        run: python3 source/build.py
+      - name: Commit if changed
+        id: commit
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain docs)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "每日重建：下架过期优惠（$(TZ=Europe/London date +%F)）"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Trigger GitHub Pages build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages 会按推送自动构建"

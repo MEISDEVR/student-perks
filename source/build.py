@@ -6,7 +6,9 @@
 用法：python3 build.py https://你的域名/ [输出目录，默认 ../docs]
 """
 import html, json, os, re, shutil, subprocess, sys
+from datetime import date, datetime
 from urllib.parse import quote
+from zoneinfo import ZoneInfo
 
 SITE_URL = (sys.argv[1] if len(sys.argv) > 1 else "https://sheeperks.com/").rstrip("/") + "/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -23,6 +25,10 @@ data = json.loads(subprocess.check_output(
     input=deals_js.encode()))
 deals, updated = data["deals"], data["updated"]
 e = lambda s: html.escape(str(s), quote=True)
+
+# 构建日（英国时间）。过期内容在构建时就剔掉，GitHub Actions 每天重建一次；BUILD_DATE=2026-11-01 可模拟某天。
+TODAY = date.fromisoformat(os.environ.get("BUILD_DATE") or datetime.now(ZoneInfo("Europe/London")).date().isoformat())
+ago = lambda s: (TODAY - date.fromisoformat(s)).days
 
 # Cloudflare Web Analytics：不用 cookie（英国不用弹同意框），脚本 defer 加载，被墙也不拖慢页面。
 # token 在 Cloudflare 后台 Analytics & Logs → Web Analytics → 添加 sheeperks.com 后拿到；留空则不注入。
@@ -87,6 +93,9 @@ wdata = json.loads(subprocess.check_output(
      "process.stdout.write(JSON.stringify({w:window.WEEKLY,u:window.WEEKLY_UPDATED}))"],
     input=open(os.path.join(ROOT, "weekly.js"), encoding="utf-8").read().encode()))
 WEEKLY, WEEKLY_UPDATED = wdata["w"], wdata["u"]
+# 首页和搜索只放没过期的；专区页过期的灰显 14 天（和 lim.js 一致）再下架
+expired = lambda w, grace=0: bool(w.get("end")) and ago(w["end"]) > grace
+LIVE = [w for w in WEEKLY if not expired(w)]
 WD_CN, WD_EN = "一二三四五六日", ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
 dot = lambda s: f"{s[5:7]}·{s[8:10]}"
 
@@ -134,7 +143,7 @@ def fold(s):
     return "\r\n".join(out)
 
 def cal_link(w):
-    if not (w.get("end") or w.get("start") or w.get("weekday")):
+    if not (w.get("end") or w.get("start") or w.get("weekday")) or expired(w):
         return ""
     return f'<a class="cal" href="cal/{e(w["id"])}.ics" download aria-label="加入日历" title="加入日历，到期前提醒">{CAL_SVG}</a>'
 
@@ -157,8 +166,8 @@ def wticket(w):
     else:
         b, s, c = w["stub"]
         stub, pill = f'<div class="stub{" " + c if c else ""}"><b>{e(b)}</b><span>{e(s)}</span></div>', None
-    pill = f'<span class="pill left">{e(pill)}</span>' if pill else '<span class="pill">长期 · 以官网为准</span>'
-    ext = "" if w["url"].endswith(".html") else ' target="_blank" rel="noopener"'
+    pill = f'<span class="pill left">{e(pill)}</span>' if pill else '<span class="pill">未公布截止日 · 以官网为准</span>'
+    ext = ' target="_blank" rel="noopener"' if w["url"].startswith("http") else ""
     price = f' <em class="price">{e(w["price"])}</em>' if w.get("price") else ""
     rows = "".join(f"<div><dt>{e(dt)}</dt><dd>{dd}</dd></div>" for dt, dd in w["rows"])
     return f'''
@@ -173,11 +182,11 @@ def wticket(w):
         {stub}
       </article>'''
 
-WEEKLY_HOME = "".join(wticket(w) for w in WEEKLY)
+WEEKLY_HOME = "".join(wticket(w) for w in LIVE)
 
 # ---------- 加群入口 ----------
-# 每页页脚上方放进群二维码：把微信活码图片存成 assets/join-qr.png 就会出现，没有这张图则不显示。
-# 用活码不用群二维码，因为微信群二维码 7 天就过期。
+# 每页页脚上方放客服微信二维码（assets/join-qr.png，没有这张图则不显示），加好友后拉进群。
+# 用个人/客服号不用群二维码，因为微信群二维码 7 天就过期。首页「本周羊毛」下方另有一条入口链到这里。
 JOIN_QR = next((f"assets/join-qr.{x}" for x in ("png", "jpg", "webp")
                 if os.path.exists(os.path.join(ROOT, "assets", f"join-qr.{x}"))), "")
 JOIN = f'''<section class="join" id="join" aria-label="加入羊毛群">
@@ -185,13 +194,31 @@ JOIN = f'''<section class="join" id="join" aria-label="加入羊毛群">
     <div class="join-text">
       <div class="eyebrow">JOIN · 羊毛群</div>
       <h2>新羊毛，群里先发</h2>
-      <p>有好的限时优惠、快到期的提醒、群友实测，会不定期发在微信群里，不用自己回来翻。</p>
+      <p>有好的限时优惠、快到期的提醒、群友实测，会不定期发在微信群里，不用自己回来翻。扫码加客服微信，备注「羊毛」，拉你进群。</p>
       <ul><li>快到期的优惠提前提醒</li><li>群友实测哪些能用、哪些失效</li><li>发现失效在群里说一声，核实后网站下架</li></ul>
     </div>
-    <figure class="join-qr"><img src="{JOIN_QR}" alt="微信扫码加入羊毛群" width="180" height="180" loading="lazy"><figcaption>微信扫码进群<small>在微信里打开可长按识别</small></figcaption></figure>
+    <figure class="join-qr"><img src="{JOIN_QR}" alt="客服微信二维码，加好友后拉你进羊毛群" width="180" height="180" loading="lazy"><figcaption>加客服微信进群<small>备注「羊毛」· 微信里可长按识别</small></figcaption></figure>
   </div></div>
 </section>
 ''' if JOIN_QR else ""
+
+JOIN_STRIP = ('<a class="join-strip" href="#join"><b>新羊毛不定期发在微信群</b><span>加客服微信，拉你进群 →</span></a>'
+              if JOIN_QR else "")
+
+def drop_expired(src):
+    """data-expire 过了的元素整块删掉；data-after 到了日期的元素去掉 hidden 显示出来（lim.js 在两次构建之间做同样的事）"""
+    for m in reversed(list(re.finditer(r'<(\w+)[^>]*\sdata-expire="(\d{4}-\d\d-\d\d)"[^>]*>', src))):
+        if ago(m.group(2)) <= 0:
+            continue
+        tag, depth, i = m.group(1), 0, m.start()
+        for t in re.finditer(rf"<(/?){tag}\b[^>]*>", src[m.start():]):
+            depth += -1 if t.group(1) else 1
+            if depth == 0:
+                i = m.start() + t.end()
+                break
+        src = src[:m.start()] + src[i:]
+    return re.sub(r'(<\w+[^>]*\sdata-after="(\d{4}-\d\d-\d\d)"[^>]*?) hidden>',
+                  lambda m: m.group(1) + ">" if ago(m.group(2)) > 0 else m.group(0), src)
 
 # 与 index.html 里 ticket() 的结构保持一致；预渲染前 9 张（免费优先），脚本加载后接管
 order = sorted(deals, key=lambda d: not d["free"])
@@ -212,11 +239,12 @@ cards = "".join(f'''
 
 page = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
 page = re.sub(r"<title>.*?</title>\n?", "", page, count=1)
-page = page.replace("{{weekly}}", WEEKLY_HOME).replace("{{weekly_updated}}", WEEKLY_UPDATED[5:]).replace("{{weekly_count}}", str(len(WEEKLY)))
+page = page.replace("{{weekly}}", WEEKLY_HOME).replace("{{weekly_updated}}", WEEKLY_UPDATED[5:]).replace("{{weekly_count}}", str(len(LIVE)))
+page = page.replace("{{join_strip}}", JOIN_STRIP)
 page = page.replace("<footer", JOIN + "<footer", 1)
 page = page.replace('<div class="grid" id="grid"></div>', f'<div class="grid" id="grid">{cards}\n    </div>')
 for k, v in {"js-total": len(deals), "js-free": sum(1 for d in deals if d["free"]),
-             "js-updated": updated, "js-month": (f"{int(updated.split('-')[1])} 月" if "-" in updated else updated)}.items():
+             "js-updated": updated, "js-checked": WEEKLY_UPDATED[5:]}.items():
     page = re.sub(rf'(class="{k}">)[^<]*(<)', rf"\g<1>{v}\2", page)
 
 ld = {"@context": "https://schema.org", "@type": "ItemList", "name": "海外学生优惠清单",
@@ -345,7 +373,7 @@ search_entries = [[f"./?q={quote(d['name'])}#deals", PAGE_LABEL["index.html"], d
                    " ".join(filter(None, [d["offer"], d.get("term", ""), d["who"], d["verify"], d["region"]]))] for d in deals]
 search_entries += [[f"./#w-{w['id']}", PAGE_LABEL["index.html"], w["title"], "本周羊毛",
                     " ".join([w["meta"], w.get("price", ""), w["offer"]] + [re.sub("<[^>]+>", "", dd) for _, dd in w["rows"]])]
-                   for w in WEEKLY if w["tag"] != "food"]
+                   for w in LIVE if w["tag"] != "food"]
 SEARCH_JS = '<script src="lim.js" defer></script>\n<script src="search.js" defer></script>\n<script src="nav.js" defer></script>\n'
 out = out.replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
 
@@ -356,19 +384,22 @@ for name in ["deals.js", "icons.js", "v2.css", "search.js", "lim.js", "nav.js", 
     shutil.copy(os.path.join(ROOT, name), DIST)
 shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
 os.makedirs(os.path.join(DIST, "cal"))
-for w in WEEKLY:
+for w in LIVE:
     if ics(w):
         open(os.path.join(DIST, "cal", f"{w['id']}.ics"), "w", encoding="utf-8", newline="").write(ics(w))
 EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html", "earn.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
-    src = re.sub(r"\{\{weekly:(\w+)\}\}", lambda m: "".join(wticket(w) for w in WEEKLY if w["tag"] == m.group(1)), src)
+    src = re.sub(r"\{\{weekly:(\w+)\}\}", lambda m: "".join(wticket(w) for w in WEEKLY if w["tag"] == m.group(1) and not expired(w, 14)), src)
+    src = drop_expired(src)
     src = src.replace("<footer", JOIN + "<footer", 1)
     src = re.sub(r"\{\{logo:([a-z0-9]+)\}\}", lambda m: logo(m.group(1)), src.replace("{{SITE_URL}}", SITE_URL))
     src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
     src, ents = index_page(src, name)
     search_entries += ents
     open(os.path.join(DIST, name), "w", encoding="utf-8").write(src)
+gone = {f"#w-{w['id']}" for w in WEEKLY if expired(w)}  # 专区页里灰显的过期卡不进搜索
+search_entries = [x for x in search_entries if not any(x[0].endswith(g) for g in gone)]
 json.dump({"p": list(PAGE_LABEL.values()), "i": search_entries}, open(os.path.join(DIST, "search-index.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))
 open(os.path.join(DIST, ".nojekyll"), "w").close()
@@ -378,6 +409,5 @@ if not host.endswith(".github.io"):  # GitHub Pages 自定义域名；DIST 每�
 open(os.path.join(DIST, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}sitemap.xml\n")
 open(os.path.join(DIST, "sitemap.xml"), "w").write(
     f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    f'  <url><loc>{SITE_URL}</loc><lastmod>{updated}-01</lastmod></url>\n'
-    + "".join(f'  <url><loc>{SITE_URL}{n}</loc></url>\n' for n in EXTRA_PAGES) + '</urlset>\n')
+    + "".join(f'  <url><loc>{SITE_URL}{n}</loc><lastmod>{WEEKLY_UPDATED}</lastmod></url>\n' for n in [""] + EXTRA_PAGES) + '</urlset>\n')
 print(f"built {len(deals)} deals, {len(search_entries)} search entries -> {DIST} for {SITE_URL}")
