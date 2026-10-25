@@ -31,3 +31,19 @@
   bar.addEventListener("focusin", () => hide(false));
   onScroll();
 })();
+
+/* 导航里的「登录」：已登录（Supabase 会话在 localStorage）时换成头像首字 + 昵称，不用加载 SDK */
+(function () {
+  const a = document.querySelector(".acct");
+  if (!a) return;
+  try {
+    const s = JSON.parse(localStorage.getItem("sheeperks-auth") || "null");
+    const u = s && s.user;
+    if (!u) return;
+    const name = localStorage.getItem("sp-nick") || (u.email || u.phone || "我").split("@")[0];
+    a.classList.add("in");
+    a.dataset.i = [...name][0].toUpperCase();
+    a.querySelector("span").textContent = name;
+    a.setAttribute("aria-label", "我的档案");
+  } catch (e) {}
+})();
