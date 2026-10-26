@@ -1,4 +1,5 @@
-/* 登录 + 个人档案（account.html）。后端是 Supabase：邮箱 / 短信验证码登录，档案存 profiles 表。
+/* 登录 + 个人中心（account.html）。后端是 Supabase：邮箱 / 短信验证码登录，档案存 profiles 表。
+   个人中心按网址 # 切换栏目（#home #hall #tasks #badges #points #settings），对应 section[data-view]。
    配置在 auth-config.js（build.py 生成）：url、key 为空时整页显示「接入中」；phone、wechat、qq 没开的方式显示「即将开放」。
    表结构和开通步骤见 supabase/README.md。 */
 (function () {
@@ -101,6 +102,35 @@
   const saved = $("[data-saved]");
   let user = null;
 
+  // ---------- 个人中心栏目切换 ----------
+  const views = $$("[data-view]").map(v => v.dataset.view);
+  let fallback = "home";
+  function route() {
+    const want = location.hash.slice(1);
+    const name = views.includes(want) ? want : fallback;
+    $$("[data-view]").forEach(v => { v.hidden = v.dataset.view !== name; });
+    $$(".hub-nav a").forEach(a => {
+      const on = a.getAttribute("href") === "#" + name;
+      a.classList.toggle("on", on);
+      if (on) { a.setAttribute("aria-current", "page"); a.scrollIntoView({ block: "nearest", inline: "nearest" }); } else a.removeAttribute("aria-current");
+    });
+  }
+  addEventListener("hashchange", () => {
+    route();
+    const body = $(".hub-body");  // 栏目在屏幕上方看不到时才滚回来
+    if (box.dataset.state === "in" && body.getBoundingClientRect().top < 0) body.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
+
+  // 档案完整度：6 项各占一份
+  function complete(p) {
+    const done = [p.nickname, p.city, p.school, p.stage, p.grad_year, (p.interests || []).length].filter(Boolean).length;
+    const pct = Math.round(done / 6 * 100);
+    $("[data-complete-pct]").textContent = pct + "%";
+    $("[data-complete-bar]").style.width = pct + "%";
+    $("[data-complete-tip]").textContent = pct === 100 ? "档案已经填完整了，之后的推荐和提醒都按它来。" : `还差 ${6 - done} 项。填好城市、学校和关心的类别，推荐才更准。`;
+    $("[data-complete-go]").textContent = pct === 100 ? "修改档案" : "去完善档案";
+  }
+
   function fill(p) {
     const f = pf.elements;
     f.nickname.value = p.nickname || "";
@@ -110,13 +140,16 @@
     f.grad_year.value = p.grad_year || "";
     $$("input[name=interests]", pf).forEach(c => { c.checked = (p.interests || []).includes(c.value); });
     f.email_opt_in.checked = !!p.email_opt_in;
-    head(p.nickname);
+    head(p);
   }
-  function head(nick) {
+  function head(p) {
     const id = user.email || user.phone || "";
-    const name = nick || id.split("@")[0] || "羊毛档案";
+    const name = p.nickname || id.split("@")[0] || "羊毛账户";
+    const since = user.created_at ? new Date(user.created_at).toLocaleDateString("zh-CN", { year: "numeric", month: "long" }) + "加入" : "";
     $("[data-me-name]").textContent = name;
+    $("[data-me-meta]").textContent = [p.school, p.city, p.stage, since].filter(Boolean).join(" · ");
     $("[data-me-id]").textContent = id;
+    complete(p);
     $("[data-avatar]").textContent = [...name][0].toUpperCase();
     try { localStorage.setItem("sp-nick", name); } catch (e) {}
     const chip = document.querySelector(".acct");
@@ -127,6 +160,8 @@
     show("in");
     const { data, error } = await sb.from("profiles").select("*").eq("id", user.id).maybeSingle();
     if (error) saved.textContent = "档案读取失败，刷新再试";
+    fallback = data ? "home" : "settings";  // 第一次登录还没档案：先进档案设置
+    route();
     fill(data || { nickname: (user.email || "").split("@")[0].slice(0, 20) });
   }
 
@@ -145,7 +180,7 @@
     const { error } = await sb.from("profiles").upsert(row);
     saved.classList.toggle("bad", !!error);
     saved.textContent = error ? "保存失败：" + error.message : "已保存 ✓";
-    if (!error) head(nickname);
+    if (!error) head(row);
   });
 
   $("[data-signout]").addEventListener("click", async () => {
