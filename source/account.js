@@ -63,7 +63,9 @@
       if (!id) return msg(kind === "email" ? "邮箱格式不对，再检查一下" : "手机号格式不对，英国号码不用加开头的 0", true);
       btn.disabled = true;
       msg("发送中…");
-      const { error } = await sb.auth.signInWithOtp(kind === "email" ? { email: id } : { phone: id });
+      // 没接自定义 SMTP 时邮件模板改不了，只有登录链接：让链接回到本页，SDK 从网址里取出会话
+      const redirect = location.origin + location.pathname;
+      const { error } = await sb.auth.signInWithOtp(kind === "email" ? { email: id, options: { emailRedirectTo: redirect } } : { phone: id });
       btn.disabled = false;
       if (error) return msg(error.status === 429 ? "发得太频繁了，过一分钟再试" : "发送失败：" + error.message, true);
       target = id;
