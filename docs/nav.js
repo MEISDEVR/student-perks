@@ -53,7 +53,7 @@
       if (!t || t.day !== day) t = { day, a: [] };
       if (!t.a.includes(act)) { t.a.push(act); localStorage.setItem("sp-track", JSON.stringify(t)); }
     };
-    const page = { "budget.html": "view_budget", "black-friday.html": "view_bf", "earn.html": "view_earn", "bicester.html": "view_bicester" }[location.pathname.split("/").pop()];
+    const page = { "budget.html": "view_budget", "black-friday.html": "view_bf", "bicester.html": "view_bicester" }[location.pathname.split("/").pop()];
     if (page) track(page);
     const wk = document.getElementById("weekly");
     if (wk && "IntersectionObserver" in window) {
@@ -61,4 +61,18 @@
       io.observe(wk);
     }
   } catch (e) {}
+})();
+
+// 折叠专栏：地址里的锚点在 <details> 里面时先展开再滚过去（搜索结果、旧链接 earn.html#hsbc 跳过来都靠它）
+(function () {
+  function open() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const el = id && document.getElementById(id);
+    if (!el) return;
+    let d = el.closest("details"), hit = false;
+    while (d) { if (!d.open) { d.open = true; hit = true; } d = d.parentElement && d.parentElement.closest("details"); }
+    if (hit) requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
+  }
+  open();
+  addEventListener("hashchange", open);
 })();

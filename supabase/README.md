@@ -30,12 +30,14 @@ Authentication → Providers → Phone，选 Twilio（或 MessageBird、Vonage�
 
 在 UK 这边的同学多数是在电脑/手机浏览器或微信里打开网站：先上邮箱登录，手机号 +44 次之，微信/QQ 等公司主体和备案落实再接。
 
-## 4. 任务系统 + 游乐场（个人中心、签到、任务、悬赏、成就、小游戏）
+## 4. 任务系统 + 小羊赏金 + 小羊商店 + 游乐场
 
-**先跑 SQL**：SQL Editor → 粘贴 `quests.sql` 全文 → Run（要在 `schema.sql` 之后跑；可以重复跑，种子数据按 code 覆盖更新，不会清掉用户数据）。没跑之前个人中心会显示「任务系统正在开通」，登录和档案照常能用。
+**先跑 SQL**：SQL Editor → 粘贴 `quests.sql` 全文 → Run（要在 `schema.sql` 之后跑）。**每次这个文件更新都再跑一遍**：表只会补新增的列和表，函数会更新，种子数据不会覆盖你在后台改过的值，也不会清掉用户数据。没跑之前个人中心会显示「任务系统正在开通」，登录和档案照常能用。
 
-- **羊毛只能由服务器发**：所有发放都走 `check_in` / `claim_quest` / `game_finish` 等函数，账本 `wool_ledger` 有唯一键防重复；用户只能读自己的数据，不能直接写表。羊毛不能购买、不能换现金。
-- **审核悬赏**：Table Editor → `quest_submissions`，筛 `status = pending`，看 `content` / `link`，把 `status` 改成 `approved`（自动发羊毛、记成就）或 `rejected`，`note` 里写原因，用户在「我的任务」里能看到。
-- **加一条悬赏**：Table Editor → `quests` → Insert row：`code` 用 `b_` 开头的英文短名，`kind = bounty`，填 `title`、`body`、`reward`、`min_level`（建议 2）、`slots`（名额，空=不限）、`ends_at`（截止日，空=长期），`active = true`。下线就把 `active` 改成 `false`。
+- **羊毛只能由服务器发和扣**：所有操作都走 `check_in` / `claim_quest` / `game_finish` / `redeem` 等函数，账本 `wool_ledger` 有唯一键防重复；用户只能读自己的数据，不能直接写表。羊毛不能购买、不能换现金。
+- **审核小羊赏金**：Table Editor → `quest_submissions`，筛 `status = pending`，看 `content` / `link`，把 `status` 改成 `approved`（自动发羊毛、记成就）或 `rejected`，`note` 里写原因，用户在「我的任务」里能看到。
+- **发一个赏金任务**：Table Editor → `quests` → Insert row：`code` 用 `b_` 开头的英文短名，`kind = bounty`，`cat` 选 `field`（实地任务）/ `freebie`（商家赠品）/ `survey`（问卷）/ `poll`（投票），填 `title`、`body`、`reward`、`min_level`（建议 2）、`slots`（名额，空=不限）、`ends_at`（截止日，空=长期），`active = true`。某个分类还没有任务时，页面显示「即将开放」板块。下线就把 `active` 改成 `false`。
+- **小羊商店上架**：Table Editor → `shop_items`。首批 8 件默认 `status = soon`（只展示「即将上架」）。备好货后把 `status` 改成 `on`，`stock` 填库存（空=不限），`cost`、`min_level`、`per_user` 按需要改；不卖了改 `off`。图片放 `source/assets/shop/`，`image` 填 `assets/shop/文件名`。
+- **处理兑换**：Table Editor → `shop_orders`，筛 `status = pending`，按 `contact` 联系用户。备好货或发了券码后改成 `ready`，`note` 里写取货时间地点或券码（用户在「我的兑换」里能看到）；交付后改 `done`。缺货或用户放弃就改 `cancelled`，羊毛自动退回（已取消的订单不能再改回来）。用户自己也能在处理前取消。
 - **改日常/每周任务、成就奖励**：改 `quests.sql` 底部的种子数据再跑一次，或直接在 `quests` / `badges` 表里改。
 - 每天的游戏羊毛上限、各游戏换算比例在 `game_finish` 函数里；问答题库在 `source/quiz.js`，题目答案要和站内页面一致。

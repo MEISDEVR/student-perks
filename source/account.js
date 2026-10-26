@@ -1,5 +1,5 @@
 /* 登录 + 个人中心（account.html）。后端是 Supabase：邮箱 / 短信验证码登录，档案存 profiles 表。
-   个人中心按网址 # 切换栏目（#home #hall #mine #badges #wallet #settings），对应 section[data-view]；
+   个人中心按网址 # 切换栏目（#home #bounty #shop #mine #badges #wallet #settings；旧的 #hall 跳到 #bounty），对应 section[data-view]；
    签到、任务、成就、账本由 hub.js 渲染。Supabase 客户端在 sp.js 里建。
    配置在 auth-config.js（build.py 生成）：url、key 为空时整页显示「接入中」；phone、wechat、qq 没开的方式显示「即将开放」。
    表结构和开通步骤见 supabase/README.md。 */
@@ -107,6 +107,7 @@
   const views = $$("[data-view]").map(v => v.dataset.view);
   let fallback = "home";
   function route() {
+    if (location.hash === "#hall") history.replaceState(null, "", "#bounty");
     const want = location.hash.slice(1);
     const name = views.includes(want) ? want : fallback;
     $$("[data-view]").forEach(v => { v.hidden = v.dataset.view !== name; });
