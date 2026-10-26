@@ -32,8 +32,9 @@ ANALYTICS = (f'<script defer src="https://static.cloudflareinsights.com/beacon.m
 
 # 登录 + 个人档案：后端用 Supabase（开通步骤见 supabase/README.md）。URL 和 anon key 是前端公开配置，不是密钥。
 # 两项留空则不显示导航里的「登录」，account.html 显示「接入中」。环境变量可临时覆盖，方便本地测试。
-SUPABASE_URL = os.environ.get("SUPABASE_URL") or ""       # 例：https://abcd1234.supabase.co
-SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY") or ""
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or "https://qsgycwpdhstrfhlsgsps.supabase.co"
+SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY") or ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzZ3ljd3BkaHN0cmZobHNnc3BzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwMzIyNTMsImV4cCI6MjEwODYwODI1M30"
+                     ".cxCqN1zYviNTzyRp9pSuUaMmbN304GVwt18ZFCI9ZU8")
 AUTH_PHONE = False   # 在 Supabase 接好短信服务商（Twilio 等）后改 True
 AUTH_WECHAT = ""     # 微信登录 Edge Function 地址，接好后填，例：https://abcd1234.supabase.co/functions/v1/wechat-login
 AUTH_QQ = ""         # QQ 登录 Edge Function 地址
