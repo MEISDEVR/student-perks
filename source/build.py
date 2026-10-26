@@ -386,10 +386,16 @@ for name in EXTRA_PAGES:
 # 账号页：不进搜索索引和 sitemap
 src = open(os.path.join(ROOT, "account.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL)
 src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX.replace('class="acct"', 'class="acct on"'))
-src = src.replace("{{auth_scripts}}", '<script src="assets/vendor/supabase-2.45.4.js"></script>\n<script src="auth-config.js"></script>\n'
-                  '<script src="account.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
+AUTH_JS = '<script src="assets/vendor/supabase-2.45.4.js"></script>\n<script src="auth-config.js"></script>\n<script src="sp.js"></script>\n'
+src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="hub.js" defer></script>\n<script src="account.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
 open(os.path.join(DIST, "account.html"), "w", encoding="utf-8").write(src)
-shutil.copy(os.path.join(ROOT, "account.js"), DIST)
+# 游乐场：不登录也能玩，登录后结算羊毛；进 sitemap，不进搜索索引
+src = open(os.path.join(ROOT, "games.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL)
+src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("<footer", JOIN + "<footer", 1)
+src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="quiz.js"></script>\n<script src="games.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
+open(os.path.join(DIST, "games.html"), "w", encoding="utf-8").write(src)
+for n in ["account.js", "sp.js", "hub.js", "games.js", "quiz.js", "play.css"]:
+    shutil.copy(os.path.join(ROOT, n), DIST)
 open(os.path.join(DIST, "auth-config.js"), "w", encoding="utf-8").write(
     "window.SP_AUTH = " + json.dumps({"url": SUPABASE_URL, "key": SUPABASE_ANON_KEY, "phone": AUTH_PHONE,
                                       "wechat": AUTH_WECHAT, "qq": AUTH_QQ}) + ";\n")
@@ -412,5 +418,5 @@ open(os.path.join(DIST, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSit
 open(os.path.join(DIST, "sitemap.xml"), "w").write(
     f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     f'  <url><loc>{SITE_URL}</loc><lastmod>{updated}-01</lastmod></url>\n'
-    + "".join(f'  <url><loc>{SITE_URL}{n}</loc></url>\n' for n in EXTRA_PAGES) + '</urlset>\n')
+    + "".join(f'  <url><loc>{SITE_URL}{n}</loc></url>\n' for n in EXTRA_PAGES + ["games.html"]) + '</urlset>\n')
 print(f"built {len(deals)} deals, {len(search_entries)} search entries -> {DIST} for {SITE_URL}")

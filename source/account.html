@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>登录 · 我的羊毛档案｜Sheeperks 英国羊毛</title>
+<title>个人中心 · 登录｜Sheeperks 英国羊毛</title>
 <meta name="description" content="登录 Sheeperks 英国羊毛，填写学校、城市和关注的优惠类别。">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="{{SITE_URL}}account.html">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="v2.css">
+<link rel="stylesheet" href="play.css">
 </head>
 <body>
 <header class="topbar"><div class="wrap">
@@ -21,21 +22,21 @@
   </nav>
 </div></header>
 
-<div class="wrap">
+<div class="wrap acct-root" id="acct" data-state="loading" aria-live="polite">
+  <!-- 未登录：介绍 + 登录卡 -->
   <section class="acct-page">
     <div class="acct-intro">
-      <div class="eyebrow">ACCOUNT · 我的羊毛档案</div>
-      <h1>登录 Sheeperks，<br>建一份<mark>羊毛档案</mark></h1>
-      <p class="lede">填上城市、学校和你关心的类别。之后上线的「收藏优惠」「快到期提醒」「本地优惠优先」都按这份档案来，换手机换电脑也不丢。</p>
+      <div class="eyebrow">ACCOUNT · 个人中心</div>
+      <h1>登录 Sheeperks，<br>开一个<mark>羊毛账户</mark></h1>
+      <p class="lede">一个账号管档案、任务、成就和积分。城市、学校和关心的类别填一次，之后的「收藏优惠」「快到期提醒」都按它来，换手机换电脑也不丢。</p>
       <ul class="acct-why">
         <li><b>不用记密码</b>邮箱收验证码就能登录，第一次登录自动建号</li>
         <li><b>只存必要信息</b>邮箱或手机号 + 你自己填的档案，不卖不分享</li>
-        <li><b>随时删除</b>档案页底部一键删除账号和全部资料</li>
+        <li><b>随时删除</b>档案设置底部一键删除账号和全部资料</li>
       </ul>
     </div>
 
-    <div class="acct-card" id="acct" data-state="loading" aria-live="polite">
-
+    <div class="acct-card">
       <!-- 未接入后端：build.py 没填 Supabase 配置时显示 -->
       <div class="acct-pane" data-pane="off">
         <div class="acct-h">登录功能接入中</div>
@@ -95,13 +96,124 @@
         <p class="acct-fine">登录即表示你同意我们保存你的邮箱或手机号和档案信息，只用于网站功能。</p>
       </div>
 
-      <!-- 已登录：个人档案 -->
-      <div class="acct-pane" data-pane="in">
-        <div class="me">
-          <span class="avatar" data-avatar aria-hidden="true">羊</span>
-          <div><b data-me-name>羊毛档案</b><small data-me-id></small></div>
-          <button class="linkish" type="button" data-signout>退出登录</button>
+      <div class="acct-pane" data-pane="loading"><p class="acct-note">加载中…</p></div>
+    </div>
+  </section>
+
+  <!-- 已登录：个人中心。顶部「牧场证」+ 栏目（按网址 # 切换）。内容由 hub.js 按 hub_state() 渲染，规则见 supabase/quests.sql -->
+  <section class="hub" data-pane="in">
+    <div class="pass">
+      <div class="pass-main">
+        <div class="pass-top"><span>SHEEPERKS · 牧场证</span><span class="mono" data-pass-no>No.————</span></div>
+        <div class="pass-who">
+          <div class="ring" data-ring><span class="avatar" data-avatar aria-hidden="true">羊</span><b class="ring-lv" data-ring-lv>1</b></div>
+          <div class="hub-who">
+            <b data-me-name>羊毛账户</b>
+            <span class="lv-chip" data-lv-chip>Lv.1 小羊羔</span>
+            <small data-me-meta></small>
+            <small class="mono" data-me-id></small>
+          </div>
         </div>
+        <div class="xp">
+          <div class="xp-bar"><i data-xp-bar></i></div>
+          <p data-xp-tip>做任务、签到、玩小游戏赚羊毛，攒够就升级</p>
+        </div>
+      </div>
+      <div class="pass-stub">
+        <span class="stub-k">羊毛余额</span>
+        <b class="stub-n" data-balance-box><i data-wool></i><span data-balance>0</span></b>
+        <span class="stub-sub">本周 +<b data-week>0</b> · 累计 <b data-earned>0</b></span>
+        <span class="stub-streak" data-streak-box><i data-ico="flame"></i><b data-streak>0</b> 天连续签到</span>
+        <div class="pass-act"><a href="#settings">编辑档案</a><button class="linkish" type="button" data-signout>退出登录</button></div>
+      </div>
+    </div>
+
+    <nav class="hub-tabs" aria-label="个人中心">
+      <a href="#home">概览</a>
+      <a href="#hall">任务大厅<i data-count="hall" hidden></i></a>
+      <a href="#mine">我的任务</a>
+      <a href="#badges">成就<i data-count="badges" hidden></i></a>
+      <a href="#wallet">羊毛账本</a>
+      <a href="games.html" class="ext">游乐场</a>
+      <a href="#settings">档案设置</a>
+    </nav>
+
+    <p class="hub-off" data-hub-off hidden>任务系统正在开通，签到、任务和成就稍后就能用。档案设置不受影响。</p>
+
+    <div class="hub-main">
+      <section class="hub-view" data-view="home">
+        <div class="home-grid">
+          <div class="col">
+            <article class="panel ci" data-checkin></article>
+            <article class="panel" data-group="daily"></article>
+            <article class="panel" data-group="weekly"></article>
+          </div>
+          <div class="col">
+            <article class="panel newbie" data-group="newbie"></article>
+            <a class="panel promo" href="games.html" data-promo></a>
+            <article class="panel" data-recent-badges></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="hub-view" data-view="hall" hidden>
+        <div class="board-head">
+          <div>
+            <div class="eyebrow">BOUNTY BOARD · 悬赏告示板</div>
+            <h2>帮大家薅得更准，<mark>赚羊毛</mark></h2>
+            <p>核实一张券、拍下店里的新优惠、实测一个折扣能不能叠加。提交后人工审核，通过就发羊毛，内容会收录到网站上帮到更多同学。</p>
+          </div>
+          <div class="board-rules">
+            <span><i data-ico="check"></i> 每个悬赏每人一次</span>
+            <span><i data-ico="clock"></i> 一般 2 天内审核</span>
+            <span><i data-ico="lock"></i> 不收押金，不要拉人</span>
+          </div>
+        </div>
+        <div class="chips filter" role="tablist" aria-label="筛选任务">
+          <button type="button" data-filter="all" aria-pressed="true">全部</button>
+          <button type="button" data-filter="bounty" aria-pressed="false">悬赏</button>
+          <button type="button" data-filter="daily" aria-pressed="false">每日</button>
+          <button type="button" data-filter="weekly" aria-pressed="false">每周</button>
+          <button type="button" data-filter="newbie" aria-pressed="false">新手</button>
+        </div>
+        <div class="bounties" data-bounties data-kind="bounty"></div>
+        <div class="hall-groups">
+          <article class="panel" data-group="daily" data-kind="daily"></article>
+          <article class="panel" data-group="weekly" data-kind="weekly"></article>
+          <article class="panel newbie" data-group="newbie" data-kind="newbie"></article>
+        </div>
+      </section>
+
+      <section class="hub-view" data-view="mine" hidden>
+        <div class="kanban" data-mine></div>
+      </section>
+
+      <section class="hub-view" data-view="badges" hidden>
+        <div class="badge-head" data-badge-head></div>
+        <ul class="stamps" data-stamps></ul>
+      </section>
+
+      <section class="hub-view" data-view="wallet" hidden>
+        <div class="wallet">
+          <div class="receipt" data-receipt></div>
+          <div class="col">
+            <article class="panel" data-earn-rules></article>
+            <article class="panel shop">
+              <div class="panel-h"><h3>羊毛兑换</h3><span class="tag">即将开放</span></div>
+              <p class="muted">羊毛先攒着，兑换开放后可以换下面这些。羊毛不能买，也不能换现金。</p>
+              <ul class="shop-list">
+                <li><b>群内抽奖券</b><span>每月羊毛抽奖，奖品是商家券和周边</span><em data-wool-price>50</em></li>
+                <li><b>小羊头像框</b><span>牧场证和群昵称旁的专属装饰</span><em data-wool-price>120</em></li>
+                <li><b>本地商家券</b><span>格拉斯哥合作商家的折扣券</span><em data-wool-price>待定</em></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="hub-view" data-view="settings" hidden>
+        <div class="panel">
+          <div class="panel-h"><h3>档案设置</h3><span class="muted" data-profile-pct></span></div>
         <form class="profile" data-profile novalidate>
           <label class="fld"><span>昵称 <em>*</em></span><input name="nickname" maxlength="20" required placeholder="群里怎么称呼你"></label>
           <div class="fld-row">
@@ -141,19 +253,33 @@
           <p>会永久删除你的登录信息和档案，不能恢复。</p>
           <button class="btn ghost" type="button" data-delete>永久删除我的账号</button>
         </details>
-      </div>
-
-      <div class="acct-pane" data-pane="loading"><p class="acct-note">加载中…</p></div>
+        </div>
+      </section>
     </div>
   </section>
 </div>
+
+<dialog class="sheet" data-sheet>
+  <form method="dialog" class="sheet-in" data-sheet-form novalidate>
+    <div class="sheet-tag" data-sheet-tag></div>
+    <h3 data-sheet-title></h3>
+    <p class="muted" data-sheet-body></p>
+    <label class="fld"><span>你的结果 <em>*</em></span><textarea name="content" rows="5" maxlength="500" required placeholder="写清楚哪家店、什么时间、结果如何。越具体越容易通过。"></textarea></label>
+    <label class="fld"><span>图片或链接 <small>选填</small></span><input name="link" type="url" maxlength="300" placeholder="可以贴图床、网盘或小红书链接"></label>
+    <p class="acct-msg" data-sheet-msg role="status"></p>
+    <div class="acct-actions">
+      <button class="btn" type="submit" value="send">提交审核</button>
+      <button class="linkish" type="submit" value="cancel" formnovalidate>取消</button>
+    </div>
+  </form>
+</dialog>
 
 <footer>
   <div class="wrap">
     <div class="foot-word"><img src="assets/logo.svg" alt="" width="168" height="168"><span>SHEEP<br>PERKS</span></div>
     <div class="foot">
-    <div><b>关于账号数据</b><p>账号由 Supabase 托管（数据存放在欧盟/英国区域）。我们只保存登录用的邮箱或手机号和你填写的档案，不出售、不分享给商家。想导出或删除数据，在档案页操作或联系客服微信。</p></div>
-    <span class="mono">Sheeperks 英国羊毛 · 我的档案</span>
+    <div><b>关于账号数据</b><p>账号由 Supabase 托管（数据存放在欧盟/英国区域）。我们只保存登录用的邮箱或手机号和你填写的档案，不出售、不分享给商家。想导出或删除数据，在档案设置里操作或联系客服微信。</p></div>
+    <span class="mono">Sheeperks 英国羊毛 · 个人中心</span>
     </div>
   </div>
 </footer>
