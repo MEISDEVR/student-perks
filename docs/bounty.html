@@ -10,7 +10,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="v2.css?v=be5d8acd">
-<link rel="stylesheet" href="play.css?v=4080872e">
+<link rel="stylesheet" href="play.css?v=fe835bdf">
 <meta property="og:site_name" content="Sheeperks 英国羊毛">
 <meta property="og:image" content="https://sheeperks.com/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -137,28 +137,36 @@
       </div>
     </div>
 
-    <nav class="hub-tabs" aria-label="小羊赏金">
-      <a href="#home">概览</a>
-      <a href="#bounty">赏金任务<i data-count="bounty" hidden></i></a>
-      <a href="#shop">小羊商店</a>
-      <a href="#mine">我的任务</a>
-      <a href="games.html" class="ext">游乐场</a>
-      <a href="#badges">成就</a>
-      <a href="#wallet">羊毛账本</a>
+    <!-- 牧场地图：每格是一个栏目，小字是实时数字（hub.js counts() 填）。滚下去后吸顶变成一行小图标 -->
+    <i class="dock-pin" aria-hidden="true"></i>
+    <nav class="dock" aria-label="小羊赏金">
+      <a href="#home" class="k-yellow"><span class="dk-ic"><i data-ico="star"></i></span><b>今日牧场</b><small data-dk="home">签到和任务</small></a>
+      <a href="#bounty" class="k-tomato"><span class="dk-ic"><i data-ico="target"></i></span><b>赏金任务</b><small data-dk="bounty">真实任务</small><i data-count="bounty" hidden></i></a>
+      <a href="#shop" class="k-mint"><span class="dk-ic"><i data-ico="shop"></i></span><b>小羊商店</b><small data-dk="shop">换周边</small></a>
+      <a href="games.html" class="k-ink ext"><span class="dk-ic"><i data-ico="gamepad"></i></span><b>游乐场</b><small data-dk="games">小游戏</small></a>
+      <a href="#mine" class="k-cobalt"><span class="dk-ic"><i data-ico="box"></i></span><b>我的任务</b><small data-dk="mine">审核进度</small></a>
+      <a href="#badges" class="k-yellow"><span class="dk-ic"><i data-ico="trophy"></i></span><b>成就</b><small data-dk="badges">徽章墙</small></a>
+      <a href="#wallet" class="k-mint"><span class="dk-ic"><i data-ico="ticket"></i></span><b>羊毛账本</b><small data-dk="wallet">收支明细</small></a>
     </nav>
 
     <p class="hub-off" data-hub-off hidden>任务系统正在开通，签到、任务和成就稍后就能用。</p>
 
     <div class="hub-main">
       <section class="hub-view" data-view="home">
-        <div class="home-grid">
+        <!-- 今天要做的放一张大卡：左签到，右今日任务 -->
+        <div class="today">
+          <div class="today-h"><span class="eyebrow">TODAY · 今日牧场</span><b class="mono" data-today-date></b></div>
+          <div class="today-b">
+            <div class="today-ci" data-checkin></div>
+            <div class="today-qs" data-group="daily"></div>
+          </div>
+        </div>
+        <div class="home-row">
           <div class="col">
-            <article class="panel ci" data-checkin></article>
-            <article class="panel" data-group="daily"></article>
             <article class="panel" data-group="weekly"></article>
+            <article class="panel newbie" data-group="newbie"></article>
           </div>
           <div class="col">
-            <article class="panel newbie" data-group="newbie"></article>
             <a class="panel promo" href="games.html" data-promo></a>
             <article class="panel" data-recent-badges></article>
           </div>
@@ -270,8 +278,8 @@
 <script src="assets/vendor/supabase-2.45.4.js?v=43b205e2"></script>
 <script src="auth-config.js?v=a055b7eb"></script>
 <script src="sp.js?v=32b3609a"></script>
-<script src="hub.js?v=b1b68acb" defer></script>
-<script src="account.js?v=f72b8eb4" defer></script>
+<script src="hub.js?v=c41d66b3" defer></script>
+<script src="account.js?v=9720309e" defer></script>
 <script src="lim.js?v=08d81bc3" defer></script>
 <script src="search.js?v=0c3165ec" defer></script>
 <script src="nav.js?v=16562d10" defer></script>

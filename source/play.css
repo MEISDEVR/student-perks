@@ -91,23 +91,53 @@ a.muted:hover { color: var(--ink); }
 .pass-act { display: flex; align-items: center; gap: 16px; margin-top: 14px; padding-top: 12px; border-top: 2px dashed rgb(20 20 20 / .35); font-size: 13px; }
 .pass-act a, .pass-act .linkish { color: #141414; font-weight: 700; font-size: 13px; }
 
-/* ---------- 栏目 ---------- */
-.hub-tabs { position: sticky; top: calc(var(--topbar-h, 72px) + 12px); z-index: 6; display: flex; gap: 4px; margin: 36px 0 24px; padding: 5px; border: var(--bw) solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: var(--sh); overflow-x: auto; scrollbar-width: none; transition: top .25s; }
-.hub-tabs::-webkit-scrollbar { display: none; }
-.hub-tabs a { position: relative; flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 11px; color: var(--ink); font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; }
-.hub-tabs a:hover { background: var(--paper); }
-.hub-tabs a.on { background: var(--active-bg); color: var(--active-fg); }
-.hub-tabs a.ext { margin-left: auto; color: var(--cobalt); }
-.hub-tabs a.ext::after { content: "↗"; font-size: 13px; }
-.hub-tabs a i { display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--tomato); color: #fff; font: 700 11px var(--font-mono); font-style: normal; }
-.hub-tabs a i[hidden] { display: none; }
-.hub-tabs a.dot::after { content: ""; position: absolute; top: 6px; right: 6px; width: 9px; height: 9px; border: 2px solid var(--surface); border-radius: 50%; background: var(--tomato); }
-.topbar-off .hub-tabs { top: 12px; }
+/* ---------- 牧场地图（栏目入口）：7 张彩色图标卡，小字是实时数字。滚过以后顶部出现一条迷你版（hub.js 复制出来） ---------- */
+.dock-pin { display: block; height: 1px; margin-top: 30px; }
+.dock { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 14px; margin: 0 0 30px; scroll-margin-top: calc(var(--topbar-h, 72px) + 16px); }
+.dock a { --k: var(--yellow); --kf: #141414; position: relative; display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 14px 14px 12px; border: 3px solid var(--line); border-radius: 18px; background: var(--surface); color: var(--ink); text-decoration: none; box-shadow: 4px 4px 0 var(--shadow); transition: transform .15s, box-shadow .15s, background .15s; }
+.dock .k-tomato { --k: var(--tomato); } .dock .k-mint { --k: var(--mint); } .dock .k-cobalt { --k: var(--cobalt); --kf: #fff; } .dock .k-ink { --k: #141414; --kf: var(--yellow); }
+.dock .k-ink .dk-ic { border-color: var(--line); }
+.dk-ic { display: grid; place-items: center; width: 46px; height: 46px; margin-bottom: 10px; border: var(--bw) solid #141414; border-radius: 13px; background: var(--k); color: var(--kf); transform: rotate(-5deg); transition: transform .25s cubic-bezier(.3, 1.6, .5, 1); }
+.dk-ic .ico { width: 24px; height: 24px; stroke-width: 2.4; }
+.dock b { font-size: 16px; font-weight: 900; letter-spacing: -.01em; white-space: nowrap; }
+.dock small { overflow: hidden; color: var(--muted); font: 500 12px var(--font-mono); white-space: nowrap; text-overflow: ellipsis; }
+.dock a.ext b::after { content: " ↗"; color: var(--cobalt); font-size: 13px; }
+.dock a:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--shadow); }
+.dock a:hover .dk-ic { transform: rotate(4deg) scale(1.06); }
+.dock a.on { background: var(--k); color: var(--kf); transform: translate(-3px, -3px); box-shadow: 7px 7px 0 var(--shadow); }
+.dock a.on small { color: inherit; opacity: .8; }
+.dock a.on .dk-ic { background: var(--surface); color: var(--ink); transform: rotate(0); }
+.dock a.on.ext b::after { color: inherit; }
+.dock a i[data-count] { position: absolute; top: -9px; right: -9px; display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 6px; border: var(--bw) solid #141414; border-radius: 999px; background: var(--tomato); color: #fff; font: 700 12px var(--font-mono); font-style: normal; }
+.dock a i[hidden] { display: none; }
+.dock a.dot::after { content: ""; position: absolute; top: 12px; right: 12px; width: 11px; height: 11px; border: 2px solid var(--surface); border-radius: 50%; background: var(--tomato); }
+/* 迷你版：只留图标 + 名字，吸在顶栏下面 */
+.dock.mini { position: fixed; z-index: 30; top: calc(var(--topbar-h, 72px) + 10px); left: 50%; width: min(1232px, calc(100% - 48px)); margin: 0; gap: 8px; padding: 6px; border: 3px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: var(--sh); transform: translate(-50%, -12px); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s, top .25s; }
+.dock.mini.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+.topbar-off .dock.mini { top: 10px; }
+.dock.mini a { flex-direction: row; align-items: center; gap: 8px; padding: 6px 10px 6px 6px; border: 0; border-radius: 12px; box-shadow: none; }
+.dock.mini a:hover, .dock.mini a.on { transform: none; box-shadow: none; }
+.dock.mini a:hover:not(.on) { background: var(--paper); }
+.dock.mini .dk-ic { width: 32px; height: 32px; margin: 0; border-radius: 9px; transform: none; }
+.dock.mini .dk-ic .ico { width: 18px; height: 18px; }
+.dock.mini b { font-size: 14px; }
+.dock.mini small { display: none; }
+.dock.mini i[data-count] { top: -4px; right: -2px; min-width: 20px; height: 20px; font-size: 11px; }
+.dock.mini a.dot::after { top: 4px; right: 4px; }
+
+/* 今日牧场：签到 + 今日任务合成一张票 */
+.today { border: 3px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: 8px 8px 0 var(--cobalt); overflow: hidden; }
+.today-h { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 24px; border-bottom: 3px solid var(--line); background: var(--yellow); color: #141414; }
+:root .today-h .eyebrow { color: #141414 !important; }
+.today-h b { font-size: 13px; }
+.today-b { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+.today-ci, .today-qs { min-width: 0; padding: 22px 26px 26px; }
+.today-ci { border-right: 3px dashed var(--line); }
+.home-row { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 30px; }
 .hub-off { margin: 0 0 20px; padding: 12px 16px; border: 2px dashed var(--line); border-radius: 14px; background: color-mix(in srgb, var(--yellow) 35%, transparent); font-size: 14px; font-weight: 700; }
 .hub-off[hidden] { display: none; }
 .hub-view { display: block; }
 .hub-view[hidden] { display: none; }
-.home-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: start; }
 .col { display: grid; gap: 24px; min-width: 0; }
 
 /* ---------- 签到 ---------- */
@@ -392,7 +422,9 @@ a.muted:hover { color: var(--ink); }
   .stub-k, .stub-n, .stub-sub { grid-column: 1; }
   .stub-streak { grid-column: 2; grid-row: 1 / 3; align-self: center; margin: 0; }
   .pass-act { grid-column: 1 / -1; }
-  .home-grid,   .hub-tabs a.ext { margin-left: 0; }
+  .dock { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .today-b, .home-row { grid-template-columns: 1fr; }
+  .today-ci { border-right: 0; border-bottom: 3px dashed var(--line); }
 }
 @media (max-width: 640px) {
   .shop-head { padding: 22px 18px; box-shadow: 5px 5px 0 var(--shadow); }
@@ -417,8 +449,20 @@ a.muted:hover { color: var(--ink); }
   .hub-who small { white-space: normal; }
   .pass-stub { padding: 18px 16px; }
   .stub-n { font-size: 48px; } .stub-n .wool { width: 38px; height: 38px; }
-  .hub-tabs { margin: 24px -16px 18px; border-radius: 0; border-inline: 0; box-shadow: none; top: var(--topbar-h, 64px); }
-  .topbar-off .hub-tabs { top: 0; }
+  .dock-pin { margin-top: 22px; }
+  .dock { display: flex; gap: 10px; margin: 0 -16px 22px; padding: 4px 16px 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; scrollbar-width: none; }
+  .dock::-webkit-scrollbar { display: none; }
+  .dock a { flex: none; width: 116px; padding: 12px 12px 10px; scroll-snap-align: start; }
+  .dk-ic { width: 40px; height: 40px; margin-bottom: 6px; } .dk-ic .ico { width: 21px; height: 21px; }
+  .dock b { font-size: 14.5px; }
+  .dock.mini { top: var(--topbar-h, 64px); width: 100%; padding: 6px 12px; border-width: 0 0 3px; border-radius: 0; box-shadow: none; }
+  .topbar-off .dock.mini { top: 0; }
+  .dock.mini a { width: auto; padding: 4px 10px 4px 4px; }
+  .dock.mini .dk-ic { width: 28px; height: 28px; }
+  .today { border-radius: 20px; box-shadow: 5px 5px 0 var(--cobalt); }
+  .today-h { padding: 10px 16px; }
+  .today-ci, .today-qs { padding: 18px 16px 20px; }
+  .home-row { gap: 18px; margin-top: 22px; }
   .panel { padding: 18px 16px; }
   .ci-days { gap: 5px; }
   .d { min-height: 88px; padding: 8px 0; font-size: 11px; border-radius: 10px; }

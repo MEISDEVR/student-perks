@@ -25,6 +25,16 @@
 
   $$("[data-ico]").forEach(i => { i.outerHTML = ico(i.dataset.ico); });
   $$("[data-wool]").forEach(i => { i.outerHTML = W(); });
+  // 牧场地图滚出屏幕后，顶部出现迷你版（同一份链接，account.js 切栏目时两份一起高亮）
+  const dock = $(".dock");
+  if (dock && "IntersectionObserver" in window) {
+    const mini = dock.cloneNode(true);
+    mini.classList.add("mini");
+    mini.setAttribute("aria-hidden", "true");
+    $$("a", mini).forEach(a => a.tabIndex = -1);
+    dock.after(mini);
+    new IntersectionObserver(([e]) => mini.classList.toggle("show", !e.isIntersecting && e.boundingClientRect.top < 0)).observe(dock);
+  }
   window.HUB = { load, refresh };
 
   async function load(u) {
@@ -340,9 +350,25 @@
 
   function counts() {
     const lv = SP.level(S.earned).lv;
-    const n = quests("bounty").filter(q => !q.submission && lv >= q.min_level && !(q.left !== null && q.left <= 0)).length, c = $("[data-count=bounty]");
-    c.hidden = !n; c.textContent = n;
-    $(".hub-tabs a[href='#home']").classList.toggle("dot", !S.checked || S.quests.some(ready));
+    const n = quests("bounty").filter(q => !q.submission && lv >= q.min_level && !(q.left !== null && q.left <= 0)).length, c = $$("[data-count=bounty]");
+    c.forEach(el => { el.hidden = !n; el.textContent = n; });
+    $$(".dock a[href='#home']").forEach(a => a.classList.toggle("dot", !S.checked || S.quests.some(ready)));
+    // 牧场地图每格下面的小字
+    const daily = quests("daily"), on = (S.shop || []).filter(it => it.status === "on");
+    const can = on.filter(it => lv >= it.min_level && S.balance >= it.cost && !(it.left !== null && it.left <= 0) && it.mine < it.per_user).length;
+    const pend = S.quests.filter(q => q.submission && q.submission.status === "pending").length, m = earnedMap();
+    const dk = {
+      home: S.checked ? `今日任务 ${daily.filter(q => q.claimed).length}/${daily.length}` : "今天还没签到",
+      bounty: n ? `${n} 个可接` : "敬请期待",
+      shop: can ? `能换 ${can} 件` : on.length ? `${on.length} 件在售` : "即将上架",
+      games: `今日 ${S.game_today}/10 羊毛`,
+      mine: pend ? `${pend} 个审核中` : "没有在审的",
+      badges: `${m.size}/${defs.length} 枚`,
+      wallet: `本周 +${S.week}`,
+    };
+    for (const k in dk) $$(`[data-dk=${k}]`).forEach(el => { el.textContent = dk[k]; });
+    const td = $("[data-today-date]");
+    if (td) td.textContent = new Date(S.today + "T12:00:00Z").toLocaleDateString("zh-CN", { month: "long", day: "numeric", weekday: "short", timeZone: "UTC" });
   }
 
   // ---------- 小羊商店 ----------

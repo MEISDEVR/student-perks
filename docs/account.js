@@ -111,15 +111,15 @@
     const want = location.hash.slice(1);
     const name = views.includes(want) ? want : fallback;
     $$("[data-view]").forEach(v => { v.hidden = v.dataset.view !== name; });
-    $$(".hub-tabs a").forEach(a => {
+    $$(".dock a").forEach(a => {
       const on = a.getAttribute("href") === "#" + name;
       a.classList.toggle("on", on);
-      if (on) { a.setAttribute("aria-current", "page"); a.scrollIntoView({ block: "nearest", inline: "nearest" }); } else a.removeAttribute("aria-current");
+      if (on) { a.setAttribute("aria-current", "page"); const d = a.parentElement; if (d.scrollWidth > d.clientWidth) d.scrollBy({ left: a.getBoundingClientRect().left - d.getBoundingClientRect().left - 16, behavior: "smooth" }); } else a.removeAttribute("aria-current");
     });
   }
   addEventListener("hashchange", () => {
     route();
-    const body = $(".hub-tabs");  // 栏目在屏幕上方看不到时才滚回来
+    const body = $(".dock");  // 牧场地图在屏幕上方看不到时才滚回来
     if (body && box.dataset.state === "in" && body.getBoundingClientRect().top < 0) body.scrollIntoView({ block: "start", behavior: "smooth" });
   });
 
