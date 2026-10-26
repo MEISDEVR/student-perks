@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://sheeperks.com/account.html">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="v2.css?v=65d2840c">
+<link rel="stylesheet" href="v2.css?v=02c02a36">
 <meta property="og:site_name" content="Sheeperks 英国羊毛">
 <meta property="og:image" content="https://sheeperks.com/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -36,7 +36,7 @@
       <h1>登录 Sheeperks，<br>建一份<mark>羊毛档案</mark></h1>
       <p class="lede">填上城市、学校和你关心的类别。之后上线的「收藏优惠」「快到期提醒」「本地优惠优先」都按这份档案来，换手机换电脑也不丢。</p>
       <ul class="acct-why">
-        <li><b>不用记密码</b>邮箱收 6 位验证码就能登录，第一次登录自动建号</li>
+        <li><b>不用记密码</b>邮箱收验证码就能登录，第一次登录自动建号</li>
         <li><b>只存必要信息</b>邮箱或手机号 + 你自己填的档案，不卖不分享</li>
         <li><b>随时删除</b>档案页底部一键删除账号和全部资料</li>
       </ul>
@@ -63,8 +63,8 @@
         <form class="acct-form" data-form="email" role="tabpanel" novalidate>
           <label class="fld"><span>邮箱</span><input type="email" name="id" autocomplete="email" inputmode="email" placeholder="学校邮箱或常用邮箱" required></label>
           <div class="otp" hidden>
-            <p class="acct-note">邮件已发到 <b data-sent-to></b>：填邮件里的 6 位验证码，或直接点邮件里的登录链接（用同一个浏览器打开）。没收到看看垃圾箱。</p>
-            <label class="fld"><span>6 位验证码</span><input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="······"></label>
+            <p class="acct-note">邮件已发到 <b data-sent-to></b>：填邮件里的验证码，或直接点邮件里的登录链接（用同一个浏览器打开）。没收到看看垃圾箱。</p>
+            <label class="fld"><span>验证码</span><input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" placeholder="邮件里的数字"></label>
           </div>
           <div class="acct-actions">
             <button class="btn" type="submit" data-label-send="发送验证码" data-label-verify="登录">发送验证码</button>
@@ -81,7 +81,7 @@
           </div>
           <div class="otp" hidden>
             <p class="acct-note">短信验证码已发到 <b data-sent-to></b>，10 分钟内有效。</p>
-            <label class="fld"><span>6 位验证码</span><input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="······"></label>
+            <label class="fld"><span>验证码</span><input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" placeholder="邮件里的数字"></label>
           </div>
           <div class="acct-actions">
             <button class="btn" type="submit" data-label-send="发送验证码" data-label-verify="登录">发送验证码</button>
@@ -167,7 +167,7 @@
 </footer>
 <script src="assets/vendor/supabase-2.45.4.js?v=43b205e2"></script>
 <script src="auth-config.js?v=a055b7eb"></script>
-<script src="account.js?v=0695bd6a" defer></script>
+<script src="account.js?v=f8cac937" defer></script>
 <script src="lim.js?v=08d81bc3" defer></script>
 <script src="search.js?v=0c3165ec" defer></script>
 <script src="nav.js?v=f1466e7b" defer></script>

@@ -67,7 +67,7 @@
       const redirect = location.origin + location.pathname;
       const { error } = await sb.auth.signInWithOtp(kind === "email" ? { email: id, options: { emailRedirectTo: redirect } } : { phone: id });
       btn.disabled = false;
-      if (error) return msg(error.status === 429 ? "发得太频繁了，过一分钟再试" : "发送失败：" + error.message, true);
+      if (error) return msg(error.status === 429 ? "发得太频繁了，过一分钟再试" : "验证码没发出去，稍后再试；一直不行请联系客服", true);
       target = id;
       $("[data-sent-to]", form).textContent = id;
       otp.hidden = false;
@@ -78,8 +78,9 @@
       form.elements.code.focus();
     }
     async function verify() {
-      const token = form.elements.code.value.trim();
-      if (!/^\d{6}$/.test(token)) return msg("请输入 6 位数字验证码", true);
+      // 位数跟 Supabase 后台 Email OTP Length 设置走（6–10 位），这里不写死
+      const token = form.elements.code.value.replace(/\D/g, "");
+      if (!/^\d{6,10}$/.test(token)) return msg("请输入邮件里的数字验证码", true);
       btn.disabled = true;
       msg("登录中…");
       const { error } = await sb.auth.verifyOtp(kind === "email" ? { email: target, token, type: "email" } : { phone: target, token, type: "sms" });
