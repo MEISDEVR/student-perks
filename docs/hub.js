@@ -1,4 +1,4 @@
-/* 个人中心的牧场证、签到、任务、小羊赏金、小羊商店、成就、羊毛账本（account.html）。
+/* 小羊赏金页（bounty.html）的牧场证、签到、任务、赏金任务、小羊商店、成就、羊毛账本。
    数据一次从 hub_state() 拿；签到、领奖励、交赏金、兑换礼品都调 supabase/quests.sql 里的函数，前端只负责展示和动画。
    account.js 登录成功后调用 HUB.load(user)，档案保存后调用 HUB.refresh()。 */
 (function () {
@@ -7,7 +7,7 @@
   const $ = (s, el = document) => el.querySelector(s), $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const CI = [2, 2, 3, 3, 4, 4, 10];   // 连续签到第 1–7 天的羊毛，和 check_in() 一致
   const GO = { checkin: ["#home", "去签到"], view_weekly: ["./#weekly", "去逛逛"], game: ["games.html", "去玩"], quiz: ["games.html#quiz", "去答题"],
-               profile: ["#settings", "去填写"], email: ["#settings", "去打开"], bounty: ["#bounty", "去做赏金"] };
+               profile: ["account.html", "去填写"], email: ["account.html", "去打开"], bounty: ["#bounty", "去做赏金"] };
   const QICO = { checkin: "flame", view_weekly: "eye", game: "gamepad", quiz: "bulb", profile: "card", email: "mail", bounty: "target" };
   const TAG = { 核实: ["search", "t-mint"], 拍券: ["camera", "t-yellow"], 实测: ["flask", "t-tomato"] };
   const GROUP = { daily: "今日任务", weekly: "本周任务", newbie: "新手任务" };
@@ -52,7 +52,7 @@
   async function refresh() {
     const { data, error } = await sb.rpc("hub_state");
     $("[data-hub-off]").hidden = !error;
-    $$(".hub-main [data-view]:not([data-view=settings]) > *").forEach(el => el.classList.toggle("is-off", !!error));
+    $$(".hub-main [data-view] > *").forEach(el => el.classList.toggle("is-off", !!error));
     if (error) return;
     S = data;
     pass(); checkin(); ["daily", "weekly", "newbie"].forEach(group); promo(); recent(); bounties(); mine(); stamps(); wallet(); shop(); counts();

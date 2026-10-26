@@ -629,3 +629,11 @@ a.muted:hover { color: var(--ink); }
   .mem-grid { gap: 8px; }
   .result-card { min-width: 0; width: 100%; padding: 20px 18px; }
 }
+
+/* 个人信息页（account.html）：牧场证只留身份，右边引到小羊赏金；下面是档案设置 */
+.me .pass-stub { align-content: center; gap: 12px; }
+.me .pass-stub .btn { justify-self: start; }
+.me-go { margin: 0; font-size: 14px; font-weight: 700; }
+.me .hub-who small[data-profile-pct] { color: var(--cobalt); font-weight: 700; }
+.me .hub-main { margin-top: 36px; }
+@media (max-width: 640px) { .me .hub-main { margin-top: 24px; } .me .pass-stub { grid-template-columns: 1fr; } }

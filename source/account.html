@@ -3,11 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>个人中心 · 小羊赏金 · 小羊商店｜Sheeperks 英国羊毛</title>
-<meta name="description" content="登录 Sheeperks 英国羊毛：签到、做小羊赏金的真实任务、玩小游戏攒羊毛，在小羊商店兑换周边和商家券。">
+<title>个人信息 · 档案设置｜Sheeperks 英国羊毛</title>
+<meta name="description" content="登录 Sheeperks 英国羊毛，管理个人信息、档案和邮件提醒。">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="{{SITE_URL}}account.html">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>
+  // 签到、任务、商店、成就、账本搬到了 bounty.html，旧链接按锚点跳过去
+  if (/^#(home|hall|bounty|shop|mine|badges|wallet)$/.test(location.hash)) location.replace("bounty.html" + (location.hash === "#hall" ? "#bounty" : location.hash));
+</script>
 <link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="v2.css">
 <link rel="stylesheet" href="play.css">
@@ -16,17 +20,18 @@
 <header class="topbar"><div class="wrap">
   <nav class="nav">
     <a class="brand" href="./"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>Sheeperks</b><small>英国羊毛 · UK STUDENT PERKS</small></span></a>
-    <div class="seg"><a href="./#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="account.html#bounty">小羊赏金</a></div>
+    <div class="seg"><a href="./#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="bounty.html">小羊赏金</a></div>
     {{search}}
     <a class="back" href="./">← 返回首页</a>
   </nav>
 </div></header>
 
 <div class="wrap acct-root" id="acct" data-state="loading" aria-live="polite">
-  <!-- 未登录：介绍 + 登录卡 -->
+  <!-- login -->
+  <!-- 未登录：介绍 + 登录卡（bounty.html 构建时复用这一段） -->
   <section class="acct-page">
     <div class="acct-intro">
-      <div class="eyebrow">ACCOUNT · 个人中心 · 零花钱专区</div>
+      <div class="eyebrow">SHEEPERKS · 羊毛账户</div>
       <h1>登录 Sheeperks，<br>开一个<mark>羊毛账户</mark></h1>
       <p class="lede">签到、做小羊赏金里的真实任务、玩小游戏攒羊毛，在小羊商店换周边和商家券。档案填一次，之后的「收藏优惠」「快到期提醒」都按它来，换手机换电脑也不丢。</p>
       <ul class="acct-why">
@@ -100,128 +105,34 @@
     </div>
   </section>
 
-  <!-- 已登录：个人中心。顶部「牧场证」+ 栏目（按网址 # 切换）。内容由 hub.js 按 hub_state() 渲染，规则见 supabase/quests.sql -->
-  <section class="hub" data-pane="in">
+  <!-- /login -->
+
+  <!-- 已登录：个人信息和设置。签到、任务、商店、成就、账本都在 bounty.html（小羊赏金） -->
+  <section class="hub me" data-pane="in">
     <div class="pass">
       <div class="pass-main">
-        <div class="pass-top"><span>SHEEPERKS · 牧场证</span><span class="mono" data-pass-no>No.————</span></div>
+        <div class="pass-top"><span>SHEEPERKS · 个人信息</span><span class="mono" data-me-id></span></div>
         <div class="pass-who">
-          <div class="ring" data-ring><span class="avatar" data-avatar aria-hidden="true">羊</span><b class="ring-lv" data-ring-lv>1</b></div>
+          <div class="ring"><span class="avatar" data-avatar aria-hidden="true">羊</span></div>
           <div class="hub-who">
             <b data-me-name>羊毛账户</b>
-            <span class="lv-chip" data-lv-chip>Lv.1 小羊羔</span>
             <small data-me-meta></small>
-            <small class="mono" data-me-id></small>
+            <small data-profile-pct></small>
           </div>
-        </div>
-        <div class="xp">
-          <div class="xp-bar"><i data-xp-bar></i></div>
-          <p data-xp-tip>做任务、签到、玩小游戏赚羊毛，攒够就升级</p>
         </div>
       </div>
       <div class="pass-stub">
-        <span class="stub-k">羊毛余额</span>
-        <b class="stub-n" data-balance-box><i data-wool></i><span data-balance>0</span></b>
-        <span class="stub-sub">本周 +<b data-week>0</b> · 累计 <b data-earned>0</b></span>
-        <span class="stub-streak" data-streak-box><i data-ico="flame"></i><b data-streak>0</b> 天连续签到</span>
-        <div class="pass-act"><a href="#settings">编辑档案</a><button class="linkish" type="button" data-signout>退出登录</button></div>
+        <span class="stub-k">我的羊毛</span>
+        <p class="me-go">签到、做任务、换礼品都在小羊赏金</p>
+        <a class="btn" href="bounty.html">去小羊赏金 →</a>
+        <div class="pass-act"><button class="linkish" type="button" data-signout>退出登录</button></div>
       </div>
     </div>
 
-    <nav class="hub-tabs" aria-label="个人中心">
-      <a href="#home">概览</a>
-      <a href="#bounty">小羊赏金<i data-count="bounty" hidden></i></a>
-      <a href="#shop">小羊商店</a>
-      <a href="#mine">我的任务</a>
-      <a href="games.html" class="ext">游乐场</a>
-      <a href="#badges">成就</a>
-      <a href="#wallet">羊毛账本</a>
-      <a href="#settings">档案设置</a>
-    </nav>
-
-    <p class="hub-off" data-hub-off hidden>任务系统正在开通，签到、任务和成就稍后就能用。档案设置不受影响。</p>
-
     <div class="hub-main">
-      <section class="hub-view" data-view="home">
-        <div class="home-grid">
-          <div class="col">
-            <article class="panel ci" data-checkin></article>
-            <article class="panel" data-group="daily"></article>
-            <article class="panel" data-group="weekly"></article>
-          </div>
-          <div class="col">
-            <article class="panel newbie" data-group="newbie"></article>
-            <a class="panel promo" href="games.html" data-promo></a>
-            <article class="panel" data-recent-badges></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="hub-view" data-view="bounty" hidden>
-        <div class="board-head">
-          <div>
-            <div class="eyebrow">SHEEP BOUNTY · 小羊赏金</div>
-            <h2>做真实任务，<mark>赚羊毛</mark></h2>
-            <p>核实一张券、拍下店里的新优惠、实测一个折扣能不能叠加；以后还有商家免费送的试用、问卷和投票。提交后人工审核，通过就发羊毛，攒够去小羊商店换礼品。</p>
-          </div>
-          <div class="board-rules">
-            <span><i data-ico="check"></i> 每个任务每人一次</span>
-            <span><i data-ico="clock"></i> 一般 2 天内审核</span>
-            <span><i data-ico="lock"></i> 不收押金，不要拉人</span>
-          </div>
-        </div>
-        <div class="chips filter" role="tablist" aria-label="赏金分类" data-cats></div>
-        <div class="bounties" data-bounties></div>
-        <div class="soon-boards" data-soon-boards></div>
-        </aside>
-      </section>
-
-      <section class="hub-view" data-view="shop" hidden>
-        <div class="shop-head" data-shop-head></div>
-        <div class="chips filter" role="tablist" aria-label="商品分类" data-shop-cats></div>
-        <div class="goods" data-goods></div>
-        <div class="shop-foot">
-          <article class="panel" data-orders></article>
-          <article class="panel">
-            <div class="panel-h"><h3>兑换说明</h3></div>
-            <ul class="rules">
-              <li><i data-ico="shop"></i><b>只能用羊毛换</b><span>羊毛不能买，也不能换现金</span></li>
-              <li><i data-ico="chevrons"></i><b>部分礼品有等级门槛</b><span>等级按累计获得算，兑换不掉级</span></li>
-              <li><i data-ico="card"></i><b>周边在格拉斯哥面交</b><span>兑换后客服按你留的微信或邮箱约时间地点</span></li>
-              <li><i data-ico="mail"></i><b>商家券线上发</b><span>券码出现在「我的兑换」里</span></li>
-              <li><i data-ico="bolt"></i><b>没处理前可以取消</b><span>取消后羊毛原路退回</span></li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="hub-view" data-view="mine" hidden>
-        <div class="kanban" data-mine></div>
-      </section>
-
-      <section class="hub-view" data-view="badges" hidden>
-        <div class="badge-head" data-badge-head></div>
-        <ul class="stamps" data-stamps></ul>
-      </section>
-
-      <section class="hub-view" data-view="wallet" hidden>
-        <div class="wallet">
-          <div class="receipt" data-receipt></div>
-          <div class="col">
-            <article class="panel" data-earn-rules></article>
-            <a class="panel promo shop-promo" href="#shop">
-              <img class="promo-sheep" src="assets/shop/tote.jpg" alt="" width="160" height="120">
-              <span class="eyebrow">SHEEP SHOP · 小羊商店</span>
-              <h3>羊毛攒着，换周边和商家券</h3>
-              <span class="promo-go" data-ico="arrow"></span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="hub-view" data-view="settings" hidden>
+      <section class="me-set">
         <div class="panel">
-          <div class="panel-h"><h3>档案设置</h3><span class="muted" data-profile-pct></span></div>
+          <div class="panel-h"><h3>档案设置</h3><span class="muted">换学校、换城市都在这里改</span></div>
         <form class="profile" data-profile novalidate>
           <label class="fld"><span>昵称 <em>*</em></span><input name="nickname" maxlength="20" required placeholder="群里怎么称呼你"></label>
           <div class="fld-row">
@@ -267,40 +178,12 @@
   </section>
 </div>
 
-<dialog class="sheet" data-sheet>
-  <form method="dialog" class="sheet-in" data-sheet-form novalidate>
-    <div class="sheet-tag" data-sheet-tag></div>
-    <h3 data-sheet-title></h3>
-    <p class="muted" data-sheet-body></p>
-    <label class="fld"><span>你的结果 <em>*</em></span><textarea name="content" rows="5" maxlength="500" required placeholder="写清楚哪家店、什么时间、结果如何。越具体越容易通过。"></textarea></label>
-    <label class="fld"><span>图片或链接 <small>选填</small></span><input name="link" type="url" maxlength="300" placeholder="可以贴图床、网盘或小红书链接"></label>
-    <p class="acct-msg" data-sheet-msg role="status"></p>
-    <div class="acct-actions">
-      <button class="btn" type="submit" value="send">提交审核</button>
-      <button class="linkish" type="submit" value="cancel" formnovalidate>取消</button>
-    </div>
-  </form>
-</dialog>
-
-<dialog class="sheet" data-buy>
-  <form method="dialog" class="sheet-in" data-buy-form novalidate>
-    <div class="buy-top"><img data-buy-img alt="" width="160" height="120"><div><div class="sheet-tag t-yellow" data-buy-tag></div><h3 data-buy-title></h3><p class="muted" data-buy-body></p></div></div>
-    <div class="buy-sum"><span>兑换后余额</span><b data-buy-after></b></div>
-    <label class="fld" data-buy-contact><span>怎么联系你 <em>*</em></span><input name="contact" maxlength="200" placeholder="微信号或邮箱，客服约你面交"></label>
-    <p class="acct-msg" data-buy-msg role="status"></p>
-    <div class="acct-actions">
-      <button class="btn" type="submit" value="send">确认兑换</button>
-      <button class="linkish" type="submit" value="cancel" formnovalidate>再想想</button>
-    </div>
-  </form>
-</dialog>
-
 <footer>
   <div class="wrap">
     <div class="foot-word"><img src="assets/logo.svg" alt="" width="168" height="168"><span>SHEEP<br>PERKS</span></div>
     <div class="foot">
     <div><b>关于账号数据</b><p>账号由 Supabase 托管（数据存放在欧盟/英国区域）。我们只保存登录用的邮箱或手机号和你填写的档案，不出售、不分享给商家。想导出或删除数据，在档案设置里操作或联系客服微信。</p></div>
-    <span class="mono">Sheeperks 英国羊毛 · 个人中心</span>
+    <span class="mono">Sheeperks 英国羊毛 · 个人信息</span>
     </div>
   </div>
 </footer>

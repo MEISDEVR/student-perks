@@ -1,6 +1,6 @@
-/* 登录 + 个人中心（account.html）。后端是 Supabase：邮箱 / 短信验证码登录，档案存 profiles 表。
-   个人中心按网址 # 切换栏目（#home #bounty #shop #mine #badges #wallet #settings；旧的 #hall 跳到 #bounty），对应 section[data-view]；
-   签到、任务、成就、账本由 hub.js 渲染。Supabase 客户端在 sp.js 里建。
+/* 登录 + 账号页，account.html（个人信息、档案设置）和 bounty.html（小羊赏金）共用。后端是 Supabase：邮箱 / 短信验证码登录，档案存 profiles 表。
+   小羊赏金按网址 # 切换栏目（#home #bounty #shop #mine #badges #wallet；旧的 #hall 跳到 #bounty），对应 section[data-view]；
+   签到、任务、成就、账本由 hub.js 渲染。档案表单只在 account.html，bounty.html 只读档案来显示名字。Supabase 客户端在 sp.js 里建。
    配置在 auth-config.js（build.py 生成）：url、key 为空时整页显示「接入中」；phone、wechat、qq 没开的方式显示「即将开放」。
    表结构和开通步骤见 supabase/README.md。 */
 (function () {
@@ -103,7 +103,7 @@
   const saved = $("[data-saved]");
   let user = null;
 
-  // ---------- 个人中心栏目切换 ----------
+  // ---------- 小羊赏金栏目切换 ----------
   const views = $$("[data-view]").map(v => v.dataset.view);
   let fallback = "home";
   function route() {
@@ -120,16 +120,18 @@
   addEventListener("hashchange", () => {
     route();
     const body = $(".hub-tabs");  // 栏目在屏幕上方看不到时才滚回来
-    if (box.dataset.state === "in" && body.getBoundingClientRect().top < 0) body.scrollIntoView({ block: "start", behavior: "smooth" });
+    if (body && box.dataset.state === "in" && body.getBoundingClientRect().top < 0) body.scrollIntoView({ block: "start", behavior: "smooth" });
   });
 
   // 档案完整度：6 项各占一份（新手任务「填好羊毛档案」也按这 6 项算）
   function complete(p) {
     const done = [p.nickname, p.city, p.school, p.stage, p.grad_year, (p.interests || []).length].filter(Boolean).length;
-    $("[data-profile-pct]").textContent = done === 6 ? "已填完整 ✓" : `完整度 ${Math.round(done / 6 * 100)}% · 填完领 20 羊毛`;
+    const el = $("[data-profile-pct]");
+    if (el) el.textContent = done === 6 ? "已填完整 ✓" : `完整度 ${Math.round(done / 6 * 100)}% · 填完领 20 羊毛`;
   }
 
   function fill(p) {
+    if (!pf) return head(p);
     const f = pf.elements;
     f.nickname.value = p.nickname || "";
     f.city.value = p.city || "";
@@ -145,10 +147,10 @@
     const name = p.nickname || id.split("@")[0] || "羊毛账户";
     const since = user.created_at ? new Date(user.created_at).toLocaleDateString("zh-CN", { year: "numeric", month: "long" }) + "加入" : "";
     $("[data-me-name]").textContent = name;
+    $("[data-avatar]").textContent = [...name][0].toUpperCase();
     $("[data-me-meta]").textContent = [p.school, p.city, p.stage, since].filter(Boolean).join(" · ");
     $("[data-me-id]").textContent = id;
     complete(p);
-    $("[data-avatar]").textContent = [...name][0].toUpperCase();
     try { localStorage.setItem("sp-nick", name); } catch (e) {}
     const chip = document.querySelector(".acct");
     if (chip) { chip.classList.add("in"); chip.dataset.i = [...name][0].toUpperCase(); chip.querySelector("span").textContent = name; }
@@ -158,13 +160,12 @@
     show("in");
     const { data, error } = await sb.from("profiles").select("*").eq("id", user.id).maybeSingle();
     if (error) saved.textContent = "档案读取失败，刷新再试";
-    fallback = data ? "home" : "settings";  // 第一次登录还没档案：先进档案设置
     route();
     fill(data || { nickname: (user.email || "").split("@")[0].slice(0, 20) });
     if (window.HUB) HUB.load(user);
   }
 
-  pf.addEventListener("submit", async e => {
+  if (pf) pf.addEventListener("submit", async e => {
     e.preventDefault();
     const f = pf.elements;
     const nickname = f.nickname.value.trim();
@@ -187,7 +188,8 @@
     try { localStorage.removeItem("sp-nick"); } catch (e) {}
     location.reload();
   });
-  $("[data-delete]").addEventListener("click", async () => {
+  const del = $("[data-delete]");
+  if (del) del.addEventListener("click", async () => {
     if (!confirm("确定永久删除账号和全部档案？删除后不能恢复。")) return;
     const { error } = await sb.rpc("delete_me");
     if (error) return alert("删除失败：" + error.message);

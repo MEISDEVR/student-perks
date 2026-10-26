@@ -17,7 +17,7 @@
   async function status() {
     const box = $("[data-status]");
     if (!user) {
-      box.innerHTML = `<a class="btn" href="account.html">登录后玩游戏攒羊毛</a><span class="muted">不登录也能玩，只是不换羊毛</span>`;
+      box.innerHTML = `<a class="btn" href="bounty.html">登录后玩游戏攒羊毛</a><span class="muted">不登录也能玩，只是不换羊毛</span>`;
       return;
     }
     const { data } = await SP.sb.from("game_plays").select("reward").eq("day", SP.ukToday());
@@ -37,7 +37,7 @@
 
   // 结算：返回结果卡里那一行字
   async function settle(game, score, el) {
-    if (!user) return `<a class="btn sm" href="account.html">登录</a><span>登录后玩，这局能换羊毛</span>`;
+    if (!user) return `<a class="btn sm" href="bounty.html">登录</a><span>登录后玩，这局能换羊毛</span>`;
     const { data, error } = await SP.sb.rpc("game_finish", { g: game, score });
     if (error || !data) return `<span>羊毛没结算上，稍后再试</span>`;
     if (!data.ok) return `<span>${{ already: "今天的问答羊毛已经领过了", plays: "今天玩得够多啦，明天再来" }[data.reason] || "这局没换到羊毛"}</span>`;
