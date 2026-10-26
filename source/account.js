@@ -1,5 +1,6 @@
 /* 登录 + 个人中心（account.html）。后端是 Supabase：邮箱 / 短信验证码登录，档案存 profiles 表。
-   个人中心按网址 # 切换栏目（#home #hall #tasks #badges #points #settings），对应 section[data-view]。
+   个人中心按网址 # 切换栏目（#home #hall #mine #badges #wallet #settings），对应 section[data-view]；
+   签到、任务、成就、账本由 hub.js 渲染。Supabase 客户端在 sp.js 里建。
    配置在 auth-config.js（build.py 生成）：url、key 为空时整页显示「接入中」；phone、wechat、qq 没开的方式显示「即将开放」。
    表结构和开通步骤见 supabase/README.md。 */
 (function () {
@@ -10,8 +11,8 @@
   const show = st => { box.dataset.state = st; };
   const msg = (t, bad) => { const m = $("[data-msg]"); m.textContent = t || ""; m.classList.toggle("bad", !!bad); };
 
-  if (!C.url || !C.key || !window.supabase) return show("off");
-  const sb = window.supabase.createClient(C.url, C.key, { auth: { storageKey: "sheeperks-auth", detectSessionInUrl: true } });
+  if (!window.SP || !SP.on) return show("off");
+  const sb = SP.sb;
   const enabled = { email: true, phone: !!C.phone, wechat: !!C.wechat, qq: !!C.qq };
 
   // ---------- 登录方式切换 ----------
@@ -109,7 +110,7 @@
     const want = location.hash.slice(1);
     const name = views.includes(want) ? want : fallback;
     $$("[data-view]").forEach(v => { v.hidden = v.dataset.view !== name; });
-    $$(".hub-nav a").forEach(a => {
+    $$(".hub-tabs a").forEach(a => {
       const on = a.getAttribute("href") === "#" + name;
       a.classList.toggle("on", on);
       if (on) { a.setAttribute("aria-current", "page"); a.scrollIntoView({ block: "nearest", inline: "nearest" }); } else a.removeAttribute("aria-current");
@@ -117,18 +118,14 @@
   }
   addEventListener("hashchange", () => {
     route();
-    const body = $(".hub-body");  // 栏目在屏幕上方看不到时才滚回来
+    const body = $(".hub-tabs");  // 栏目在屏幕上方看不到时才滚回来
     if (box.dataset.state === "in" && body.getBoundingClientRect().top < 0) body.scrollIntoView({ block: "start", behavior: "smooth" });
   });
 
-  // 档案完整度：6 项各占一份
+  // 档案完整度：6 项各占一份（新手任务「填好羊毛档案」也按这 6 项算）
   function complete(p) {
     const done = [p.nickname, p.city, p.school, p.stage, p.grad_year, (p.interests || []).length].filter(Boolean).length;
-    const pct = Math.round(done / 6 * 100);
-    $("[data-complete-pct]").textContent = pct + "%";
-    $("[data-complete-bar]").style.width = pct + "%";
-    $("[data-complete-tip]").textContent = pct === 100 ? "档案已经填完整了，之后的推荐和提醒都按它来。" : `还差 ${6 - done} 项。填好城市、学校和关心的类别，推荐才更准。`;
-    $("[data-complete-go]").textContent = pct === 100 ? "修改档案" : "去完善档案";
+    $("[data-profile-pct]").textContent = done === 6 ? "已填完整 ✓" : `完整度 ${Math.round(done / 6 * 100)}% · 填完领 20 羊毛`;
   }
 
   function fill(p) {
@@ -163,6 +160,7 @@
     fallback = data ? "home" : "settings";  // 第一次登录还没档案：先进档案设置
     route();
     fill(data || { nickname: (user.email || "").split("@")[0].slice(0, 20) });
+    if (window.HUB) HUB.load(user);
   }
 
   pf.addEventListener("submit", async e => {
@@ -180,7 +178,7 @@
     const { error } = await sb.from("profiles").upsert(row);
     saved.classList.toggle("bad", !!error);
     saved.textContent = error ? "保存失败：" + error.message : "已保存 ✓";
-    if (!error) head(row);
+    if (!error) { head(row); if (window.HUB) HUB.refresh(); }
   });
 
   $("[data-signout]").addEventListener("click", async () => {

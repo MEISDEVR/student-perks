@@ -10,6 +10,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="v2.css">
+<link rel="stylesheet" href="play.css">
 </head>
 <body>
 <header class="topbar"><div class="wrap">
@@ -99,105 +100,120 @@
     </div>
   </section>
 
-  <!-- 已登录：个人中心。新功能 = 侧栏加一个 a[href="#xxx"] + 一个 section[data-view="xxx"]，account.js 自动切换 -->
+  <!-- 已登录：个人中心。顶部「牧场证」+ 栏目（按网址 # 切换）。内容由 hub.js 按 hub_state() 渲染，规则见 supabase/quests.sql -->
   <section class="hub" data-pane="in">
-    <div class="hub-hero">
-      <span class="avatar" data-avatar aria-hidden="true">羊</span>
-      <div class="hub-who">
-        <b data-me-name>羊毛账户</b>
-        <small data-me-meta></small>
-        <small class="mono" data-me-id></small>
+    <div class="pass">
+      <div class="pass-main">
+        <div class="pass-top"><span>SHEEPERKS · 牧场证</span><span class="mono" data-pass-no>No.————</span></div>
+        <div class="pass-who">
+          <div class="ring" data-ring><span class="avatar" data-avatar aria-hidden="true">羊</span><b class="ring-lv" data-ring-lv>1</b></div>
+          <div class="hub-who">
+            <b data-me-name>羊毛账户</b>
+            <span class="lv-chip" data-lv-chip>Lv.1 小羊羔</span>
+            <small data-me-meta></small>
+            <small class="mono" data-me-id></small>
+          </div>
+        </div>
+        <div class="xp">
+          <div class="xp-bar"><i data-xp-bar></i></div>
+          <p data-xp-tip>做任务、签到、玩小游戏赚羊毛，攒够就升级</p>
+        </div>
       </div>
-      <div class="hub-hero-act">
-        <a class="btn ghost" href="#settings">编辑档案</a>
-        <button class="linkish" type="button" data-signout>退出登录</button>
+      <div class="pass-stub">
+        <span class="stub-k">羊毛余额</span>
+        <b class="stub-n" data-balance-box><i data-wool></i><span data-balance>0</span></b>
+        <span class="stub-sub">本周 +<b data-week>0</b> · 累计 <b data-earned>0</b></span>
+        <span class="stub-streak" data-streak-box><i data-ico="flame"></i><b data-streak>0</b> 天连续签到</span>
+        <div class="pass-act"><a href="#settings">编辑档案</a><button class="linkish" type="button" data-signout>退出登录</button></div>
       </div>
-      <dl class="hub-stats">
-        <div><dt>积分<small>即将上线</small></dt><dd data-stat="points">—</dd></div>
-        <div><dt>等级<small>即将上线</small></dt><dd data-stat="level">—</dd></div>
-        <div><dt>成就<small>即将上线</small></dt><dd data-stat="badges">—</dd></div>
-        <div><dt>连续签到<small>即将上线</small></dt><dd data-stat="streak">—</dd></div>
-      </dl>
     </div>
 
-    <div class="hub-body">
-      <nav class="hub-nav" aria-label="个人中心">
-        <a href="#home">概览</a>
-        <a href="#hall">任务大厅<i>即将上线</i></a>
-        <a href="#tasks">我的任务<i>即将上线</i></a>
-        <a href="#badges">成就<i>即将上线</i></a>
-        <a href="#points">积分明细<i>即将上线</i></a>
-        <a href="#settings">档案设置</a>
-      </nav>
+    <nav class="hub-tabs" aria-label="个人中心">
+      <a href="#home">概览</a>
+      <a href="#hall">任务大厅<i data-count="hall" hidden></i></a>
+      <a href="#mine">我的任务</a>
+      <a href="#badges">成就<i data-count="badges" hidden></i></a>
+      <a href="#wallet">羊毛账本</a>
+      <a href="games.html" class="ext">游乐场</a>
+      <a href="#settings">档案设置</a>
+    </nav>
 
-      <div class="hub-main">
-        <section class="hub-view" data-view="home">
-          <div class="hub-card hub-complete" data-complete>
-            <div class="hub-h"><span>档案完整度</span><b data-complete-pct>0%</b></div>
-            <div class="meter"><i data-complete-bar></i></div>
-            <p class="acct-note" data-complete-tip>填好城市、学校和关心的类别，推荐才更准。</p>
-            <a class="btn" href="#settings" data-complete-go>去完善档案</a>
-          </div>
-          <div class="hub-grid">
-            <a class="hub-tile t-yellow" href="#hall"><b>任务大厅</b><span>核实优惠、分享实测，完成任务拿积分</span><i>即将上线</i></a>
-            <a class="hub-tile t-mint" href="#badges"><b>成就</b><span>薅羊毛路上的里程碑，集齐解锁称号</span><i>即将上线</i></a>
-            <a class="hub-tile t-blue" href="#points"><b>积分</b><span>积分记录与兑换，每一笔来源都查得到</span><i>即将上线</i></a>
-          </div>
-          <div class="hub-card">
-            <div class="hub-h"><span>常用入口</span></div>
-            <div class="hub-links">
-              <a href="./#weekly">本周羊毛</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="earn.html">零花钱专区</a>
-            </div>
-          </div>
-        </section>
+    <p class="hub-off" data-hub-off hidden>任务系统正在开通，签到、任务和成就稍后就能用。档案设置不受影响。</p>
 
-        <section class="hub-view" data-view="hall" hidden>
-          <div class="hub-card">
-            <div class="hub-h"><span>任务大厅</span><i class="tag">即将上线</i></div>
-            <p class="acct-note">官方发布的小任务，做完拿积分。下面是预览，还不能领取。</p>
-            <ul class="task-list is-preview">
-              <li><b>完善羊毛档案</b><span>填好城市、学校和关心的类别</span><em>+20</em></li>
-              <li><b>每日签到</b><span>每天打开个人中心签到一次</span><em>+2</em></li>
-              <li><b>核实一条优惠</b><span>去店里或官网确认一条优惠还能用，回报结果</span><em>+10</em></li>
-              <li><b>上传一张纸质券</b><span>拍下店里拿到的纸质优惠券，审核通过后收录</span><em>+15</em></li>
-              <li><b>报告一条失效</b><span>发现优惠已经失效，告诉我们</span><em>+5</em></li>
-            </ul>
+    <div class="hub-main">
+      <section class="hub-view" data-view="home">
+        <div class="home-grid">
+          <div class="col">
+            <article class="panel ci" data-checkin></article>
+            <article class="panel" data-group="daily"></article>
+            <article class="panel" data-group="weekly"></article>
           </div>
-        </section>
-
-        <section class="hub-view" data-view="tasks" hidden>
-          <div class="hub-card hub-empty">
-            <div class="hub-h"><span>我的任务</span><i class="tag">即将上线</i></div>
-            <p>还没有进行中的任务。任务大厅开放后，领取的任务和进度都在这里。</p>
-            <a class="btn ghost" href="#hall">先看看任务大厅</a>
+          <div class="col">
+            <article class="panel newbie" data-group="newbie"></article>
+            <a class="panel promo" href="games.html" data-promo></a>
+            <article class="panel" data-recent-badges></article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="hub-view" data-view="badges" hidden>
-          <div class="hub-card">
-            <div class="hub-h"><span>成就</span><i class="tag">即将上线</i></div>
-            <p class="acct-note">完成特定目标自动解锁。下面是预览。</p>
-            <ul class="badge-grid">
-              <li><span>🐑</span><b>初来乍到</b><small>注册账号</small></li>
-              <li><span>📇</span><b>档案齐全</b><small>档案完整度 100%</small></li>
-              <li><span>🔎</span><b>火眼金睛</b><small>核实 10 条优惠</small></li>
-              <li><span>🎟️</span><b>纸券猎人</b><small>上传 5 张纸质券</small></li>
-              <li><span>🔥</span><b>七日不断</b><small>连续签到 7 天</small></li>
-              <li><span>🛍️</span><b>黑五老兵</b><small>黑五期间完成 3 个任务</small></li>
-            </ul>
+      <section class="hub-view" data-view="hall" hidden>
+        <div class="board-head">
+          <div>
+            <div class="eyebrow">BOUNTY BOARD · 悬赏告示板</div>
+            <h2>帮大家薅得更准，<mark>赚羊毛</mark></h2>
+            <p>核实一张券、拍下店里的新优惠、实测一个折扣能不能叠加。提交后人工审核，通过就发羊毛，内容会收录到网站上帮到更多同学。</p>
           </div>
-        </section>
-
-        <section class="hub-view" data-view="points" hidden>
-          <div class="hub-card hub-empty">
-            <div class="hub-h"><span>积分明细</span><i class="tag">即将上线</i></div>
-            <p>积分上线后，每一笔的来源和用途都记在这里。积分只能靠做任务获得，不能购买，也不需要拉人。</p>
+          <div class="board-rules">
+            <span><i data-ico="check"></i> 每个悬赏每人一次</span>
+            <span><i data-ico="clock"></i> 一般 2 天内审核</span>
+            <span><i data-ico="lock"></i> 不收押金，不要拉人</span>
           </div>
-        </section>
+        </div>
+        <div class="chips filter" role="tablist" aria-label="筛选任务">
+          <button type="button" data-filter="all" aria-pressed="true">全部</button>
+          <button type="button" data-filter="bounty" aria-pressed="false">悬赏</button>
+          <button type="button" data-filter="daily" aria-pressed="false">每日</button>
+          <button type="button" data-filter="weekly" aria-pressed="false">每周</button>
+          <button type="button" data-filter="newbie" aria-pressed="false">新手</button>
+        </div>
+        <div class="bounties" data-bounties data-kind="bounty"></div>
+        <div class="hall-groups">
+          <article class="panel" data-group="daily" data-kind="daily"></article>
+          <article class="panel" data-group="weekly" data-kind="weekly"></article>
+          <article class="panel newbie" data-group="newbie" data-kind="newbie"></article>
+        </div>
+      </section>
 
-        <section class="hub-view" data-view="settings" hidden>
-          <div class="hub-card">
-            <div class="hub-h"><span>档案设置</span></div>
+      <section class="hub-view" data-view="mine" hidden>
+        <div class="kanban" data-mine></div>
+      </section>
+
+      <section class="hub-view" data-view="badges" hidden>
+        <div class="badge-head" data-badge-head></div>
+        <ul class="stamps" data-stamps></ul>
+      </section>
+
+      <section class="hub-view" data-view="wallet" hidden>
+        <div class="wallet">
+          <div class="receipt" data-receipt></div>
+          <div class="col">
+            <article class="panel" data-earn-rules></article>
+            <article class="panel shop">
+              <div class="panel-h"><h3>羊毛兑换</h3><span class="tag">即将开放</span></div>
+              <p class="muted">羊毛先攒着，兑换开放后可以换下面这些。羊毛不能买，也不能换现金。</p>
+              <ul class="shop-list">
+                <li><b>群内抽奖券</b><span>每月羊毛抽奖，奖品是商家券和周边</span><em data-wool-price>50</em></li>
+                <li><b>小羊头像框</b><span>牧场证和群昵称旁的专属装饰</span><em data-wool-price>120</em></li>
+                <li><b>本地商家券</b><span>格拉斯哥合作商家的折扣券</span><em data-wool-price>待定</em></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="hub-view" data-view="settings" hidden>
+        <div class="panel">
+          <div class="panel-h"><h3>档案设置</h3><span class="muted" data-profile-pct></span></div>
         <form class="profile" data-profile novalidate>
           <label class="fld"><span>昵称 <em>*</em></span><input name="nickname" maxlength="20" required placeholder="群里怎么称呼你"></label>
           <div class="fld-row">
@@ -237,12 +253,26 @@
           <p>会永久删除你的登录信息和档案，不能恢复。</p>
           <button class="btn ghost" type="button" data-delete>永久删除我的账号</button>
         </details>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   </section>
 </div>
+
+<dialog class="sheet" data-sheet>
+  <form method="dialog" class="sheet-in" data-sheet-form novalidate>
+    <div class="sheet-tag" data-sheet-tag></div>
+    <h3 data-sheet-title></h3>
+    <p class="muted" data-sheet-body></p>
+    <label class="fld"><span>你的结果 <em>*</em></span><textarea name="content" rows="5" maxlength="500" required placeholder="写清楚哪家店、什么时间、结果如何。越具体越容易通过。"></textarea></label>
+    <label class="fld"><span>图片或链接 <small>选填</small></span><input name="link" type="url" maxlength="300" placeholder="可以贴图床、网盘或小红书链接"></label>
+    <p class="acct-msg" data-sheet-msg role="status"></p>
+    <div class="acct-actions">
+      <button class="btn" type="submit" value="send">提交审核</button>
+      <button class="linkish" type="submit" value="cancel" formnovalidate>取消</button>
+    </div>
+  </form>
+</dialog>
 
 <footer>
   <div class="wrap">

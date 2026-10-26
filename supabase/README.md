@@ -29,3 +29,13 @@ Authentication → Providers → Phone，选 Twilio（或 MessageBird、Vonage�
 - **QQ 互联**：connect.qq.com 开发者认证（个人或企业），创建网站应用，审核要求网站已上线、有 QQ 登录按钮、域名有 **ICP 备案**。
 
 在 UK 这边的同学多数是在电脑/手机浏览器或微信里打开网站：先上邮箱登录，手机号 +44 次之，微信/QQ 等公司主体和备案落实再接。
+
+## 4. 任务系统 + 游乐场（个人中心、签到、任务、悬赏、成就、小游戏）
+
+**先跑 SQL**：SQL Editor → 粘贴 `quests.sql` 全文 → Run（要在 `schema.sql` 之后跑；可以重复跑，种子数据按 code 覆盖更新，不会清掉用户数据）。没跑之前个人中心会显示「任务系统正在开通」，登录和档案照常能用。
+
+- **羊毛只能由服务器发**：所有发放都走 `check_in` / `claim_quest` / `game_finish` 等函数，账本 `wool_ledger` 有唯一键防重复；用户只能读自己的数据，不能直接写表。羊毛不能购买、不能换现金。
+- **审核悬赏**：Table Editor → `quest_submissions`，筛 `status = pending`，看 `content` / `link`，把 `status` 改成 `approved`（自动发羊毛、记成就）或 `rejected`，`note` 里写原因，用户在「我的任务」里能看到。
+- **加一条悬赏**：Table Editor → `quests` → Insert row：`code` 用 `b_` 开头的英文短名，`kind = bounty`，填 `title`、`body`、`reward`、`min_level`（建议 2）、`slots`（名额，空=不限）、`ends_at`（截止日，空=长期），`active = true`。下线就把 `active` 改成 `false`。
+- **改日常/每周任务、成就奖励**：改 `quests.sql` 底部的种子数据再跑一次，或直接在 `quests` / `badges` 表里改。
+- 每天的游戏羊毛上限、各游戏换算比例在 `game_finish` 函数里；问答题库在 `source/quiz.js`，题目答案要和站内页面一致。
