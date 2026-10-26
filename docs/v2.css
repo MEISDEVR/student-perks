@@ -747,7 +747,8 @@ html.modal-open { overflow: hidden; }
 .fld legend small { font-weight: 400; color: var(--muted); }
 .fld input, .fld select, .phone-row select { width: 100%; box-sizing: border-box; padding: 11px 14px; border: var(--bw) solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); font: 16px var(--font-body); }
 .fld input:focus, .fld select:focus { outline: 3px solid var(--yellow); outline-offset: 1px; }
-.fld input[name="code"] { font: 500 24px var(--font-mono); letter-spacing: .5em; text-align: center; }
+.fld input[name="code"] { font: 500 22px var(--font-mono); letter-spacing: .3em; text-align: center; }
+.fld input[name="code"]::placeholder { font: 15px var(--font-body); letter-spacing: 0; }
 .fld input[readonly] { color: var(--muted); }
 .phone-row { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 8px; }
 .phone-row input { width: 100%; box-sizing: border-box; padding: 11px 14px; border: var(--bw) solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); font: 16px var(--font-body); }
