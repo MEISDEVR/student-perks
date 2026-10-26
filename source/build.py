@@ -383,12 +383,18 @@ for name in EXTRA_PAGES:
     src, ents = index_page(src, name)
     search_entries += ents
     open(os.path.join(DIST, name), "w", encoding="utf-8").write(src)
-# 账号页：不进搜索索引和 sitemap
+# 账号页（个人信息 + 档案设置）和小羊赏金：不进搜索索引和 sitemap
 src = open(os.path.join(ROOT, "account.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL)
 src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX.replace('class="acct"', 'class="acct on"'))
 AUTH_JS = '<script src="assets/vendor/supabase-2.45.4.js"></script>\n<script src="auth-config.js"></script>\n<script src="sp.js"></script>\n'
-src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="hub.js" defer></script>\n<script src="account.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
+src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="account.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
 open(os.path.join(DIST, "account.html"), "w", encoding="utf-8").write(src)
+# 小羊赏金：签到、任务、商店、成就、账本。登录区从 account.html 的 <!-- login --> 段复用
+login = re.search(r"  <!-- login -->\n(.*?)  <!-- /login -->\n", src, re.S).group(1)
+src = open(os.path.join(ROOT, "bounty.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL).replace("{{login}}\n", login)
+src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX)
+src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="hub.js" defer></script>\n<script src="account.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
+open(os.path.join(DIST, "bounty.html"), "w", encoding="utf-8").write(src)
 # 游乐场：不登录也能玩，登录后结算羊毛；进 sitemap，不进搜索索引
 src = open(os.path.join(ROOT, "games.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL)
 src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("<footer", JOIN + "<footer", 1)

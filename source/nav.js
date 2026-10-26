@@ -32,8 +32,8 @@
   onScroll();
 })();
 
-/* 导航里的「登录」：已登录（Supabase 会话在 localStorage）时换成头像首字 + 昵称，不用加载 SDK。
-   今天还没签到就亮小红点；看过「本周羊毛」等记一笔，回到个人中心时由 hub.js 报给后端算任务进度。 */
+/* 导航里的「登录」：已登录（Supabase 会话在 localStorage）时换成头像首字 + 昵称，不用加载 SDK。头像进 account.html 改个人信息。
+   今天还没签到，导航「小羊赏金」亮小红点；看过「本周羊毛」等记一笔，回到小羊赏金时由 hub.js 报给后端算任务进度。 */
 (function () {
   const a = document.querySelector(".acct");
   if (!a) return;
@@ -45,9 +45,10 @@
     a.classList.add("in");
     a.dataset.i = [...name][0].toUpperCase();
     a.querySelector("span").textContent = name;
-    a.setAttribute("aria-label", "个人中心");
+    a.setAttribute("aria-label", "个人信息");
     const day = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date());
-    if (localStorage.getItem("sp-ci") !== day) a.classList.add("dot");
+    const bt = document.querySelector('.seg a[href="bounty.html"]');
+    if (bt && localStorage.getItem("sp-ci") !== day) bt.classList.add("dot");
     const track = act => {
       let t = JSON.parse(localStorage.getItem("sp-track") || "null");
       if (!t || t.day !== day) t = { day, a: [] };

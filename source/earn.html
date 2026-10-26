@@ -8,17 +8,17 @@
 <link rel="canonical" href="{{SITE_URL}}budget.html#bank">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <script>
-  // 零花钱专区拆分：银行开户 → 穷鬼专区「开户专栏」，任务和赚羊毛 → 个人中心「小羊赏金」。旧链接按锚点跳到新位置
+  // 零花钱专区拆分：银行开户 → 穷鬼专区「开户专栏」，任务和赚羊毛 → 小羊赏金（bounty.html）。旧链接按锚点跳到新位置
   (function () {
     var h = location.hash.slice(1);
     var to = { bank: "budget.html#bank", "bank-list": "budget.html#bank", banks: "budget.html#banks", hsbc: "budget.html#hsbc" }[h]
-      || (/^w-/.test(h) ? "budget.html#" + h : "account.html#bounty");
+      || (/^w-/.test(h) ? "budget.html#" + h : "bounty.html");
     location.replace(to);
   })();
 </script>
-<meta http-equiv="refresh" content="0; url=account.html#bounty">
+<meta http-equiv="refresh" content="0; url=bounty.html">
 </head>
 <body style="font-family:system-ui,sans-serif;padding:40px;line-height:1.7">
-<p>零花钱专区已经拆分：银行开户奖励在 <a href="budget.html#bank">穷鬼专区 · 开户专栏</a>，做任务赚羊毛在 <a href="account.html#bounty">个人中心 · 小羊赏金</a>。</p>
+<p>零花钱专区已经拆分：银行开户奖励在 <a href="budget.html#bank">穷鬼专区 · 开户专栏</a>，做任务赚羊毛在 <a href="bounty.html">小羊赏金</a>。</p>
 </body>
 </html>

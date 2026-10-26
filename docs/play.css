@@ -319,15 +319,6 @@ a.muted:hover { color: var(--ink); }
 .sb-ico { display: grid; place-items: center; width: 56px; height: 56px; border: var(--bw) solid #141414; border-radius: 16px; color: #141414; box-shadow: 3px 3px 0 #141414; transform: rotate(-4deg); }
 .sb-ico .ico { width: 28px; height: 28px; }
 .sb-freebie .sb-ico { background: var(--tomato); } .sb-survey .sb-ico { background: var(--mint); } .sb-poll .sb-ico { background: var(--yellow); }
-.redline { margin-top: 32px; padding: 22px 24px; border: 3px solid var(--line); border-radius: 20px; background: var(--surface); }
-.redline-h { display: flex; gap: 14px; align-items: center; margin-bottom: 16px; }
-.redline-h .mark { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border: var(--bw) solid #141414; border-radius: 50%; background: var(--tomato); color: #fff; font: 900 22px var(--font-display); }
-.redline-h b { display: block; font-size: 18px; font-weight: 900; }
-.redline-h span { font-size: 13.5px; color: var(--muted); }
-.redline ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
-.redline li { padding: 12px 14px; border: var(--bw) solid var(--line); border-radius: 12px; background: var(--paper); font-size: 13.5px; color: var(--muted); }
-.redline li b { display: block; margin-bottom: 2px; color: var(--ink); font-size: 14.5px; }
-.redline a { color: var(--ink); }
 
 /* ---------- 小羊商店 ---------- */
 .shop-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 20px 32px; padding: 28px 30px; border: 3px solid var(--line); border-radius: 24px; background: var(--mint); color: #141414; box-shadow: 6px 6px 0 var(--shadow); }
@@ -411,7 +402,6 @@ a.muted:hover { color: var(--ink); }
   .good-f .btn, .good-f .b-st { flex-basis: 100%; justify-content: center; }
   .buy-top { grid-template-columns: 96px minmax(0, 1fr); } .buy-top img { width: 96px; height: 72px; }
   .soon-board { grid-template-columns: 44px minmax(0, 1fr); padding: 16px; } .sb-ico { width: 44px; height: 44px; }
-  .redline { padding: 18px 16px; }
   .shop-foot .rules li { grid-template-columns: 22px minmax(0, 1fr); gap: 2px 10px; }
   .shop-foot .rules span { grid-column: 2; justify-self: start; text-align: left; }
   .o { grid-template-columns: 56px minmax(0, 1fr); } .o img, .o .good-ph.sm { width: 56px; height: 42px; }
@@ -639,3 +629,11 @@ a.muted:hover { color: var(--ink); }
   .mem-grid { gap: 8px; }
   .result-card { min-width: 0; width: 100%; padding: 20px 18px; }
 }
+
+/* 个人信息页（account.html）：牧场证只留身份，右边引到小羊赏金；下面是档案设置 */
+.me .pass-stub { align-content: center; gap: 12px; }
+.me .pass-stub .btn { justify-self: start; }
+.me-go { margin: 0; font-size: 14px; font-weight: 700; }
+.me .hub-who small[data-profile-pct] { color: var(--cobalt); font-weight: 700; }
+.me .hub-main { margin-top: 36px; }
+@media (max-width: 640px) { .me .hub-main { margin-top: 24px; } .me .pass-stub { grid-template-columns: 1fr; } }
