@@ -815,3 +815,21 @@ html.modal-open { overflow: hidden; }
   .seg a { padding: 8px 0; font-size: 12px; letter-spacing: -.02em; }
 }
 @media (max-width: 360px) { .seg a { font-size: 11px; } }
+
+/* 折叠专栏（穷鬼专区 · 开户）：<details class="fold">，链接到里面的锚点时 nav.js 自动展开 */
+.fold { margin-top: 18px; border: var(--bw) solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: 4px 4px 0 var(--shadow); }
+.fold > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; cursor: pointer; list-style: none; }
+.fold > summary::-webkit-details-marker { display: none; }
+.fold > summary span { display: grid; gap: 4px; }
+.fold > summary small { color: var(--cobalt); font-size: 12px; letter-spacing: .08em; }
+.fold > summary b { font-family: var(--font-display); font-size: 22px; line-height: 1.2; }
+.fold > summary em { font-style: normal; font-size: 14px; color: var(--muted); }
+.fold > summary i { position: relative; flex: none; width: 40px; height: 40px; border: var(--bw) solid var(--line); border-radius: 50%; background: var(--yellow); transition: transform .2s; }
+.fold > summary i::before, .fold > summary i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 3px; margin: -1.5px 0 0 -7px; border-radius: 2px; background: #141414; }
+.fold > summary i::after { transform: rotate(90deg); transition: transform .2s; }
+.fold[open] > summary i { transform: rotate(180deg); }
+.fold[open] > summary i::after { transform: rotate(0); }
+.fold[open] > summary { border-bottom: 2px dashed color-mix(in srgb, var(--ink) 25%, transparent); }
+.fold > summary:hover b { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.fold-body { padding: 4px 22px 22px; }
+@media (max-width: 640px) { .fold > summary { padding: 14px 16px; } .fold > summary b { font-size: 18px; } .fold-body { padding: 0 14px 16px; } }

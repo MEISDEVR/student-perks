@@ -1,13 +1,16 @@
--- Sheeperks 羊毛牧场：积分（羊毛）、等级、签到、任务、悬赏、成就、小游戏。
+-- Sheeperks 羊毛牧场：积分（羊毛）、等级、签到、任务、小羊赏金、成就、小游戏、小羊商店。
 -- 在 Supabase 后台 SQL Editor 里整段运行（先跑过 schema.sql）。可以重复运行：表用 if not exists，函数用 create or replace，任务/成就用 upsert。
 --
 -- 原则：
 --   1. 前端不能直接写任何发分的表，只能调下面这些 security definer 函数，函数里按规则算分、限次。
 --   2. 所有发分写进 wool_ledger，(user_id, kind, ref) 唯一，同一件事重复调用不会重复发。
 --   3. 「一天」按英国时间算（Europe/London），每周从周一开始。
---   4. 羊毛只能做任务、签到、玩游戏获得，不能买，不做拉人头、不收押金。
+--   4. 羊毛只能做任务、签到、玩游戏获得，不能买、不能换现金，不做拉人头、不收押金。
+--   5. 兑换礼品时扣羊毛，订单取消自动退回；等级按累计获得算，兑换不掉级。
 --
--- 后台审核悬赏：Table Editor → quest_submissions，把 status 改成 approved（发羊毛）或 rejected（可在 note 写原因）。
+-- 后台审核赏金：Table Editor → quest_submissions，把 status 改成 approved（发羊毛）或 rejected（可在 note 写原因）。
+-- 后台处理兑换：Table Editor → shop_orders，pending → ready（备好货 / 发了券码，note 里写怎么领）→ done；改成 cancelled 自动退回羊毛。
+-- 上架礼品：Table Editor → shop_items，status 改成 on 才能兑换（soon = 只展示「即将上架」，off = 隐藏）。
 
 -- ---------- 表 ----------
 create table if not exists public.quests (
@@ -95,6 +98,43 @@ create table if not exists public.game_plays (
 );
 create index if not exists game_plays_user_day on public.game_plays (user_id, day);
 
+-- 小羊赏金分类：field 实地任务（核实 / 拍券 / 实测）、freebie 商家免费赠品、survey 问卷、poll 投票。后三类先留板块。
+alter table public.quests add column if not exists cat text not null default 'field';
+do $$ begin
+  alter table public.quests add constraint quests_cat_check check (cat in ('field', 'freebie', 'survey', 'poll'));
+exception when duplicate_object then null; end $$;
+
+-- 小羊商店
+create table if not exists public.shop_items (
+  code      text primary key,
+  title     text not null,
+  body      text not null default '',
+  cost      int  not null check (cost > 0),
+  cat       text not null default 'merch' check (cat in ('merch', 'coupon', 'digital')),
+  image     text,                         -- 网站上的图片路径，比如 assets/shop/tote.jpg
+  stock     int,                          -- 总库存，空 = 不限
+  per_user  int  not null default 1,      -- 每人最多兑换几次
+  min_level int  not null default 1,
+  ship      text not null default 'meet' check (ship in ('meet', 'post', 'online')),  -- 格拉斯哥面交 / 邮寄 / 线上发券码
+  status    text not null default 'soon' check (status in ('on', 'soon', 'off')),
+  ends_at   timestamptz,
+  sort      int  not null default 0
+);
+
+create table if not exists public.shop_orders (
+  id         bigserial primary key,
+  user_id    uuid not null references auth.users (id) on delete cascade,
+  item       text not null references public.shop_items (code),
+  cost       int  not null,
+  contact    text check (char_length(contact) <= 200),   -- 用户留的联系方式（微信号 / 邮箱），只给管理员看
+  status     text not null default 'pending' check (status in ('pending', 'ready', 'done', 'cancelled')),
+  note       text,                                        -- 管理员写给用户的：取货时间地点、券码等
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+create index if not exists shop_orders_user on public.shop_orders (user_id, created_at desc);
+create index if not exists shop_orders_item on public.shop_orders (item) where status <> 'cancelled';
+
 -- ---------- 权限：自己的数据只读，写入只走函数 ----------
 alter table public.quests enable row level security;
 alter table public.badges enable row level security;
@@ -104,19 +144,23 @@ alter table public.user_actions enable row level security;
 alter table public.user_badges enable row level security;
 alter table public.quest_submissions enable row level security;
 alter table public.game_plays enable row level security;
+alter table public.shop_items enable row level security;
+alter table public.shop_orders enable row level security;
 
 revoke all on public.quests, public.badges, public.wool_ledger, public.checkins, public.user_actions,
-              public.user_badges, public.quest_submissions, public.game_plays from anon, authenticated;
-grant select on public.quests, public.badges to anon, authenticated;
+              public.user_badges, public.quest_submissions, public.game_plays, public.shop_items, public.shop_orders from anon, authenticated;
+grant select on public.quests, public.badges, public.shop_items to anon, authenticated;
 grant select on public.wool_ledger, public.checkins, public.user_actions, public.user_badges,
-                public.quest_submissions, public.game_plays to authenticated;
+                public.quest_submissions, public.game_plays, public.shop_orders to authenticated;
 
 drop policy if exists "quests readable" on public.quests;
 drop policy if exists "badges readable" on public.badges;
 create policy "quests readable" on public.quests for select using (active);
 create policy "badges readable" on public.badges for select using (true);
+drop policy if exists "shop readable" on public.shop_items;
+create policy "shop readable" on public.shop_items for select using (status <> 'off');
 do $$ declare t text; begin
-  foreach t in array array['wool_ledger', 'checkins', 'user_actions', 'user_badges', 'quest_submissions', 'game_plays'] loop
+  foreach t in array array['wool_ledger', 'checkins', 'user_actions', 'user_badges', 'quest_submissions', 'game_plays', 'shop_orders'] loop
     execute format('drop policy if exists "read own" on public.%I', t);
     execute format('create policy "read own" on public.%I for select using (auth.uid() = user_id)', t);
   end loop;
@@ -127,14 +171,14 @@ create or replace function public.uk_today() returns date language sql stable se
   select (now() at time zone 'Europe/London')::date;
 $$;
 
--- 等级按累计获得的羊毛算（以后兑换花掉也不掉级）。门槛和前端 hub.js 的 LEVELS 保持一致。
+-- 等级按累计获得的羊毛算（兑换花掉也不掉级；订单取消退回的不算新获得）。门槛和前端 hub.js 的 LEVELS 保持一致。
 create or replace function public.wool_level(earned int) returns int language sql immutable set search_path = '' as $$
   select case when earned >= 2000 then 6 when earned >= 900 then 5 when earned >= 400 then 4
               when earned >= 150 then 3 when earned >= 50 then 2 else 1 end;
 $$;
 
 create or replace function public._earned(uid uuid) returns int language sql stable set search_path = '' as $$
-  select coalesce(sum(delta) filter (where delta > 0), 0)::int from public.wool_ledger where user_id = uid;
+  select coalesce(sum(delta) filter (where delta > 0 and kind <> 'refund'), 0)::int from public.wool_ledger where user_id = uid;
 $$;
 
 create or replace function public._give(uid uuid, amount int, k text, r text, n text) returns boolean
@@ -220,14 +264,14 @@ begin
     'today', today,
     'balance', coalesce((select sum(delta) from public.wool_ledger where user_id = uid), 0),
     'earned', public._earned(uid),
-    'week', coalesce((select sum(delta) from public.wool_ledger where user_id = uid and delta > 0
+    'week', coalesce((select sum(delta) from public.wool_ledger where user_id = uid and delta > 0 and kind <> 'refund'
                       and (created_at at time zone 'Europe/London')::date >= date_trunc('week', today)::date), 0),
     'streak', coalesce((select streak from public.checkins where user_id = uid and day >= today - 1 order by day desc limit 1), 0),
     'checked', exists (select 1 from public.checkins where user_id = uid and day = today),
     'checkins', coalesce((select jsonb_agg(day order by day) from public.checkins where user_id = uid and day > today - 35), '[]'),
     'quests', coalesce((select jsonb_agg(jsonb_build_object(
         'code', q.code, 'kind', q.kind, 'title', q.title, 'body', q.body, 'reward', q.reward, 'goal', q.goal,
-        'min_level', q.min_level, 'tag', q.tag, 'link', q.link, 'ends_at', q.ends_at,
+        'min_level', q.min_level, 'tag', q.tag, 'cat', q.cat, 'link', q.link, 'ends_at', q.ends_at,
         'left', case when q.slots is null then null else q.slots - (select count(*) from public.quest_submissions s where s.quest = q.code and s.status <> 'rejected') end,
         'slots', q.slots,
         'progress', case when q.kind = 'bounty' then null else least(public._progress(uid, q), q.goal) end,
@@ -240,7 +284,16 @@ begin
     'badges', coalesce((select jsonb_agg(jsonb_build_object('code', code, 'at', earned_at)) from public.user_badges where user_id = uid), '[]'),
     'ledger', coalesce((select jsonb_agg(x) from (select delta, kind, note, created_at from public.wool_ledger
                         where user_id = uid order by created_at desc, id desc limit 40) x), '[]'),
-    'game_today', coalesce((select sum(reward) from public.game_plays where user_id = uid and day = today), 0)
+    'game_today', coalesce((select sum(reward) from public.game_plays where user_id = uid and day = today), 0),
+    'shop', coalesce((select jsonb_agg(jsonb_build_object(
+        'code', i.code, 'title', i.title, 'body', i.body, 'cost', i.cost, 'cat', i.cat, 'image', i.image, 'ship', i.ship,
+        'status', i.status, 'min_level', i.min_level, 'per_user', i.per_user, 'ends_at', i.ends_at, 'stock', i.stock,
+        'left', case when i.stock is null then null else i.stock - (select count(*) from public.shop_orders o where o.item = i.code and o.status <> 'cancelled') end,
+        'mine', (select count(*) from public.shop_orders o where o.item = i.code and o.user_id = uid and o.status <> 'cancelled')
+      ) order by i.status = 'soon', i.sort, i.cost) from public.shop_items i where i.status <> 'off'), '[]'),
+    'orders', coalesce((select jsonb_agg(jsonb_build_object('id', o.id, 'item', o.item, 'title', i.title, 'image', i.image, 'cost', o.cost,
+        'status', o.status, 'note', o.note, 'contact', o.contact, 'at', o.created_at) order by o.created_at desc)
+      from public.shop_orders o join public.shop_items i on i.code = o.item where o.user_id = uid), '[]')
   );
 end $$;
 
@@ -333,6 +386,58 @@ begin
   return jsonb_build_object('ok', true, 'reward', r, 'today', got + r, 'cap', 10, 'badges', public._badges(uid));
 end $$;
 
+-- 兑换礼品：上架中、没过期、等级够、有库存、没超每人限额、余额够才扣。同一用户加锁，连点也不会扣成负数。
+create or replace function public.redeem(c text, contact text default null) returns jsonb
+language plpgsql security definer set search_path = '' as $$
+declare uid uuid := auth.uid(); i public.shop_items; bal int; used int; oid bigint;
+begin
+  if uid is null then raise exception 'not signed in'; end if;
+  perform pg_advisory_xact_lock(hashtextextended('shop:' || uid::text, 0));
+  select * into i from public.shop_items where code = c for update;
+  if i.code is null or i.status <> 'on' or (i.ends_at is not null and i.ends_at < now()) then return jsonb_build_object('ok', false, 'reason', 'closed'); end if;
+  if public.wool_level(public._earned(uid)) < i.min_level then return jsonb_build_object('ok', false, 'reason', 'level'); end if;
+  if i.ship <> 'online' and char_length(coalesce(trim(contact), '')) < 2 then return jsonb_build_object('ok', false, 'reason', 'contact'); end if;
+  if i.stock is not null and (select count(*) from public.shop_orders where item = c and status <> 'cancelled') >= i.stock then
+    return jsonb_build_object('ok', false, 'reason', 'stock');
+  end if;
+  if (select count(*) from public.shop_orders where item = c and user_id = uid and status <> 'cancelled') >= i.per_user then
+    return jsonb_build_object('ok', false, 'reason', 'limit');
+  end if;
+  bal := coalesce((select sum(delta) from public.wool_ledger where user_id = uid), 0);
+  if bal < i.cost then return jsonb_build_object('ok', false, 'reason', 'balance', 'need', i.cost - bal); end if;
+  insert into public.shop_orders (user_id, item, cost, contact) values (uid, c, i.cost, nullif(left(trim(contact), 200), '')) returning id into oid;
+  perform public._give(uid, -i.cost, 'shop', oid::text, '兑换：' || i.title);
+  return jsonb_build_object('ok', true, 'order', oid, 'balance', bal - i.cost);
+end $$;
+
+-- 用户自己取消还没处理的兑换（羊毛由下面的触发器退回）
+create or replace function public.cancel_order(o bigint) returns jsonb
+language plpgsql security definer set search_path = '' as $$
+declare uid uuid := auth.uid();
+begin
+  if uid is null then raise exception 'not signed in'; end if;
+  update public.shop_orders set status = 'cancelled', note = coalesce(note, '你自己取消了') where id = o and user_id = uid and status = 'pending';
+  return jsonb_build_object('ok', found);
+end $$;
+
+-- 订单改成 cancelled（用户取消或后台取消）时退回羊毛，每单只退一次
+create or replace function public.order_changed() returns trigger
+language plpgsql security definer set search_path = '' as $$
+declare t text;
+begin
+  new.updated_at := now();
+  if new.status = 'cancelled' and old.status <> 'cancelled' then
+    select title into t from public.shop_items where code = new.item;
+    perform public._give(new.user_id, new.cost, 'refund', new.id::text, '退回：' || coalesce(t, new.item));
+  elsif old.status = 'cancelled' and new.status <> 'cancelled' then
+    raise exception '已取消的订单不能恢复，请让用户重新兑换';
+  end if;
+  return new;
+end $$;
+drop trigger if exists shop_orders_changed on public.shop_orders;
+create trigger shop_orders_changed before update on public.shop_orders
+  for each row execute function public.order_changed();
+
 -- 后台把悬赏改成 approved 时自动发羊毛、记行为、查成就
 create or replace function public.bounty_reviewed() returns trigger
 language plpgsql security definer set search_path = '' as $$
@@ -361,14 +466,16 @@ create trigger quest_submissions_badges after update on public.quest_submissions
 -- 内部函数不给前端直接调
 do $$ declare f text; begin
   foreach f in array array['_earned(uuid)', '_profile_score(uuid)', '_give(uuid,int,text,text,text)', '_bump(uuid,text,int)', '_progress(uuid,public.quests)',
-                           '_period(public.quests)', '_badges(uuid)', 'bounty_reviewed()', 'bounty_badges()'] loop
+                           '_period(public.quests)', '_badges(uuid)', 'bounty_reviewed()', 'bounty_badges()', 'order_changed()'] loop
     execute format('revoke all on function public.%s from public, anon, authenticated', f);
   end loop;
 end $$;
 revoke all on function public.hub_state(), public.check_in(), public.track(text), public.claim_quest(text),
-                       public.submit_bounty(text, text, text), public.game_finish(text, int) from public, anon;
+                       public.submit_bounty(text, text, text), public.game_finish(text, int),
+                       public.redeem(text, text), public.cancel_order(bigint) from public, anon;
 grant execute on function public.hub_state(), public.check_in(), public.track(text), public.claim_quest(text),
-                          public.submit_bounty(text, text, text), public.game_finish(text, int) to authenticated;
+                          public.submit_bounty(text, text, text), public.game_finish(text, int),
+                          public.redeem(text, text), public.cancel_order(bigint) to authenticated;
 
 -- ---------- 初始任务和成就（改文案、奖励直接改这里再跑一遍，或在 Table Editor 改） ----------
 insert into public.quests (code, kind, title, body, reward, action, goal, sort) values
@@ -382,11 +489,11 @@ insert into public.quests (code, kind, title, body, reward, action, goal, sort) 
   ('d_quiz',    'daily',  '答完今日问答',     '3 道题，答对越多羊毛越多',                     1,  'quiz',    1, 13),
   ('w_checkin', 'weekly', '本周签到 5 天',    '周一到周日任意 5 天',                          15, 'checkin', 5, 20),
   ('w_game',    'weekly', '本周玩 8 局游戏',  '游乐场任意游戏',                               10, 'game',    8, 21),
-  ('w_bounty',  'weekly', '完成 1 个悬赏',    '任务大厅里的悬赏，审核通过才算',               20, 'bounty',  1, 22)
+  ('w_bounty',  'weekly', '完成 1 个赏金任务', '小羊赏金里的真实任务，审核通过才算',          20, 'bounty',  1, 22)
 on conflict (code) do update set kind = excluded.kind, title = excluded.title, body = excluded.body, reward = excluded.reward,
   action = excluded.action, goal = excluded.goal, sort = excluded.sort;
 
--- 示例悬赏：上线前按实际情况改，或在 Table Editor 新增行（kind 填 bounty）
+-- 示例赏金：上线前按实际情况改，或在 Table Editor 新增行（kind 填 bounty，cat 填 field / freebie / survey / poll）
 insert into public.quests (code, kind, title, body, reward, tag, min_level, slots, link, ends_at, sort) values
   ('b_mcd_coupon', 'bounty', '核实：麦当劳纸质券还能用吗', '去格拉斯哥任意一家麦当劳，用穷鬼专区里的纸质券点一次，告诉我们哪家店、哪张券、能不能用。', 15, '核实', 2, 20, 'budget.html#mcd-glasgow', '2026-12-04 23:59+00', 30),
   ('b_new_coupon', 'bounty', '拍券：店里新出的纸质优惠券', '在格拉斯哥任意连锁店拿到新的纸质券？写清店名、券面内容和截止日（可以附图片链接）。审核通过后收录到网站。', 20, '拍券', 2, 30, null, null, 31),
@@ -407,3 +514,16 @@ insert into public.badges (code, title, body, reward, sort) values
   ('lv3',      '薅毛学徒', '升到 3 级',                      0,  11),
   ('lv5',      '牧场老手', '升到 5 级',                      0,  12)
 on conflict (code) do update set title = excluded.title, body = excluded.body, reward = excluded.reward, sort = excluded.sort;
+
+-- 小羊商店首批礼品：先全部「即将上架」（status = soon），备好货后在 Table Editor 把 status 改成 on、填 stock。
+-- 价格只是起步建议，可以直接改；这里用 do nothing，重跑不会覆盖你在后台改过的值。
+insert into public.shop_items (code, title, body, cost, cat, image, stock, per_user, min_level, ship, status, sort) values
+  ('stickers',   '格村小羊表情贴纸',   '防水 PVC 模切，一版 9 枚，贴电脑、水杯、宿舍门', 60,   'merch', 'assets/shop/stickers.jpg',   null, 2, 1, 'meet', 'soon', 1),
+  ('pin',        '小羊珐琅徽章',       '限定编号徽章，别在包上、帽子上',                 180,  'merch', 'assets/shop/pin.jpg',        null, 1, 2, 'meet', 'soon', 2),
+  ('cardholder', '公交卡套',           '带挂绳的卡套，Young Scot 卡、学生证都能放',      220,  'merch', 'assets/shop/cardholder.jpg', null, 1, 2, 'meet', 'soon', 3),
+  ('mug',        '「今日份羊毛已到账」搪瓷杯', '宿舍喝水泡面都行',                     380,  'merch', 'assets/shop/mug.jpg',        null, 1, 3, 'meet', 'soon', 4),
+  ('tote',       '帆布袋 Bag for Life', '超市购物不用再买 10p 塑料袋',                   450,  'merch', 'assets/shop/tote.jpg',       null, 1, 3, 'meet', 'soon', 5),
+  ('beanie',     'Wee Deals 毛线帽',    '格拉斯哥冬天刚需',                              700,  'merch', 'assets/shop/beanie.jpg',     null, 1, 4, 'meet', 'soon', 6),
+  ('hoodie',     'Skint but Smart 卫衣', '牧场老手限定，背后印「穷鬼专区 · 终身会员」',  1500, 'merch', 'assets/shop/hoodie.jpg',     null, 1, 5, 'meet', 'soon', 7),
+  ('coupon',     '本地商家券',          '格拉斯哥合作商家的折扣券，线上发券码',          100,  'coupon', null,                        null, 1, 2, 'online', 'soon', 20)
+on conflict (code) do nothing;

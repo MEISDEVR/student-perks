@@ -264,7 +264,7 @@ ACCT_BTN = ('<a class="acct" href="account.html" aria-label="登录"><svg width=
             '<path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>登录</span></a>') if AUTH_ON else ""
 SEARCH_BOX += ACCT_BTN
 PAGE_LABEL = {"index.html": "全部优惠", "budget.html": "穷鬼专区", "black-friday.html": "英国黑五",
-              "bicester.html": "比斯特专区", "earn.html": "零花钱专区"}
+              "bicester.html": "比斯特专区"}
 ITEM_CLASS = {"ticket", "card", "row", "tl", "tip", "bc", "route", "cat"}
 CHILD_OF = {"stack", "plan"}  # 这些容器的直接子元素算一张卡
 TITLE_TAGS = {"h3", "h4", "summary", "th"}
@@ -291,7 +291,7 @@ class Indexer(HTMLParser):
             return
         if tag == "h2":
             self.h2 = []
-        if self.cur is None and (cls & ITEM_CLASS or tag == "details" or (tag == "div" and parent[1] & CHILD_OF)
+        if self.cur is None and (cls & ITEM_CLASS or (tag == "details" and "fold" not in cls) or (tag == "div" and parent[1] & CHILD_OF)
                                  or (tag == "tr" and parent[0] == "tbody")):
             line, col = self.getpos()
             self.cur = {"depth": len(self.stack), "id": a.get("id"), "pos": self.lines[line - 1] + col + 1 + len(tag),
@@ -373,7 +373,7 @@ os.makedirs(os.path.join(DIST, "cal"))
 for w in WEEKLY:
     if ics(w):
         open(os.path.join(DIST, "cal", f"{w['id']}.ics"), "w", encoding="utf-8", newline="").write(ics(w))
-EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html", "earn.html"]
+EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
     src = re.sub(r"\{\{weekly:(\w+)\}\}", lambda m: "".join(wticket(w) for w in WEEKLY if w["tag"] == m.group(1)), src)
@@ -394,6 +394,9 @@ src = open(os.path.join(ROOT, "games.html"), encoding="utf-8").read().replace("{
 src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("<footer", JOIN + "<footer", 1)
 src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="quiz.js"></script>\n<script src="games.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
 open(os.path.join(DIST, "games.html"), "w", encoding="utf-8").write(src)
+# 零花钱专区已拆分：earn.html 只留一个跳转页（银行 → 穷鬼专区开户专栏，其余 → 个人中心小羊赏金）
+open(os.path.join(DIST, "earn.html"), "w", encoding="utf-8").write(
+    open(os.path.join(ROOT, "earn.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL))
 for n in ["account.js", "sp.js", "hub.js", "games.js", "quiz.js", "play.css"]:
     shutil.copy(os.path.join(ROOT, n), DIST)
 open(os.path.join(DIST, "auth-config.js"), "w", encoding="utf-8").write(
