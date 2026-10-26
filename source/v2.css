@@ -796,3 +796,22 @@ html.modal-open { overflow: hidden; }
   .acct-card { padding: 20px 16px; box-shadow: 5px 5px 0 var(--cobalt); }
   .fld-row { grid-template-columns: 1fr; }
 }
+
+/* ---------- 顶栏排版：LOGO ｜ 栏目（居中）｜ 搜索 + 登录 ---------- */
+.nav > .seg { flex: none; margin-inline: auto; }
+.nav:has(.sbox) .back { display: none; }  /* 点 LOGO 就回首页 */
+@media (min-width: 1081px) {
+  .nav { gap: 16px; }
+  .sbox { flex: 0 1 220px; min-width: 0; }
+}
+/* 中等宽度：搜索收成圆形图标按钮，保证栏目和登录不被挤 */
+@media (min-width: 1081px) and (max-width: 1360px) {
+  .sbox { flex: none; width: 44px; height: 44px; padding: 0; justify-content: center; }
+  .sbox span, .sbox kbd { display: none; }
+}
+/* 手机：5 个栏目排一行 */
+@media (max-width: 640px) {
+  .seg { grid-template-columns: repeat(5, minmax(0, 1fr)); border-radius: 999px; }
+  .seg a { padding: 8px 0; font-size: 12px; letter-spacing: -.02em; }
+}
+@media (max-width: 360px) { .seg a { font-size: 11px; } }

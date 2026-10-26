@@ -395,6 +395,15 @@ open(os.path.join(DIST, "auth-config.js"), "w", encoding="utf-8").write(
                                       "wechat": AUTH_WECHAT, "qq": AUTH_QQ}) + ";\n")
 json.dump({"p": list(PAGE_LABEL.values()), "i": search_entries}, open(os.path.join(DIST, "search-index.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))
+# 引用的 css/js 加 ?v=内容哈希：部署后浏览器立刻拿新文件，不会新 HTML 配旧样式
+import hashlib
+ver = lambda n: hashlib.md5(open(os.path.join(DIST, n), "rb").read()).hexdigest()[:8]
+for n in os.listdir(DIST):
+    if n.endswith(".html"):
+        h = os.path.join(DIST, n)
+        s = re.sub(r'((?:href|src)=")([\w./-]+\.(?:css|js))(")', lambda m: m.group(1) + m.group(2) + "?v=" + ver(m.group(2)) + m.group(3)
+                   if os.path.exists(os.path.join(DIST, m.group(2))) else m.group(0), open(h, encoding="utf-8").read())
+        open(h, "w", encoding="utf-8").write(s)
 open(os.path.join(DIST, ".nojekyll"), "w").close()
 host = SITE_URL.split("/")[2]
 if not host.endswith(".github.io"):  # GitHub Pages 自定义域名；DIST 每次重建，CNAME 要在这里写

@@ -158,9 +158,8 @@
 <header class="topbar"><div class="wrap">
   <nav class="nav">
     <a class="brand" href="#top" id="top"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>Sheeperks</b><small>英国羊毛 · UK STUDENT PERKS</small></span></a>
-    <div class="seg"><a class="on" href="#deals">全部优惠</a><i aria-hidden="true">✦</i><a href="budget.html">穷鬼专区</a><i aria-hidden="true">✦</i><a href="black-friday.html">英国黑五</a><i aria-hidden="true">✦</i><a href="bicester.html">比斯特专区</a><i aria-hidden="true">✦</i><a href="earn.html">零花钱专区</a><i aria-hidden="true">✦</i><a href="#guide">怎么验证</a><i aria-hidden="true">✦</i></div>
+    <div class="seg"><a class="on" href="#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="earn.html">零花钱专区</a></div>
     {{search}}
-    <span class="badge"><span class="js-month">10月</span>已核实</span>
   </nav>
 </div></header>
 
@@ -197,11 +196,11 @@
   </section>
 </div>
 
-<nav class="marquee" aria-label="热门优惠"><div class="marquee-track" id="marquee"><div class="mq-set"><a href="#d-github">Copilot 免费</a><i aria-hidden="true">✦</i><a href="#d-jetbrains">JetBrains 全家桶</a><i aria-hidden="true">✦</i><a href="#d-googlegemini">Gemini 一年</a><i aria-hidden="true">✦</i><a href="#d-notion">Notion Plus</a><i aria-hidden="true">✦</i><a href="#d-figma">Figma 教育版</a><i aria-hidden="true">✦</i><a href="budget.html#p-tesco">Tesco 会员价</a><i aria-hidden="true">✦</i><a href="budget.html#p-mcd">麦当劳积分</a><i aria-hidden="true">✦</i><a href="#d-nationalrail">Railcard 1/3 off</a><i aria-hidden="true">✦</i></div></div></nav>
+<nav class="marquee" aria-label="热门优惠"><div class="marquee-track" id="marquee"><div class="mq-set"><a href="#d-github">Copilot 免费</a><a href="#d-jetbrains">JetBrains 全家桶</a><a href="#d-googlegemini">Gemini 一年</a><a href="#d-notion">Notion Plus</a><a href="#d-figma">Figma 教育版</a><a href="budget.html#p-tesco">Tesco 会员价</a><a href="budget.html#p-mcd">麦当劳积分</a><a href="#d-nationalrail">Railcard 1/3 off</a></div></div></nav>
 
 <div class="wrap">
   <section class="sec" id="featuredSec">
-    <div class="sec-head"><div><div class="eyebrow">Editor's picks · 本学期</div><h2>先领这几个，最值</h2></div><a class="aside" href="#deals">全部 <span class="js-total">30</span> 项 →</a><i aria-hidden="true">✦</i></div>
+    <div class="sec-head"><div><div class="eyebrow">Editor's picks · 本学期</div><h2>先领这几个，最值</h2></div><a class="aside" href="#deals">全部 <span class="js-total">30</span> 项 →</a></div>
     <div class="bento" id="featured"></div>
   </section>
 
@@ -314,7 +313,7 @@
             <div><dt>验证</dt><dd>${esc(d.verify)}</dd></div>
             ${d.term ? `<div><dt>期限</dt><dd>${esc(d.term)}</dd></div>` : ""}
           </dl>
-          <div class="t-foot"><span class="pill">${esc(pillOf(d))}</span><a class="cta" href="${esc(d.url)}" target="_blank" rel="noopener">去申请 ${arrow}</a><i aria-hidden="true">✦</i></div>
+          <div class="t-foot"><span class="pill">${esc(pillOf(d))}</span><a class="cta" href="${esc(d.url)}" target="_blank" rel="noopener">去申请 ${arrow}</a></div>
         </div>
         <div class="stub${d.free ? "" : " deal"}" aria-label="${d.free ? "免费" : "折扣"}"><b>${d.free ? "FREE" : "DEAL"}</b><span>${d.free ? "免费" : "折扣"}</span></div>
       </article>`;
