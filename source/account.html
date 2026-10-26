@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>登录 · 我的羊毛档案｜Sheeperks 英国羊毛</title>
+<meta name="description" content="登录 Sheeperks 英国羊毛，填写学校、城市和关注的优惠类别。">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{{SITE_URL}}account.html">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="v2.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <nav class="nav">
+    <a class="brand" href="./"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>Sheeperks</b><small>英国羊毛 · UK STUDENT PERKS</small></span></a>
+    <div class="seg"><a href="./#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="earn.html">零花钱专区</a></div>
+    {{search}}
+    <a class="back" href="./">← 返回首页</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <section class="acct-page">
+    <div class="acct-intro">
+      <div class="eyebrow">ACCOUNT · 我的羊毛档案</div>
+      <h1>登录 Sheeperks，<br>建一份<mark>羊毛档案</mark></h1>
+      <p class="lede">填上城市、学校和你关心的类别。之后上线的「收藏优惠」「快到期提醒」「本地优惠优先」都按这份档案来，换手机换电脑也不丢。</p>
+      <ul class="acct-why">
+        <li><b>不用记密码</b>邮箱收 6 位验证码就能登录，第一次登录自动建号</li>
+        <li><b>只存必要信息</b>邮箱或手机号 + 你自己填的档案，不卖不分享</li>
+        <li><b>随时删除</b>档案页底部一键删除账号和全部资料</li>
+      </ul>
+    </div>
+
+    <div class="acct-card" id="acct" data-state="loading" aria-live="polite">
+
+      <!-- 未接入后端：build.py 没填 Supabase 配置时显示 -->
+      <div class="acct-pane" data-pane="off">
+        <div class="acct-h">登录功能接入中</div>
+        <p class="acct-note">账号系统正在接入，开放后这里可以用邮箱、手机号、微信或 QQ 登录。</p>
+      </div>
+
+      <!-- 未登录 -->
+      <div class="acct-pane" data-pane="out">
+        <div class="acct-h">登录 / 注册</div>
+        <div class="acct-tabs" role="tablist" aria-label="登录方式">
+          <button type="button" role="tab" data-tab="email" aria-selected="true">邮箱</button>
+          <button type="button" role="tab" data-tab="phone" aria-selected="false">手机号</button>
+          <button type="button" role="tab" data-tab="wechat" aria-selected="false">微信</button>
+          <button type="button" role="tab" data-tab="qq" aria-selected="false">QQ</button>
+        </div>
+
+        <form class="acct-form" data-form="email" role="tabpanel" novalidate>
+          <label class="fld"><span>邮箱</span><input type="email" name="id" autocomplete="email" inputmode="email" placeholder="学校邮箱或常用邮箱" required></label>
+          <div class="otp" hidden>
+            <p class="acct-note">邮件已发到 <b data-sent-to></b>：填邮件里的 6 位验证码，或直接点邮件里的登录链接（用同一个浏览器打开）。没收到看看垃圾箱。</p>
+            <label class="fld"><span>6 位验证码</span><input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="······"></label>
+          </div>
+          <div class="acct-actions">
+            <button class="btn" type="submit" data-label-send="发送验证码" data-label-verify="登录">发送验证码</button>
+            <button class="linkish" type="button" data-resend hidden>重新发送</button>
+          </div>
+        </form>
+
+        <form class="acct-form" data-form="phone" role="tabpanel" novalidate hidden>
+          <div class="fld"><span>手机号</span>
+            <div class="phone-row">
+              <select name="cc" aria-label="国家或地区区号"><option value="+44">🇬🇧 +44</option><option value="+86">🇨🇳 +86</option></select>
+              <input type="tel" name="id" autocomplete="tel-national" inputmode="tel" placeholder="7123 456789" required>
+            </div>
+          </div>
+          <div class="otp" hidden>
+            <p class="acct-note">短信验证码已发到 <b data-sent-to></b>，10 分钟内有效。</p>
+            <label class="fld"><span>6 位验证码</span><input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="······"></label>
+          </div>
+          <div class="acct-actions">
+            <button class="btn" type="submit" data-label-send="发送验证码" data-label-verify="登录">发送验证码</button>
+            <button class="linkish" type="button" data-resend hidden>重新发送</button>
+          </div>
+          <p class="soon" data-soon>手机号登录即将开放，先用邮箱登录，之后可以在档案里绑定手机号。</p>
+        </form>
+
+        <div class="acct-form" data-form="wechat" role="tabpanel" hidden>
+          <a class="btn oauth wx" data-oauth="wechat" href="#">微信扫码登录</a>
+          <p class="soon" data-soon>微信登录即将开放，先用邮箱登录，开放后可以绑定到同一个账号。</p>
+        </div>
+        <div class="acct-form" data-form="qq" role="tabpanel" hidden>
+          <a class="btn oauth qq" data-oauth="qq" href="#">QQ 登录</a>
+          <p class="soon" data-soon>QQ 登录即将开放，先用邮箱登录，开放后可以绑定到同一个账号。</p>
+        </div>
+
+        <p class="acct-msg" data-msg role="status"></p>
+        <p class="acct-fine">登录即表示你同意我们保存你的邮箱或手机号和档案信息，只用于网站功能。</p>
+      </div>
+
+      <!-- 已登录：个人档案 -->
+      <div class="acct-pane" data-pane="in">
+        <div class="me">
+          <span class="avatar" data-avatar aria-hidden="true">羊</span>
+          <div><b data-me-name>羊毛档案</b><small data-me-id></small></div>
+          <button class="linkish" type="button" data-signout>退出登录</button>
+        </div>
+        <form class="profile" data-profile novalidate>
+          <label class="fld"><span>昵称 <em>*</em></span><input name="nickname" maxlength="20" required placeholder="群里怎么称呼你"></label>
+          <div class="fld-row">
+            <label class="fld"><span>所在城市</span>
+              <select name="city"><option value="">选择城市</option><option>格拉斯哥</option><option>爱丁堡</option><option>阿伯丁</option><option>邓迪</option><option>圣安德鲁斯</option><option>伦敦</option><option>曼彻斯特</option><option>伯明翰</option><option>利兹</option><option>谢菲尔德</option><option>诺丁汉</option><option>布里斯托</option><option>利物浦</option><option>纽卡斯尔</option><option>其他城市</option></select>
+            </label>
+            <label class="fld"><span>学校</span><input name="school" list="schools" maxlength="60" placeholder="例如 University of Glasgow"></label>
+            <datalist id="schools"><option>University of Glasgow</option><option>University of Strathclyde</option><option>Glasgow School of Art</option><option>Glasgow Caledonian University</option><option>Royal Conservatoire of Scotland</option><option>University of Edinburgh</option><option>Heriot-Watt University</option><option>Edinburgh Napier University</option><option>University of Aberdeen</option><option>University of Dundee</option><option>University of St Andrews</option></datalist>
+          </div>
+          <div class="fld-row">
+            <label class="fld"><span>学习阶段</span>
+              <select name="stage"><option value="">选择</option><option>预科 / 语言班</option><option>本科</option><option>授课型硕士</option><option>研究型硕士</option><option>博士</option><option>已毕业</option></select>
+            </label>
+            <label class="fld"><span>预计毕业</span>
+              <select name="grad_year"><option value="">选择年份</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option></select>
+            </label>
+          </div>
+          <fieldset class="fld chips">
+            <legend>关心哪些羊毛 <small>多选</small></legend>
+            <label><input type="checkbox" name="interests" value="food"><span>吃喝快餐</span></label>
+            <label><input type="checkbox" name="interests" value="grocery"><span>超市日用</span></label>
+            <label><input type="checkbox" name="interests" value="software"><span>软件 AI</span></label>
+            <label><input type="checkbox" name="interests" value="tech"><span>电脑数码</span></label>
+            <label><input type="checkbox" name="interests" value="fashion"><span>服饰比斯特</span></label>
+            <label><input type="checkbox" name="interests" value="travel"><span>交通出行</span></label>
+            <label><input type="checkbox" name="interests" value="bank"><span>银行奖励</span></label>
+            <label><input type="checkbox" name="interests" value="sale"><span>黑五大促</span></label>
+          </fieldset>
+          <label class="check"><input type="checkbox" name="email_opt_in"><span>有我关心的限时羊毛时，发邮件提醒我（随时可取消）</span></label>
+          <div class="acct-actions">
+            <button class="btn" type="submit">保存档案</button>
+            <span class="acct-msg" data-saved role="status"></span>
+          </div>
+        </form>
+        <details class="danger">
+          <summary>删除账号</summary>
+          <p>会永久删除你的登录信息和档案，不能恢复。</p>
+          <button class="btn ghost" type="button" data-delete>永久删除我的账号</button>
+        </details>
+      </div>
+
+      <div class="acct-pane" data-pane="loading"><p class="acct-note">加载中…</p></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-word"><img src="assets/logo.svg" alt="" width="168" height="168"><span>SHEEP<br>PERKS</span></div>
+    <div class="foot">
+    <div><b>关于账号数据</b><p>账号由 Supabase 托管（数据存放在欧盟/英国区域）。我们只保存登录用的邮箱或手机号和你填写的档案，不出售、不分享给商家。想导出或删除数据，在档案页操作或联系客服微信。</p></div>
+    <span class="mono">Sheeperks 英国羊毛 · 我的档案</span>
+    </div>
+  </div>
+</footer>
+{{auth_scripts}}
+</body>
+</html>

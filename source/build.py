@@ -30,6 +30,16 @@ CF_BEACON_TOKEN = ""
 ANALYTICS = (f'<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
              f'data-cf-beacon=\'{{"token": "{CF_BEACON_TOKEN}"}}\'></script>\n') if CF_BEACON_TOKEN else ""
 
+# 登录 + 个人档案：后端用 Supabase（开通步骤见 supabase/README.md）。URL 和 anon key 是前端公开配置，不是密钥。
+# 两项留空则不显示导航里的「登录」，account.html 显示「接入中」。环境变量可临时覆盖，方便本地测试。
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or "https://qsgycwpdhstrfhlsgsps.supabase.co"
+SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY") or ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzZ3ljd3BkaHN0cmZobHNnc3BzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwMzIyNTMsImV4cCI6MjEwODYwODI1M30"
+                     ".cxCqN1zYviNTzyRp9pSuUaMmbN304GVwt18ZFCI9ZU8")
+AUTH_PHONE = False   # 在 Supabase 接好短信服务商（Twilio 等）后改 True
+AUTH_WECHAT = ""     # 微信登录 Edge Function 地址，接好后填，例：https://abcd1234.supabase.co/functions/v1/wechat-login
+AUTH_QQ = ""         # QQ 登录 Edge Function 地址
+AUTH_ON = bool(SUPABASE_URL and SUPABASE_ANON_KEY)
+
 def pill(d):
     v = d["verify"]
     if re.search("SheerID", v, re.I): return "SheerID"
@@ -249,6 +259,10 @@ out = head + page[:split] + "\n</head>\n<body>\n" + page[split:] + "\n</body>\n<
 SEARCH_BOX = ('<button class="sbox" type="button" data-search aria-haspopup="dialog" aria-label="搜索全站优惠">'
               '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">'
               '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>搜优惠、品牌、关键词</span><kbd>Ctrl K</kbd></button>')
+ACCT_BTN = ('<a class="acct" href="account.html" aria-label="登录"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" '
+            'stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/>'
+            '<path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>登录</span></a>') if AUTH_ON else ""
+SEARCH_BOX += ACCT_BTN
 PAGE_LABEL = {"index.html": "全部优惠", "budget.html": "穷鬼专区", "black-friday.html": "英国黑五",
               "bicester.html": "比斯特专区", "earn.html": "零花钱专区"}
 ITEM_CLASS = {"ticket", "card", "row", "tl", "tip", "bc", "route", "cat"}
@@ -369,6 +383,16 @@ for name in EXTRA_PAGES:
     src, ents = index_page(src, name)
     search_entries += ents
     open(os.path.join(DIST, name), "w", encoding="utf-8").write(src)
+# 账号页：不进搜索索引和 sitemap
+src = open(os.path.join(ROOT, "account.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL)
+src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX.replace('class="acct"', 'class="acct on"'))
+src = src.replace("{{auth_scripts}}", '<script src="assets/vendor/supabase-2.45.4.js"></script>\n<script src="auth-config.js"></script>\n'
+                  '<script src="account.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
+open(os.path.join(DIST, "account.html"), "w", encoding="utf-8").write(src)
+shutil.copy(os.path.join(ROOT, "account.js"), DIST)
+open(os.path.join(DIST, "auth-config.js"), "w", encoding="utf-8").write(
+    "window.SP_AUTH = " + json.dumps({"url": SUPABASE_URL, "key": SUPABASE_ANON_KEY, "phone": AUTH_PHONE,
+                                      "wechat": AUTH_WECHAT, "qq": AUTH_QQ}) + ";\n")
 json.dump({"p": list(PAGE_LABEL.values()), "i": search_entries}, open(os.path.join(DIST, "search-index.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))
 open(os.path.join(DIST, ".nojekyll"), "w").close()
