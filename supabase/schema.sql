@@ -14,6 +14,10 @@ create table if not exists public.profiles (
   updated_at   timestamptz not null default now()
 );
 
+-- 建项目时没勾「Automatically expose new tables」的话，要手动给登录用户开表权限（勾了也不影响）
+grant select, insert, update on public.profiles to authenticated;
+revoke all on public.profiles from anon;
+
 -- 行级权限：每个人只能读写自己的那一行
 alter table public.profiles enable row level security;
 drop policy if exists "read own profile" on public.profiles;

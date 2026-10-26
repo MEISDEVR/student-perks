@@ -4,7 +4,7 @@
 
 ## 1. 建项目（约 10 分钟，邮箱登录就能用）
 
-1. 在 supabase.com 注册，New project，Region 选 **London (eu-west-2)**（数据留在英国，符合 UK GDPR）。
+1. 在 supabase.com 注册，New project，Region 点「Need a specific region?」选 **London (eu-west-2)**（数据留在英国，符合 UK GDPR）。Security 里勾 Enable Data API、Enable automatic RLS，「Automatically expose new tables」可以不勾（schema.sql 会单独授权）。
 2. SQL Editor → 粘贴 `schema.sql` 全文 → Run。
 3. Authentication → Sign In / Providers → Email：打开，关掉 "Confirm email"（验证码本身就是确认）。
 4. Authentication → Emails → Templates → **Magic Link** 和 **Confirm signup** 两个模板，正文都改成显示验证码，例如：
