@@ -3,16 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sheeperks 英国羊毛：在英留学生的学生优惠、限时羊毛与省钱攻略</title>
-<meta name="description" content="汇总 GitHub Student Pack、JetBrains、Azure for Students、Google AI 学生版、Notion、Figma、Spotify、Apple 教育优惠等海外学生优惠，写清资格、验证方式（学校邮箱、SheerID、UNiDAYS、ISIC）和官方申请入口。">
+<title>Sheeperks 英国羊毛：在英留学生的限时羊毛、黑五和比斯特活动</title>
+<meta name="description" content="在英留学生现在能用的限时优惠：快餐券、银行开户奖励、英国黑五 11-27 倒计时和已官宣信息、比斯特购物村近期活动，按截止日期排，过期自动下架。长期学生优惠见学生优惠页。">
 <meta name="google-site-verification" content="e53tznfkhhCijPSgTLN8fvLbjxAnkYY7kBtX5b2WUY4">
 <link rel="canonical" href="https://sheeperks.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sheeperks 英国羊毛：在英留学生的学生优惠、限时羊毛与省钱攻略">
-<meta property="og:description" content="汇总 GitHub Student Pack、JetBrains、Azure for Students、Google AI 学生版、Notion、Figma、Spotify、Apple 教育优惠等海外学生优惠，写清资格、验证方式（学校邮箱、SheerID、UNiDAYS、ISIC）和官方申请入口。">
+<meta property="og:title" content="Sheeperks 英国羊毛：现在能薅的羊毛">
+<meta property="og:description" content="限时券、黑五倒计时、比斯特活动，过期自动下架。">
 <meta property="og:url" content="https://sheeperks.com/">
 <meta property="og:locale" content="zh_CN">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="v2.css?v=dc1c0f1f">
+<style>
+/* 首页 = 实时羊毛：本周羊毛 + 黑五 + 比斯特，长期学生优惠在 perks.html。公共样式在 v2.css。 */
+.live-hero { padding-block: 40px 8px; }
+.live-hero .jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.live-hero .jump a { padding: 7px 14px; border: var(--bw) solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-weight: 700; font-size: 14px; text-decoration: none; box-shadow: 2px 2px 0 var(--shadow); }
+.live-hero .jump a:hover { background: var(--yellow); color: var(--on-color); }
+.countdown .go { justify-self: start; font-weight: 800; }
+.facts.bv a { background: var(--mint); }
+.facts a .cd { display: inline-block; margin-top: 6px; padding: 0 8px; border: 1.5px solid currentColor; border-radius: 999px; font: 700 12px var(--font-mono); }
+.facts a .cd.hot { background: var(--tomato); border-color: var(--tomato); color: #fff; }
+.more-links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px; font-weight: 700; font-size: 14px; }
+.picks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.pick { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: var(--bw) solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); text-decoration: none; box-shadow: 3px 3px 0 var(--shadow); }
+.pick:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shadow); }
+.pick b { display: block; font-size: 15px; }
+.pick small { display: block; color: var(--muted); font-size: 12px; }
+@media (max-width: 1080px) { .picks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .live-hero { padding-block: 20px 0; }
+  .live-hero .jump { margin-top: 16px; gap: 8px; }
+  .live-hero .jump a { padding: 5px 12px; font-size: 13px; }
+  .picks { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+}
+</style>
 <meta property="og:site_name" content="Sheeperks 英国羊毛">
 <meta property="og:image" content="https://sheeperks.com/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -21,182 +47,40 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/icon-512.png">
 <meta name="theme-color" content="#F3E24A">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "海外学生优惠清单", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "GitHub Student Developer Pack", "url": "https://education.github.com/pack"}, {"@type": "ListItem", "position": 2, "name": "JetBrains 教育许可", "url": "https://www.jetbrains.com/community/education/#students"}, {"@type": "ListItem", "position": 3, "name": "Unity Student", "url": "https://unity.com/products/unity-student"}, {"@type": "ListItem", "position": 4, "name": "Azure for Students", "url": "https://azure.microsoft.com/free/students/"}, {"@type": "ListItem", "position": 5, "name": "AWS Educate", "url": "https://aws.amazon.com/education/awseducate/"}, {"@type": "ListItem", "position": 6, "name": "Google AI 学生优惠", "url": "https://gemini.google/gb/students/"}, {"@type": "ListItem", "position": 7, "name": "Microsoft 365 教育版", "url": "https://www.microsoft.com/education/products/office"}, {"@type": "ListItem", "position": 8, "name": "Notion 教育版", "url": "https://www.notion.com/product/notion-for-education"}, {"@type": "ListItem", "position": 9, "name": "Miro Education", "url": "https://miro.com/education-whiteboard/"}, {"@type": "ListItem", "position": 10, "name": "Tableau for Students", "url": "https://www.tableau.com/academic/students"}, {"@type": "ListItem", "position": 11, "name": "Overleaf Professional（学校授权）", "url": "https://www.overleaf.com/edu/glasgow"}, {"@type": "ListItem", "position": 12, "name": "格拉斯哥大学免费软件包", "url": "https://www.gla.ac.uk/myglasgow/it/softwareandonlinetools/"}, {"@type": "ListItem", "position": 13, "name": "Figma Education", "url": "https://www.figma.com/education/"}, {"@type": "ListItem", "position": 14, "name": "Autodesk Education", "url": "https://www.autodesk.com/education/edu-software/overview"}, {"@type": "ListItem", "position": 15, "name": "Adobe Creative Cloud 学生价", "url": "https://www.adobe.com/creativecloud/buy/students.html"}, {"@type": "ListItem", "position": 16, "name": "Ableton Live 教育版", "url": "https://www.ableton.com/en/shop/education/"}, {"@type": "ListItem", "position": 17, "name": "Canva for Education", "url": "https://www.canva.com/education/"}, {"@type": "ListItem", "position": 18, "name": "Apple 教育优惠", "url": "https://www.apple.com/uk-edu/store"}, {"@type": "ListItem", "position": 19, "name": "Samsung 教育优惠", "url": "https://www.samsung.com/uk/students-offers/"}, {"@type": "ListItem", "position": 20, "name": "Microsoft Store 教育优惠", "url": "https://www.microsoft.com/en-gb/store/collections/surfaceforstudents"}, {"@type": "ListItem", "position": 21, "name": "Lenovo 教育商店（英国）", "url": "https://www.lenovo.com/gb/en/student-deals/"}, {"@type": "ListItem", "position": 22, "name": "Dell 学生优惠（英国）", "url": "https://www.dell.com/en-uk/lp/dt/students"}, {"@type": "ListItem", "position": 23, "name": "Spotify Premium Student", "url": "https://www.spotify.com/uk/student/"}, {"@type": "ListItem", "position": 24, "name": "Apple Music 学生方案", "url": "https://www.apple.com/uk/apple-music/"}, {"@type": "ListItem", "position": 25, "name": "YouTube Premium 学生方案", "url": "https://www.youtube.com/premium/student"}, {"@type": "ListItem", "position": 26, "name": "Amazon Prime Student（英国）", "url": "https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GAHEWLGGJTWD9NK5"}, {"@type": "ListItem", "position": 27, "name": "16-25 Railcard（英国）", "url": "https://www.16-25railcard.co.uk/"}, {"@type": "ListItem", "position": 28, "name": "UNiDAYS", "url": "https://www.myunidays.com/"}, {"@type": "ListItem", "position": 29, "name": "Student Beans", "url": "https://www.studentbeans.com/uk"}, {"@type": "ListItem", "position": 30, "name": "ISIC 国际学生证", "url": "https://www.isic.org.uk/"}]}</script>
-<style>body{margin:0}[hidden]{display:none!important}</style>
-<link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="v2.css?v=dc1c0f1f">
-<style>
-/* 首页专用：Hero 拼贴、跑马灯、Bento 精选、筛选条、三步领取。公共样式在 v2.css。 */
-.home-hero { display: grid; grid-template-columns: minmax(0, 1fr) 540px; gap: 40px; align-items: center; padding-block: 40px 72px; }
-.kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
-.kicker .chip-s { background: var(--yellow); color: var(--on-color); font-family: var(--font-mono); }
-.home-hero h1 { font-weight: 900; font-size: clamp(44px, 6.2vw, 92px); line-height: 1.08; letter-spacing: -.045em; margin-block: 22px 26px; }
-.home-hero .lede { font-size: 17px; }
-.search { display: flex; align-items: center; gap: 12px; max-width: 620px; padding: 8px 8px 8px 20px; border: 3px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 6px 6px 0 var(--shadow); }
-.search:focus-within { box-shadow: 6px 6px 0 var(--cobalt); }
-.search svg { flex: none; }
-.search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 16px; color: var(--ink); padding-block: 8px; }
-.search input::placeholder { color: var(--muted); }
-.search kbd { flex: none; font-family: var(--font-mono); font-size: 12px; padding: 1px 7px; border: 1.5px solid var(--line); border-radius: 6px; color: var(--muted); }
-.popular { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
-.popular button { cursor: pointer; padding: 3px 12px; border: var(--bw) solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-family: var(--font-body); font-weight: 700; font-size: 12px; }
-.popular button:hover { background: var(--yellow); color: var(--on-color); }
-.popular button.hot { background: var(--mint); color: var(--on-color); }
-
-.collage { position: relative; height: 540px; }
-.blob { position: absolute; right: 30px; top: 70px; width: 380px; height: 380px; border-radius: 50%; background: var(--cobalt); border: 3px solid var(--line); }
-.spark { position: absolute; width: 56px; height: 56px; left: 0; top: 70px; }
-.collage .ticket { position: absolute; width: 400px; }
-.collage .ticket:hover { transform: none; }
-.c1 { right: 0; top: 0; transform: rotate(-6deg) !important; }
-.c2 { right: 70px; top: 180px; transform: rotate(2deg) !important; }
-.c3 { right: 140px; top: 350px; transform: rotate(-4deg) !important; }
-.collage .rows { display: none; }
-.collage .offer { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.stamp { position: absolute; right: -6px; top: 330px; width: 132px; height: 132px; border-radius: 50%; background: var(--tomato); color: #fff; border: 3px solid var(--line); box-shadow: 4px 4px 0 var(--shadow); display: grid; place-items: center; align-content: center; text-align: center; transform: rotate(12deg); z-index: 2; }
-.stamp b { font-family: var(--font-display); font-weight: 800; font-size: 44px; line-height: 1; }
-.stamp small { font-weight: 900; font-size: 13px; }
-
-.marquee { margin-block: 8px 0; background: #141414; color: var(--yellow); border-block: 3px solid var(--line); transform: rotate(-1.6deg); overflow: hidden; white-space: nowrap; }
-.marquee-track { display: inline-flex; padding-block: 14px; animation: scroll 38s linear infinite; font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: .01em; text-transform: uppercase; }
-.mq-set { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; }
-.mq-set i { font-style: normal; color: #f3efe6; }
-.marquee a { color: inherit; text-decoration: none; padding: 2px 8px; margin: -2px -8px; border: 2px solid transparent; transition: background .15s, color .15s; }
-.marquee a:hover, .marquee a:focus-visible { background: var(--yellow); color: #141414; border-color: #141414; box-shadow: 3px 3px 0 #f3efe6; outline: none; }
-.marquee:hover .marquee-track, .marquee:focus-within .marquee-track, .marquee.hold .marquee-track { animation-play-state: paused; }
-@keyframes scroll { to { transform: translateX(-50%); } }
-
-.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(220px, auto)); gap: 20px; }
-.tile { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 10px; padding: 24px; border: var(--bw) solid var(--line); border-radius: 22px; box-shadow: var(--sh); color: var(--on-color); text-decoration: none; min-width: 0; transition: transform .14s, box-shadow .14s; }
-.tile:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--shadow); }
-.tile .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; }
-.tile h3 { font-weight: 900; font-size: 30px; line-height: 1.15; letter-spacing: -.02em; }
-.tile p { margin: 0; font-size: 13px; }
-.tile .go { margin-top: auto; font-weight: 900; font-size: 14px; }
-.tile.big { grid-column: span 2; grid-row: span 2; background: var(--cobalt); color: #fff; padding: 32px; }
-.tile.big h3 { font-family: var(--font-display); font-size: clamp(48px, 6vw, 88px); line-height: .98; letter-spacing: -.04em; max-width: 6em; }
-.tile.big p { font-size: 15px; max-width: 30em; opacity: .9; }
-.tile.big .go { align-self: flex-start; padding: 10px 18px; border: var(--bw) solid #141414; border-radius: 999px; background: var(--yellow); color: #141414; box-shadow: 3px 3px 0 #141414; }
-.tile.big .bigstar { position: absolute; right: 28px; bottom: 26px; width: 130px; height: 130px; }
-.tile.y { background: var(--yellow); }
-.tile.m { background: var(--mint); }
-.tile.t { background: var(--tomato); color: #fff; }
-.tile.k-dark { background: #141414; color: #f3efe6; }
-.tile.k-dark .k { color: var(--yellow); }
-.tile.wide { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 24px; background: var(--mint); }
-.tile.wide h3 { flex: none; }
-.tile.wide p { flex: 1; font-size: 14px; }
-.tile.wide .go { margin: 0; flex: none; }
-@media (max-width: 640px) { .tile.wide { flex-direction: column; align-items: flex-start; gap: 8px; } }
-.tile .num { font-family: var(--font-display); font-weight: 800; font-size: 84px; line-height: 1; color: var(--yellow); font-variant-numeric: tabular-nums; }
-.tile .num small { font-family: var(--font-body); font-size: 20px; font-weight: 900; color: #f3efe6; margin-left: 6px; }
-
-.topbar-off .filters { top: 0; }
-.filters { position: sticky; top: var(--topbar-h, 0px); z-index: 5; transition: top .25s ease; padding-block: 14px; background: var(--paper); }
-.filter-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 12px 10px 10px; border: var(--bw) solid var(--line); border-radius: 999px; background: var(--surface); box-shadow: 4px 4px 0 var(--shadow); }
-.chips { display: flex; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
-.chips::-webkit-scrollbar { display: none; }
-.chip { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; cursor: pointer; padding: 7px 14px; border-radius: 999px; border: 1.5px solid transparent; background: transparent; font-weight: 700; font-size: 14px; }
-.chip:hover { border-color: var(--line); }
-.chip span { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
-.chip[aria-pressed="true"] { background: var(--active-bg); color: var(--active-fg); }
-.chip[aria-pressed="true"] span { color: var(--active-fg); opacity: .8; }
-.switch { display: inline-flex; align-items: center; gap: 10px; flex: none; cursor: pointer; font-weight: 700; font-size: 14px; padding-right: 6px; }
-.switch input { appearance: none; margin: 0; width: 44px; height: 26px; border-radius: 13px; border: var(--bw) solid var(--line); background: var(--paper); position: relative; cursor: pointer; transition: background .15s; }
-.switch input::after { content: ""; position: absolute; left: 2px; top: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); transition: transform .15s; }
-.switch input:checked { background: var(--cobalt); }
-.switch input:checked::after { transform: translateX(18px); background: #fff; }
-.count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
-.sort { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; }
-.sort select { font: inherit; color: var(--ink); background: var(--surface); border: var(--bw) solid var(--line); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
-.more { display: flex; justify-content: center; margin-top: 36px; }
-.empty { padding: 48px 0; text-align: center; color: var(--muted); }
-
-.how { margin-top: 112px; background: #141414; color: #f3efe6; border-block: 3px solid var(--line); padding-block: 80px; }
-.how .eyebrow { color: var(--yellow); }
-.how h2 { margin-top: 8px; font-weight: 900; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -.02em; }
-.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 32px; }
-.step { padding: 26px; border: var(--bw) solid #f3efe6; border-radius: 22px; min-width: 0; }
-.step .n { font-family: var(--font-display); font-weight: 800; font-size: 64px; line-height: 1; }
-.step:nth-child(1) .n { color: var(--yellow); }
-.step:nth-child(2) .n { color: var(--mint); }
-.step:nth-child(3) .n { color: var(--tomato); }
-.step h3 { margin-top: 18px; font-size: 22px; font-weight: 900; }
-.step p { margin: 6px 0 0; font-size: 14px; opacity: .75; }
-.verify { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin-top: 56px; }
-.verify div { border-top: 2px dashed rgba(243, 239, 230, .4); padding-top: 16px; min-width: 0; }
-.verify h3 { font-family: var(--font-display); font-weight: 800; font-size: 22px; }
-.verify .used { font-family: var(--font-mono); font-size: 12px; color: var(--yellow); margin: 4px 0 6px; }
-.verify p { margin: 0; font-size: 14px; opacity: .72; }
-.how + footer { margin-top: 0; }
-
-@media (max-width: 1180px) {
-  .home-hero { grid-template-columns: 1fr; padding-bottom: 40px; }
-  .collage { height: 470px; max-width: 560px; width: 100%; justify-self: center; }
-}
-@media (max-width: 1080px) {
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
-  .tile.big { grid-row: auto; }
-  .verify { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .filter-card { border-radius: 22px; flex-direction: column; align-items: stretch; }
-}
-@media (max-width: 640px) {
-  .home-hero { padding-block: 16px 24px; gap: 24px; }
-  .home-hero h1 { font-size: 46px; margin-block: 16px 18px; }
-  .search { padding-left: 14px; box-shadow: 4px 4px 0 var(--shadow); }
-  .search kbd { display: none; }
-  .search .btn { padding: 9px 14px; }
-  .popular { display: none; }
-  .collage { height: 372px; }
-  .blob { width: 240px; height: 240px; right: 10px; top: 30px; }
-  .spark { width: 40px; height: 40px; top: 10px; }
-  .collage .ticket { width: min(300px, 82vw); }
-  .collage .offer { display: none; }
-  .c1 { right: 0; top: 0; }
-  .c2 { right: 26px; top: 110px; }
-  .c3 { right: 52px; top: 224px; }
-  .stamp { width: 96px; height: 96px; top: 190px; right: -4px; }
-  .stamp b { font-size: 32px; }
-  .stamp small { font-size: 11px; }
-  .marquee-track { font-size: 16px; padding-block: 10px; }
-  .bento { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
-  .tile { padding: 16px; border-radius: 18px; }
-  .tile h3 { font-size: 22px; }
-  .tile.big { padding: 22px; }
-  .tile.big h3 { font-size: 48px; }
-  .tile.big .bigstar { width: 70px; height: 70px; right: 16px; bottom: 16px; }
-  .tile .num { font-size: 56px; }
-  .tile p { font-size: 12px; }
-  .filters { padding-block: 8px; }
-  .filter-card { padding: 8px; gap: 8px; box-shadow: 3px 3px 0 var(--shadow); }
-  .how { margin-top: 72px; padding-block: 56px; }
-  .steps { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .step { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 4px 12px; padding: 18px; }
-  .step .n { font-size: 44px; grid-row: span 2; }
-  .step h3 { margin: 0; font-size: 18px; }
-  .step p { margin: 0; }
-  .verify { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 40px; }
-}
-</style>
 </head>
 <body>
 
-
 <header class="topbar"><div class="wrap">
   <nav class="nav">
-    <a class="brand" href="#top" id="top"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>Sheeperks</b><small>英国羊毛 · UK STUDENT PERKS</small></span></a>
-    <div class="seg"><a class="on" href="#deals">全部优惠</a><a href="budget.html">穷鬼专区</a><a href="black-friday.html">英国黑五</a><a href="bicester.html">比斯特专区</a><a href="bounty.html">小羊赏金</a></div>
+    <a class="brand" href="./" id="top"><picture><source srcset="assets/logo-inverse.svg" media="(prefers-color-scheme: dark)"><img src="assets/logo.svg" alt="" width="48" height="48"></picture><span><b>Sheeperks</b><small>英国羊毛 · UK STUDENT PERKS</small></span></a>
+    <div class="seg"><a class="on" href="./">实时羊毛</a><a href="budget.html">穷鬼专区</a><a href="perks.html">学生优惠</a><a href="bicester.html">比斯特专区</a><a href="bounty.html">小羊赏金</a></div>
     <button class="sbox" type="button" data-search aria-haspopup="dialog" aria-label="搜索全站优惠"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>搜优惠、品牌、关键词</span><kbd>Ctrl K</kbd></button><a class="acct" href="account.html" aria-label="登录"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>登录</span></a>
   </nav>
 </div></header>
 
 <div class="wrap">
 
-  <p class="intro"><b>Sheeperks 英国羊毛</b>：在英留学生能用的学生优惠和限时羊毛，只链官方入口，过期自动下架。</p>
+  <section class="hero live-hero">
+    <div>
+      <div class="eyebrow">LIVE · 实时羊毛 · 10-21 更新</div>
+      <h1>现在能薅的羊毛，<br><mark>都在这一页</mark></h1>
+      <p class="lede">限时券、银行开户奖励、黑五和比斯特活动，按截止日期排，过期自动下架，只链官方入口。长期有效的软件、订阅学生优惠在 <a href="perks.html">学生优惠</a>。</p>
+      <div class="jump"><a href="#weekly">本周羊毛 ↓</a><a href="#bf">英国黑五 ↓</a><a href="#bicester">比斯特 ↓</a><a href="perks.html">学生优惠 →</a></div>
+    </div>
+    <aside class="dark-panel countdown" aria-label="黑五倒计时">
+      <div class="label">距 BLACK FRIDAY 还有</div>
+      <div class="big"><span id="days">31</span><small>天</small></div>
+      <div class="pair">
+        <div><b>11-27 周五</b><span>Black Friday</span></div>
+        <div><b>11-30 周一</b><span>Cyber Monday</span></div>
+      </div>
+      <a class="go" href="black-friday.html">黑五攻略一页看完 →</a>
+    </aside>
+  </section>
 
   <section class="sec weekly" id="weekly">
     <div class="sec-head">
-      <div><div class="eyebrow">THIS WEEK · 10-21 更新</div><h2>本周羊毛</h2></div>
+      <div><div class="eyebrow">THIS WEEK · 限时</div><h2>本周羊毛</h2></div>
       <span class="aside"><span data-feed-count>17</span> 条在架<span data-feed-since hidden></span> · 按截止日期排 · 过期自动下架</span>
     </div>
     <div class="grid lim feed" id="feed" data-feed>
@@ -375,195 +259,40 @@
     <a class="join-strip" href="#join"><b>新羊毛不定期发在微信群</b><span>加客服微信，拉你进群 →</span></a>
   </section>
 
-  <section class="home-hero">
-    <div>
-      <div class="kicker"><span class="chip-s">2026–27 学年</span><span><span class="js-total">30</span> 项优惠 · <span class="js-free">17</span> 项免费 · 只链官方入口</span></div>
-      <h1>在读这几年，<br>该领的 <span class="hl">别错过</span></h1>
-      <p class="lede">软件、云服务、设备、订阅和吃饭买菜的学生优惠，每项写清资格、验证方式和官方申请入口。只链官方渠道，用本人学籍申请。</p>
-      <form class="search" id="searchForm" role="search">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="搜 Copilot、Spotify、SheerID…" autocomplete="off" aria-label="搜索优惠">
-        <kbd>/</kbd>
-        <button class="btn" type="submit">搜索</button>
-      </form>
-      <div class="popular">大家在搜 → <button type="button">Copilot</button><button type="button" class="hot">免费一年</button><button type="button">Spotify</button><button type="button">Railcard</button><button type="button">Mac</button></div>
+  <section class="sec" id="bf">
+    <div class="sec-head"><div><div class="eyebrow">BLACK FRIDAY 2026 · UK</div><h2>英国黑五：现在到 11-30</h2></div><span class="aside">截至 10-27，大多数品牌还没官宣日期</span></div>
+    <div class="facts">
+      <a href="black-friday.html#confirmed"><b>11 月初</b><span>Currys 官网写明早鸟价 11 月初开始，早鸟期买了黑五当天再降可以退差价</span><i>已官宣 →</i></a>
+      <a href="black-friday.html#dates"><b>11 月上中旬</b><span>Amazon UK 往年这时才公布日期，2025 年黑五周是 11-20 至 12-01</span><i>关键日期 →</i></a>
+      <a href="black-friday.html#plan"><b>11-27 / 11-30</b><span>Black Friday 周五、Cyber Monday 周一。多数品牌这一周全面开跑，美妆和 Railcard 常留到周一</span><i>备战时间表 →</i></a>
+      <a href="black-friday.html#worth"><b>先查历史价</b><span>Which? 跟踪的黑五商品里 83% 一年里别的时候价格相同或更低。想买的现在就列清单</span><i>值不值得等 →</i></a>
     </div>
-    <div class="collage" id="collage" aria-hidden="true">
-      <div class="blob"></div>
-      <svg class="spark" viewBox="0 0 40 40"><path d="M20 1 Q22 18 39 20 Q22 22 20 39 Q18 22 1 20 Q18 18 20 1Z" fill="var(--yellow)" stroke="var(--line)" stroke-width="2.4" stroke-linejoin="round"/></svg>
-      <div class="stamp"><b class="js-free">17</b><small>项免费可领</small></div>
-    </div>
-  </section>
-</div>
-
-<nav class="marquee" aria-label="热门优惠"><div class="marquee-track" id="marquee"><div class="mq-set"><a href="#d-github">Copilot 免费</a><a href="#d-jetbrains">JetBrains 全家桶</a><a href="#d-googlegemini">Gemini 一年</a><a href="#d-notion">Notion Plus</a><a href="#d-figma">Figma 教育版</a><a href="budget.html#p-tesco">Tesco 会员价</a><a href="budget.html#p-mcd">麦当劳积分</a><a href="#d-nationalrail">Railcard 1/3 off</a></div></div></nav>
-
-<div class="wrap">
-  <section class="sec" id="featuredSec">
-    <div class="sec-head"><div><div class="eyebrow">Editor's picks · 本学期</div><h2>先领这几个，最值</h2></div><a class="aside" href="#deals">全部 <span class="js-total">30</span> 项 →</a></div>
-    <div class="bento" id="featured"></div>
+    <div class="more-links"><a href="black-friday.html#brands">主流品牌往年力度 →</a><a href="black-friday.html#exclusive">哪些优惠只能二选一 →</a><a href="black-friday.html#student">学生折扣 →</a><a href="black-friday.html#rights">退货与付款 →</a></div>
   </section>
 
-  <section class="sec" id="deals">
-    <div class="sec-head">
-      <div><div class="eyebrow">All perks · <span class="js-total">30</span> 项</div><h2>按类别找</h2></div>
-      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><span class="count" id="count"></span><label class="sort" for="sort">排序 <select id="sort"><option value="free">免费优先</option><option value="name">按名称</option><option value="cat">按分类</option></select></label></div>
+  <section class="sec" id="bicester">
+    <div class="sec-head"><div><div class="eyebrow">BICESTER VILLAGE · 近期</div><h2>比斯特购物村：最近有什么</h2></div><span class="aside">日期以官网为准 · 会员注册免费</span></div>
+    <div class="facts bv">
+      <a href="bicester.html#confirmed" data-expire="2026-11-01"><b>10-23 ~ 11-01</b><span>Winter Event：参与店铺在奥莱价上，会员最高再减 20%，每天 9:00–19:00</span><em class="cd" data-countdown="2026-11-01">截至 11-01</em></a>
+      <a href="bicester.html"><b>11-12 起</b><span>官网活动页预告「The Christmas Market With Diddly Squat Farm」圣诞市集，具体时间以官网为准</span><i>比斯特专区 →</i></a>
+      <a href="bicester.html#confirmed"><b>约 11-10</b><span>黑五预计开跑，2025 年是 11-10 至 12-01，参与店铺部分商品低至 5 折（按原价算）。今年还没官宣</span><i>大促日历 →</i></a>
+      <a href="bicester.html"><b>9 折</b><span>UNiDAYS 学生 9 折、银联 9 折，和会员活动<b style="display:inline;font:inherit;font-weight:800">三选一</b>，不能叠加</span><i>怎么领 →</i></a>
     </div>
   </section>
-</div>
 
-<div class="filters">
-  <div class="wrap">
-    <div class="filter-card">
-      <div class="chips" id="chips" role="group" aria-label="分类"></div>
-      <label class="switch" for="freeOnly"><input id="freeOnly" type="checkbox"> 只看免费</label>
+  <section class="sec" id="perks">
+    <div class="sec-head"><div><div class="eyebrow">STUDENT PERKS · 长期有效</div><h2>学生优惠：<span>30</span> 项，<span>17</span> 项免费</h2></div><a class="aside" href="perks.html">全部学生优惠 →</a></div>
+    <div class="picks">
+      <a class="pick" href="perks.html#d-github"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#181717"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span><span><b>Copilot 免费用</b><small>GitHub Student Developer Pack</small></span></a>
+      <a class="pick" href="perks.html#d-jetbrains"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#000000"><path d="M2.345 23.997A2.347 2.347 0 0 1 0 21.652V10.988C0 9.665.535 8.37 1.473 7.433l5.965-5.961A5.01 5.01 0 0 1 10.989 0h10.666A2.347 2.347 0 0 1 24 2.345v10.664a5.056 5.056 0 0 1-1.473 3.554l-5.965 5.965A5.017 5.017 0 0 1 13.007 24v-.003H2.345Zm8.969-6.854H5.486v1.371h5.828v-1.371ZM3.963 6.514h13.523v13.519l4.257-4.257a3.936 3.936 0 0 0 1.146-2.767V2.345c0-.678-.552-1.234-1.234-1.234H10.989a3.897 3.897 0 0 0-2.767 1.145L3.963 6.514Zm-.192.192L2.256 8.22a3.944 3.944 0 0 0-1.145 2.768v10.664c0 .678.552 1.234 1.234 1.234h10.666a3.9 3.9 0 0 0 2.767-1.146l1.512-1.511H3.771V6.706Z"/></svg></span><span><b>全家桶 IDE 免费</b><small>JetBrains 教育许可</small></span></a>
+      <a class="pick" href="perks.html#d-googlegemini"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#8E75B2"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span><span><b>Gemini 免费 1 年</b><small>Google AI 学生优惠</small></span></a>
+      <a class="pick" href="perks.html#d-unity"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#141414"><path d="m12.9288 4.2939 3.7997 2.1929c.1366.077.1415.2905 0 .3675l-4.515 2.6076a.4192.4192 0 0 1-.4246 0L7.274 6.8543c-.139-.0745-.1415-.293 0-.3675l3.7972-2.193V0L1.3758 5.5977V16.793l3.7177-2.1456v-4.3858c-.0025-.1565.1813-.2682.318-.1838l4.5148 2.6076a.4252.4252 0 0 1 .2136.3676v5.2127c.0025.1565-.1813.2682-.3179.1838l-3.7996-2.1929-3.7178 2.1457L12 24l9.6954-5.5977-3.7178-2.1457-3.7996 2.1929c-.1341.082-.3229-.0248-.3179-.1838V13.053c0-.1565.087-.2956.2136-.3676l4.5149-2.6076c.134-.082.3228.0224.3179.1838v4.3858l3.7177 2.1456V5.5977L12.9288 0Z"/></svg></span><span><b>Unity Student</b><small>开发工具 · 免费</small></span></a>
+      <a class="pick" href="perks.html#d-img:azure.svg"><span class="bi img"><img src="assets/brands/azure.svg" alt="" width="28" height="28" loading="lazy"></span><span><b>Azure for Students</b><small>云与 AI · 免费</small></span></a>
+      <a class="pick" href="perks.html#d-img:aws.svg"><span class="bi img"><img src="assets/brands/aws.svg" alt="" width="28" height="28" loading="lazy"></span><span><b>AWS Educate</b><small>云与 AI · 免费</small></span></a>
     </div>
-  </div>
-</div>
+  </section>
 
-<div class="wrap">
-  <div style="padding-top:16px">
-    <div class="grid" id="grid">
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#181717"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span><div class="meta">开发工具 · 全球</div></div>
-          <h3>GitHub Student Developer Pack</h3>
-          <p class="offer">GitHub Pro 免费，外加 Copilot Student（无限代码补全，每月 200 次 AI 额度）；另有几十家合作方福利，如免费域名、云额度。Copilot Pro 原价 USD 10/月。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>年满 13 岁、在授予学位或文凭的学校在读，并有 GitHub 账号。</dd></div>
-            <div><dt>验证</dt><dd>GitHub Education 审核：学校邮箱、学生证或在读证明照片，需开启定位。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://education.github.com/pack" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#000000"><path d="M2.345 23.997A2.347 2.347 0 0 1 0 21.652V10.988C0 9.665.535 8.37 1.473 7.433l5.965-5.961A5.01 5.01 0 0 1 10.989 0h10.666A2.347 2.347 0 0 1 24 2.345v10.664a5.056 5.056 0 0 1-1.473 3.554l-5.965 5.965A5.017 5.017 0 0 1 13.007 24v-.003H2.345Zm8.969-6.854H5.486v1.371h5.828v-1.371ZM3.963 6.514h13.523v13.519l4.257-4.257a3.936 3.936 0 0 0 1.146-2.767V2.345c0-.678-.552-1.234-1.234-1.234H10.989a3.897 3.897 0 0 0-2.767 1.145L3.963 6.514Zm-.192.192L2.256 8.22a3.944 3.944 0 0 0-1.145 2.768v10.664c0 .678.552 1.234 1.234 1.234h10.666a3.9 3.9 0 0 0 2.767-1.146l1.512-1.511H3.771V6.706Z"/></svg></span><div class="meta">开发工具 · 全球</div></div>
-          <h3>JetBrains 教育许可</h3>
-          <p class="offer">All Products Pack 免费：IntelliJ IDEA Ultimate、PyCharm Pro、WebStorm、CLion 等 10 款 IDE 全部可用，仅限学习，不可商用。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>在认可院校在读、课程时长 1 年以上的学生。</dd></div>
-            <div><dt>验证</dt><dd>学校邮箱、ISIC 国际学生证、官方在读证明，或关联 GitHub Student Pack。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.jetbrains.com/community/education/#students" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#141414"><path d="m12.9288 4.2939 3.7997 2.1929c.1366.077.1415.2905 0 .3675l-4.515 2.6076a.4192.4192 0 0 1-.4246 0L7.274 6.8543c-.139-.0745-.1415-.293 0-.3675l3.7972-2.193V0L1.3758 5.5977V16.793l3.7177-2.1456v-4.3858c-.0025-.1565.1813-.2682.318-.1838l4.5148 2.6076a.4252.4252 0 0 1 .2136.3676v5.2127c.0025.1565-.1813.2682-.3179.1838l-3.7996-2.1929-3.7178 2.1457L12 24l9.6954-5.5977-3.7178-2.1457-3.7996 2.1929c-.1341.082-.3229-.0248-.3179-.1838V13.053c0-.1565.087-.2956.2136-.3676l4.5149-2.6076c.134-.082.3228.0224.3179.1838v4.3858l3.7177 2.1456V5.5977L12.9288 0Z"/></svg></span><div class="meta">开发工具 · 全球</div></div>
-          <h3>Unity Student</h3>
-          <p class="offer">免费用 Unity Pro 编辑器（Pro 原价 USD 2,310/年），附送 Odin Inspector 教育许可、Synty 素材包和 Unity Cloud。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>年满 16 岁、在认可院校在读的学生。</dd></div>
-            <div><dt>验证</dt><dd>通过 GitHub Student Pack 或 Unity 学生验证。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">人工审核</span><a class="cta" href="https://unity.com/products/unity-student" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi img"><img src="assets/brands/azure.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">云与 AI · 全球（多数国家）</div></div>
-          <h3>Azure for Students</h3>
-          <p class="offer">送 USD 100 Azure 额度，可开虚拟机、数据库、AI 服务等；另有一批每月免费额度的服务，注册不需要信用卡。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>年满 18 岁、在可授予学位的认可院校全日制在读的学生。</dd></div>
-            <div><dt>验证</dt><dd>用学校邮箱登录或验证学生身份。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://azure.microsoft.com/free/students/" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi img"><img src="assets/brands/aws.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">云与 AI · 全球</div></div>
-          <h3>AWS Educate</h3>
-          <p class="offer">免费的 AWS 云计算自学课程 + 限时沙盒实验环境，学完拿数字徽章。注意：不送 AWS 额度（2023 年起取消），也不用开 AWS 账号。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>年满 13 岁的学习者（各国最低年龄不同），不要求在读。</dd></div>
-            <div><dt>验证</dt><dd>邮箱注册即可，无需学籍验证。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">邮箱注册</span><a class="cta" href="https://aws.amazon.com/education/awseducate/" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#8E75B2"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span><div class="meta">云与 AI · 英国等指定国家</div></div>
-          <h3>Google AI 学生优惠</h3>
-          <p class="offer">英国大学生可免费用 12 个月 Google AI Plus：更高的 Gemini 使用上限 + 400 GB 云存储。免费一年的 AI Pro 现在只给美国学生。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>年满 18 岁、在英国等指定国家高校在读的学生。</dd></div>
-            <div><dt>验证</dt><dd>SheerID 学生验证，需绑定付款方式。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">SheerID</span><a class="cta" href="https://gemini.google/gb/students/" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi img"><img src="assets/brands/microsoft365.svg" alt="" width="28" height="28" loading="lazy"></span><div class="meta">效率办公 · 全球</div></div>
-          <h3>Microsoft 365 教育版</h3>
-          <p class="offer">Office 365 A1 免费：Word、Excel、PowerPoint、OneNote、Outlook 网页版。学校若买了 A3/A5，还能装桌面版（电脑、平板、手机各 5 台）。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>所在学校已开通 Microsoft 365 教育版的学生。</dd></div>
-            <div><dt>验证</dt><dd>用学校邮箱登录 office.com，或问学校 IT 是否提供桌面版。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.microsoft.com/education/products/office" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#000000"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg></span><div class="meta">效率办公 · 全球</div></div>
-          <h3>Notion 教育版</h3>
-          <p class="offer">Plus 计划免费：无限块、无限文件上传、30 天页面历史。仅限单人工作区，多人协作要另付费。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>认可高校在读学生，账号主邮箱必须是学校邮箱。</dd></div>
-            <div><dt>验证</dt><dd>用学校邮箱注册，在 Settings → Plans 切换到教育版；不接受证件照。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://www.notion.com/product/notion-for-education" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-      <article class="ticket">
-        <div class="t-main">
-          <div class="t-head"><span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#050038"><path d="M17.392 0H13.9L17 4.808 10.444 0H6.949l3.102 6.3L3.494 0H0l3.05 8.131L0 24h3.494L10.05 6.985 6.949 24h3.494L17 5.494 13.899 24h3.493L24 3.672 17.392 0z"/></svg></span><div class="meta">效率办公 · 全球</div></div>
-          <h3>Miro Education</h3>
-          <p class="offer">免费 Education 计划：无限白板和协作功能，团队最多 10 人；不含邮件客服。</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>认可院校在读学生和教师（英国院校可申请）。</dd></div>
-            <div><dt>验证</dt><dd>学校邮箱并提交教育版申请。</dd></div>
-          </dl>
-          <div class="t-foot"><span class="pill">学校邮箱</span><a class="cta" href="https://miro.com/education-whiteboard/" target="_blank" rel="noopener">去申请 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-        </div>
-        <div class="stub" aria-label="免费"><b>FREE</b><span>免费</span></div>
-      </article>
-    </div>
-    <div class="empty" id="empty" hidden>没有匹配的优惠。换个关键词，或切回“全部”分类。</div>
-    <div class="more" id="more" hidden><button class="btn ghost" type="button" id="moreBtn"></button></div>
-  </div>
 </div>
-
-<section class="how" id="guide">
-  <div class="wrap">
-    <div class="eyebrow">How it works</div>
-    <h2>三步领到，不踩坑</h2>
-    <div class="steps">
-      <div class="step"><div class="n">01</div><h3>挑一个</h3><p>按类别或搜索找到想要的，先看资格和适用地区。</p></div>
-      <div class="step"><div class="n">02</div><h3>备材料</h3><p>学校邮箱、在读证明，或一次通过 SheerID / UNiDAYS 验证。</p></div>
-      <div class="step"><div class="n">03</div><h3>官方领</h3><p>只点官方申请入口，用本人学籍，不买卖账号。</p></div>
-    </div>
-    <div class="verify">
-      <div><h3>学校邮箱</h3><div class="used">Notion、Azure、JetBrains 等</div><p>用学校发的邮箱注册或接收验证链接。毕业后邮箱停用，优惠通常随之失效。</p></div>
-      <div><h3>SheerID</h3><div class="used">Spotify、YouTube、Google 等</div><p>第三方学籍验证。填写学校名称后常自动通过，不通过时上传学生证或学费单。</p></div>
-      <div><h3>UNiDAYS</h3><div class="used">Apple、服装与数码品牌</div><p>验证一次，可在合作品牌间复用。需定期重新确认在读状态。</p></div>
-      <div><h3>ISIC</h3><div class="used">交通、博物馆、部分软件</div><p>国际学生证，付费办理，适合学校邮箱不被识别的情况。</p></div>
-    </div>
-  </div>
-</section>
 
 <section class="join" id="join" aria-label="加入羊毛群">
   <div class="wrap"><div class="join-card">
@@ -576,203 +305,27 @@
     <figure class="join-qr"><img src="assets/join-qr.png" alt="客服微信二维码，加好友后拉你进羊毛群" width="180" height="180" loading="lazy"><figcaption>加客服微信进群<small>备注「羊毛」· 微信里可长按识别</small></figcaption></figure>
   </div></div>
 </section>
-<footer id="notice">
+<footer>
   <div class="wrap">
     <div class="foot-word"><img src="assets/logo.svg" alt="" width="168" height="168"><span>SHEEP<br>PERKS</span></div>
     <div class="foot">
-      <div><b>只收录面向真实在读学生的官方优惠</b><p>请用本人真实学籍申请。借用或伪造学籍、转售学生账号违反各平台条款，可能导致封号。优惠内容、价格和地区会变动，申请前以官方页面为准。</p></div>
-      <span class="mono">核实于 <span class="js-updated">2026-10</span> · Sheeperks 英国羊毛</span>
+    <div><b>只收录官方渠道的优惠</b><p>限时信息来自品牌官网和公开报道，标了「预测」的是按往年推算。价格和活动以官网当天显示为准，发现失效欢迎在群里说一声。</p></div>
+    <span class="mono">Sheeperks 英国羊毛 · 实时羊毛 · 更新于 2026-10-21</span>
     </div>
   </div>
 </footer>
 
-<script src="icons.js?v=1c0aee60"></script>
-<script src="deals.js?v=4b389e25"></script>
 <script>
 (function () {
-  const deals = window.DEALS || [];
-  const ICONS = window.ICONS || {};
-  const updated = window.DEALS_UPDATED || "—";
-  const PAGE = 9;
-  const cats = ["全部", ...new Set(deals.map(d => d.cat))];
-  const state = { cat: "全部", q: "", free: false, sort: "free", expanded: false };
-  try { const c = localStorage.getItem("cat"); if (c && cats.includes(c)) state.cat = c; } catch (e) {}
-  const qp = new URLSearchParams(location.search).get("q");  // 全站搜索跳过来：?q=名称#deals
-  if (qp) { state.q = qp; state.cat = "全部"; }
-
-  const $ = id => document.getElementById(id);
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const setAll = (cls, v) => document.querySelectorAll(cls).forEach(el => el.textContent = v);
-  setAll(".js-total", deals.length);
-  setAll(".js-free", deals.filter(d => d.free).length);
-  setAll(".js-updated", updated);
-
-  const pillOf = d => {
-    const v = d.verify;
-    if (/SheerID/i.test(v)) return "SheerID";
-    if (/UNiDAYS/i.test(v)) return "UNiDAYS";
-    if (/付费/.test(v)) return "付费办理";
-    if (/学校邮箱|\.edu/.test(v)) return "学校邮箱";
-    if (/邮箱注册/.test(v)) return "邮箱注册";
-    return "人工审核";
-  };
-  const icon = d => {
-    const k = d.icon || "";
-    if (k.startsWith("img:")) return `<span class="bi img"><img src="assets/brands/${esc(k.slice(4))}" alt="" width="28" height="28" loading="lazy"></span>`;
-    if (k.startsWith("mono:")) {
-      const [, t, bg] = k.split(":");
-      return `<span class="bi mono${t.length > 2 ? " long" : ""}" style="background:${bg}" aria-hidden="true">${esc(t)}</span>`;
-    }
-    const ic = ICONS[k];
-    if (!ic) return `<span class="bi mono" style="background:#141414" aria-hidden="true">★</span>`;
-    const light = parseInt(ic.hex.slice(1, 3), 16) + parseInt(ic.hex.slice(3, 5), 16) + parseInt(ic.hex.slice(5, 7), 16) > 600;
-    return `<span class="bi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="${light ? "#141414" : ic.hex}"><path d="${ic.d}"/></svg></span>`;
-  };
-  const arrow = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
-  const key = d => (d.icon || "").replace(/^img:/, "").replace(/\..*$/, "");  // 稳定锚点：#d-github
-  const ticket = (d, extra = "", anchor = false) => `
-      <article class="ticket${extra}"${anchor ? ` id="d-${esc(key(d))}"` : ""}>
-        <div class="t-main">
-          <div class="t-head">${icon(d)}<div class="meta">${esc(d.cat)} · ${esc(d.region)}</div></div>
-          <h3>${esc(d.name)}</h3>
-          <p class="offer">${esc(d.offer)}</p>
-          <dl class="rows">
-            <div><dt>资格</dt><dd>${esc(d.who)}</dd></div>
-            <div><dt>验证</dt><dd>${esc(d.verify)}</dd></div>
-            ${d.term ? `<div><dt>期限</dt><dd>${esc(d.term)}</dd></div>` : ""}
-          </dl>
-          <div class="t-foot"><span class="pill">${esc(pillOf(d))}</span><a class="cta" href="${esc(d.url)}" target="_blank" rel="noopener">去申请 ${arrow}</a></div>
-        </div>
-        <div class="stub${d.free ? "" : " deal"}" aria-label="${d.free ? "免费" : "折扣"}"><b>${d.free ? "FREE" : "DEAL"}</b><span>${d.free ? "免费" : "折扣"}</span></div>
-      </article>`;
-
-  // Hero 拼贴：三张精选票
-  const picks = deals.filter(d => d.featured);
-  const collage = $("collage");
-  [picks[1], picks[0], deals.find(d => d.icon === "spotify")].filter(Boolean).forEach((d, i) => {
-    collage.insertAdjacentHTML("beforeend", ticket(d, " c" + (i + 1)));
-  });
-
-  // Bento 精选
-  const bf = new Date("2026-11-27T00:00:00Z");
-  const days = Math.max(0, Math.ceil((bf - new Date()) / 864e5));
-  const [p0, ...rest] = picks;
-  $("featured").innerHTML = (p0 ? `
-      <a class="tile big" href="${esc(p0.url)}" target="_blank" rel="noopener">
-        <div style="display:flex;align-items:center;gap:12px">${icon(p0)}<span class="k">01 · ${esc(p0.cat)} · ${esc(p0.region)}</span></div>
-        <h3>${esc(p0.featured)}</h3>
-        <p>${esc(p0.offer)}</p>
-        <span class="go">去官方申请 ↗</span>
-        <svg class="bigstar" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 1 Q22 18 39 20 Q22 22 20 39 Q18 22 1 20 Q18 18 20 1Z" fill="#f3e24a" stroke="#141414" stroke-width="1.6" stroke-linejoin="round"/></svg>
-      </a>` : "") + rest.map((d, i) => `
-      <a class="tile ${i % 2 ? "m" : "y"}" href="${esc(d.url)}" target="_blank" rel="noopener">
-        <div style="display:flex;align-items:center;gap:10px">${icon(d)}<span class="k">0${i + 2} · ${esc(d.cat)}</span></div>
-        <h3>${esc(d.featured)}</h3>
-        <p>${esc(d.offer)}</p>
-      </a>`).join("") + `
-      <a class="tile t" href="budget.html">
-        <span class="k">NEW · 穷鬼专区</span>
-        <h3>吃饭买菜<br>也能薅</h3>
-        <p>超市会员价、快餐 App 免费餐、临期食品袋</p>
-        <span class="go">去看看 →</span>
-      </a>
-      <a class="tile k-dark" href="black-friday.html">
-        <span class="k">BLACK FRIDAY · 11-27</span>
-        <div class="num">${days}<small>天</small></div>
-        <span class="go">英国黑五品牌折扣 →</span>
-      </a>
-      <a class="tile wide" href="bicester.html">
-        <span class="k">BICESTER VILLAGE</span>
-        <h3>比斯特专区</h3>
-        <p>大促日历、Winter Event 会员额外折扣、学生和银联 9 折，挑对日子再去</p>
-        <span class="go">去看看 →</span>
-      </a>
-      <a class="tile wide k-dark" href="bounty.html" style="background:#141414">
-        <span class="k">SHEEP BOUNTY · 小羊赏金</span>
-        <h3>做任务攒羊毛，换小羊周边</h3>
-        <p>核实券、拍新券、实测折扣，审核通过发羊毛；攒够去小羊商店换礼品。银行开户奖励挪到了穷鬼专区</p>
-        <span class="go">去看看 →</span>
-      </a>`;
-
-  function renderChips() {
-    $("chips").innerHTML = cats.map(c => {
-      const n = c === "全部" ? deals.length : deals.filter(d => d.cat === c).length;
-      return `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c === state.cat}">${esc(c)}<span>${n}</span></button>`;
-    }).join("");
-  }
-
-  function render() {
-    const q = state.q.toLowerCase();
-    let list = deals.filter(d =>
-      (state.cat === "全部" || d.cat === state.cat) &&
-      (!state.free || d.free) &&
-      (!q || [d.name, d.offer, d.who, d.verify, d.term || "", d.region, d.cat].join(" ").toLowerCase().includes(q)));
-    if (state.sort === "free") list = list.slice().sort((a, b) => (b.free - a.free));
-    if (state.sort === "name") list = list.slice().sort((a, b) => a.name.localeCompare(b.name, "zh"));
-    if (state.sort === "cat") list = list.slice().sort((a, b) => cats.indexOf(a.cat) - cats.indexOf(b.cat));
-    const shown = state.expanded ? list : list.slice(0, PAGE);
-    $("grid").innerHTML = shown.map(d => ticket(d, "", true)).join("");
-    $("count").textContent = `显示 ${list.length} / ${deals.length}`;
-    $("empty").hidden = list.length > 0;
-    const rest = list.length - shown.length;
-    $("more").hidden = rest <= 0;
-    $("moreBtn").textContent = `再看 ${rest} 项 ↓`;
-    $("featuredSec").hidden = !!(state.q || state.free || state.cat !== "全部");
-  }
-
-  $("chips").addEventListener("click", e => {
-    const b = e.target.closest(".chip"); if (!b) return;
-    state.cat = b.dataset.cat; state.expanded = false;
-    try { localStorage.setItem("cat", state.cat); } catch (e) {}
-    renderChips(); render();
-  });
-  $("q").addEventListener("input", e => { state.q = e.target.value.trim(); state.expanded = false; render(); });
-  $("searchForm").addEventListener("submit", e => { e.preventDefault(); $("deals").scrollIntoView({ behavior: "smooth" }); });
-  document.querySelector(".popular").addEventListener("click", e => {
-    const b = e.target.closest("button"); if (!b) return;
-    $("q").value = b.textContent; state.q = b.textContent; state.expanded = false; render();
-    $("deals").scrollIntoView({ behavior: "smooth" });
-  });
-  document.addEventListener("keydown", e => {
-    if (e.key === "/" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); $("q").focus(); }
-  });
-  $("freeOnly").addEventListener("change", e => { state.free = e.target.checked; render(); });
-  $("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
-  $("moreBtn").addEventListener("click", () => { state.expanded = true; render(); });
-
-  // 跑马灯：复制一份接在后面无缝循环；点 #d-xxx 时清空筛选、展开全部，滚到那张卡并闪一下
-  const mq = $("marquee"), set = mq.querySelector(".mq-set"), dup = set.cloneNode(true);
-  dup.setAttribute("aria-hidden", "true");
-  dup.querySelectorAll("a").forEach(a => a.tabIndex = -1);
-  mq.appendChild(dup);
-  mq.parentNode.addEventListener("touchstart", () => mq.parentNode.classList.add("hold"), { passive: true });
-  mq.parentNode.addEventListener("touchend", () => setTimeout(() => mq.parentNode.classList.remove("hold"), 1200), { passive: true });
-  function showDeal(hash) {
-    if (!/^#d-[\w-]+$/.test(hash) || !deals.some(d => "#d-" + key(d) === hash)) return false;
-    Object.assign(state, { cat: "全部", q: "", free: false, expanded: true });
-    $("q").value = ""; $("freeOnly").checked = false;
-    renderChips(); render();
-    const el = document.querySelector(hash);
-    requestAnimationFrame(() => {
-      el.scrollIntoView({ block: "center", behavior: "smooth" });
-      el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
-    });
-    return true;
-  }
-  mq.addEventListener("click", e => {
-    const a = e.target.closest("a");
-    if (a && showDeal(a.getAttribute("href"))) { e.preventDefault(); history.replaceState(null, "", a.getAttribute("href")); }
-  });
-
-  if (qp) $("q").value = qp;
-  renderChips(); render();
-  showDeal(location.hash);
-  window.addEventListener("hashchange", () => showDeal(location.hash));
+  var today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date());
+  var d = Math.round((Date.UTC(2026, 10, 27) - Date.UTC(+today.slice(0, 4), +today.slice(5, 7) - 1, +today.slice(8, 10))) / 864e5);
+  var el = document.getElementById("days");
+  if (d > 0) el.textContent = d;
+  else el.parentNode.innerHTML = d === 0 ? "就是今天" : "已开始";
 })();
 </script>
-
 <script src="lim.js?v=4d78e16d" defer></script>
-<script src="search.js?v=0c3165ec" defer></script>
+<script src="search.js?v=b7d3e568" defer></script>
 <script src="nav.js?v=16562d10" defer></script>
 </body>
 </html>
