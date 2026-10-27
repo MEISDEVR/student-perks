@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://sheeperks.com/bounty.html">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="v2.css?v=be5d8acd">
+<link rel="stylesheet" href="v2.css?v=dc1c0f1f">
 <link rel="stylesheet" href="play.css?v=fe835bdf">
 <meta property="og:site_name" content="Sheeperks 英国羊毛">
 <meta property="og:image" content="https://sheeperks.com/assets/og.png">
@@ -108,6 +108,25 @@
     </div>
   </section>
 
+
+  <!-- 未登录：先看能做什么、能换什么，再决定要不要登录（数字和 hub.js / quests.sql 保持一致） -->
+  <section class="acct-preview" aria-label="小羊赏金介绍">
+    <div class="sec-head"><div><div class="eyebrow">HOW IT WORKS · 怎么攒羊毛</div><h2>登录后能做这些</h2></div><a class="aside" href="#acct">登录 / 注册 ↑</a></div>
+    <div class="pv-grid">
+      <article class="pv k-yellow"><b>每日签到</b><p>连续签到第 1–7 天分别给 2、2、3、3、4、4、10 羊毛，一周 28 个。</p></article>
+      <article class="pv k-tomato"><b>赏金任务</b><p>核实一张券、拍下店里的新优惠、实测能不能叠加。人工审核，一般 2 天内发羊毛。</p></article>
+      <article class="pv k-mint"><b>游乐场</b><p>小羊跳跳、品牌翻翻乐、今日问答，每天最多 10 羊毛。<a href="games.html">不登录也能先玩 →</a></p></article>
+    </div>
+    <div class="pv-shop">
+      <div><b>小羊商店 · 首批周边筹备中</b><p>羊毛只能用来换礼品，不能买也不能换现金。周边在格拉斯哥面交，商家券线上发码。</p></div>
+      <ul>
+        <li><img src="assets/shop/stickers.jpg" alt="" width="72" height="72" loading="lazy"><span>表情贴纸</span></li>
+        <li><img src="assets/shop/pin.jpg" alt="" width="72" height="72" loading="lazy"><span>珐琅徽章</span></li>
+        <li><img src="assets/shop/tote.jpg" alt="" width="72" height="72" loading="lazy"><span>帆布袋</span></li>
+        <li><img src="assets/shop/beanie.jpg" alt="" width="72" height="72" loading="lazy"><span>毛线帽</span></li>
+      </ul>
+    </div>
+  </section>
 
   <!-- 已登录：小羊赏金。顶部「牧场证」+ 栏目（按网址 # 切换）。内容由 hub.js 按 hub_state() 渲染，规则见 supabase/quests.sql -->
   <section class="hub" data-pane="in">
@@ -266,6 +285,17 @@
   </form>
 </dialog>
 
+<section class="join" id="join" aria-label="加入羊毛群">
+  <div class="wrap"><div class="join-card">
+    <div class="join-text">
+      <div class="eyebrow">JOIN · 羊毛群</div>
+      <h2>新羊毛，群里先发</h2>
+      <p>有好的限时优惠、快到期的提醒、群友实测，会不定期发在微信群里，不用自己回来翻。扫码加客服微信，备注「羊毛」，拉你进群。</p>
+      <ul><li>快到期的优惠提前提醒</li><li>群友实测哪些能用、哪些失效</li><li>发现失效在群里说一声，核实后网站下架</li></ul>
+    </div>
+    <figure class="join-qr"><img src="assets/join-qr.png" alt="客服微信二维码，加好友后拉你进羊毛群" width="180" height="180" loading="lazy"><figcaption>加客服微信进群<small>备注「羊毛」· 微信里可长按识别</small></figcaption></figure>
+  </div></div>
+</section>
 <footer>
   <div class="wrap">
     <div class="foot-word"><img src="assets/logo.svg" alt="" width="168" height="168"><span>SHEEP<br>PERKS</span></div>
@@ -280,7 +310,7 @@
 <script src="sp.js?v=32b3609a"></script>
 <script src="hub.js?v=c41d66b3" defer></script>
 <script src="account.js?v=9720309e" defer></script>
-<script src="lim.js?v=08d81bc3" defer></script>
+<script src="lim.js?v=4d78e16d" defer></script>
 <script src="search.js?v=0c3165ec" defer></script>
 <script src="nav.js?v=16562d10" defer></script>
 </body>

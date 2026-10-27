@@ -1,15 +1,26 @@
-// 限时卡片（.lim 里的票根）：按英国当天日期算「还剩 N 天 / N 天后开始 / 今天可用」，上架 7 天内标 NEW。
+// 限时卡片（.lim 里的票根）：按英国当天日期算「还剩 N 天 / N 天后开始 / 今天可用」。
 // 穷鬼专区：过期的标「已过期」排到最后，过期 14 天后隐藏。
 // 首页「本周羊毛」（data-feed）：过期的直接下架，其余按紧急程度排序，桌面只露前 6 张，手机横滑看全部。
+// NEW 标：回访的人标「上次来之后上架的」，首次来的标 7 天内上架的。上次来访日期存在浏览器本地。
+// 构建时已按构建日剔掉过期内容（build.py），这里负责两次构建之间的变化。
 (function () {
   var today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date());
   var day = function (s) { return Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)) / 864e5; };
   var t = day(today), wd = (t + 4) % 7 || 7; // 1970-01-01 是周四；周一=1…周日=7
+  var last = null; // 上次来访那天（今天之前）；同一天多次打开不更新
+  try {
+    var v = JSON.parse(localStorage.getItem("visit") || "null") || {};
+    if (v.cur && v.cur !== today) { v.last = v.cur; v.cur = today; localStorage.setItem("visit", JSON.stringify(v)); }
+    else if (!v.cur) localStorage.setItem("visit", JSON.stringify({ cur: today }));
+    if (v.last) last = day(v.last);
+  } catch (e) {}
+  var since = 0;
   [].forEach.call(document.querySelectorAll(".lim"), function (grid) {
     var feed = grid.hasAttribute("data-feed"), cards = [].slice.call(grid.children), live = [];
     cards.forEach(function (el, i) {
       var d = el.dataset, pill = el.querySelector(".pill.left"), stub = el.querySelector(".stub"), key = 1000 + i;
-      if (d.added && t - day(d.added) >= 0 && t - day(d.added) <= 7) el.classList.add("is-new");
+      var a = d.added ? day(d.added) : null;
+      if (a !== null && a <= t && (last !== null ? a > last : t - a <= 7)) el.classList.add("is-new");
       if (d.start && day(d.start) > t) {
         var s = day(d.start) - t;
         pill.textContent = s === 1 ? "明天开始" : s + " 天后开始";
@@ -34,6 +45,7 @@
         key = k;
       }
       el._key = key;
+      if (feed && el.classList.contains("is-new") && last !== null) since++;
       live.push(el);
     });
     if (!feed) return;
@@ -47,9 +59,12 @@
     }
     var cnt = document.querySelector("[data-feed-count]");
     if (cnt) cnt.textContent = live.length;
+    var sn = document.querySelector("[data-feed-since]");
+    if (sn && since) { sn.textContent = " · 你上次来之后新增 " + since + " 条"; sn.hidden = false; }
   });
   // 不是票根的限时块（如纸质券列表）：data-expire 过了就隐藏
   [].forEach.call(document.querySelectorAll("[data-expire]"), function (el) { if (day(el.dataset.expire) < t) el.hidden = true; });
+  [].forEach.call(document.querySelectorAll("[data-after]"), function (el) { if (day(el.dataset.after) < t) el.hidden = false; });
   [].forEach.call(document.querySelectorAll("[data-countdown]"), function (el) {
     var n = day(el.dataset.countdown) - t;
     if (n >= 0) { el.textContent = n === 0 ? "今天截止" : "还剩 " + n + " 天"; if (n <= 7) el.classList.add("hot"); }

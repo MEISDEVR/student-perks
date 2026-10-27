@@ -165,14 +165,17 @@
 
 <div class="wrap">
 
+  <p class="intro"><b>Sheeperks 英国羊毛</b>：在英留学生能用的学生优惠和限时羊毛，只链官方入口，过期自动下架。</p>
+
   <section class="sec weekly" id="weekly">
     <div class="sec-head">
       <div><div class="eyebrow">THIS WEEK · {{weekly_updated}} 更新</div><h2>本周羊毛</h2></div>
-      <span class="aside"><span data-feed-count>{{weekly_count}}</span> 条在架 · 按截止日期排 · 过期自动下架</span>
+      <span class="aside"><span data-feed-count>{{weekly_count}}</span> 条在架<span data-feed-since hidden></span> · 按截止日期排 · 过期自动下架</span>
     </div>
     <div class="grid lim feed" id="feed" data-feed>{{weekly}}
     </div>
     <button class="btn ghost feed-more" type="button" data-feed-more hidden>展开全部</button>
+    {{join_strip}}
   </section>
 
   <section class="home-hero">
@@ -277,7 +280,6 @@
   setAll(".js-total", deals.length);
   setAll(".js-free", deals.filter(d => d.free).length);
   setAll(".js-updated", updated);
-  setAll(".js-month", updated.includes("-") ? Number(updated.split("-")[1]) + " 月" : updated);
 
   const pillOf = d => {
     const v = d.verify;

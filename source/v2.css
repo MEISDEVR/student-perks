@@ -602,6 +602,7 @@ html.modal-open { overflow: hidden; }
   /* 手机横滑：首屏就能看到一张半，滑动看全部 */
   .feed { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -16px; padding: 14px 16px 16px; scrollbar-width: none; }
   .feed::-webkit-scrollbar { display: none; }
+  .feed { align-items: flex-start; }  /* 卡片按自己内容高，不被最长那张拉出空白 */
   .feed > .ticket { flex: 0 0 84%; scroll-snap-align: center; }
   .feed .ticket.extra { display: grid; }
   .feed-more { display: none; }
@@ -628,11 +629,23 @@ html.modal-open { overflow: hidden; }
   .join-qr { justify-self: center; }
 }
 
-/* 手机导航：栏目按钮排成 3 列网格，全部露出，不用横滑找 */
+/* 手机导航：5 个栏目排一行，375 以上全部露出，更窄的屏幕可横滑 */
 @media (max-width: 640px) {
-  .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; border-radius: 18px; overflow: visible; }
+  .seg { gap: 0; padding: 3px; }
   .seg > i { display: none; }
-  .seg a { padding: 8px 4px; font-size: 13px; }
+  .seg a { flex: 1 0 auto; padding: 7px 6px; font-size: 13px; }
+}
+
+/* 首页开头一句话介绍 + 本周羊毛下方的加群入口 */
+.intro { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+.intro b { color: var(--ink); }
+.join-strip { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-top: 24px; padding: 14px 20px; border: var(--bw) solid var(--line); border-radius: 14px; background: var(--yellow); color: #141414; text-decoration: none; box-shadow: 4px 4px 0 var(--shadow); }
+.join-strip b { font-size: 16px; }
+.join-strip span { font-weight: 700; font-size: 14px; }
+.join-strip:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--shadow); }
+@media (max-width: 640px) {
+  .intro { margin-top: 2px; font-size: 13px; }
+  .join-strip { margin-top: 8px; padding: 12px 16px; }
 }
 .hero .btn.jump { margin-top: 18px; }
 
@@ -833,3 +846,23 @@ html.modal-open { overflow: hidden; }
 .fold > summary:hover b { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
 .fold-body { padding: 4px 22px 22px; }
 @media (max-width: 640px) { .fold > summary { padding: 14px 16px; } .fold > summary b { font-size: 18px; } .fold-body { padding: 0 14px 16px; } }
+
+/* 小羊赏金未登录预览：登录卡下面说明能做什么、能换什么；登录后隐藏 */
+.acct-preview { padding-top: 64px; }
+.acct-root[data-state="in"] .acct-preview { display: none; }
+.pv-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.pv { padding: 18px 20px; border: var(--bw) solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 4px 4px 0 var(--shadow); }
+.pv b { font-size: 18px; }
+.pv p { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
+.pv.k-yellow { border-top: 8px solid var(--yellow); } .pv.k-tomato { border-top: 8px solid var(--tomato); } .pv.k-mint { border-top: 8px solid var(--mint); }
+.pv-shop { display: flex; justify-content: space-between; align-items: center; gap: 16px 28px; flex-wrap: wrap; margin-top: 16px; padding: 18px 20px; border: var(--bw) dashed var(--line); border-radius: 16px; }
+.pv-shop b { font-size: 16px; }
+.pv-shop p { margin: 4px 0 0; max-width: 32em; font-size: 14px; color: var(--muted); }
+.pv-shop ul { display: flex; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.pv-shop li { display: grid; justify-items: center; gap: 4px; font-size: 12px; }
+.pv-shop img { width: 72px; height: 72px; object-fit: cover; border: 2px solid var(--line); border-radius: 12px; }
+@media (max-width: 640px) {
+  .acct-preview { padding-top: 40px; }
+  .pv-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .pv-shop img { width: 60px; height: 60px; }
+}
