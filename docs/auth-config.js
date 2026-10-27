@@ -1,0 +1,1 @@
+window.SP_AUTH = {"url": "https://qsgycwpdhstrfhlsgsps.supabase.co", "key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzZ3ljd3BkaHN0cmZobHNnc3BzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwMzIyNTMsImV4cCI6MjEwODYwODI1M30.cxCqN1zYviNTzyRp9pSuUaMmbN304GVwt18ZFCI9ZU8", "phone": false, "wechat": "", "qq": ""};

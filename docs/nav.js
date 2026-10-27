@@ -31,3 +31,49 @@
   bar.addEventListener("focusin", () => hide(false));
   onScroll();
 })();
+
+/* 导航里的「登录」：已登录（Supabase 会话在 localStorage）时换成头像首字 + 昵称，不用加载 SDK。头像进 account.html 改个人信息。
+   今天还没签到，导航「小羊赏金」亮小红点；看过「本周羊毛」等记一笔，回到小羊赏金时由 hub.js 报给后端算任务进度。 */
+(function () {
+  const a = document.querySelector(".acct");
+  if (!a) return;
+  try {
+    const s = JSON.parse(localStorage.getItem("sheeperks-auth") || "null");
+    const u = s && s.user;
+    if (!u) return;
+    const name = localStorage.getItem("sp-nick") || (u.email || u.phone || "我").split("@")[0];
+    a.classList.add("in");
+    a.dataset.i = [...name][0].toUpperCase();
+    a.querySelector("span").textContent = name;
+    a.setAttribute("aria-label", "个人信息");
+    const day = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date());
+    const bt = document.querySelector('.seg a[href="bounty.html"]');
+    if (bt && localStorage.getItem("sp-ci") !== day) bt.classList.add("dot");
+    const track = act => {
+      let t = JSON.parse(localStorage.getItem("sp-track") || "null");
+      if (!t || t.day !== day) t = { day, a: [] };
+      if (!t.a.includes(act)) { t.a.push(act); localStorage.setItem("sp-track", JSON.stringify(t)); }
+    };
+    const page = { "budget.html": "view_budget", "black-friday.html": "view_bf", "bicester.html": "view_bicester" }[location.pathname.split("/").pop()];
+    if (page) track(page);
+    const wk = document.getElementById("weekly");
+    if (wk && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { track("view_weekly"); io.disconnect(); } }, { threshold: .3 });
+      io.observe(wk);
+    }
+  } catch (e) {}
+})();
+
+// 折叠专栏：地址里的锚点在 <details> 里面时先展开再滚过去（搜索结果、旧链接 earn.html#hsbc 跳过来都靠它）
+(function () {
+  function open() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const el = id && document.getElementById(id);
+    if (!el) return;
+    let d = el.closest("details"), hit = false;
+    while (d) { if (!d.open) { d.open = true; hit = true; } d = d.parentElement && d.parentElement.closest("details"); }
+    if (hit) requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
+  }
+  open();
+  addEventListener("hashchange", open);
+})();

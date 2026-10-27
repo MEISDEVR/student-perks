@@ -36,6 +36,16 @@ CF_BEACON_TOKEN = ""
 ANALYTICS = (f'<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
              f'data-cf-beacon=\'{{"token": "{CF_BEACON_TOKEN}"}}\'></script>\n') if CF_BEACON_TOKEN else ""
 
+# 登录 + 个人档案：后端用 Supabase（开通步骤见 supabase/README.md）。URL 和 anon key 是前端公开配置，不是密钥。
+# 两项留空则不显示导航里的「登录」，account.html 显示「接入中」。环境变量可临时覆盖，方便本地测试。
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or "https://qsgycwpdhstrfhlsgsps.supabase.co"
+SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY") or ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzZ3ljd3BkaHN0cmZobHNnc3BzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwMzIyNTMsImV4cCI6MjEwODYwODI1M30"
+                     ".cxCqN1zYviNTzyRp9pSuUaMmbN304GVwt18ZFCI9ZU8")
+AUTH_PHONE = False   # 在 Supabase 接好短信服务商（Twilio 等）后改 True
+AUTH_WECHAT = ""     # 微信登录 Edge Function 地址，接好后填，例：https://abcd1234.supabase.co/functions/v1/wechat-login
+AUTH_QQ = ""         # QQ 登录 Edge Function 地址
+AUTH_ON = bool(SUPABASE_URL and SUPABASE_ANON_KEY)
+
 def pill(d):
     v = d["verify"]
     if re.search("SheerID", v, re.I): return "SheerID"
@@ -277,8 +287,12 @@ out = head + page[:split] + "\n</head>\n<body>\n" + page[split:] + "\n</body>\n<
 SEARCH_BOX = ('<button class="sbox" type="button" data-search aria-haspopup="dialog" aria-label="搜索全站优惠">'
               '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">'
               '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>搜优惠、品牌、关键词</span><kbd>Ctrl K</kbd></button>')
+ACCT_BTN = ('<a class="acct" href="account.html" aria-label="登录"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" '
+            'stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/>'
+            '<path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>登录</span></a>') if AUTH_ON else ""
+SEARCH_BOX += ACCT_BTN
 PAGE_LABEL = {"index.html": "全部优惠", "budget.html": "穷鬼专区", "black-friday.html": "英国黑五",
-              "bicester.html": "比斯特专区", "earn.html": "零花钱专区"}
+              "bicester.html": "比斯特专区"}
 ITEM_CLASS = {"ticket", "card", "row", "tl", "tip", "bc", "route", "cat"}
 CHILD_OF = {"stack", "plan"}  # 这些容器的直接子元素算一张卡
 TITLE_TAGS = {"h3", "h4", "summary", "th"}
@@ -305,7 +319,7 @@ class Indexer(HTMLParser):
             return
         if tag == "h2":
             self.h2 = []
-        if self.cur is None and (cls & ITEM_CLASS or tag == "details" or (tag == "div" and parent[1] & CHILD_OF)
+        if self.cur is None and (cls & ITEM_CLASS or (tag == "details" and "fold" not in cls) or (tag == "div" and parent[1] & CHILD_OF)
                                  or (tag == "tr" and parent[0] == "tbody")):
             line, col = self.getpos()
             self.cur = {"depth": len(self.stack), "id": a.get("id"), "pos": self.lines[line - 1] + col + 1 + len(tag),
@@ -387,7 +401,7 @@ os.makedirs(os.path.join(DIST, "cal"))
 for w in LIVE:
     if ics(w):
         open(os.path.join(DIST, "cal", f"{w['id']}.ics"), "w", encoding="utf-8", newline="").write(ics(w))
-EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html", "earn.html"]
+EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
     src = re.sub(r"\{\{weekly:(\w+)\}\}", lambda m: "".join(wticket(w) for w in WEEKLY if w["tag"] == m.group(1) and not expired(w, 14)), src)
@@ -398,10 +412,44 @@ for name in EXTRA_PAGES:
     src, ents = index_page(src, name)
     search_entries += ents
     open(os.path.join(DIST, name), "w", encoding="utf-8").write(src)
+# 账号页（个人信息 + 档案设置）和小羊赏金：不进搜索索引和 sitemap
+src = open(os.path.join(ROOT, "account.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL)
+src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX.replace('class="acct"', 'class="acct on"'))
+AUTH_JS = '<script src="assets/vendor/supabase-2.45.4.js"></script>\n<script src="auth-config.js"></script>\n<script src="sp.js"></script>\n'
+src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="account.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
+open(os.path.join(DIST, "account.html"), "w", encoding="utf-8").write(src)
+# 小羊赏金：签到、任务、商店、成就、账本。登录区从 account.html 的 <!-- login --> 段复用
+login = re.search(r"  <!-- login -->\n(.*?)  <!-- /login -->\n", src, re.S).group(1)
+src = open(os.path.join(ROOT, "bounty.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL).replace("{{login}}\n", login)
+src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("<footer", JOIN + "<footer", 1)
+src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="hub.js" defer></script>\n<script src="account.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
+open(os.path.join(DIST, "bounty.html"), "w", encoding="utf-8").write(src)
+# 游乐场：不登录也能玩，登录后结算羊毛；进 sitemap，不进搜索索引
+src = open(os.path.join(ROOT, "games.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL)
+src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("<footer", JOIN + "<footer", 1)
+src = src.replace("{{auth_scripts}}", AUTH_JS + '<script src="quiz.js"></script>\n<script src="games.js" defer></script>').replace("</body>", SEARCH_JS + "</body>", 1)
+open(os.path.join(DIST, "games.html"), "w", encoding="utf-8").write(src)
+# 零花钱专区已拆分：earn.html 只留一个跳转页（银行 → 穷鬼专区开户专栏，其余 → 个人中心小羊赏金）
+open(os.path.join(DIST, "earn.html"), "w", encoding="utf-8").write(
+    open(os.path.join(ROOT, "earn.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL))
+for n in ["account.js", "sp.js", "hub.js", "games.js", "quiz.js", "play.css"]:
+    shutil.copy(os.path.join(ROOT, n), DIST)
+open(os.path.join(DIST, "auth-config.js"), "w", encoding="utf-8").write(
+    "window.SP_AUTH = " + json.dumps({"url": SUPABASE_URL, "key": SUPABASE_ANON_KEY, "phone": AUTH_PHONE,
+                                      "wechat": AUTH_WECHAT, "qq": AUTH_QQ}) + ";\n")
 gone = {f"#w-{w['id']}" for w in WEEKLY if expired(w)}  # 专区页里灰显的过期卡不进搜索
 search_entries = [x for x in search_entries if not any(x[0].endswith(g) for g in gone)]
 json.dump({"p": list(PAGE_LABEL.values()), "i": search_entries}, open(os.path.join(DIST, "search-index.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))
+# 引用的 css/js 加 ?v=内容哈希：部署后浏览器立刻拿新文件，不会新 HTML 配旧样式
+import hashlib
+ver = lambda n: hashlib.md5(open(os.path.join(DIST, n), "rb").read()).hexdigest()[:8]
+for n in os.listdir(DIST):
+    if n.endswith(".html"):
+        h = os.path.join(DIST, n)
+        s = re.sub(r'((?:href|src)=")([\w./-]+\.(?:css|js))(")', lambda m: m.group(1) + m.group(2) + "?v=" + ver(m.group(2)) + m.group(3)
+                   if os.path.exists(os.path.join(DIST, m.group(2))) else m.group(0), open(h, encoding="utf-8").read())
+        open(h, "w", encoding="utf-8").write(s)
 open(os.path.join(DIST, ".nojekyll"), "w").close()
 host = SITE_URL.split("/")[2]
 if not host.endswith(".github.io"):  # GitHub Pages 自定义域名；DIST 每次重建，CNAME 要在这里写
@@ -409,5 +457,5 @@ if not host.endswith(".github.io"):  # GitHub Pages 自定义域名；DIST 每�
 open(os.path.join(DIST, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}sitemap.xml\n")
 open(os.path.join(DIST, "sitemap.xml"), "w").write(
     f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    + "".join(f'  <url><loc>{SITE_URL}{n}</loc><lastmod>{WEEKLY_UPDATED}</lastmod></url>\n' for n in [""] + EXTRA_PAGES) + '</urlset>\n')
+    + "".join(f'  <url><loc>{SITE_URL}{n}</loc><lastmod>{WEEKLY_UPDATED}</lastmod></url>\n' for n in [""] + EXTRA_PAGES + ["games.html", "bounty.html"]) + '</urlset>\n')
 print(f"built {len(deals)} deals, {len(search_entries)} search entries -> {DIST} for {SITE_URL}")

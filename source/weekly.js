@@ -33,7 +33,7 @@ window.WEEKLY = [
     rows: [["资格", "新客户；2023-01-01 以来有过 HSBC UK 或 first direct 活期账户的不算"],
            ["注意", "CASS 转户会<b>关掉被转的旧账户</b>，用备用账户转，别动日常主卡"]],
     added: "2026-10-21", stub: ["£220", "奖励", "deal"],
-    url: "earn.html#hsbc", cta: "看攻略" },
+    url: "budget.html#hsbc", cta: "看攻略" },
   { id: "barclays", tag: "bank", icon: "mono:BA:#00aeef", meta: "Barclays · 转户奖励",
     title: "转户到 Bank Account", price: "最高 £300",
     offer: "10-01 起的新转户奖励：用 CASS 把旧账户转到 Barclays 标准 Bank Account，满足条件最高拿 £300，比 HSBC 还多。",
