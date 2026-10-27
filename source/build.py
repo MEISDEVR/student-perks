@@ -14,7 +14,7 @@ SITE_URL = (sys.argv[1] if len(sys.argv) > 1 else "https://sheeperks.com/").rstr
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "..", "docs"))
 
-TITLE = "Sheeperks 英国羊毛：在英留学生的学生优惠、限时羊毛与省钱攻略"
+TITLE = "学生优惠大全：GitHub、JetBrains、Apple 教育优惠等官方入口｜Sheeperks 英国羊毛"
 DESC = ("汇总 GitHub Student Pack、JetBrains、Azure for Students、Google AI 学生版、Notion、Figma、"
         "Spotify、Apple 教育优惠等海外学生优惠，写清资格、验证方式（学校邮箱、SheerID、UNiDAYS、ISIC）和官方申请入口。")
 
@@ -247,10 +247,9 @@ cards = "".join(f'''
         <div class="stub{"" if d["free"] else " deal"}" aria-label="{"免费" if d["free"] else "折扣"}"><b>{"FREE" if d["free"] else "DEAL"}</b><span>{"免费" if d["free"] else "折扣"}</span></div>
       </article>''' for d in order[:9])
 
-page = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+# 学生优惠页（perks.html）：30 项长期学生优惠，由 deals.js 渲染；首页 index.html 是实时羊毛，在下面单独构建
+page = open(os.path.join(ROOT, "perks.html"), encoding="utf-8").read()
 page = re.sub(r"<title>.*?</title>\n?", "", page, count=1)
-page = page.replace("{{weekly}}", WEEKLY_HOME).replace("{{weekly_updated}}", WEEKLY_UPDATED[5:]).replace("{{weekly_count}}", str(len(LIVE)))
-page = page.replace("{{join_strip}}", JOIN_STRIP)
 page = page.replace("<footer", JOIN + "<footer", 1)
 page = page.replace('<div class="grid" id="grid"></div>', f'<div class="grid" id="grid">{cards}\n    </div>')
 for k, v in {"js-total": len(deals), "js-free": sum(1 for d in deals if d["free"]),
@@ -267,18 +266,17 @@ head = f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{e(TITLE)}</title>
 <meta name="description" content="{e(DESC)}">
-<meta name="google-site-verification" content="e53tznfkhhCijPSgTLN8fvLbjxAnkYY7kBtX5b2WUY4">
-<link rel="canonical" href="{SITE_URL}">
+<link rel="canonical" href="{SITE_URL}perks.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{e(TITLE)}">
 <meta property="og:description" content="{e(DESC)}">
-<meta property="og:url" content="{SITE_URL}">
+<meta property="og:url" content="{SITE_URL}perks.html">
 <meta property="og:locale" content="zh_CN">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 {SHARE_HEAD}<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 <style>body{{margin:0}}[hidden]{{display:none!important}}</style>
 {ANALYTICS}'''
-# 把 index.html 里的 <link>/<style> 留在 head，正文放进 body
+# 把 perks.html 里的 <link>/<style> 留在 head，正文放进 body
 split = page.index("</style>") + len("</style>")
 out = head + page[:split] + "\n</head>\n<body>\n" + page[split:] + "\n</body>\n</html>\n"
 
@@ -291,7 +289,7 @@ ACCT_BTN = ('<a class="acct" href="account.html" aria-label="登录"><svg width=
             'stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/>'
             '<path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>登录</span></a>') if AUTH_ON else ""
 SEARCH_BOX += ACCT_BTN
-PAGE_LABEL = {"index.html": "全部优惠", "budget.html": "穷鬼专区", "black-friday.html": "英国黑五",
+PAGE_LABEL = {"index.html": "实时羊毛", "perks.html": "学生优惠", "budget.html": "穷鬼专区", "black-friday.html": "英国黑五",
               "bicester.html": "比斯特专区"}
 ITEM_CLASS = {"ticket", "card", "row", "tl", "tip", "bc", "route", "cat"}
 CHILD_OF = {"stack", "plan"}  # 这些容器的直接子元素算一张卡
@@ -383,7 +381,7 @@ def index_page(src, name):
         entries.append([f"{name}#{it['id']}", PAGE_LABEL[name], title[:60], it["sec"], text[:700]])
     return out, entries
 
-search_entries = [[f"./?q={quote(d['name'])}#deals", PAGE_LABEL["index.html"], d["name"], d["cat"],
+search_entries = [[f"perks.html?q={quote(d['name'])}#deals", PAGE_LABEL["perks.html"], d["name"], d["cat"],
                    " ".join(filter(None, [d["offer"], d.get("term", ""), d["who"], d["verify"], d["region"]]))] for d in deals]
 search_entries += [[f"./#w-{w['id']}", PAGE_LABEL["index.html"], w["title"], "本周羊毛",
                     " ".join([w["meta"], w.get("price", ""), w["offer"]] + [re.sub("<[^>]+>", "", dd) for _, dd in w["rows"]])]
@@ -393,7 +391,7 @@ out = out.replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</bo
 
 shutil.rmtree(DIST, ignore_errors=True)
 os.makedirs(DIST)
-open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(out)
+open(os.path.join(DIST, "perks.html"), "w", encoding="utf-8").write(out)
 for name in ["deals.js", "icons.js", "v2.css", "search.js", "lim.js", "nav.js", "manifest.webmanifest"]:
     shutil.copy(os.path.join(ROOT, name), DIST)
 shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(DIST, "assets"))
@@ -401,6 +399,18 @@ os.makedirs(os.path.join(DIST, "cal"))
 for w in LIVE:
     if ics(w):
         open(os.path.join(DIST, "cal", f"{w['id']}.ics"), "w", encoding="utf-8", newline="").write(ics(w))
+# 首页：实时羊毛（本周羊毛 + 黑五 + 比斯特 + 学生优惠精选）。本周羊毛已单独进搜索索引，首页不再扫描
+top = [d for d in deals if d.get("featured")] + [d for d in deals if d["free"] and not d.get("featured")]
+picks = "".join(f'''
+      <a class="pick" href="perks.html#d-{e(d["icon"])}">{icon(d)}<span><b>{e(d.get("featured") or d["name"])}</b><small>{e(d["name"] if d.get("featured") else d["cat"] + " · 免费")}</small></span></a>'''
+                for d in top[:6])
+src = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read().replace("{{SITE_URL}}", SITE_URL)
+src = src.replace("{{weekly}}", WEEKLY_HOME).replace("{{weekly_updated_full}}", WEEKLY_UPDATED).replace("{{weekly_updated}}", WEEKLY_UPDATED[5:])
+src = src.replace("{{weekly_count}}", str(len(LIVE))).replace("{{join_strip}}", JOIN_STRIP).replace("{{perks_picks}}", picks)
+src = src.replace("{{perks_total}}", str(len(deals))).replace("{{perks_free}}", str(sum(1 for d in deals if d["free"])))
+src = drop_expired(src).replace("<footer", JOIN + "<footer", 1)
+src = src.replace("</head>", SHARE_HEAD + ANALYTICS + "</head>", 1).replace("{{search}}", SEARCH_BOX).replace("</body>", SEARCH_JS + "</body>", 1)
+open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(src)
 EXTRA_PAGES = ["budget.html", "black-friday.html", "bicester.html"]
 for name in EXTRA_PAGES:
     src = open(os.path.join(ROOT, name), encoding="utf-8").read()
@@ -457,5 +467,5 @@ if not host.endswith(".github.io"):  # GitHub Pages 自定义域名；DIST 每�
 open(os.path.join(DIST, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}sitemap.xml\n")
 open(os.path.join(DIST, "sitemap.xml"), "w").write(
     f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    + "".join(f'  <url><loc>{SITE_URL}{n}</loc><lastmod>{WEEKLY_UPDATED}</lastmod></url>\n' for n in [""] + EXTRA_PAGES + ["games.html", "bounty.html"]) + '</urlset>\n')
+    + "".join(f'  <url><loc>{SITE_URL}{n}</loc><lastmod>{WEEKLY_UPDATED}</lastmod></url>\n' for n in ["", "perks.html"] + EXTRA_PAGES + ["games.html", "bounty.html"]) + '</urlset>\n')
 print(f"built {len(deals)} deals, {len(search_entries)} search entries -> {DIST} for {SITE_URL}")

@@ -123,7 +123,7 @@
   document.addEventListener("click", e => { if (e.target.closest("[data-search]")) { e.preventDefault(); open(); } });
   document.addEventListener("keydown", e => {
     if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)) { e.preventDefault(); open(); }
-    else if (e.key === "/" && here !== "index.html" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); open(); }
+    else if (e.key === "/" && here !== "perks.html" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); open(); }
   });
   const ANCHOR = /^#(s\d+|p-[\w-]+)$/;  // p-* 是手写的固定锚点（首页跑马灯链过来）
   if (ANCHOR.test(location.hash)) {
