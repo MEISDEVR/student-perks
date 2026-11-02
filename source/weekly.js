@@ -4,8 +4,22 @@
 // （assets/brands 里的文件名，或 mono:字母:底色）/ meta / title / price 价签（可选）/ offer / rows 两行说明 [标题, 内容]
 // （内容可含 <b>）/ added 上架日期（7 天内显示 NEW）/ start 开始日期 / end 截止日期 / weekday 每周几（1–7）
 // / stub 右侧票根 [大字, 小字, 样式]（没有日期时用）/ url 链接（站内页面写相对路径）/ cta 按钮文字
-window.WEEKLY_UPDATED = "2026-10-21";
+window.WEEKLY_UPDATED = "2026-11-02";
 window.WEEKLY = [
+  { id: "currys-bf", tag: "shop", icon: "currys", meta: "Currys · 黑五已开跑",
+    title: "黑五提前开跑 + 降价退差价", price: "到 12-01",
+    offer: "Currys 10-28 起黑五已开跑，TV、笔记本、家电为主。11-24 前买的带标商品，12-01 前再降价就退差价，大件可以现在锁价。",
+    rows: [["保价", "带「Our lowest ever price」「Black Friday」「Black Friday &amp; Beyond」标；<b>11-24 前</b>买，12-01 前到官网登记小票"],
+           ["注意", "条款来自 hotukdeals 摘录和 Currys 保价页，以官网为准；买前看 PriceSpy 历史价"]],
+    added: "2026-11-02", start: "2026-10-28", end: "2026-12-01",
+    url: "black-friday.html#confirmed", cta: "黑五专区" },
+  { id: "bicester-xmas", tag: "shop", icon: "bicestervillage", meta: "比斯特 · 圣诞季",
+    title: "圣诞市集 × Diddly Squat Farm", price: "免费入场",
+    offer: "比斯特官网写明 11-12 起和 Clarkson 的 Diddly Squat Farm 合办圣诞市集，同日 Winter Snug 节日体验开放；11-15、19、24、26 有圣诞工作坊。",
+    rows: [["时间", "11-12 起，结束日期官网没写"],
+           ["会员", "在 Village Workshop 买装饰、礼品包装 9 折"]],
+    added: "2026-11-02", start: "2026-11-12",
+    url: "bicester.html#confirmed", cta: "比斯特专区" },
   { id: "nationwide", tag: "bank", icon: "mono:NW:#1c2a6b", meta: "Nationwide · 学生账户",
     title: "FlexStudent 开户", price: "£100 + £120 券",
     offer: "新开 FlexStudent 学生账户，返 £100 现金，另送 12 个月 Just Eat 券，每月 £10。",
@@ -106,9 +120,9 @@ window.WEEKLY = [
     url: "https://www.glasgowtourism.org/glasgow-christmas-markets/", cta: "活动攻略" },
   { id: "black-friday", tag: "shop", icon: "mono:BF:#141414", meta: "英国黑五 · 全品类",
     title: "Black Friday 开跑", price: "11-27",
-    offer: "多数品牌黑五这一周全面打折，11-30 Cyber Monday 线上补漏。Currys 11 月初就有早鸟价，带保价。",
-    rows: [["现在做", "把想买的东西列清单、加进比价工具看历史价"],
-           ["注意", "Amazon、比斯特往年 11 月中旬才官宣日期，官宣后这里更新"]],
+    offer: "多数品牌黑五这一周全面打折，11-30 Cyber Monday 线上补漏。Currys 10-28 已提前开跑，带保价。",
+    rows: [["现在做", "把想买的东西列清单、加进比价工具看历史价；Currys 已开跑，大件可以先锁价"],
+           ["注意", "截至 11-02 Amazon、比斯特还没官宣日期，官宣后这里更新"]],
     added: "2026-10-21", start: "2026-11-27", end: "2026-11-30",
     url: "black-friday.html", cta: "黑五专区" },
   { id: "kfc-student", tag: "food", icon: "kfc", meta: "KFC · 学生专属",
