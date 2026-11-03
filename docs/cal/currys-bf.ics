@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:currys-bf@sheeperks.com
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261029
+SUMMARY:Currys 开始：黑五提前开跑 + 降价退差价（至 12-01
+ ）
+DESCRIPTION:Currys 10-28 起黑五已开跑，TV、笔记本、家电为
+ 主。11-24 前买的带标商品，12-01 前再降价就退差价，大
+ 件可以现在锁价。\nhttps://sheeperks.com/black-friday.html#confir
+ med
+URL:https://sheeperks.com/black-friday.html#confirmed
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：黑五提前开跑 + 降价退差价（至 12-01）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

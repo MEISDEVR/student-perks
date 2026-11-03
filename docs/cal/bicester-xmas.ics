@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:bicester-xmas@sheeperks.com
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20261112
+DTEND;VALUE=DATE:20261113
+SUMMARY:比斯特 开始：圣诞市集 × Diddly Squat Farm
+DESCRIPTION:比斯特官网写明 11-12 起和 Clarkson 的 Diddly Squat 
+ Farm 合办圣诞市集，同日 Winter Snug 节日体验开放；11-15
+ 、19、24、26 有圣诞工作坊。\nhttps://sheeperks.com/bicester.ht
+ ml#confirmed
+URL:https://sheeperks.com/bicester.html#confirmed
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：圣诞市集 × Diddly Squat Farm
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
