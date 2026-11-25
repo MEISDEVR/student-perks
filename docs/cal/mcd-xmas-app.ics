@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:mcd-xmas-app@sheeperks.com
+DTSTAMP:20261125T000000Z
+DTSTART;VALUE=DATE:20261123
+DTEND;VALUE=DATE:20261124
+SUMMARY:McDonald's 开始：本周满 £20 减 £5（至 11-30）
+DESCRIPTION:麦当劳 11-17 至 12-24 每周换一批 App 专属优惠。
+ 这周（11-23 至 11-30）是单笔满 £20 减 £5，适合和室友
+ 拼一单。\nhttps://www.mcdonalds.com/gb/en-gb/newsroom/article/value-
+ festive-kevin-offer.html
+URL:https://www.mcdonalds.com/gb/en-gb/newsroom/article/value-festive-kev
+ in-offer.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：本周满 £20 减 £5（至 11-30）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

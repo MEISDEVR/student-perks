@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:kfc-crazy-tue@sheeperks.com
+DTSTAMP:20261125T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+RRULE:FREQ=WEEKLY
+SUMMARY:KFC Crazy Tuesday £3 单品
+DESCRIPTION:KFC 每周二在 App 上新一款限时便宜单品，11 月
+ 出过 2 块 Tender + 薯条 + 蘸酱 £3、3 块原味鸡 £3。每周
+ 品项不同。\nhttps://retailtimes.co.uk/kfc-drops-three-pieces-of-ori
+ ginal-recipe-chicken-for-3-this-crazy-tuesday/
+URL:https://retailtimes.co.uk/kfc-drops-three-pieces-of-original-recipe-c
+ hicken-for-3-this-crazy-tuesday/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Crazy Tuesday £3 单品
+TRIGGER:PT9H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:bicester-bf@sheeperks.com
+DTSTAMP:20261125T000000Z
+DTSTART;VALUE=DATE:20261112
+DTEND;VALUE=DATE:20261113
+SUMMARY:比斯特 开始：黑五 11-12 至 11-30（至 11-30）
+DESCRIPTION:比斯特官网写明黑五 11-12 至 11-30，参与精品店
+ 的部分商品按原价算最高 50% off（平时最高约 40%）。11-
+ 12 起圣诞市集也同时在办。\nhttps://sheeperks.com/bicester.htm
+ l#confirmed
+URL:https://sheeperks.com/bicester.html#confirmed
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：黑五 11-12 至 11-30（至 11-30）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:mcd-99p@sheeperks.com
+DTSTAMP:20261125T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:McDonald's 开始：芝士汉堡 / Snack Wrap 99p（至 12-06）
+DESCRIPTION:圣诞 App 优惠第 3 周（12-01 至 12-06）预计是 99p 
+ 单品，芝士汉堡或 Snack Wrap 任选，比 Saver Menu 再便宜一
+ 半。\nhttps://www.hotukdeals.com/deals/mcdonalds-offers-via-app-eg-99p
+ -cheeseburger-or-snack-wrap-mcchicken-fries-ps199-bogof-big-mac-more-in-
+ post-5039307
+URL:https://www.hotukdeals.com/deals/mcdonalds-offers-via-app-eg-99p-chee
+ seburger-or-snack-wrap-mcchicken-fries-ps199-bogof-big-mac-more-in-post-
+ 5039307
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：芝士汉堡 / Snack Wrap 99p（至 12-06）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

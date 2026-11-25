@@ -8,9 +8,10 @@ DTSTAMP:20261021T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:英国黑五 开始：Black Friday 开跑（至 11-30）
-DESCRIPTION:多数品牌黑五这一周全面打折，11-30 Cyber Monday 
- 线上补漏。Currys 10-28 已提前开跑，带保价。\nhttps://shee
- perks.com/black-friday.html
+DESCRIPTION:11-27 周五是黑五当天，11-30 Cyber Monday 线上补漏
+ 。Amazon（11-19 起）、比斯特（11-12 起）、Currys、Argos、J
+ ohn Lewis、Boots 都已开跑。\nhttps://sheeperks.com/black-friday.ht
+ ml
 URL:https://sheeperks.com/black-friday.html
 BEGIN:VALARM
 ACTION:DISPLAY
