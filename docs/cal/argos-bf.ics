@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:argos-bf@sheeperks.com
+DTSTAMP:20261125T000000Z
+DTSTART;VALUE=DATE:20261030
+DTEND;VALUE=DATE:20261031
+SUMMARY:Argos 开始：黑五价降了补差价（至 12-01）
+DESCRIPTION:Argos 今年黑五 10-30 至 12-01。带 Black Friday 标的
+ 商品在这段时间买，12-25 前再降价可以申请退差价，比
+  Currys 保价时间长。\nhttps://www.argos.co.uk/events/black-friday
+URL:https://www.argos.co.uk/events/black-friday
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：黑五价降了补差价（至 12-01）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

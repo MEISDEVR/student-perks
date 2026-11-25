@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sheeperks//CN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:amazon-bf@sheeperks.com
+DTSTAMP:20261125T000000Z
+DTSTART;VALUE=DATE:20261119
+DTEND;VALUE=DATE:20261120
+SUMMARY:Amazon UK 开始：黑五周 11-19 至 11-30（至 11-30）
+DESCRIPTION:Amazon 今年官宣黑五周 11-19（周四）开始，到 11
+ -30 Cyber Monday 结束，共 12 天。科技、家电、日用品为主
+ ，每天有限时 Lightning Deals。\nhttps://sheeperks.com/black-frida
+ y.html#confirmed
+URL:https://sheeperks.com/black-friday.html#confirmed
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:开始：黑五周 11-19 至 11-30（至 11-30）
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
